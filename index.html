@@ -261,6 +261,16 @@
     .itin-empty { color: var(--subtle); font-size: 13px; padding: 12px 0; line-height: 1.5; }
     .itin-bench { margin-top: 16px; border: 1px dashed rgba(255,255,255,0.2); border-radius: var(--radius-lg); padding: 14px 16px; background: rgba(255,206,122,0.05); }
     .itin-bench h3 { font-size: 15px; margin: 0 0 6px; }
+    .itin-main { display: flex; gap: 12px; align-items: flex-start; }
+    .itin-thumb { width: 70px; height: 52px; border-radius: 10px; object-fit: cover; flex: 0 0 auto; border: 1px solid rgba(255,255,255,0.14); }
+    .itin-thumb.fallback { display: grid; place-items: center; font-size: 24px; background: rgba(255,255,255,0.08); }
+    .itin-text { min-width: 0; }
+
+    /* Board-piece picker */
+    .piece-picker { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+    .piece-chip { width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.14); background: rgba(0,0,0,0.22); border-radius: 12px; font-size: 19px; line-height: 1; display: grid; place-items: center; transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease; }
+    .piece-chip:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.28); }
+    .piece-chip.active { background: rgba(79,139,255,0.22); border-color: rgba(110,168,255,0.55); box-shadow: 0 6px 16px rgba(79,139,255,0.18); }
 
     /* Group-task collaboration: owner + shared options + voting */
     .group-card { display: block !important; }
@@ -478,7 +488,7 @@
               <button class="hub-card" data-jump="settings">
                 <span class="hub-icon">👥</span>
                 <span class="hub-title">Roster</span>
-                <span class="hub-copy">Names, roles and vibes.</span>
+                <span class="hub-copy">Names, vibes and board pieces.</span>
                 <span class="hub-status">Edit roster</span>
               </button>
             </div>
@@ -523,12 +533,16 @@
                 <div class="progress-bar"><div class="progress-fill" id="selectedProgressFill"></div></div>
               </div>
               <div class="pill-row">
-                <span class="pill" id="selectedRole">🧭 No role yet</span>
+                <span class="pill" id="selectedRole">Pick a vibe</span>
                 <span class="pill" id="selectedStage">Base camp</span>
               </div>
               <div class="vibe-block">
                 <div class="label">Their vibe</div>
                 <div class="vibe-picker" id="vibePicker"></div>
+              </div>
+              <div class="vibe-block">
+                <div class="label">Their board piece</div>
+                <div class="piece-picker" id="piecePicker"></div>
               </div>
             </div>
 
@@ -755,7 +769,8 @@
     ];
 
     const colours = ["#4f8bff", "#ef4d4d", "#5fd39a", "#ffce7a", "#8fb6ff", "#ff9aa2", "#9ec4ff", "#c2b6ff", "#ffffff"];
-    const roles = ["🧭 Trip Lead", "🚘 Driver 1", "🚘 Driver 2", "💶 Money Manager", "🥟 Food Scout", "📸 Content Lead", "🗺️ Navigator", "🍻 Vibes Officer", "🪪 Admin Lead"];
+    // Each traveller picks their own board piece (token) — no assigned roles.
+    const pieces = ["♟️", "🦆", "🚗", "🏔️", "🥟", "🍷", "🧭", "🐉", "🚠", "🦌", "📸", "🎒", "🍻", "⛰️", "🐻", "🚀"];
 
     // Each traveller picks their own vibe — shown on their token and roster card.
     const vibes = [
@@ -798,15 +813,15 @@
       taskOwners: {},
       taskOptions: {},
       players: [
-        { name: "Jason", initials: "J", colour: colours[0], role: roles[0], vibe: "scenic", progress: 1, completed: { crewLock: true } },
-        { name: "Traveller 2", initials: "T2", colour: colours[1], role: roles[1], vibe: null, progress: 0, completed: {} },
-        { name: "Traveller 3", initials: "T3", colour: colours[2], role: roles[2], vibe: null, progress: 0, completed: {} },
-        { name: "Traveller 4", initials: "T4", colour: colours[3], role: roles[3], vibe: null, progress: 0, completed: {} },
-        { name: "Traveller 5", initials: "T5", colour: colours[4], role: roles[4], vibe: null, progress: 0, completed: {} },
-        { name: "Traveller 6", initials: "T6", colour: colours[5], role: roles[5], vibe: null, progress: 0, completed: {} },
-        { name: "Traveller 7", initials: "T7", colour: colours[6], role: roles[6], vibe: null, progress: 0, completed: {} },
-        { name: "Traveller 8", initials: "T8", colour: colours[7], role: roles[7], vibe: null, progress: 0, completed: {} },
-        { name: "Traveller 9", initials: "T9", colour: colours[8], role: roles[8], vibe: null, progress: 0, completed: {} }
+        { name: "Jason", initials: "J", colour: colours[0], vibe: "scenic", piece: "📸", progress: 1, completed: { crewLock: true } },
+        { name: "Traveller 2", initials: "T2", colour: colours[1], vibe: null, piece: null, progress: 0, completed: {} },
+        { name: "Traveller 3", initials: "T3", colour: colours[2], vibe: null, piece: null, progress: 0, completed: {} },
+        { name: "Traveller 4", initials: "T4", colour: colours[3], vibe: null, piece: null, progress: 0, completed: {} },
+        { name: "Traveller 5", initials: "T5", colour: colours[4], vibe: null, piece: null, progress: 0, completed: {} },
+        { name: "Traveller 6", initials: "T6", colour: colours[5], vibe: null, piece: null, progress: 0, completed: {} },
+        { name: "Traveller 7", initials: "T7", colour: colours[6], vibe: null, piece: null, progress: 0, completed: {} },
+        { name: "Traveller 8", initials: "T8", colour: colours[7], vibe: null, piece: null, progress: 0, completed: {} },
+        { name: "Traveller 9", initials: "T9", colour: colours[8], vibe: null, piece: null, progress: 0, completed: {} }
       ],
       groupDone: {
         routeLock: false,
@@ -1077,7 +1092,8 @@
         const x = cp.x + Math.cos(angle) * radius;
         const y = cp.y + Math.sin(angle) * radius;
         const v = vibeById(p.vibe);
-        return `<div class="token ${idx === state.selectedPlayer ? "active" : ""}" data-name="${escapeHtml(p.name)}${v ? " · " + v.name : ""}" style="left:${x}%; top:${y}%; background:${p.colour}" onclick="void(0)">${escapeHtml(p.initials)}${v ? `<span class="token-vibe">${v.emoji}</span>` : ""}</div>`;
+        const face = p.piece ? escapeHtml(p.piece) : escapeHtml(p.initials);
+        return `<div class="token ${idx === state.selectedPlayer ? "active" : ""}" data-name="${escapeHtml(p.name)}${v ? " · " + v.name : ""}" style="left:${x}%; top:${y}%; background:${p.colour}" onclick="void(0)">${face}${v ? `<span class="token-vibe">${v.emoji}</span>` : ""}</div>`;
       }).join("");
     }
 
@@ -1092,7 +1108,7 @@
         const progress = computePlayerProgress(p);
         const v = vibeById(p.vibe);
         return `<div class="traveller-row" role="button" tabindex="0" data-player="${idx}">
-          <div class="avatar-dot" style="background:${p.colour}">${escapeHtml(p.initials)}</div>
+          <div class="avatar-dot" style="background:${p.colour}">${p.piece ? escapeHtml(p.piece) : escapeHtml(p.initials)}</div>
           <div><div class="traveller-name">${escapeHtml(p.name)}${v ? `<span class="traveller-vibe">${v.emoji}</span>` : ""}</div><div class="traveller-progress">${v ? v.name + " · " : ""}${checkpoints[progress].title}</div></div>
           <span class="pill ${idx === state.selectedPlayer ? "done" : ""}">${Math.round(progress / (checkpoints.length - 1) * 100)}%</span>
         </div>`;
@@ -1109,7 +1125,8 @@
       document.getElementById("selectedName").textContent = p.name;
       document.getElementById("selectedProgress").textContent = `${percent}%`;
       document.getElementById("selectedProgressFill").style.width = `${percent}%`;
-      document.getElementById("selectedRole").textContent = p.role || "🧭 No role yet";
+      const sv = vibeById(p.vibe);
+      document.getElementById("selectedRole").textContent = `${p.piece || "♟️"} ${sv ? sv.name : "pick a vibe"}`;
       document.getElementById("selectedStage").textContent = checkpoints[progress].title;
     }
 
@@ -1412,6 +1429,23 @@
       });
     }
 
+    function renderPiecePicker() {
+      const holder = document.getElementById("piecePicker");
+      if (!holder) return;
+      const p = selectedPlayer();
+      holder.innerHTML = pieces.map(pc => `
+        <button class="piece-chip ${p.piece === pc ? "active" : ""}" data-piece="${escapeAttr(pc)}" title="Use ${escapeAttr(pc)} as your board piece">${pc}</button>`).join("");
+      holder.querySelectorAll(".piece-chip").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const player = selectedPlayer();
+          player.piece = player.piece === btn.dataset.piece ? null : btn.dataset.piece;
+          saveState();
+          renderAll();
+          toast(player.piece ? `${player.name}'s piece: ${player.piece}` : `${player.name} cleared their piece`);
+        });
+      });
+    }
+
     function spawnLeaves() {
       const holder = document.getElementById("leaves");
       if (!holder) return;
@@ -1430,23 +1464,26 @@
     function renderRosterEditor() {
       const holder = document.getElementById("rosterEditor");
       holder.innerHTML = state.players.map((p, idx) => `<div class="roster-row">
-        <div class="avatar-dot" style="background:${p.colour}; width:42px; height:42px">${escapeHtml(p.initials)}</div>
+        <div class="avatar-dot" style="background:${p.colour}; width:42px; height:42px">${p.piece ? escapeHtml(p.piece) : escapeHtml(p.initials)}</div>
         <div class="roster-fields">
           <input type="text" value="${escapeAttr(p.name)}" data-field="name" data-idx="${idx}" aria-label="Name for traveller ${idx + 1}" placeholder="Name" />
-          <input type="text" value="${escapeAttr(p.role)}" data-field="role" data-idx="${idx}" aria-label="Role for traveller ${idx + 1}" placeholder="Role" />
           <select data-field="vibe" data-idx="${idx}" aria-label="Vibe for traveller ${idx + 1}">
             <option value="">Pick a vibe…</option>
             ${vibes.map(v => `<option value="${v.id}" ${p.vibe === v.id ? "selected" : ""}>${v.emoji} ${v.name}</option>`).join("")}
+          </select>
+          <select data-field="piece" data-idx="${idx}" aria-label="Board piece for traveller ${idx + 1}">
+            <option value="">Pick a piece…</option>
+            ${pieces.map(pc => `<option value="${escapeAttr(pc)}" ${p.piece === pc ? "selected" : ""}>${pc}</option>`).join("")}
           </select>
         </div>
       </div>`).join("");
       const onChange = e => {
         const idx = Number(e.target.dataset.idx);
         const field = e.target.dataset.field;
-        state.players[idx][field] = field === "vibe" ? (e.target.value || null) : e.target.value;
+        state.players[idx][field] = (field === "vibe" || field === "piece") ? (e.target.value || null) : e.target.value;
         if (field === "name") state.players[idx].initials = makeInitials(e.target.value, idx);
         saveState();
-        renderPlayerSelect(); renderTravellerGrid(); renderTokens(); renderSelectedPanel(); renderVibePicker(); renderNextActions(); renderBadges();
+        renderPlayerSelect(); renderTravellerGrid(); renderTokens(); renderSelectedPanel(); renderVibePicker(); renderPiecePicker(); renderNextActions(); renderBadges();
       };
       holder.querySelectorAll("input").forEach(el => el.addEventListener("input", onChange));
       holder.querySelectorAll("select").forEach(el => el.addEventListener("change", onChange));
@@ -1493,16 +1530,21 @@
 
       const d = ITIN_DAYS.find(x => x.n === itinDay) || ITIN_DAYS[0];
       const dayItems = chosen.filter(i => i.day === d.n).map(i => ({
-        slot: i.slot || "Anytime",
-        title: `${i.emoji} ${i.title}`,
-        note: i.weather ? (i.weather === "clear" ? "Weather call — do this if it's clear" : "Weather call — the low-cloud backup") : i.desc,
+        slot: i.slot || "Anytime", emoji: i.emoji, title: i.title, img: i.img,
+        note: i.weather ? `${i.desc} (${i.weather === "clear" ? "do this if it's clear" : "the low-cloud backup"})` : i.desc,
         rank: SLOT_RANK[i.slot] || 2
       }));
-      const anchors = d.anchors.map(a => ({ slot: a.slot, title: a.t, note: "", anchor: true, rank: SLOT_RANK[a.slot] || 2 }));
+      const anchors = d.anchors.map(a => ({ slot: a.slot, title: a.t, note: "", emoji: "", img: "", anchor: true, rank: SLOT_RANK[a.slot] || 2 }));
       const rows = [...anchors, ...dayItems].sort((a, b) => a.rank - b.rank);
       car.innerHTML = `<div class="day-card">
         <div class="day-head"><div><h3>Day ${d.n} · ${escapeHtml(d.title)}</h3><div class="day-base">${escapeHtml(d.base)} · ${d.date}</div></div></div>
-        ${rows.length ? rows.map(it => `<div class="itin-item ${it.anchor ? "itin-anchor" : ""}"><div class="itin-slot">${escapeHtml(it.slot)}</div><div><div class="itin-title">${escapeHtml(it.title)}</div>${it.note ? `<div class="itin-note">${escapeHtml(it.note)}</div>` : ""}</div></div>`).join("") : `<div class="itin-empty">Nothing voted in for this day yet — vote activities <b>Keen</b> in the Activity Market and they'll drop in here.</div>`}
+        ${rows.length ? rows.map(it => `<div class="itin-item ${it.anchor ? "itin-anchor" : ""}">
+            <div class="itin-slot">${escapeHtml(it.slot)}</div>
+            <div class="itin-main">
+              ${it.anchor ? "" : (it.img ? `<img class="itin-thumb" src="images/${escapeAttr(it.img)}" alt="${escapeAttr(it.title)}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'itin-thumb fallback',textContent:'${it.emoji || "📍"}'}))">` : `<div class="itin-thumb fallback">${it.emoji || "📍"}</div>`)}
+              <div class="itin-text"><div class="itin-title">${escapeHtml((it.emoji ? it.emoji + " " : "") + it.title)}</div>${it.note ? `<div class="itin-note">${escapeHtml(it.note)}</div>` : ""}</div>
+            </div>
+          </div>`).join("") : `<div class="itin-empty">Nothing voted in for this day yet — vote activities <b>Keen</b> in the Activity Market and they'll drop in here.</div>`}
       </div>`;
 
       if (bench) {
@@ -1514,7 +1556,7 @@
     }
 
     function renderAll() {
-      renderNodes(); renderTokens(); renderPlayerSelect(); renderTravellerGrid(); renderSelectedPanel(); renderVibePicker(); renderTasks(); renderIdeas(); renderBoardIdeaPreview(); renderNextActions(); renderBadges(); renderRosterEditor(); renderHero(); renderItinerary();
+      renderNodes(); renderTokens(); renderPlayerSelect(); renderTravellerGrid(); renderSelectedPanel(); renderVibePicker(); renderPiecePicker(); renderTasks(); renderIdeas(); renderBoardIdeaPreview(); renderNextActions(); renderBadges(); renderRosterEditor(); renderHero(); renderItinerary();
     }
 
     function toast(message) {
