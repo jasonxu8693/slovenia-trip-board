@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Slovenia Crew Trip Board</title>
+  <meta name="description" content="Live group planning board for the Slovenia September 2026 crew trip — Ljubljana, Bled and the Julian Alps." />
+  <style>
+    :root {
+      --ink: #eaf6f3;
+      --muted: rgba(234, 246, 243, 0.78);
+      --subtle: rgba(234, 246, 243, 0.58);
+      --panel: rgba(16, 30, 34, 0.70);
+      --panel-strong: rgba(10, 22, 26, 0.90);
+      --line: rgba(255, 255, 255, 0.15);
+      --gold: #ffce7a;
+      --sun: #54d6cf;
+      --neon: #6fe0d6;
+      --pink: #ff9e86;
+      --green: #7fe3b0;
+      --purple: #8fb6ff;
+      --danger: #ff7a7a;
+      --shadow: 0 24px 80px rgba(4, 14, 16, 0.46);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 14% 12%, rgba(111, 224, 214, 0.20), transparent 22%),
+        radial-gradient(circle at 84% 16%, rgba(255, 206, 122, 0.18), transparent 24%),
+        radial-gradient(circle at 50% 86%, rgba(127, 227, 176, 0.14), transparent 28%),
+        linear-gradient(150deg, #06110f 0%, #0a1a1d 34%, #0e2230 66%, #0a1714 100%);
+      overflow-x: hidden;
+    }
+
+    body:before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.13) 0 2px, transparent 2.5px),
+        radial-gradient(circle at 70% 24%, rgba(111,224,214,0.16) 0 1.6px, transparent 2px),
+        radial-gradient(circle at 45% 70%, rgba(255,206,122,0.13) 0 1.8px, transparent 2.2px),
+        linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+      background-size: 240px 240px, 280px 280px, 320px 320px, 48px 48px, 48px 48px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent 88%);
+      z-index: -1;
+    }
+
+    body:after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 16% 18%, rgba(255,255,255,0.07), transparent 10%),
+        radial-gradient(circle at 86% 26%, rgba(255,255,255,0.07), transparent 10%),
+        radial-gradient(circle at 28% 80%, rgba(255,255,255,0.07), transparent 10%);
+      mix-blend-mode: screen;
+      z-index: -1;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+
+    .app { width: min(1280px, calc(100% - 28px)); margin: 0 auto; padding: 18px 0 calc(52px + var(--safe-bottom)); }
+
+    .hero {
+      position: relative;
+      min-height: 430px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(6, 16, 18, 0.24), rgba(6, 16, 18, 0.92)),
+        radial-gradient(circle at 14% 16%, rgba(111, 224, 214, 0.22), transparent 24%),
+        radial-gradient(circle at 82% 16%, rgba(255, 206, 122, 0.20), transparent 26%),
+        linear-gradient(135deg, rgba(18, 34, 38, 0.95), rgba(8, 18, 22, 0.92));
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .hero-art { position: absolute; inset: 0; opacity: 0.96; z-index: -1; }
+    .ridge { position: absolute; left: 0; right: 0; bottom: 0; height: 60%; }
+    .peak { position: absolute; bottom: -2%; clip-path: polygon(50% 0%, 100% 100%, 0 100%); filter: drop-shadow(0 12px 28px rgba(4,12,14,0.34)); }
+    .peak:after { content: ""; position: absolute; left: 50%; top: 0; transform: translateX(-50%); width: 42%; height: 34%; background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(214,240,238,0.10)); clip-path: polygon(50% 0%, 86% 100%, 70% 64%, 50% 92%, 30% 60%, 14% 100%); }
+    .pk1 { left: 38%; width: 34%; height: 52%; background: linear-gradient(180deg, rgba(86,120,128,0.80), rgba(14,30,34,0.94)); }
+    .pk2 { left: 24%; width: 30%; height: 40%; background: linear-gradient(180deg, rgba(70,100,108,0.70), rgba(12,26,30,0.92)); opacity: 0.92; }
+    .pk3 { right: 14%; width: 34%; height: 38%; background: linear-gradient(180deg, rgba(64,92,100,0.66), rgba(10,22,26,0.90)); opacity: 0.86; }
+    .pine { position: absolute; bottom: 0; width: 0; height: 0; }
+    .pine:before { content: ""; position: absolute; left: -16px; bottom: 0; border-left: 16px solid transparent; border-right: 16px solid transparent; border-bottom: 54px solid rgba(18,42,36,0.92); filter: drop-shadow(0 6px 10px rgba(0,0,0,0.2)); }
+    .pn1 { left: 8%; transform: scale(1.1); } .pn2 { left: 14%; transform: scale(0.8); } .pn3 { right: 9%; transform: scale(1.2); } .pn4 { right: 15%; transform: scale(0.85); }
+    .chapel { position: absolute; left: 50%; bottom: 4%; transform: translateX(-50%); width: 26px; height: 60px; background: linear-gradient(180deg, rgba(245,250,248,0.92), rgba(150,175,172,0.5)); border-radius: 4px 4px 0 0; }
+    .chapel:before { content: ""; position: absolute; left: 50%; top: -26px; transform: translateX(-50%); border-left: 13px solid transparent; border-right: 13px solid transparent; border-bottom: 26px solid rgba(196,128,74,0.9); }
+    .chapel:after { content: ""; position: absolute; left: 50%; top: -40px; transform: translateX(-50%); width: 3px; height: 14px; background: rgba(255,206,122,0.95); box-shadow: 0 0 10px rgba(255,206,122,0.8); }
+    .moon { position: absolute; right: 9%; top: 9%; width: 104px; height: 104px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.96), rgba(231,246,243,0.95) 38%, rgba(111,224,214,0.85) 70%, rgba(111,224,214,0.28) 100%); box-shadow: 0 0 80px rgba(111,224,214,0.26); overflow: hidden; }
+    .moon:before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, rgba(255,255,255,0.30) 0 8px, rgba(255,255,255,0.07) 8px 16px); mix-blend-mode: screen; }
+    .hero:after { content: ""; position: absolute; inset: auto -8% 8% -8%; height: 160px; background:
+      radial-gradient(circle at 20% 0%, rgba(255,255,255,0.14), transparent 28%),
+      radial-gradient(circle at 50% 0%, rgba(111,224,214,0.22), transparent 30%),
+      radial-gradient(circle at 80% 0%, rgba(255,206,122,0.16), transparent 28%);
+      pointer-events: none; filter: blur(18px); opacity: 0.9; }
+
+    .hero-content { position: relative; z-index: 1; padding: 28px; display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 28px; min-height: 430px; align-items: end; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; width: fit-content; padding: 8px 12px; border: 1px solid rgba(255,255,255,0.16); border-radius: 999px; background: rgba(255,255,255,0.08); backdrop-filter: blur(14px); color: var(--muted); font-size: 13px; letter-spacing: 0.02em; }
+    .hero h1 { margin: 18px 0 12px; font-size: clamp(40px, 7vw, 82px); line-height: 0.92; letter-spacing: -0.07em; max-width: 760px; }
+    .hero h1 .shine { display: block; background: linear-gradient(100deg, #ffe6b0, #6fe0d6 44%, #ff9e86 72%, #ffce7a); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p { max-width: 720px; color: var(--muted); font-size: 17px; line-height: 1.55; margin: 0; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+    .btn { border: 0; border-radius: 999px; padding: 13px 17px; color: #07201d; background: linear-gradient(135deg, #eafffb, #6fe0d6); font-weight: 800; box-shadow: 0 12px 30px rgba(111, 224, 214, 0.22); transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(111, 224, 214, 0.30); }
+    .btn.secondary { color: var(--ink); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); box-shadow: none; }
+    .btn.ghost { color: var(--ink); background: transparent; border: 1px solid rgba(255,255,255,0.18); box-shadow: none; }
+    .btn.small { padding: 9px 12px; font-size: 13px; }
+    .btn.danger { background: rgba(255,100,100,0.18); color: #ffdada; border: 1px solid rgba(255,100,100,0.32); box-shadow: none; }
+
+    .stat-card { align-self: stretch; display: grid; gap: 14px; align-content: end; }
+    .glass { border: 1px solid rgba(255,255,255,0.16); border-radius: var(--radius-lg); background: linear-gradient(180deg, rgba(255,255,255,0.11), rgba(255,255,255,0.06)); backdrop-filter: blur(18px); padding: 18px; }
+    .flight-card { position: relative; overflow: hidden; }
+    .flight-card:before { content: ""; position: absolute; inset: -60% auto auto -20%; width: 170px; height: 170px; background: radial-gradient(circle, rgba(111,224,214,0.26), transparent 62%); }
+    .label { color: var(--subtle); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 800; }
+    .big { font-size: 30px; font-weight: 900; letter-spacing: -0.05em; margin-top: 6px; }
+    .micro { color: var(--muted); font-size: 13px; line-height: 1.45; }
+    .pill-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .pill { display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,0.14); background: rgba(0,0,0,0.18); color: var(--muted); border-radius: 999px; padding: 7px 10px; font-size: 12px; font-weight: 700; }
+    .pill.done { color: #c8ffe0; border-color: rgba(127,227,176,0.30); background: rgba(127,227,176,0.12); }
+    .pill.warn { color: #ffe7ae; border-color: rgba(255,206,122,0.3); background: rgba(255,206,122,0.12); }
+    .pill.hot { color: #ffe0cf; border-color: rgba(255,158,134,0.32); background: rgba(255,158,134,0.12); }
+
+    .nav { position: sticky; top: 10px; z-index: 20; margin: 18px 0; display: flex; gap: 10px; padding: 8px; border: 1px solid var(--line); background: rgba(10, 20, 24, 0.78); backdrop-filter: blur(18px); border-radius: 999px; overflow-x: auto; box-shadow: 0 12px 38px rgba(4,12,14,0.24); }
+    .nav button { white-space: nowrap; border: 0; border-radius: 999px; color: var(--muted); background: transparent; padding: 11px 14px; font-weight: 800; font-size: 13px; }
+    .nav button.active { color: #07201d; background: linear-gradient(135deg, rgba(234,255,251,0.98), rgba(140,232,224,0.96)); }
+
+    .section { display: none; animation: fadeIn 0.25s ease both; }
+    .section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    .layout { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(330px, 0.55fr); gap: 18px; align-items: start; }
+    .panel { border: 1px solid var(--line); border-radius: var(--radius-xl); background: linear-gradient(180deg, rgba(20, 36, 40, 0.72), rgba(9, 20, 24, 0.80)); box-shadow: 0 18px 60px rgba(4,12,14,0.26); backdrop-filter: blur(18px); overflow: hidden; }
+    .panel.pad { padding: 20px; }
+    .panel-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 20px; border-bottom: 1px solid var(--line); }
+    .panel h2, .panel h3 { margin: 0; letter-spacing: -0.035em; }
+    .panel h2 { font-size: 26px; }
+    .panel h3 { font-size: 18px; }
+    .panel-sub { color: var(--muted); margin: 6px 0 0; line-height: 1.45; font-size: 14px; }
+
+    .board-shell { position: relative; padding: 16px; }
+    .board {
+      position: relative;
+      min-height: 660px;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.14);
+      background:
+        radial-gradient(circle at 80% 12%, rgba(255,206,122,0.20), transparent 26%),
+        radial-gradient(circle at 18% 16%, rgba(143,182,255,0.16), transparent 24%),
+        radial-gradient(circle at 52% 90%, rgba(84,214,207,0.14), transparent 28%),
+        linear-gradient(180deg, #102338 0%, #143b3f 44%, #16463a 74%, #1c4b3a 100%);
+      box-shadow: inset 0 0 110px rgba(255,255,255,0.05);
+    }
+    .board:before { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.07)' stroke-width='1'%3E%3Cpath d='M0 92 C26 70, 44 104, 70 84 S122 70, 180 98'/%3E%3Cpath d='M14 132 C42 112, 63 150, 98 128 S142 120, 170 144'/%3E%3C/g%3E%3C/svg%3E"); opacity: 0.6; }
+    .lake { position: absolute; left: -4%; right: 18%; bottom: -8%; height: 34%; background: linear-gradient(180deg, rgba(84,214,207,0.20), rgba(18, 62, 84, 0.62)); border-radius: 48% 52% 0 0; filter: blur(0.2px); }
+    .cloud { position: absolute; width: 150px; height: 50px; border-radius: 999px; background: rgba(255,255,255,0.12); filter: blur(0.3px); }
+    .cloud:before, .cloud:after { content: ""; position: absolute; border-radius: 50%; background: inherit; }
+    .cloud:before { width: 70px; height: 70px; left: 25px; top: -36px; }
+    .cloud:after { width: 58px; height: 58px; right: 24px; top: -26px; }
+    .c1 { left: 16%; top: 14%; animation: drift 14s linear infinite; }
+    .c2 { right: 22%; top: 11%; transform: scale(0.7); opacity: 0.7; animation: drift2 17s linear infinite; }
+    @keyframes drift { 50% { transform: translateX(26px); } }
+    @keyframes drift2 { 50% { transform: translateX(-22px) scale(0.7); } }
+
+    .route-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
+    .route-line { fill: none; stroke: rgba(234, 246, 243, 0.74); stroke-width: 8; stroke-linecap: round; stroke-dasharray: 2 18; filter: drop-shadow(0 0 8px rgba(84,214,207,0.36)); }
+    .route-shadow { fill: none; stroke: rgba(0, 0, 0, 0.28); stroke-width: 14; stroke-linecap: round; stroke-dasharray: 2 18; }
+
+    .node { position: absolute; z-index: 5; width: 118px; min-height: 112px; transform: translate(-50%, -50%); display: grid; justify-items: center; gap: 7px; text-align: center; }
+    .node-core { width: 62px; height: 62px; border-radius: 22px; display: grid; place-items: center; font-size: 30px; color: #06201c; background: var(--ink); border: 2px solid rgba(255,255,255,0.4); box-shadow: 0 18px 36px rgba(0,0,0,0.3), 0 0 0 6px rgba(255,255,255,0.08); transition: transform 0.2s ease; }
+    .node:hover .node-core { transform: translateY(-4px) rotate(-3deg); }
+    .node-title { font-size: 12px; line-height: 1.15; font-weight: 900; text-shadow: 0 2px 6px rgba(0,0,0,0.6); }
+    .node-meta { font-size: 10px; color: var(--muted); font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
+    .node.group .node-core { background: linear-gradient(135deg, #eafffb, #6fe0d6); }
+    .node.boss .node-core { background: linear-gradient(135deg, #173a36, #3f7d6b); color: white; animation: bossPulse 3s ease-in-out infinite; }
+    .node.personal .node-core { background: linear-gradient(135deg, #f3fdfb, #cdeee9); }
+    @keyframes bossPulse { 0%,100% { box-shadow: 0 18px 36px rgba(0,0,0,0.3), 0 0 0 6px rgba(84,214,207,0.08); } 50% { box-shadow: 0 18px 36px rgba(0,0,0,0.3), 0 0 0 12px rgba(84,214,207,0.16); } }
+
+    .token-layer { position: absolute; inset: 0; z-index: 8; pointer-events: none; }
+    .token { position: absolute; width: 38px; height: 38px; border-radius: 16px 16px 16px 6px; transform: translate(-50%, -50%) rotate(-6deg); display: grid; place-items: center; font-weight: 1000; font-size: 15px; color: #06201c; border: 2px solid rgba(255,255,255,0.72); box-shadow: 0 14px 28px rgba(0,0,0,0.35); transition: left 0.45s cubic-bezier(.2,.8,.2,1), top 0.45s cubic-bezier(.2,.8,.2,1), transform 0.2s ease; }
+    .token.active { z-index: 10; transform: translate(-50%, -50%) rotate(4deg) scale(1.1); box-shadow: 0 16px 34px rgba(0,0,0,0.42), 0 0 0 7px rgba(255,255,255,0.13); }
+    .token:after { content: attr(data-name); position: absolute; top: 42px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: var(--ink); background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.12); border-radius: 999px; padding: 4px 8px; font-size: 10px; opacity: 0; transition: opacity 0.2s ease; }
+    .token.active:after, .token:hover:after { opacity: 1; }
+
+    .side-stack { display: grid; gap: 18px; }
+    .player-card { padding: 18px; }
+    .select-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; margin: 14px 0; }
+    select, input[type="text"] { width: 100%; border: 1px solid rgba(255,255,255,0.14); border-radius: 14px; background: rgba(0,0,0,0.2); color: var(--ink); padding: 12px 13px; outline: none; }
+    select option { color: #111; }
+    .progress-wrap { margin-top: 14px; }
+    .progress-head { display: flex; justify-content: space-between; color: var(--muted); font-weight: 800; font-size: 12px; margin-bottom: 8px; }
+    .progress-bar { height: 12px; background: rgba(255,255,255,0.09); border-radius: 999px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
+    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #54d6cf, #7fe3b0, #ffce7a); border-radius: inherit; transition: width 0.35s ease; }
+
+    .traveller-grid { display: grid; grid-template-columns: 1fr; gap: 9px; margin-top: 14px; }
+    .traveller-row { display: grid; grid-template-columns: auto 1fr auto; gap: 9px; align-items: center; padding: 10px; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; background: rgba(255,255,255,0.05); }
+    .avatar-dot { width: 26px; height: 26px; border-radius: 10px; display: grid; place-items: center; color: #06201c; font-weight: 1000; font-size: 12px; border: 1px solid rgba(255,255,255,0.55); }
+    .traveller-name { font-weight: 850; font-size: 13px; }
+    .traveller-progress { color: var(--subtle); font-size: 11px; }
+
+    .task-list { display: grid; gap: 10px; }
+    .task-card { border: 1px solid rgba(255,255,255,0.12); border-radius: 18px; background: rgba(255,255,255,0.06); padding: 14px; display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: start; transition: transform 0.16s ease, border-color 0.16s ease; }
+    .task-card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.22); }
+    .task-card.completed { background: rgba(127, 227, 176, 0.1); border-color: rgba(127, 227, 176, 0.32); }
+    .task-card.group-done { background: rgba(255, 206, 122, 0.1); border-color: rgba(255, 206, 122, 0.28); }
+    .task-icon { width: 40px; height: 40px; border-radius: 15px; display: grid; place-items: center; background: rgba(255,255,255,0.12); font-size: 22px; }
+    .task-title { font-weight: 950; letter-spacing: -0.02em; }
+    .task-desc { color: var(--muted); font-size: 13px; line-height: 1.45; margin-top: 4px; }
+    .task-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .tag { font-size: 10px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 7px; border-radius: 999px; background: rgba(255,255,255,0.08); color: var(--muted); }
+    .tag.p1 { background: rgba(255,158,134,0.16); color: #ffe0cf; }
+    .tag.p2 { background: rgba(255,206,122,0.14); color: #ffe7ae; }
+    .tag.p3 { background: rgba(143,182,255,0.14); color: #d7e6ff; }
+    .tag.personal { background: rgba(84,214,207,0.14); color: #ccfbf6; }
+    .toggle { appearance: none; width: 50px; height: 30px; border-radius: 999px; background: rgba(255,255,255,0.13); border: 1px solid rgba(255,255,255,0.15); position: relative; transition: background 0.2s ease; margin: 3px 0 0; }
+    .toggle:before { content: ""; width: 22px; height: 22px; position: absolute; left: 3px; top: 3px; border-radius: 50%; background: white; transition: transform 0.2s ease; }
+    .toggle:checked { background: rgba(127,227,176,0.8); }
+    .toggle:checked:before { transform: translateX(20px); }
+
+    .idea-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .idea-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .idea-card { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.14); border-radius: 24px; background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05)); padding: 16px; display: grid; gap: 13px; box-shadow: 0 14px 34px rgba(7,30,28,0.14); }
+    .idea-card:before { content: ""; position: absolute; width: 160px; height: 160px; border-radius: 50%; right: -60px; top: -78px; background: rgba(255,206,122,0.10); pointer-events: none; }
+    .idea-top { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: start; position: relative; }
+    .idea-emoji { width: 48px; height: 48px; border-radius: 18px; display: grid; place-items: center; font-size: 26px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.12); }
+    .idea-title { font-weight: 1000; letter-spacing: -0.03em; font-size: 17px; }
+    .idea-desc { color: var(--muted); font-size: 13px; line-height: 1.45; margin-top: 4px; }
+    .idea-city { align-self: start; white-space: nowrap; }
+    .vote-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; position: relative; }
+    .vote-btn { border: 1px solid rgba(255,255,255,0.13); border-radius: 14px; background: rgba(0,0,0,0.18); color: var(--muted); padding: 10px 8px; font-weight: 950; font-size: 12px; transition: transform 0.16s ease, background 0.16s ease, border-color 0.16s ease; }
+    .vote-btn:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.24); }
+    .vote-btn.active.keen { background: rgba(127,227,176,0.18); color: #c8ffe0; border-color: rgba(127,227,176,0.38); }
+    .vote-btn.active.maybe { background: rgba(255,206,122,0.18); color: #ffe7ae; border-color: rgba(255,206,122,0.38); }
+    .vote-btn.active.no { background: rgba(255,122,122,0.18); color: #ffdada; border-color: rgba(255,122,122,0.38); }
+    .vote-meter { display: grid; gap: 8px; position: relative; }
+    .meter-track { height: 11px; display: flex; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.08); }
+    .meter-keen { background: rgba(127,227,176,0.85); }
+    .meter-maybe { background: rgba(255,206,122,0.85); }
+    .meter-no { background: rgba(255,122,122,0.85); }
+    .vote-counts { display: flex; flex-wrap: wrap; gap: 6px; color: var(--subtle); font-size: 11px; font-weight: 850; }
+    .idea-status { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 7px 10px; font-size: 11px; font-weight: 1000; letter-spacing: 0.05em; text-transform: uppercase; background: rgba(255,255,255,0.08); color: var(--muted); border: 1px solid rgba(255,255,255,0.12); }
+    .idea-status.hot { background: rgba(127,227,176,0.14); color: #c8ffe0; border-color: rgba(127,227,176,0.32); }
+    .idea-status.watch { background: rgba(255,206,122,0.14); color: #ffe7ae; border-color: rgba(255,206,122,0.32); }
+    .idea-status.cold { background: rgba(255,122,122,0.14); color: #ffdada; border-color: rgba(255,122,122,0.32); }
+    .idea-summary-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+    .mini-score { border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 12px; background: rgba(255,255,255,0.05); }
+    .mini-score .num { font-size: 26px; font-weight: 1000; letter-spacing: -0.05em; }
+    .mini-score .txt { color: var(--muted); font-size: 12px; line-height: 1.35; }
+    .add-idea-form { display: grid; grid-template-columns: 0.9fr 0.8fr 1.4fr auto; gap: 10px; margin-top: 16px; }
+    .idea-help { color: var(--muted); font-size: 13px; line-height: 1.5; }
+
+    .planning-hub { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding: 16px 20px 0; }
+    .hub-card { text-align: left; border: 1px solid rgba(255,255,255,0.13); border-radius: 22px; background: rgba(255,255,255,0.06); color: var(--ink); padding: 15px; min-height: 118px; display: grid; align-content: start; gap: 8px; transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease; }
+    .hub-card:hover { transform: translateY(-3px); border-color: rgba(255,206,122,0.34); background: rgba(255,255,255,0.09); }
+    .hub-card.primary { background: linear-gradient(135deg, rgba(84,214,207,0.16), rgba(255,158,134,0.10)); border-color: rgba(84,214,207,0.28); box-shadow: 0 16px 42px rgba(84,214,207,0.10); }
+    .hub-icon { font-size: 26px; }
+    .hub-title { font-weight: 1000; letter-spacing: -0.03em; font-size: 16px; }
+    .hub-copy { color: var(--muted); font-size: 12px; line-height: 1.42; }
+    .hub-status { width: fit-content; border-radius: 999px; padding: 6px 9px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.12); color: var(--muted); font-size: 11px; font-weight: 900; }
+
+    .nav button.market-tab { color: #fff0cc; border: 1px solid rgba(255,206,122,0.22); background: rgba(255,206,122,0.08); }
+    .nav button.market-tab.active { color: #06201c; background: linear-gradient(90deg, #ffce7a, #ff9d3d); }
+
+    .activity-spotlight { border-color: rgba(84,214,207,0.24); background: linear-gradient(180deg, rgba(84,214,207,0.10), rgba(255,255,255,0.04)); }
+    .activity-spotlight h3 { font-size: 21px; margin: 8px 0 6px; letter-spacing: -0.04em; }
+    .activity-spotlight p { color: var(--muted); font-size: 13px; line-height: 1.5; margin: 0; }
+    .mini-idea-list { display: grid; gap: 8px; margin: 14px 0; }
+    .mini-idea-row { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center; padding: 9px 10px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.15); }
+    .mini-idea-name { font-weight: 900; font-size: 12px; }
+    .mini-idea-meta { color: var(--subtle); font-size: 11px; }
+
+    .flow-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 16px 0 18px; }
+    .flow-step { border: 1px solid rgba(255,255,255,0.11); border-radius: 18px; background: rgba(255,255,255,0.05); padding: 12px; }
+    .flow-step strong { display: block; font-size: 13px; margin-bottom: 5px; }
+    .flow-step span { display: block; color: var(--muted); font-size: 12px; line-height: 1.35; }
+
+    .quest-controls { display: flex; flex-wrap: wrap; gap: 10px; padding: 16px 20px 20px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .info-card { border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); background: rgba(255,255,255,0.06); padding: 16px; min-height: 140px; position: relative; overflow: hidden; }
+    .info-card:before { content: ""; position: absolute; width: 110px; height: 110px; border-radius: 50%; background: rgba(84,214,207,0.12); right: -32px; top: -34px; }
+    .info-card .emoji { font-size: 34px; margin-bottom: 10px; }
+    .info-card h3 { font-size: 17px; margin: 0 0 8px; }
+    .info-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.48; }
+    .info-card ul { margin: 10px 0 0 18px; padding: 0; color: var(--muted); line-height: 1.5; font-size: 13px; }
+
+    .timeline { display: grid; gap: 10px; }
+    .timeline-item { display: grid; grid-template-columns: 92px 1fr; gap: 12px; padding: 14px; border-radius: 18px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); }
+    .timeline-date { color: var(--gold); font-weight: 1000; font-size: 13px; }
+    .timeline-title { font-weight: 950; }
+    .timeline-body { color: var(--muted); font-size: 13px; margin-top: 4px; line-height: 1.45; }
+
+    .modal { position: fixed; inset: 0; display: none; place-items: center; padding: 18px; background: rgba(2, 10, 12, 0.78); backdrop-filter: blur(14px); z-index: 80; }
+    .modal.active { display: grid; }
+    .modal-card { width: min(780px, 100%); border: 1px solid rgba(255,255,255,0.18); border-radius: 34px; background: linear-gradient(180deg, rgba(20, 36, 40, 0.98), rgba(9, 20, 24, 0.98)); box-shadow: var(--shadow); padding: 24px; }
+
+    .toast { position: fixed; left: 50%; bottom: calc(18px + var(--safe-bottom)); transform: translateX(-50%) translateY(20px); opacity: 0; pointer-events: none; z-index: 100; background: rgba(6,22,26,0.94); color: var(--ink); border: 1px solid rgba(255,255,255,0.14); border-radius: 999px; padding: 11px 15px; box-shadow: 0 12px 36px rgba(0,0,0,0.32); transition: opacity 0.2s ease, transform 0.2s ease; font-weight: 800; font-size: 13px; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    .source-note { color: var(--subtle); font-size: 12px; line-height: 1.5; padding: 16px 20px 20px; border-top: 1px solid var(--line); }
+    .source-note a { color: #bdf3ee; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* Live sync chip + confetti */
+    .nav .sync-chip { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; border: 1px solid rgba(255,255,255,0.16); background: rgba(0,0,0,0.24); color: var(--muted); border-radius: 999px; padding: 9px 13px; font-weight: 800; font-size: 12px; transition: background 0.2s ease, border-color 0.2s ease; }
+    .nav .sync-chip:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.26); }
+    .nav .sync-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: #7fe3b0; box-shadow: 0 0 10px rgba(127,227,176,0.85); flex: none; }
+    .nav .sync-chip .ico { display: inline-block; font-size: 12px; }
+    .nav .sync-chip.syncing { color: #ffe7ae; border-color: rgba(255,206,122,0.34); }
+    .nav .sync-chip.syncing .dot { background: #ffce7a; animation: syncPulse 0.9s ease-in-out infinite; }
+    .nav .sync-chip.syncing .ico { animation: spin 0.8s linear infinite; }
+    .nav .sync-chip.offline { color: #ffd8d8; border-color: rgba(255,122,122,0.34); }
+    .nav .sync-chip.offline .dot { background: #ff7a7a; box-shadow: 0 0 10px rgba(255,122,122,0.7); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes syncPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+    .confetti-wrap { position: fixed; inset: 0; pointer-events: none; z-index: 90; overflow: hidden; }
+    .confetti { position: absolute; top: -14px; width: 9px; height: 14px; border-radius: 2px; opacity: 0.95; will-change: transform, opacity; animation: confettiFall linear forwards; }
+    @keyframes confettiFall { 0% { transform: translateY(-10px) rotate(0deg); opacity: 1; } 100% { transform: translateY(102vh) rotate(640deg); opacity: 0.9; } }
+
+    /* Slovenia alpine board scene + per-player vibes + countdown */
+    .sln-scene { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+    /* Slovenian coat-of-arms style emblem: Triglav + stars on a blue shield */
+    .emblem { position: absolute; top: 10%; right: 9%; width: 74px; height: 88px; z-index: 2; filter: drop-shadow(0 0 22px rgba(143,182,255,0.30)); animation: emblemGlow 5s ease-in-out infinite; }
+    .emblem svg { width: 100%; height: 100%; display: block; }
+    @keyframes emblemGlow { 0%,100% { filter: drop-shadow(0 0 18px rgba(143,182,255,0.22)); } 50% { filter: drop-shadow(0 0 30px rgba(255,206,122,0.40)); } }
+    /* Ljubljana dragon — the city mascot, perched by the castle */
+    .dragon-mascot { position: absolute; right: 13%; top: 30%; font-size: 34px; z-index: 4; transform-origin: center; animation: dragonBob 4.2s ease-in-out infinite; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.35)) hue-rotate(-12deg); }
+    .dragon-mascot:after { content: "Ljubljana dragon"; position: absolute; left: 50%; top: 100%; transform: translateX(-50%); white-space: nowrap; font-size: 10px; font-weight: 900; color: #d7ffe9; background: rgba(8,22,26,0.7); border: 1px solid rgba(255,255,255,0.12); border-radius: 999px; padding: 2px 7px; margin-top: 4px; }
+    @keyframes dragonBob { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-7px) rotate(3deg); } }
+    /* Alpine cable-car gondolas (Vogel / Velika Planina) swaying on a line */
+    .gondola { position: absolute; width: 22px; height: 16px; border-radius: 5px; background: linear-gradient(180deg, #ff9d3d, #d9602a); box-shadow: 0 0 14px rgba(255,157,61,0.5); transform-origin: top center; animation: sway 4.6s ease-in-out infinite; z-index: 3; }
+    .gondola:before { content: ""; position: absolute; top: -8px; left: 50%; transform: translateX(-50%); width: 2px; height: 8px; background: rgba(255,255,255,0.5); }
+    .gondola:after { content: ""; position: absolute; top: -10px; left: -40px; width: 120px; height: 1px; background: rgba(255,255,255,0.28); transform: rotate(-7deg); z-index: -1; }
+    .gondola.g1 { left: 30%; top: 18%; }
+    .gondola.g2 { left: 47%; top: 15%; background: linear-gradient(180deg, #6fe0d6, #2c9b93); box-shadow: 0 0 14px rgba(84,214,207,0.5); animation-delay: 1s; }
+    .gondola.g3 { left: 60%; top: 20%; animation-delay: 2s; }
+    @keyframes sway { 0%,100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
+    .leaves { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 3; }
+    .leaf { position: absolute; top: -26px; opacity: 0; animation: leafFall linear infinite; will-change: transform, opacity; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.25)); }
+    @keyframes leafFall { 0% { transform: translateY(-30px) translateX(0) rotate(0deg); opacity: 0; } 12% { opacity: 0.95; } 88% { opacity: 0.85; } 100% { transform: translateY(900px) translateX(46px) rotate(360deg); opacity: 0; } }
+
+    .vibe-block { margin-top: 16px; }
+    .vibe-picker { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 9px; }
+    .vibe-chip { display: grid; justify-items: center; gap: 4px; padding: 10px 6px; border: 1px solid rgba(255,255,255,0.13); border-radius: 15px; background: rgba(0,0,0,0.2); color: var(--muted); transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease; }
+    .vibe-chip:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.26); }
+    .vibe-chip.active { background: rgba(255,206,122,0.18); border-color: rgba(255,206,122,0.42); color: #ffe7ae; box-shadow: 0 8px 22px rgba(255,206,122,0.12); }
+    .vibe-chip .vibe-emoji { font-size: 21px; line-height: 1; }
+    .vibe-chip .vibe-name { font-size: 10px; font-weight: 900; letter-spacing: 0.02em; }
+
+    .roster-row { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center; padding: 12px; border: 1px solid rgba(255,255,255,0.12); border-radius: 18px; background: rgba(255,255,255,0.05); }
+    .roster-fields { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 10px; }
+    .roster-fields select { width: 100%; border: 1px solid rgba(255,255,255,0.14); border-radius: 14px; background: rgba(0,0,0,0.2); color: var(--ink); padding: 11px 12px; outline: none; }
+    .roster-fields select option { color: #111; }
+    @media (max-width: 620px) { .roster-fields { grid-template-columns: 1fr; } }
+
+    .token-vibe { position: absolute; top: -11px; right: -11px; width: 20px; height: 20px; border-radius: 50%; background: rgba(6,22,26,0.94); border: 1px solid rgba(255,255,255,0.5); display: grid; place-items: center; font-size: 11px; line-height: 1; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+    .traveller-vibe { font-size: 13px; margin-left: 4px; }
+    .countdown-card .big { background: linear-gradient(100deg, #ffce7a, #ff9e86 60%, #6fe0d6); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+    @media (max-width: 980px) {
+      .hero-content { grid-template-columns: 1fr; align-items: end; }
+      .layout { grid-template-columns: 1fr; }
+      .grid-3, .grid-2, .idea-grid, .idea-summary-grid, .add-idea-form, .planning-hub, .flow-steps { grid-template-columns: 1fr; }
+      .board { min-height: 720px; }
+      .node { width: 94px; }
+      .node-core { width: 54px; height: 54px; border-radius: 19px; font-size: 26px; }
+      .dragon-mascot { font-size: 28px; }
+    }
+
+    @media (max-width: 620px) {
+      .app { width: min(100% - 16px, 1280px); padding-top: 8px; }
+      .hero { min-height: 520px; border-radius: 24px; }
+      .hero-content { padding: 20px; min-height: 520px; }
+      .panel, .board { border-radius: 24px; }
+      .panel-head { display: grid; }
+      .board-shell { padding: 8px; }
+      .board { min-height: 780px; }
+      .node-title { font-size: 10px; }
+      .node-meta { display: none; }
+      .token { width: 32px; height: 32px; border-radius: 13px 13px 13px 5px; font-size: 13px; }
+      .timeline-item { grid-template-columns: 1fr; }
+      .nav { top: 6px; border-radius: 22px; }
+      .gondola, .emblem { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="hero">
+      <div class="hero-art" aria-hidden="true">
+        <div class="moon"></div>
+        <div class="ridge">
+          <div class="peak pk2"></div><div class="peak pk3"></div><div class="peak pk1"></div>
+          <div class="pine pn1"></div><div class="pine pn2"></div><div class="pine pn3"></div><div class="pine pn4"></div>
+          <div class="chapel"></div>
+        </div>
+      </div>
+      <div class="hero-content">
+        <div>
+          <div class="eyebrow">🇸🇮 Ljubljana · Bled · Julian Alps · 11–15 Sep 2026</div>
+          <h1><span>Slovenia crew</span><span class="shine">trip board</span></h1>
+          <p>Votes, flights, bookings and group progress — one shared board for the whole crew.</p>
+          <div class="hero-actions">
+            <button class="btn" data-jump="board">Open board</button>
+            <button class="btn secondary" data-jump="tasks">Group tasks</button>
+            <button class="btn ghost" data-jump="ideas">Activity Market</button>
+            <button class="btn ghost" data-jump="settings">Set your vibe</button>
+          </div>
+        </div>
+        <aside class="stat-card">
+          <div class="glass countdown-card">
+            <div class="label">Countdown to Ljubljana</div>
+            <div class="big"><span id="countdownDays">—</span></div>
+            <div class="micro" id="countdownSub">Ljubljana + Bled · 11 to 15 Sep 2026</div>
+            <div class="pill-row">
+              <span class="pill hot">🍂 Early autumn in the Alps</span>
+              <span class="pill" id="travellerCountPill">9 travellers</span>
+            </div>
+          </div>
+          <div class="glass">
+            <div class="label">Group progress</div>
+            <div class="big"><span id="heroProgressPct">0%</span></div>
+            <div class="progress-bar" style="margin-top:12px"><div class="progress-fill" id="heroProgressFill"></div></div>
+            <div class="micro" id="heroProgressSub" style="margin-top:10px">Group bosses cleared together.</div>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <nav class="nav" aria-label="App sections">
+      <button class="active" data-tab="board">🗺️ Board</button>
+      <button data-tab="tasks">🐉 Group tasks</button>
+      <button class="market-tab" data-tab="ideas">🎯 Activity Market</button>
+      <button data-tab="intel">📍 Trip intel</button>
+      <button data-tab="settings">⚙️ Roster &amp; vibes</button>
+      <button class="sync-chip" id="syncChip" title="Tap to pull the latest from the group">
+        <span class="dot"></span><span class="ico">↻</span><span id="syncChipText">Live</span>
+      </button>
+    </nav>
+
+    <main>
+      <section id="board" class="section active">
+        <div class="layout">
+          <div class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>Trip board</h2>
+                <p class="panel-sub">Track progress, votes and group decisions.</p>
+              </div>
+              <div class="pill-row" style="margin:0">
+                <span class="pill hot" id="vibeSummaryBadge">0/9 vibes set</span>
+                <span class="pill warn" id="groupProgressBadge">Group bosses 0%</span>
+              </div>
+            </div>
+            <div class="planning-hub" aria-label="Planning shortcuts">
+              <button class="hub-card primary" data-jump="ideas">
+                <span class="hub-icon">🎯</span>
+                <span class="hub-title">Activity Market</span>
+                <span class="hub-copy">Vote on caves, gorges, cable cars and lake days.</span>
+                <span class="hub-status" id="boardVoteStatus">0 votes cast</span>
+              </button>
+              <button class="hub-card" data-jump="tasks">
+                <span class="hub-icon">🐉</span>
+                <span class="hub-title">Group tasks</span>
+                <span class="hub-copy">Route, budget, accommodation, cars and itinerary.</span>
+                <span class="hub-status">Shared progress</span>
+              </button>
+              <button class="hub-card" data-jump="settings">
+                <span class="hub-icon">👥</span>
+                <span class="hub-title">Roster</span>
+                <span class="hub-copy">Names, roles and vibes.</span>
+                <span class="hub-status">Edit roster</span>
+              </button>
+            </div>
+            <div class="board-shell">
+              <div class="board" id="questBoard">
+                <svg class="sln-scene" viewBox="0 0 1000 660" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="mtnBack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4d6f86"/><stop offset="1" stop-color="#1c2c3c"/></linearGradient>
+                    <linearGradient id="mtnFront" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#365a52"/><stop offset="1" stop-color="#11231d"/></linearGradient>
+                    <linearGradient id="bledLake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5fd6cf"/><stop offset="1" stop-color="#1d5e6e"/></linearGradient>
+                    <linearGradient id="crag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a7283"/><stop offset="1" stop-color="#222a36"/></linearGradient>
+                  </defs>
+                  <!-- back range with snow caps -->
+                  <path fill="url(#mtnBack)" opacity="0.92" d="M0 350 L120 232 L210 320 L300 200 L360 270 L430 188 L520 300 L620 235 L720 320 L840 232 L1000 300 L1000 660 L0 660 Z"/>
+                  <!-- Triglav triple summit highlight -->
+                  <path fill="#ffffff" opacity="0.86" d="M392 232 L430 188 L470 232 L452 224 L430 210 L412 224 Z"/>
+                  <path fill="#ffffff" opacity="0.7" d="M276 240 L300 200 L326 240 L312 230 L300 218 L288 230 Z"/>
+                  <!-- front range -->
+                  <path fill="url(#mtnFront)" d="M0 446 Q170 372 330 436 T660 432 T1000 424 L1000 660 L0 660 Z"/>
+                  <!-- pine forest band -->
+                  <g fill="#13261f" opacity="0.85">
+                    <path d="M70 470 l13 -30 l13 30 z"/><path d="M96 470 l11 -24 l11 24 z"/><path d="M118 472 l14 -32 l14 32 z"/>
+                    <path d="M150 474 l12 -26 l12 26 z"/><path d="M560 470 l13 -28 l13 28 z"/><path d="M588 472 l11 -24 l11 24 z"/>
+                  </g>
+                  <!-- Bled castle on its crag (left of the lake) -->
+                  <g transform="translate(150 360)">
+                    <path d="M0 0 L70 -8 L96 86 L-18 86 Z" fill="url(#crag)"/>
+                    <rect x="20" y="-40" width="40" height="44" fill="#2b3548"/>
+                    <rect x="44" y="-66" width="18" height="30" fill="#222c3d"/>
+                    <path d="M44 -66 l9 -14 l9 14 z" fill="#c4804a"/>
+                    <rect x="28" y="-30" width="7" height="9" fill="#ffce7a" opacity="0.9"/>
+                    <rect x="44" y="-30" width="7" height="9" fill="#ffce7a" opacity="0.8"/>
+                    <rect x="48" y="-58" width="6" height="8" fill="#ffce7a" opacity="0.85"/>
+                  </g>
+                  <!-- Lake Bled with the island church -->
+                  <ellipse cx="430" cy="540" rx="230" ry="70" fill="url(#bledLake)" opacity="0.86"/>
+                  <ellipse cx="430" cy="540" rx="230" ry="70" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+                  <g transform="translate(430 520)">
+                    <ellipse cx="0" cy="22" rx="62" ry="16" fill="#1d6b54" opacity="0.9"/>
+                    <ellipse cx="0" cy="20" rx="58" ry="12" fill="#2f8a63"/>
+                    <!-- island church: nave + bell tower + cross -->
+                    <rect x="-16" y="-6" width="30" height="26" fill="#f1f5f2"/>
+                    <path d="M-16 -6 L-1 -20 L14 -6 Z" fill="#c4804a"/>
+                    <rect x="16" y="-30" width="13" height="50" fill="#e9eef0"/>
+                    <path d="M16 -30 l6.5 -14 l6.5 14 z" fill="#b9763f"/>
+                    <rect x="20.5" y="-50" width="2" height="9" fill="#ffce7a"/>
+                    <rect x="18.5" y="-46" width="6" height="2" fill="#ffce7a"/>
+                    <rect x="20" y="-20" width="5" height="7" fill="#ffce7a" opacity="0.9"/>
+                    <rect x="-8" y="2" width="6" height="8" fill="#ffce7a" opacity="0.85"/>
+                    <rect x="2" y="2" width="6" height="8" fill="#ffce7a" opacity="0.85"/>
+                  </g>
+                  <!-- kozolec (Slovenian hayrack) in the right meadow -->
+                  <g transform="translate(792 470)" opacity="0.92">
+                    <rect x="0" y="0" width="6" height="48" fill="#6b4a2c"/>
+                    <rect x="48" y="0" width="6" height="48" fill="#6b4a2c"/>
+                    <path d="M-8 -6 L62 -6 L54 -20 L0 -20 Z" fill="#7d5836"/>
+                    <g stroke="#9c7a4e" stroke-width="2"><line x1="6" y1="12" x2="48" y2="12"/><line x1="6" y1="24" x2="48" y2="24"/><line x1="6" y1="36" x2="48" y2="36"/></g>
+                  </g>
+                </svg>
+                <div class="emblem" aria-hidden="true">
+                  <svg viewBox="0 0 74 88">
+                    <path d="M4 6 H70 V52 Q70 78 37 86 Q4 78 4 52 Z" fill="#1e63b8" stroke="#eaf6f3" stroke-width="3"/>
+                    <circle cx="22" cy="22" r="3" fill="#ffce7a"/><circle cx="52" cy="22" r="3" fill="#ffce7a"/><circle cx="37" cy="15" r="3" fill="#ffce7a"/>
+                    <path d="M14 56 L29 34 L37 46 L45 30 L60 56 Z" fill="#ffffff"/>
+                    <path d="M14 62 q11 -6 23 0 t23 0" fill="none" stroke="#9fd4ff" stroke-width="3"/>
+                  </svg>
+                </div>
+                <div class="dragon-mascot" aria-hidden="true">🐉</div>
+                <div class="cloud c1"></div><div class="cloud c2"></div>
+                <div class="gondola g1"></div><div class="gondola g2"></div><div class="gondola g3"></div>
+                <div class="lake"></div>
+                <div class="leaves" id="leaves" aria-hidden="true"></div>
+                <svg class="route-svg" viewBox="0 0 1000 660" preserveAspectRatio="none" aria-hidden="true">
+                  <path class="route-shadow" d="M105 540 C145 410 255 455 255 342 C255 230 385 248 420 150 C460 42 640 98 655 220 C672 356 765 298 835 390 C900 475 850 560 745 555" />
+                  <path class="route-line" d="M105 540 C145 410 255 455 255 342 C255 230 385 248 420 150 C460 42 640 98 655 220 C672 356 765 298 835 390 C900 475 850 560 745 555" />
+                </svg>
+                <div id="nodes"></div>
+                <div class="token-layer" id="tokens"></div>
+              </div>
+            </div>
+            <div class="quest-controls">
+              <button class="btn small" id="advanceBtn">Move player forward</button>
+              <button class="btn small secondary" id="undoBtn">Move player back</button>
+              <button class="btn small ghost" id="copySummaryBtn">Copy summary</button>
+              <button class="btn small danger" id="resetBtn">Reset board</button>
+            </div>
+            <div class="source-note">Live group sync is on — your changes save to the shared Google Sheet automatically. Tap the <strong>Live</strong> chip at the top to pull in what the others have done. Everyone should use the same GitHub Pages link.</div>
+          </div>
+
+          <aside class="side-stack">
+            <div class="panel player-card">
+              <div class="label">Selected player</div>
+              <div class="select-row">
+                <select id="playerSelect" aria-label="Selected traveller"></select>
+                <button class="btn small secondary" id="focusPlayerBtn">Focus</button>
+              </div>
+              <div class="progress-wrap">
+                <div class="progress-head"><span id="selectedName">Jason</span><span id="selectedProgress">0%</span></div>
+                <div class="progress-bar"><div class="progress-fill" id="selectedProgressFill"></div></div>
+              </div>
+              <div class="pill-row">
+                <span class="pill" id="selectedRole">🧭 No role yet</span>
+                <span class="pill" id="selectedStage">Base camp</span>
+              </div>
+              <div class="vibe-block">
+                <div class="label">Their vibe</div>
+                <div class="vibe-picker" id="vibePicker"></div>
+              </div>
+            </div>
+
+            <div class="panel pad">
+              <div class="label">Roster</div>
+              <div class="traveller-grid" id="travellerGrid"></div>
+            </div>
+
+            <div class="panel pad activity-spotlight">
+              <div class="label">Next thing</div>
+              <h3>Vote first. Lock it later.</h3>
+              <p>Keep the good ideas alive until the group picks a shortlist.</p>
+              <div class="mini-idea-list" id="boardIdeaPreview"></div>
+              <button class="btn small" data-jump="ideas">Activity Market</button>
+            </div>
+
+            <div class="panel pad">
+              <div class="label">Next three actions</div>
+              <div id="nextActions" class="task-list" style="margin-top:12px"></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="tasks" class="section">
+        <div class="layout">
+          <div class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>Group tasks</h2>
+                <p class="panel-sub">Personal tasks move one player. Group tasks move everyone.</p>
+              </div>
+              <button class="btn small secondary" id="markJasonFactsBtn">Apply Jason facts</button>
+            </div>
+            <div style="padding:20px">
+              <h3 style="margin-bottom:12px">Personal checkpoints</h3>
+              <div class="task-list" id="personalTasks"></div>
+              <h3 style="margin:24px 0 12px">Group tasks</h3>
+              <div class="task-list" id="groupTasks"></div>
+            </div>
+          </div>
+          <aside class="side-stack">
+            <div class="panel pad">
+              <div class="label">Why these matter</div>
+              <div class="info-card" style="margin-top:12px">
+                <div class="emoji">🗺️</div>
+                <h3>Route lock</h3>
+                <p>Lock dates and Ljubljana flights before booking accommodation.</p>
+              </div>
+              <div class="info-card" style="margin-top:12px">
+                <div class="emoji">🚘</div>
+                <h3>Ride plan</h3>
+                <p>Decide early: two hire cars or one 9-seater van. Confirm drivers and the motorway vignette.</p>
+              </div>
+              <div class="info-card" style="margin-top:12px">
+                <div class="emoji">🛂</div>
+                <h3>Entry check</h3>
+                <p>Slovenia is in the EU and Schengen. UK travellers: passport valid, GHIC/EHIC + travel insurance, no visa for short stays.</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="ideas" class="section">
+        <div class="layout">
+          <div class="panel pad">
+            <div class="panel-head" style="padding:0 0 18px; border-bottom:0">
+              <div>
+                <h2>Activity Market</h2>
+                <p class="panel-sub">Vote on ideas before they become itinerary items.</p>
+              </div>
+              <div class="pill-row" style="margin:0">
+                <span class="pill done" id="ideasHotBadge">0 shortlist ideas</span>
+                <span class="pill warn" id="ideasVotesBadge">0 votes cast</span>
+              </div>
+            </div>
+            <div class="flow-steps">
+              <div class="flow-step"><strong>1. Pick yourself</strong><span>Use the player dropdown.</span></div>
+              <div class="flow-step"><strong>2. Vote lightly</strong><span>Keen, maybe or no.</span></div>
+              <div class="flow-step"><strong>3. Shortlist later</strong><span>Shortlist the strongest ideas later.</span></div>
+            </div>
+            <div class="idea-toolbar">
+              <div class="idea-help">Rule of thumb: 5+ keen = shortlist · 3+ no = discuss · mostly maybe = optional.</div>
+              <button class="btn small secondary" id="copyIdeasBtn">Copy vote summary</button>
+            </div>
+            <div class="idea-grid" id="ideaGrid"></div>
+            <h3 style="margin:24px 0 8px">Add a new idea</h3>
+            <div class="add-idea-form">
+              <input type="text" id="newIdeaTitle" placeholder="Idea name" />
+              <input type="text" id="newIdeaCity" placeholder="Ljubljana, Bled, Bohinj…" />
+              <input type="text" id="newIdeaDesc" placeholder="Why it could be good" />
+              <button class="btn small" id="addIdeaBtn">Add idea</button>
+            </div>
+          </div>
+          <aside class="side-stack">
+            <div class="panel pad">
+              <div class="label">Decision logic</div>
+              <div class="idea-summary-grid">
+                <div class="mini-score"><div class="num" id="hotIdeaCount">0</div><div class="txt">Strong shortlist ideas</div></div>
+                <div class="mini-score"><div class="num" id="maybeIdeaCount">0</div><div class="txt">Maybe list</div></div>
+                <div class="mini-score"><div class="num" id="blockedIdeaCount">0</div><div class="txt">Needs discussion</div></div>
+              </div>
+              <div class="info-card" style="margin-top:14px">
+                <div class="emoji">💡</div>
+                <h3>Wishlist checkpoint</h3>
+                <p>Vote on one idea to clear your wishlist checkpoint.</p>
+              </div>
+              <div class="info-card" style="margin-top:12px">
+                <div class="emoji">⛰️</div>
+                <h3>Weather call</h3>
+                <p>Vogel is only worth it on a clear day. Savica waterfall is the low-cloud backup — keep both alive until 48h before.</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="intel" class="section">
+        <div class="panel pad">
+          <div class="panel-head" style="padding:0 0 18px; border-bottom:0">
+            <div>
+              <h2>Trip facts</h2>
+              <p class="panel-sub">Locked details and planning assumptions.</p>
+            </div>
+          </div>
+          <div class="grid-3">
+            <div class="info-card"><div class="emoji">📅</div><h3>Dates</h3><p>Fri 11 to Tue 15 Sep 2026. Ljubljana first, then Bled.</p></div>
+            <div class="info-card"><div class="emoji">✈️</div><h3>Route</h3><p>London → Ljubljana (LJU). Flights still to confirm — check Wizz, easyJet and BA seasonal direct.</p></div>
+            <div class="info-card"><div class="emoji">🏔️</div><h3>Why Slovenia</h3><p>Lake Bled, Julian Alps, Karst caves, gorges, alpine lakes and a walkable dragon-stamped capital.</p></div>
+          </div>
+
+          <h3 style="margin:24px 0 12px">Draft rhythm</h3>
+          <div class="timeline">
+            <div class="timeline-item"><div class="timeline-date">Fri 11 Sep</div><div><div class="timeline-title">Arrive Ljubljana</div><div class="timeline-body">Pick up cars, drop bags, compact old town — Dragon Bridge, castle funicular, riverside dinner.</div></div></div>
+            <div class="timeline-item"><div class="timeline-date">Sat 12 Sep</div><div><div class="timeline-title">Karst cave day</div><div class="timeline-body">Postojna Cave train + Predjama Castle (timed tour). Škocjan is the dramatic alternative.</div></div></div>
+            <div class="timeline-item"><div class="timeline-date">Sun 13 Sep</div><div><div class="timeline-title">Velika Planina, then Bled</div><div class="timeline-body">Cable car + chairlift to the herders' huts if operating, then transfer to the Bled base.</div></div></div>
+            <div class="timeline-item"><div class="timeline-date">Mon 14 Sep</div><div><div class="timeline-title">Vintgar + Bohinj</div><div class="timeline-body">Vintgar Gorge early (timed entry), afternoon at Bohinj — Vogel cable car if clear, Savica falls if cloudy.</div></div></div>
+            <div class="timeline-item"><div class="timeline-date">Tue 15 Sep</div><div><div class="timeline-title">Bled + fly home</div><div class="timeline-body">Row to Bled Island, ring the wishing bell, then airport — no Ljubljana detour on a flight day.</div></div></div>
+          </div>
+
+          <h3 style="margin:24px 0 12px">Planning watchouts</h3>
+          <div class="grid-2">
+            <div class="info-card"><div class="emoji">💶</div><h3>Euro + budget</h3><p>Slovenia uses the euro. Set a per-person budget before comparing villa, apartment cluster, cars and food tiers.</p></div>
+            <div class="info-card"><div class="emoji">🚗</div><h3>Vignette + ZTL</h3><p>Hire cars need a motorway vignette — confirm it's included. Ljubljana old town is largely car-free; park on the edge.</p></div>
+            <div class="info-card"><div class="emoji">🧥</div><h3>Caves are cold</h3><p>Postojna is ~10°C year-round. Bring a layer even on a warm September day. Tours are timed — pre-book.</p></div>
+            <div class="info-card"><div class="emoji">🌊</div><h3>Vintgar crowds</h3><p>Vintgar is a timed, one-way boardwalk. Book an early slot and treat it as a planned entry, not a casual stop.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="settings" class="section">
+        <div class="layout">
+          <div class="panel pad">
+            <h2>Roster settings</h2>
+            <p class="panel-sub">Rename placeholders once the crew is confirmed.</p>
+            <div id="rosterEditor" class="task-list" style="margin-top:18px"></div>
+          </div>
+          <aside class="panel pad">
+            <h3>Export snapshot</h3>
+            <p class="panel-sub">Copy the current board state manually.</p>
+            <button class="btn small" id="exportBtn" style="margin-top:14px">Copy JSON snapshot</button>
+            <button class="btn small secondary" id="importBtn" style="margin-top:14px">Paste JSON snapshot</button>
+          </aside>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const STORE_KEY = "sloveniaCrewQuestBoardV1";
+    // Paste your Google Apps Script Web App URL here after deployment.
+    // It should look like: https://script.google.com/macros/s/AKfycb.../exec
+    const REMOTE_API_URL = ""; // paste this trip's Apps Script /exec URL here
+    let remoteSaveTimer = null;
+    let remoteLoadAttempted = false;
+    let lastSeenUpdatedAt = null;
+    let lastSyncedAt = null;
+    let pendingSave = false;
+    let lastLocalSaveAt = 0;
+
+    const checkpoints = [
+      { id: "spawn", title: "Home check-in", meta: "Start", icon: "✈️", type: "personal", x: 10.5, y: 82 },
+      { id: "crewLock", title: "Crew lock", meta: "P1", icon: "🧑‍🤝‍🧑", type: "personal", x: 22, y: 61 },
+      { id: "ticket", title: "Tickets booked", meta: "P1", icon: "🎟️", type: "personal", x: 26, y: 39 },
+      { id: "routeBoss", title: "Route lock", meta: "Boss", icon: "🗺️", type: "boss", x: 42, y: 22 },
+      { id: "ljubljana", title: "Ljubljana set", meta: "Plan", icon: "🐉", type: "group", x: 63, y: 31 },
+      { id: "caveRun", title: "Cave run", meta: "Book", icon: "🕳️", type: "personal", x: 74, y: 45 },
+      { id: "bledBase", title: "Bled base", meta: "Boss", icon: "🏰", type: "boss", x: 84, y: 61 },
+      { id: "wheels", title: "Ride plan", meta: "Boss", icon: "🚘", type: "boss", x: 76, y: 75 },
+      { id: "admin", title: "Admin clear", meta: "Admin", icon: "🪪", type: "personal", x: 58, y: 77 },
+      { id: "final", title: "Trip ready", meta: "Clear", icon: "✨", type: "personal", x: 42, y: 68 }
+    ];
+
+    const colours = ["#54d6cf", "#ff9e86", "#7fe3b0", "#ffce7a", "#8fb6ff", "#9ed6c4", "#ffd1a1", "#c2b6ff", "#eaf6f3"];
+    const roles = ["🧭 Trip Lead", "🚘 Driver 1", "🚘 Driver 2", "💶 Money Manager", "🥟 Food Scout", "📸 Content Lead", "🗺️ Navigator", "🍻 Vibes Officer", "🪪 Admin Lead"];
+
+    // Each traveller picks their own vibe — shown on their token and roster card.
+    const vibes = [
+      { id: "foodie", emoji: "🥟", name: "Foodie", tag: "Here for the štruklji" },
+      { id: "adventurer", emoji: "🧗", name: "Adventure", tag: "Send it" },
+      { id: "planner", emoji: "🗓️", name: "Planner", tag: "Loves a plan" },
+      { id: "party", emoji: "🍻", name: "Party", tag: "Laško till late" },
+      { id: "scenic", emoji: "📸", name: "Scenic", tag: "Golden hour hunter" },
+      { id: "chill", emoji: "🌊", name: "Chill", tag: "Easy does it" }
+    ];
+    function vibeById(id) { return vibes.find(v => v.id === id) || null; }
+
+    const TRIP_START = new Date(2026, 8, 11); // 11 Sep 2026 (month is 0-indexed)
+
+    const defaultIdeas = [
+      { id: "postojnaPredjama", emoji: "🕳️", title: "Postojna Cave + Predjama Castle", city: "Karst", desc: "Iconic cave train through huge chambers, then the clifftop castle built into a cave mouth. Best default for a big group." },
+      { id: "skocjan", emoji: "🌋", title: "Škocjan Caves", city: "Karst", desc: "More dramatic underground river canyon (UNESCO), but more walking and logistics care than Postojna." },
+      { id: "velikaPlanina", emoji: "🚠", title: "Velika Planina", city: "Kamnik", desc: "Cable car + chairlift up to the alpine herders' huts. Strong Slovenian mountain energy — go only if the lifts are operating." },
+      { id: "vintgar", emoji: "🌊", title: "Vintgar Gorge", city: "near Bled", desc: "Emerald river on a timed one-way boardwalk. Book an early slot to beat the crowds." },
+      { id: "vogel", emoji: "🏔️", title: "Vogel cable car", city: "Bohinj", desc: "Julian Alps panorama above Lake Bohinj. Only worth it on a clear day." },
+      { id: "savica", emoji: "💦", title: "Savica Waterfall", city: "Bohinj", desc: "Short waterfall hike — the easy, low-cloud backup for the Vogel day." },
+      { id: "bledIsland", emoji: "🚣", title: "Row to Bled Island", city: "Bled", desc: "Pletna boat or row out to the island church, climb the 99 steps and ring the wishing bell." },
+      { id: "ljubljanaOldTown", emoji: "🐉", title: "Ljubljana old town + castle", city: "Ljubljana", desc: "Dragon Bridge, castle funicular, central market and riverside bars. Easy arrival-day win." }
+    ];
+
+    const defaultState = {
+      selectedPlayer: 0,
+      ideas: structuredClone(defaultIdeas),
+      ideaVotes: {},
+      players: [
+        { name: "Jason", initials: "J", colour: colours[0], role: roles[0], vibe: "scenic", progress: 1, completed: { crewLock: true } },
+        { name: "Traveller 2", initials: "T2", colour: colours[1], role: roles[1], vibe: null, progress: 0, completed: {} },
+        { name: "Traveller 3", initials: "T3", colour: colours[2], role: roles[2], vibe: null, progress: 0, completed: {} },
+        { name: "Traveller 4", initials: "T4", colour: colours[3], role: roles[3], vibe: null, progress: 0, completed: {} },
+        { name: "Traveller 5", initials: "T5", colour: colours[4], role: roles[4], vibe: null, progress: 0, completed: {} },
+        { name: "Traveller 6", initials: "T6", colour: colours[5], role: roles[5], vibe: null, progress: 0, completed: {} },
+        { name: "Traveller 7", initials: "T7", colour: colours[6], role: roles[6], vibe: null, progress: 0, completed: {} },
+        { name: "Traveller 8", initials: "T8", colour: colours[7], role: roles[7], vibe: null, progress: 0, completed: {} },
+        { name: "Traveller 9", initials: "T9", colour: colours[8], role: roles[8], vibe: null, progress: 0, completed: {} }
+      ],
+      groupDone: {
+        routeLock: false,
+        budgetPact: false,
+        caveCall: false,
+        ljubljanaAccom: false,
+        bledAccom: false,
+        vehicle: false,
+        activityShortlist: false,
+        dinners: false,
+        offlinePack: false
+      }
+    };
+
+    const personalTasks = [
+      { id: "crewLock", icon: "🧑‍🤝‍🧑", title: "Confirm your details", desc: "Name, contact, passport name, passport expiry and a firm yes or no.", priority: "P1", checkpoint: 1 },
+      { id: "outbound", icon: "🎟️", title: "Outbound flight booked", desc: "Fri 11 Sep, London to Ljubljana. Match the group flight or book your own.", priority: "P1", checkpoint: 2 },
+      { id: "return", icon: "↩️", title: "Return flight booked", desc: "Tue 15 Sep, Ljubljana to London.", priority: "P1", checkpoint: 3 },
+      { id: "wishlistVote", icon: "⭐", title: "Vote on activity ideas", desc: "Vote on at least one idea in the Activity Market.", priority: "P2", checkpoint: 4 },
+      { id: "caveBook", icon: "🕳️", title: "Cave tour ticket sorted", desc: "Book your timed Postojna or Škocjan slot once the cave call is locked.", priority: "P2", checkpoint: 5 },
+      { id: "accomShare", icon: "🏡", title: "Accommodation share paid", desc: "Pay your share once the Ljubljana and Bled stays are chosen.", priority: "P2", checkpoint: 6 },
+      { id: "transportShare", icon: "🚘", title: "Car / seat role confirmed", desc: "Confirm driver, navigator or passenger and your car group.", priority: "P2", checkpoint: 7 },
+      { id: "admin", icon: "🪪", title: "Entry admin ready", desc: "Passport valid, GHIC/EHIC, travel insurance and EU roaming or an eSIM sorted.", priority: "P1", checkpoint: 8 },
+      { id: "final", icon: "✨", title: "Packed and offline ready", desc: "Bookings, QR codes, maps and emergency info saved offline. Layers for the caves.", priority: "P2", checkpoint: 9 }
+    ];
+
+    const groupTasks = [
+      { id: "routeLock", icon: "🗺️", title: "Lock the route", desc: "Confirm dates, the Ljubljana flights and arrival/return times.", priority: "P1" },
+      { id: "budgetPact", icon: "💶", title: "Set the budget", desc: "Agree a per-person budget anchor (roughly £1,000–1,200pp planning baseline).", priority: "P1" },
+      { id: "caveCall", icon: "🕳️", title: "Lock the cave plan", desc: "Postojna + Predjama (default) or Škocjan. Then book timed tickets.", priority: "P1" },
+      { id: "ljubljanaAccom", icon: "🏙️", title: "Book the Ljubljana stay", desc: "Central, parking-friendly, easy for an arrival night for nine.", priority: "P2" },
+      { id: "bledAccom", icon: "🏡", title: "Book the Bled stay", desc: "Group Airbnb or apartment cluster — enough real beds and bathrooms.", priority: "P2" },
+      { id: "vehicle", icon: "🚘", title: "Lock the ride plan", desc: "Two hire cars or one 9-seater van. Confirm drivers and the vignette.", priority: "P2" },
+      { id: "activityShortlist", icon: "⚔️", title: "Choose the activity shortlist", desc: "Pick the strongest caves, gorge, cable car and lake days from the Market.", priority: "P2" },
+      { id: "dinners", icon: "🍽️", title: "Book group dinners", desc: "Reserve Ljubljana and Bled dinners once the stays are set.", priority: "P2" },
+      { id: "offlinePack", icon: "📲", title: "Generate the launch pack", desc: "Tickets, accommodation, cars, maps, insurance and emergency contacts saved.", priority: "P3" }
+    ];
+
+    let state = loadState();
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORE_KEY);
+        if (!raw) return structuredClone(defaultState);
+        const parsed = JSON.parse(raw);
+        return {
+          ...structuredClone(defaultState),
+          ...parsed,
+          players: parsed.players || structuredClone(defaultState.players),
+          groupDone: { ...defaultState.groupDone, ...(parsed.groupDone || {}) },
+          ideas: parsed.ideas || structuredClone(defaultIdeas),
+          ideaVotes: parsed.ideaVotes || {}
+        };
+      } catch (e) {
+        return structuredClone(defaultState);
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORE_KEY, JSON.stringify(state));
+      queueRemoteSave();
+    }
+
+    function hasRemoteSync() {
+      return REMOTE_API_URL && REMOTE_API_URL.startsWith("https://script.google.com/");
+    }
+
+    function mergeRemoteState(remote) {
+      if (!remote || typeof remote !== "object") return;
+      // "Who am I" is a per-device choice — never let a remote sync change it.
+      const localSelected = state.selectedPlayer;
+      state = {
+        ...structuredClone(defaultState),
+        ...remote,
+        players: remote.players || structuredClone(defaultState.players),
+        groupDone: { ...defaultState.groupDone, ...(remote.groupDone || {}) },
+        ideas: remote.ideas || structuredClone(defaultIdeas),
+        ideaVotes: remote.ideaVotes || {}
+      };
+      if (typeof localSelected === "number" && state.players[localSelected]) {
+        state.selectedPlayer = localSelected;
+      }
+      localStorage.setItem(STORE_KEY, JSON.stringify(state));
+    }
+
+    function relTime(ts) {
+      const s = Math.round((Date.now() - ts) / 1000);
+      if (s < 10) return "just now";
+      if (s < 60) return `${s}s ago`;
+      const m = Math.round(s / 60);
+      if (m < 60) return `${m}m ago`;
+      const h = Math.round(m / 60);
+      return `${h}h ago`;
+    }
+
+    function setSyncChip(kind) {
+      const chip = document.getElementById("syncChip");
+      const textEl = document.getElementById("syncChipText");
+      const stamp = document.getElementById("syncTabStamp");
+      if (chip) chip.classList.remove("syncing", "offline");
+      if (kind === "disabled") {
+        if (chip) chip.classList.add("offline");
+        if (textEl) textEl.textContent = "Local only";
+        if (stamp) stamp.textContent = "Live sync is not configured on this copy of the board.";
+        return;
+      }
+      if (kind === "syncing") {
+        if (chip) chip.classList.add("syncing");
+        if (textEl) textEl.textContent = "Syncing…";
+        if (stamp) stamp.textContent = "Checking the group sheet…";
+        return;
+      }
+      if (kind === "offline") {
+        if (chip) chip.classList.add("offline");
+        if (textEl) textEl.textContent = "Offline";
+        if (stamp) stamp.textContent = "Could not reach the sheet. Your changes are still saved on this device.";
+        return;
+      }
+      const rel = lastSyncedAt ? relTime(lastSyncedAt) : null;
+      if (textEl) textEl.textContent = rel ? `Live · ${rel}` : "Live";
+      if (stamp) stamp.textContent = rel ? `Last synced ${rel}.` : "Connected to the group sheet.";
+    }
+
+    function remotePull(opts) {
+      opts = opts || {};
+      if (!hasRemoteSync()) { setSyncChip("disabled"); return; }
+      if (!opts.poll) setSyncChip("syncing");
+      const callbackName = `sloveniaBoardSync_${Date.now()}_${Math.floor(Math.random() * 100000)}`;
+      const script = document.createElement("script");
+      let done = false;
+      const cleanup = () => {
+        if (done) return;
+        done = true;
+        try { delete window[callbackName]; } catch (e) { window[callbackName] = undefined; }
+        script.remove();
+      };
+      window[callbackName] = (response) => {
+        if (response && response.ok) {
+          const remoteStamp = response.updatedAt || null;
+          const changed = remoteStamp && remoteStamp !== lastSeenUpdatedAt;
+          // Don't overwrite local edits that haven't finished saving yet.
+          const safe = !pendingSave && (Date.now() - lastLocalSaveAt > 4000);
+          const allowMerge = opts.manual || opts.initial || (changed && safe);
+          if (response.state && allowMerge) {
+            mergeRemoteState(response.state);
+            renderAll();
+            if (opts.manual) toast("Pulled the latest from the group");
+            else if (changed && !opts.initial) toast("Synced a group update");
+          }
+          lastSeenUpdatedAt = remoteStamp || lastSeenUpdatedAt;
+          lastSyncedAt = Date.now();
+          remoteLoadAttempted = true;
+          setSyncChip("live");
+        } else {
+          setSyncChip(lastSyncedAt ? "live" : "offline");
+          if (opts.manual) toast("Could not read the group sheet");
+        }
+        cleanup();
+      };
+      script.onerror = () => {
+        setSyncChip(lastSyncedAt ? "live" : "offline");
+        if (opts.manual) toast("Could not reach the group sheet");
+        cleanup();
+      };
+      script.src = `${REMOTE_API_URL}?callback=${encodeURIComponent(callbackName)}&t=${Date.now()}`;
+      document.body.appendChild(script);
+      setTimeout(() => { if (!done) { setSyncChip(lastSyncedAt ? "live" : "offline"); cleanup(); } }, 10000);
+    }
+
+    function startSyncLoops() {
+      if (!hasRemoteSync()) { setSyncChip("disabled"); return; }
+      // Quietly check for group updates in the background.
+      setInterval(() => remotePull({ poll: true }), 25000);
+      // Keep the "synced 2m ago" label fresh.
+      setInterval(() => {
+        const chip = document.getElementById("syncChip");
+        if (chip && lastSyncedAt && !chip.classList.contains("syncing") && !chip.classList.contains("offline")) {
+          setSyncChip("live");
+        }
+      }, 20000);
+    }
+
+    function queueRemoteSave() {
+      if (!hasRemoteSync()) return;
+      pendingSave = true;
+      setSyncChip("syncing");
+      clearTimeout(remoteSaveTimer);
+      remoteSaveTimer = setTimeout(remoteSave, 450);
+    }
+
+    function remoteSave() {
+      if (!hasRemoteSync()) return;
+      const iframeId = "sloveniaBoardSyncFrame";
+      let iframe = document.getElementById(iframeId);
+      if (!iframe) {
+        iframe = document.createElement("iframe");
+        iframe.id = iframeId;
+        iframe.name = iframeId;
+        iframe.style.display = "none";
+        document.body.appendChild(iframe);
+      }
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = REMOTE_API_URL;
+      form.target = iframeId;
+      form.style.display = "none";
+
+      const input = document.createElement("textarea");
+      input.name = "payload";
+      input.value = JSON.stringify({ state, updatedAt: new Date().toISOString() });
+      form.appendChild(input);
+      document.body.appendChild(form);
+      form.submit();
+      lastLocalSaveAt = Date.now();
+      setTimeout(() => form.remove(), 1000);
+      setTimeout(() => {
+        pendingSave = false;
+        lastSyncedAt = Date.now();
+        setSyncChip("live");
+      }, 1300);
+    }
+
+    function clamp(n, min, max) { return Math.max(min, Math.min(max, n)); }
+    function selectedPlayer() { return state.players[state.selectedPlayer] || state.players[0]; }
+
+    function computePlayerProgress(player) {
+      const maxCheckpoint = Math.max(...personalTasks.filter(t => player.completed[t.id]).map(t => t.checkpoint), player.progress || 0);
+      return clamp(maxCheckpoint, 0, checkpoints.length - 1);
+    }
+
+    function renderNodes() {
+      const holder = document.getElementById("nodes");
+      holder.innerHTML = checkpoints.map(cp => `
+        <div class="node ${cp.type}" style="left:${cp.x}%; top:${cp.y}%" title="${cp.title}">
+          <div class="node-core">${cp.icon}</div>
+          <div class="node-title">${cp.title}</div>
+          <div class="node-meta">${cp.meta}</div>
+        </div>
+      `).join("");
+    }
+
+    function renderTokens() {
+      const holder = document.getElementById("tokens");
+      const used = {};
+      const playerCount = Math.max(state.players.length, 1);
+      holder.innerHTML = state.players.map((p, idx) => {
+        const progress = computePlayerProgress(p);
+        p.progress = progress;
+        const cp = checkpoints[progress];
+        const key = progress;
+        used[key] = used[key] || 0;
+        const stackIndex = used[key]++;
+        const angle = (stackIndex / playerCount) * Math.PI * 2;
+        const radius = stackIndex === 0 ? 0 : 2.7 + Math.floor((stackIndex - 1) / 6) * 2;
+        const x = cp.x + Math.cos(angle) * radius;
+        const y = cp.y + Math.sin(angle) * radius;
+        const v = vibeById(p.vibe);
+        return `<div class="token ${idx === state.selectedPlayer ? "active" : ""}" data-name="${escapeHtml(p.name)}${v ? " · " + v.name : ""}" style="left:${x}%; top:${y}%; background:${p.colour}" onclick="void(0)">${escapeHtml(p.initials)}${v ? `<span class="token-vibe">${v.emoji}</span>` : ""}</div>`;
+      }).join("");
+    }
+
+    function renderPlayerSelect() {
+      const sel = document.getElementById("playerSelect");
+      sel.innerHTML = state.players.map((p, idx) => `<option value="${idx}" ${idx === state.selectedPlayer ? "selected" : ""}>${escapeHtml(p.name)}</option>`).join("");
+    }
+
+    function renderTravellerGrid() {
+      const holder = document.getElementById("travellerGrid");
+      holder.innerHTML = state.players.map((p, idx) => {
+        const progress = computePlayerProgress(p);
+        const v = vibeById(p.vibe);
+        return `<div class="traveller-row" role="button" tabindex="0" data-player="${idx}">
+          <div class="avatar-dot" style="background:${p.colour}">${escapeHtml(p.initials)}</div>
+          <div><div class="traveller-name">${escapeHtml(p.name)}${v ? `<span class="traveller-vibe">${v.emoji}</span>` : ""}</div><div class="traveller-progress">${v ? v.name + " · " : ""}${checkpoints[progress].title}</div></div>
+          <span class="pill ${idx === state.selectedPlayer ? "done" : ""}">${Math.round(progress / (checkpoints.length - 1) * 100)}%</span>
+        </div>`;
+      }).join("");
+      holder.querySelectorAll(".traveller-row").forEach(row => {
+        row.addEventListener("click", () => { state.selectedPlayer = Number(row.dataset.player); saveState(); renderAll(); });
+      });
+    }
+
+    function renderSelectedPanel() {
+      const p = selectedPlayer();
+      const progress = computePlayerProgress(p);
+      const percent = Math.round(progress / (checkpoints.length - 1) * 100);
+      document.getElementById("selectedName").textContent = p.name;
+      document.getElementById("selectedProgress").textContent = `${percent}%`;
+      document.getElementById("selectedProgressFill").style.width = `${percent}%`;
+      document.getElementById("selectedRole").textContent = p.role || "🧭 No role yet";
+      document.getElementById("selectedStage").textContent = checkpoints[progress].title;
+    }
+
+    function renderTasks() {
+      const p = selectedPlayer();
+      const personalHolder = document.getElementById("personalTasks");
+      personalHolder.innerHTML = personalTasks.map(task => {
+        const done = !!p.completed[task.id];
+        return `<label class="task-card ${done ? "completed" : ""}">
+          <div class="task-icon">${task.icon}</div>
+          <div><div class="task-title">${task.title}</div><div class="task-desc">${task.desc}</div><div class="task-tags"><span class="tag ${task.priority.toLowerCase()}">${task.priority}</span><span class="tag personal">${escapeHtml(p.name)} only</span></div></div>
+          <input class="toggle personal-toggle" type="checkbox" data-task="${task.id}" ${done ? "checked" : ""}/>
+        </label>`;
+      }).join("");
+      personalHolder.querySelectorAll(".personal-toggle").forEach(toggle => {
+        toggle.addEventListener("change", e => {
+          const taskId = e.target.dataset.task;
+          const player = selectedPlayer();
+          player.completed[taskId] = e.target.checked;
+          const progress = computePlayerProgress(player);
+          player.progress = progress;
+          saveState();
+          renderAll();
+          toast(e.target.checked ? `${player.name} cleared a checkpoint` : `${player.name} checkpoint unchecked`);
+        });
+      });
+
+      const groupHolder = document.getElementById("groupTasks");
+      groupHolder.innerHTML = groupTasks.map(task => {
+        const done = !!state.groupDone[task.id];
+        return `<label class="task-card ${done ? "group-done" : ""}">
+          <div class="task-icon">${task.icon}</div>
+          <div><div class="task-title">${task.title}</div><div class="task-desc">${task.desc}</div><div class="task-tags"><span class="tag ${task.priority.toLowerCase()}">${task.priority}</span><span class="tag">Group boss</span></div></div>
+          <input class="toggle group-toggle" type="checkbox" data-task="${task.id}" ${done ? "checked" : ""}/>
+        </label>`;
+      }).join("");
+      groupHolder.querySelectorAll(".group-toggle").forEach(toggle => {
+        toggle.addEventListener("change", e => {
+          state.groupDone[e.target.dataset.task] = e.target.checked;
+          saveState();
+          renderAll();
+          if (e.target.checked) celebrate();
+          toast(e.target.checked ? "Group boss cleared" : "Group boss reopened");
+        });
+      });
+    }
+
+    function allIdeas() {
+      if (!state.ideas || !Array.isArray(state.ideas)) state.ideas = structuredClone(defaultIdeas);
+      return state.ideas;
+    }
+
+    function tallyIdea(ideaId) {
+      const votes = state.ideaVotes?.[ideaId] || {};
+      const tally = { keen: 0, maybe: 0, no: 0, total: 0 };
+      Object.values(votes).forEach(v => { if (tally[v] !== undefined) { tally[v] += 1; tally.total += 1; } });
+      tally.score = tally.keen * 2 + tally.maybe - tally.no * 2;
+      return tally;
+    }
+
+    function ideaStatus(tally) {
+      if (tally.keen >= 5 && tally.no <= 1) return { label: "Shortlist", cls: "hot" };
+      if (tally.no >= 3) return { label: "Discuss", cls: "cold" };
+      if (tally.total === 0) return { label: "Unvoted", cls: "" };
+      return { label: "Maybe", cls: "watch" };
+    }
+
+    function selectedPlayerVoteCount(playerIdx = state.selectedPlayer) {
+      return allIdeas().filter(idea => state.ideaVotes?.[idea.id]?.[playerIdx]).length;
+    }
+
+    function updateWishlistCheckpoint() {
+      const p = selectedPlayer();
+      p.completed.wishlistVote = selectedPlayerVoteCount(state.selectedPlayer) > 0;
+      if (p.completed.wishlistVote && (p.progress || 0) < 4) p.progress = 4;
+    }
+
+    function renderIdeas() {
+      const holder = document.getElementById("ideaGrid");
+      if (!holder) return;
+      const ideas = allIdeas();
+      const playerCount = state.players.length;
+      holder.innerHTML = ideas.map(idea => {
+        const tally = tallyIdea(idea.id);
+        const status = ideaStatus(tally);
+        const selectedVote = state.ideaVotes?.[idea.id]?.[state.selectedPlayer] || "";
+        const denom = Math.max(tally.total, 1);
+        return `<article class="idea-card">
+          <div class="idea-top">
+            <div class="idea-emoji">${idea.emoji || "💡"}</div>
+            <div><div class="idea-title">${escapeHtml(idea.title)}</div><div class="idea-desc">${escapeHtml(idea.desc)}</div></div>
+            <span class="idea-status ${status.cls}">${status.label}</span>
+          </div>
+          <div class="pill-row" style="margin:0"><span class="pill idea-city">${escapeHtml(idea.city || "TBC")}</span><span class="pill">${tally.total}/${playerCount} voted</span><span class="pill">Score ${tally.score}</span></div>
+          <div class="vote-row" aria-label="Vote on ${escapeAttr(idea.title)}">
+            <button class="vote-btn keen ${selectedVote === "keen" ? "active" : ""}" data-idea="${idea.id}" data-vote="keen">✅ Keen</button>
+            <button class="vote-btn maybe ${selectedVote === "maybe" ? "active" : ""}" data-idea="${idea.id}" data-vote="maybe">🤷 Maybe</button>
+            <button class="vote-btn no ${selectedVote === "no" ? "active" : ""}" data-idea="${idea.id}" data-vote="no">❌ No</button>
+          </div>
+          <div class="vote-meter">
+            <div class="meter-track"><div class="meter-keen" style="width:${tally.keen / denom * 100}%"></div><div class="meter-maybe" style="width:${tally.maybe / denom * 100}%"></div><div class="meter-no" style="width:${tally.no / denom * 100}%"></div></div>
+            <div class="vote-counts"><span>✅ ${tally.keen} keen</span><span>🤷 ${tally.maybe} maybe</span><span>❌ ${tally.no} no</span></div>
+          </div>
+        </article>`;
+      }).join("");
+      holder.querySelectorAll(".vote-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const ideaId = btn.dataset.idea;
+          const vote = btn.dataset.vote;
+          state.ideaVotes[ideaId] = state.ideaVotes[ideaId] || {};
+          if (state.ideaVotes[ideaId][state.selectedPlayer] === vote) delete state.ideaVotes[ideaId][state.selectedPlayer];
+          else state.ideaVotes[ideaId][state.selectedPlayer] = vote;
+          updateWishlistCheckpoint();
+          saveState(); renderAll(); toast(`${selectedPlayer().name} voted on an idea`);
+        });
+      });
+      const tallies = ideas.map(i => tallyIdea(i.id));
+      const hot = tallies.filter(t => t.keen >= 5 && t.no <= 1).length;
+      const maybe = tallies.filter(t => t.total > 0 && !(t.keen >= 5 && t.no <= 1) && t.no < 3).length;
+      const blocked = tallies.filter(t => t.no >= 3).length;
+      const totalVotes = tallies.reduce((sum, t) => sum + t.total, 0);
+      document.getElementById("hotIdeaCount").textContent = hot;
+      document.getElementById("maybeIdeaCount").textContent = maybe;
+      document.getElementById("blockedIdeaCount").textContent = blocked;
+      document.getElementById("ideasHotBadge").textContent = `${hot} shortlist ideas`;
+      document.getElementById("ideasVotesBadge").textContent = `${totalVotes} votes cast`;
+      renderBoardIdeaPreview();
+    }
+
+    function renderBoardIdeaPreview() {
+      const holder = document.getElementById("boardIdeaPreview");
+      const status = document.getElementById("boardVoteStatus");
+      if (!holder || !status) return;
+      const ideas = allIdeas();
+      const totalVotes = ideas.reduce((sum, idea) => sum + tallyIdea(idea.id).total, 0);
+      const selectedVotes = selectedPlayerVoteCount(state.selectedPlayer);
+      status.textContent = `${totalVotes} votes cast · ${selectedVotes} by selected player`;
+      holder.innerHTML = ideas.slice(0, 4).map(idea => {
+        const tally = tallyIdea(idea.id);
+        const st = ideaStatus(tally);
+        return `<div class="mini-idea-row">
+          <span>${idea.emoji || "💡"}</span>
+          <div><div class="mini-idea-name">${escapeHtml(idea.title)}</div><div class="mini-idea-meta">${tally.keen} keen · ${tally.maybe} maybe · ${tally.no} no</div></div>
+          <span class="idea-status ${st.cls}">${st.label}</span>
+        </div>`;
+      }).join("");
+    }
+
+    function renderNextActions() {
+      const p = selectedPlayer();
+      const openPersonal = personalTasks.filter(t => !p.completed[t.id]).slice(0, 2);
+      const openGroup = groupTasks.filter(t => !state.groupDone[t.id]).slice(0, 1);
+      const actions = [...openPersonal, ...openGroup];
+      document.getElementById("nextActions").innerHTML = actions.map(t => `<div class="task-card" style="grid-template-columns:auto 1fr; padding:12px"><div class="task-icon">${t.icon}</div><div><div class="task-title">${t.title}</div><div class="task-desc">${t.desc}</div></div></div>`).join("") || `<div class="info-card"><div class="emoji">🏆</div><h3>All clear</h3><p>No open actions for the selected view.</p></div>`;
+    }
+
+    function renderBadges() {
+      const vibeSet = state.players.filter(p => p.vibe).length;
+      const vibeBadge = document.getElementById("vibeSummaryBadge");
+      if (vibeBadge) vibeBadge.textContent = `${vibeSet}/${state.players.length} vibes set`;
+      const groupTotal = groupTasks.length;
+      const groupDone = Object.values(state.groupDone).filter(Boolean).length;
+      const percent = Math.round(groupDone / groupTotal * 100);
+      const gpb = document.getElementById("groupProgressBadge");
+      if (gpb) gpb.textContent = `Group bosses ${percent}%`;
+    }
+
+    function renderHero() {
+      const days = Math.ceil((TRIP_START - new Date()) / 86400000);
+      const daysEl = document.getElementById("countdownDays");
+      const subEl = document.getElementById("countdownSub");
+      if (daysEl) {
+        if (days > 1) { daysEl.textContent = `${days} days`; if (subEl) subEl.textContent = "until you land in Ljubljana · 11 Sep 2026"; }
+        else if (days === 1) { daysEl.textContent = "1 day"; if (subEl) subEl.textContent = "Ljubljana tomorrow — pack the layers"; }
+        else if (days === 0) { daysEl.textContent = "Today ✈️"; if (subEl) subEl.textContent = "Departure day"; }
+        else { daysEl.textContent = "In Slovenia 🇸🇮"; if (subEl) subEl.textContent = "Ljubljana + Bled · 11 to 15 Sep 2026"; }
+      }
+      const groupDone = Object.values(state.groupDone).filter(Boolean).length;
+      const pct = Math.round(groupDone / groupTasks.length * 100);
+      const pctEl = document.getElementById("heroProgressPct");
+      const fillEl = document.getElementById("heroProgressFill");
+      const subP = document.getElementById("heroProgressSub");
+      if (pctEl) pctEl.textContent = `${pct}%`;
+      if (fillEl) fillEl.style.width = `${pct}%`;
+      if (subP) subP.textContent = `${groupDone} of ${groupTasks.length} group bosses cleared together.`;
+      const tcp = document.getElementById("travellerCountPill");
+      if (tcp) tcp.textContent = `${state.players.length} travellers`;
+    }
+
+    function renderVibePicker() {
+      const holder = document.getElementById("vibePicker");
+      if (!holder) return;
+      const p = selectedPlayer();
+      holder.innerHTML = vibes.map(v => `
+        <button class="vibe-chip ${p.vibe === v.id ? "active" : ""}" data-vibe="${v.id}" title="${escapeAttr(v.tag)}">
+          <span class="vibe-emoji">${v.emoji}</span><span class="vibe-name">${v.name}</span>
+        </button>`).join("");
+      holder.querySelectorAll(".vibe-chip").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const player = selectedPlayer();
+          player.vibe = player.vibe === btn.dataset.vibe ? null : btn.dataset.vibe;
+          saveState();
+          renderAll();
+          const chosen = vibeById(player.vibe);
+          toast(chosen ? `${player.name}: ${chosen.name} ${chosen.emoji}` : `${player.name} cleared their vibe`);
+        });
+      });
+    }
+
+    function spawnLeaves() {
+      const holder = document.getElementById("leaves");
+      if (!holder) return;
+      const glyphs = ["🍁", "🍂", "🍃"];
+      let html = "";
+      for (let i = 0; i < 11; i++) {
+        const left = Math.round(Math.random() * 100);
+        const dur = (7 + Math.random() * 8).toFixed(1);
+        const delay = (Math.random() * 12).toFixed(1);
+        const size = (14 + Math.random() * 12).toFixed(0);
+        html += `<span class="leaf" style="left:${left}%; font-size:${size}px; animation-duration:${dur}s; animation-delay:-${delay}s;">${glyphs[i % 3]}</span>`;
+      }
+      holder.innerHTML = html;
+    }
+
+    function renderRosterEditor() {
+      const holder = document.getElementById("rosterEditor");
+      holder.innerHTML = state.players.map((p, idx) => `<div class="roster-row">
+        <div class="avatar-dot" style="background:${p.colour}; width:42px; height:42px">${escapeHtml(p.initials)}</div>
+        <div class="roster-fields">
+          <input type="text" value="${escapeAttr(p.name)}" data-field="name" data-idx="${idx}" aria-label="Name for traveller ${idx + 1}" placeholder="Name" />
+          <input type="text" value="${escapeAttr(p.role)}" data-field="role" data-idx="${idx}" aria-label="Role for traveller ${idx + 1}" placeholder="Role" />
+          <select data-field="vibe" data-idx="${idx}" aria-label="Vibe for traveller ${idx + 1}">
+            <option value="">Pick a vibe…</option>
+            ${vibes.map(v => `<option value="${v.id}" ${p.vibe === v.id ? "selected" : ""}>${v.emoji} ${v.name}</option>`).join("")}
+          </select>
+        </div>
+      </div>`).join("");
+      const onChange = e => {
+        const idx = Number(e.target.dataset.idx);
+        const field = e.target.dataset.field;
+        state.players[idx][field] = field === "vibe" ? (e.target.value || null) : e.target.value;
+        if (field === "name") state.players[idx].initials = makeInitials(e.target.value, idx);
+        saveState();
+        renderPlayerSelect(); renderTravellerGrid(); renderTokens(); renderSelectedPanel(); renderVibePicker(); renderNextActions(); renderBadges();
+      };
+      holder.querySelectorAll("input").forEach(el => el.addEventListener("input", onChange));
+      holder.querySelectorAll("select").forEach(el => el.addEventListener("change", onChange));
+    }
+
+    function makeInitials(name, idx) {
+      const clean = (name || "").trim();
+      if (!clean) return `T${idx + 1}`;
+      const parts = clean.split(/\s+/).slice(0, 2).map(x => x[0]).join("").toUpperCase();
+      return parts || `T${idx + 1}`;
+    }
+
+    function escapeHtml(str) { return String(str || "").replace(/[&<>"]/g, s => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[s])); }
+    function escapeAttr(str) { return escapeHtml(str).replace(/'/g, "&#039;"); }
+
+    function renderAll() {
+      renderNodes(); renderTokens(); renderPlayerSelect(); renderTravellerGrid(); renderSelectedPanel(); renderVibePicker(); renderTasks(); renderIdeas(); renderBoardIdeaPreview(); renderNextActions(); renderBadges(); renderRosterEditor(); renderHero();
+    }
+
+    function toast(message) {
+      const t = document.getElementById("toast");
+      t.textContent = message;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 1800);
+    }
+
+    function celebrate() {
+      const wrap = document.createElement("div");
+      wrap.className = "confetti-wrap";
+      const cols = ["#54d6cf", "#ff9e86", "#7fe3b0", "#ffce7a", "#8fb6ff", "#eafffb"];
+      for (let i = 0; i < 26; i++) {
+        const p = document.createElement("span");
+        p.className = "confetti";
+        p.style.left = `${Math.random() * 100}vw`;
+        p.style.background = cols[i % cols.length];
+        p.style.animationDuration = `${1.1 + Math.random() * 0.9}s`;
+        p.style.animationDelay = `${Math.random() * 0.18}s`;
+        p.style.transform = `rotate(${Math.random() * 360}deg)`;
+        wrap.appendChild(p);
+      }
+      document.body.appendChild(wrap);
+      setTimeout(() => wrap.remove(), 2600);
+    }
+
+    document.querySelectorAll(".nav button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (!btn.dataset.tab) return; // the sync chip is a nav button with no tab
+        document.querySelectorAll(".nav button").forEach(x => x.classList.remove("active"));
+        document.querySelectorAll(".section").forEach(x => x.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById(btn.dataset.tab).classList.add("active");
+      });
+    });
+
+    document.querySelectorAll("[data-jump]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const target = btn.dataset.jump;
+        document.querySelector(`.nav button[data-tab='${target}']`).click();
+        document.getElementById(target).scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    document.getElementById("playerSelect").addEventListener("change", e => { state.selectedPlayer = Number(e.target.value); saveState(); renderAll(); });
+    document.getElementById("focusPlayerBtn").addEventListener("click", () => toast(`${selectedPlayer().name} is selected`));
+    document.getElementById("advanceBtn").addEventListener("click", () => { const p = selectedPlayer(); p.progress = clamp((p.progress || 0) + 1, 0, checkpoints.length - 1); saveState(); renderAll(); toast(`${p.name} moved forward`); });
+    document.getElementById("undoBtn").addEventListener("click", () => { const p = selectedPlayer(); p.progress = clamp((p.progress || 0) - 1, 0, checkpoints.length - 1); saveState(); renderAll(); toast(`${p.name} moved back`); });
+    document.getElementById("resetBtn").addEventListener("click", () => { if (confirm("Reset this browser's Slovenia board state?")) { localStorage.removeItem(STORE_KEY); state = loadState(); renderAll(); toast("Board reset"); } });
+    document.getElementById("markJasonFactsBtn").addEventListener("click", () => {
+      const jason = state.players[0];
+      jason.name = "Jason"; jason.initials = "J"; jason.completed.crewLock = true; jason.progress = 1;
+      state.selectedPlayer = 0;
+      saveState(); renderAll(); toast("Jason facts applied");
+    });
+
+    document.getElementById("addIdeaBtn").addEventListener("click", () => {
+      const title = document.getElementById("newIdeaTitle").value.trim();
+      const city = document.getElementById("newIdeaCity").value.trim() || "TBC";
+      const desc = document.getElementById("newIdeaDesc").value.trim() || "New group idea. Vote first, commit later.";
+      if (!title) { toast("Add an idea name first"); return; }
+      state.ideas = allIdeas();
+      state.ideas.push({ id: `custom_${Date.now()}`, emoji: "💡", title, city, desc });
+      document.getElementById("newIdeaTitle").value = "";
+      document.getElementById("newIdeaCity").value = "";
+      document.getElementById("newIdeaDesc").value = "";
+      saveState(); renderAll(); toast("Idea added");
+    });
+
+    document.getElementById("copyIdeasBtn").addEventListener("click", async () => {
+      const lines = [
+        "Slovenia Crew Trip — Idea Votes",
+        `Selected traveller: ${selectedPlayer().name}`,
+        "",
+        ...allIdeas().map(idea => {
+          const t = tallyIdea(idea.id);
+          const status = ideaStatus(t).label;
+          return `• ${idea.title} (${idea.city}): ${status}, ${t.keen} keen, ${t.maybe} maybe, ${t.no} no`;
+        })
+      ];
+      await navigator.clipboard.writeText(lines.join("\n")); toast("Idea results copied");
+    });
+
+    document.getElementById("copySummaryBtn").addEventListener("click", async () => {
+      const groupDoneCount = Object.values(state.groupDone).filter(Boolean).length;
+      const lines = [
+        "Slovenia Crew Trip — Board Summary",
+        "Dates: 11 to 15 Sep 2026",
+        "Route: London to Ljubljana, base Ljubljana then Bled",
+        `Group boss progress: ${groupDoneCount}/${groupTasks.length}`,
+        "",
+        "Traveller progress:",
+        ...state.players.map(p => { const v = vibeById(p.vibe); return `• ${p.name}${v ? ` (${v.name})` : ""}: ${checkpoints[computePlayerProgress(p)].title}`; }),
+        "",
+        "Shortlist ideas:",
+        ...allIdeas().filter(i => ideaStatus(tallyIdea(i.id)).label === "Shortlist").map(i => `• ${i.title} (${i.city})`),
+        "",
+        "Open group bosses:",
+        ...groupTasks.filter(t => !state.groupDone[t.id]).map(t => `• ${t.title}`)
+      ];
+      await navigator.clipboard.writeText(lines.join("\n")); toast("Summary copied");
+    });
+
+    document.getElementById("exportBtn").addEventListener("click", async () => { await navigator.clipboard.writeText(JSON.stringify(state, null, 2)); toast("JSON snapshot copied"); });
+    document.getElementById("importBtn").addEventListener("click", async () => {
+      const raw = prompt("Paste JSON snapshot");
+      if (!raw) return;
+      try { state = { ...structuredClone(defaultState), ...JSON.parse(raw) }; saveState(); renderAll(); toast("Snapshot imported"); } catch (e) { alert("Invalid JSON snapshot"); }
+    });
+
+    document.getElementById("syncChip").addEventListener("click", () => remotePull({ manual: true }));
+
+    spawnLeaves();
+    renderAll();
+    setSyncChip(hasRemoteSync() ? "syncing" : "disabled");
+    remotePull({ initial: true });
+    startSyncLoops();
+    setInterval(renderHero, 3600000); // refresh the countdown hourly
+  </script>
+</body>
+</html>
