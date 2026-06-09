@@ -242,6 +242,48 @@
     .add-idea-form { display: grid; grid-template-columns: 0.9fr 0.8fr 1.4fr auto; gap: 10px; margin-top: 16px; }
     .idea-help { color: var(--muted); font-size: 13px; line-height: 1.5; }
 
+    /* Auto itinerary (day carousel) */
+    .day-tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 14px; scrollbar-width: none; }
+    .day-tabs::-webkit-scrollbar { display: none; }
+    .day-tab { flex: 0 0 auto; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.05); color: var(--muted); border-radius: 14px; padding: 9px 13px; font-weight: 900; font-size: 12px; display: grid; gap: 2px; min-width: 92px; text-align: left; }
+    .day-tab small { font-weight: 800; color: var(--subtle); font-size: 10px; }
+    .day-tab.active { background: linear-gradient(135deg, #2f6fed, #1c4ea8); color: #fff; border-color: rgba(110,168,255,0.5); }
+    .day-tab.active small { color: rgba(255,255,255,0.85); }
+    .day-card { border: 1px solid rgba(255,255,255,0.14); border-radius: var(--radius-lg); background: rgba(255,255,255,0.05); padding: 16px 18px; }
+    .day-card .day-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 6px; }
+    .day-card .day-head h3 { font-size: 20px; }
+    .day-base { font-size: 12px; color: var(--subtle); font-weight: 800; }
+    .itin-item { display: grid; grid-template-columns: 78px 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(255,255,255,0.08); }
+    .itin-slot { color: #9cc2ff; font-weight: 900; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .itin-title { font-weight: 850; font-size: 14px; }
+    .itin-note { color: var(--muted); font-size: 12px; margin-top: 3px; line-height: 1.45; }
+    .itin-anchor .itin-title { color: var(--muted); font-weight: 700; }
+    .itin-empty { color: var(--subtle); font-size: 13px; padding: 12px 0; line-height: 1.5; }
+    .itin-bench { margin-top: 16px; border: 1px dashed rgba(255,255,255,0.2); border-radius: var(--radius-lg); padding: 14px 16px; background: rgba(255,206,122,0.05); }
+    .itin-bench h3 { font-size: 15px; margin: 0 0 6px; }
+
+    /* Group-task collaboration: owner + shared options + voting */
+    .group-card { display: block !important; }
+    .group-card .g-top { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: start; }
+    .collab { margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; display: grid; gap: 10px; }
+    .collab-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+    .owner-pill { font-size: 12.5px; font-weight: 750; color: var(--muted); }
+    .owner-pill b { color: #cfe0ff; }
+    .option-list { display: grid; gap: 8px; }
+    .opt { border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; background: rgba(0,0,0,0.2); padding: 10px 11px; display: grid; gap: 8px; }
+    .opt.top { border-color: rgba(95,211,154,0.42); background: rgba(95,211,154,0.08); }
+    .opt-head { display: flex; justify-content: space-between; gap: 8px; align-items: start; }
+    .opt-title { font-weight: 850; font-size: 13px; }
+    .opt-title a { color: #bcd4ff; text-decoration: underline; text-underline-offset: 2px; }
+    .opt-by { color: var(--subtle); font-size: 11px; }
+    .opt-votes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .opt-votes .vote-btn { padding: 7px 6px; font-size: 11px; }
+    .opt-rm { border: 0; background: transparent; color: var(--subtle); font-weight: 900; font-size: 13px; padding: 0 4px; }
+    .opt-rm:hover { color: #ffb3b3; }
+    .add-option { display: grid; grid-template-columns: 1.1fr 1fr auto; gap: 8px; }
+    .add-option input { padding: 9px 10px; font-size: 13px; }
+    @media (max-width: 620px) { .add-option { grid-template-columns: 1fr; } .itin-item { grid-template-columns: 62px 1fr; } }
+
     .planning-hub { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding: 16px 20px 0; }
     .hub-card { text-align: left; border: 1px solid rgba(255,255,255,0.13); border-radius: 22px; background: rgba(255,255,255,0.06); color: var(--ink); padding: 15px; min-height: 118px; display: grid; align-content: start; gap: 8px; transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease; }
     .hub-card:hover { transform: translateY(-3px); border-color: rgba(110,168,255,0.4); background: rgba(255,255,255,0.09); }
@@ -398,6 +440,7 @@
       <button class="active" data-tab="board">🗺️ Board</button>
       <button data-tab="tasks">🐉 Group tasks</button>
       <button class="market-tab" data-tab="ideas">🎯 Activity Market</button>
+      <button data-tab="itinerary">📅 Itinerary</button>
       <button data-tab="intel">📍 Trip intel</button>
       <button data-tab="settings">⚙️ Roster &amp; vibes</button>
       <button class="sync-chip" id="syncChip" title="Tap to pull the latest from the group">
@@ -604,6 +647,28 @@
         </div>
       </section>
 
+      <section id="itinerary" class="section">
+        <div class="panel pad">
+          <div class="panel-head" style="padding:0 0 18px; border-bottom:0">
+            <div>
+              <h2>Auto itinerary</h2>
+              <p class="panel-sub">Built live from the group's votes — every activity you vote Keen drops into the day it fits best.</p>
+            </div>
+            <div class="pill-row" style="margin:0">
+              <span class="pill" id="itinCountBadge">0 activities in</span>
+            </div>
+          </div>
+          <div class="idea-help" style="margin-bottom:14px">Vote activities <strong>Keen</strong> in the Activity Market (more keen than no = it's in) and they slot into the right day automatically — caves on the Karst day, gorge + lakes on the Bled days, and so on. It's a smart draft to react to, not a lock.</div>
+          <div class="day-tabs" id="dayTabs"></div>
+          <div class="day-carousel" id="dayCarousel"></div>
+          <div id="itinBench"></div>
+          <div class="quest-controls" style="padding:16px 0 0">
+            <button class="btn small" id="copyItinBtn">Copy itinerary</button>
+            <button class="btn small secondary" data-jump="ideas">Back to voting</button>
+          </div>
+        </div>
+      </section>
+
       <section id="intel" class="section">
         <div class="panel pad">
           <div class="panel-head" style="padding:0 0 18px; border-bottom:0">
@@ -705,21 +770,33 @@
 
     const TRIP_START = new Date(2026, 8, 11); // 11 Sep 2026 (month is 0-indexed)
 
+    // region + day + slot drive the auto-itinerary. day:0 / region:"bench" = optional add-on (not in the core 5 days).
     const defaultIdeas = [
-      { id: "postojnaPredjama", emoji: "🕳️", title: "Postojna Cave + Predjama Castle", city: "Karst", img: "predjama.jpg", desc: "Iconic cave train through huge chambers, then the clifftop castle built into a cave mouth. Best default for a big group." },
-      { id: "skocjan", emoji: "🌋", title: "Škocjan Caves", city: "Karst", img: "skocjan.jpg", desc: "More dramatic underground river canyon (UNESCO), but more walking and logistics care than Postojna. Closest to the Trieste side." },
-      { id: "velikaPlanina", emoji: "🚠", title: "Velika Planina", city: "Kamnik", img: "velika.jpg", desc: "Cable car + chairlift up to the alpine herders' huts. Strong Slovenian mountain energy — go only if the lifts are operating." },
-      { id: "vintgar", emoji: "🌊", title: "Vintgar Gorge", city: "near Bled", img: "vintgar.jpg", desc: "Emerald river on a timed one-way boardwalk. Book an early slot to beat the crowds." },
-      { id: "vogel", emoji: "🏔️", title: "Vogel cable car", city: "Bohinj", img: "vogel.jpg", desc: "Julian Alps panorama above Lake Bohinj. Only worth it on a clear day." },
-      { id: "savica", emoji: "💦", title: "Savica Waterfall", city: "Bohinj", img: "savica.jpg", desc: "Short waterfall hike — the easy, low-cloud backup for the Vogel day." },
-      { id: "bledIsland", emoji: "🚣", title: "Row to Bled Island", city: "Bled", img: "bledisland.jpg", desc: "Pletna boat or row out to the island church, climb the 99 steps and ring the wishing bell." },
-      { id: "ljubljanaOldTown", emoji: "🐉", title: "Ljubljana old town + castle", city: "Ljubljana", img: "ljubljana.jpg", desc: "Dragon Bridge, castle funicular, central market and riverside bars. Easy arrival-day win." }
+      { id: "ljubljanaOldTown", emoji: "🐉", title: "Ljubljana old town + castle", city: "Ljubljana", img: "ljubljana.jpg", region: "ljubljana", day: 1, slot: "Afternoon", desc: "Dragon Bridge, Triple Bridge, Central Market, castle funicular and riverside bars. Easy arrival-day win." },
+      { id: "postojnaPredjama", emoji: "🕳️", title: "Postojna Cave + Predjama Castle", city: "Karst", img: "predjama.jpg", region: "karst", day: 2, slot: "Morning", desc: "Iconic cave train through huge chambers, then the clifftop castle built into a cave mouth. Best default for a big group." },
+      { id: "skocjan", emoji: "🌋", title: "Škocjan Caves", city: "Karst", img: "skocjan.jpg", region: "karst", day: 2, slot: "Alt", desc: "More dramatic underground river canyon (UNESCO), but more walking. The southern cave swap, closest to Trieste." },
+      { id: "kriznaJama", emoji: "🕯️", title: "Križna Jama", city: "Karst", img: "", region: "karst", day: 2, slot: "Alt", desc: "The adventurous cave swap — small groups, boats across underground lakes. Book well ahead." },
+      { id: "velikaPlanina", emoji: "🚠", title: "Velika Planina", city: "Kamnik", img: "velika.jpg", region: "kamnik", day: 3, slot: "Morning", desc: "Cable car + chairlift to the shepherds' huts. Adds alpine texture on the way north — go only if the lifts run." },
+      { id: "bledCastle", emoji: "🏰", title: "Bled Castle", city: "Bled", img: "bledcastle.jpg", region: "bled", day: 3, slot: "Sunset", desc: "Clifftop castle over the lake — best light and views late afternoon." },
+      { id: "ojstrica", emoji: "🌄", title: "Ojstrica viewpoint", city: "Bled", img: "", region: "bled", day: 3, slot: "Sunset", desc: "Short steep walk to the classic Bled postcard view. Sunset if the legs are willing." },
+      { id: "vintgar", emoji: "🌊", title: "Vintgar Gorge", city: "near Bled", img: "vintgar.jpg", region: "bled", day: 4, slot: "Morning", desc: "Emerald river on a timed one-way boardwalk. Book an early slot to beat the crowds." },
+      { id: "bohinj", emoji: "🏞️", title: "Lake Bohinj", city: "Bohinj", img: "bohinj.jpg", region: "bohinj", day: 4, slot: "Midday", desc: "Quieter, bigger and more alpine than Bled — swim, kayak or just lap it." },
+      { id: "vogel", emoji: "🏔️", title: "Vogel cable car", city: "Bohinj", img: "vogel.jpg", region: "bohinj", day: 4, slot: "Afternoon", weather: "clear", desc: "Julian Alps panorama above Bohinj. Only worth it on a clear day." },
+      { id: "savica", emoji: "💦", title: "Savica Waterfall", city: "Bohinj", img: "savica.jpg", region: "bohinj", day: 4, slot: "Afternoon", weather: "cloudy", desc: "Short waterfall hike — the easy, low-cloud backup for the Vogel day." },
+      { id: "bledIsland", emoji: "🚣", title: "Row to Bled Island", city: "Bled", img: "bledisland.jpg", region: "bled", day: 5, slot: "Morning", desc: "Pletna boat or row to the island church, 99 steps and the wishing bell — a good slow last morning." },
+      { id: "kremsnita", emoji: "🍰", title: "Bled cream cake (kremšnita)", city: "Bled", img: "", region: "bled", day: 5, slot: "Anytime", desc: "The lakeside ritual. Touristy, non-negotiable." },
+      { id: "soca", emoji: "🚣", title: "Soča Valley (rafting)", city: "Soča", img: "soca.jpg", region: "bench", day: 0, slot: "Add-on", desc: "Turquoise river, rafting and mountain roads — the bigger outdoor day. Would need a swap or an extra day." },
+      { id: "piran", emoji: "🌅", title: "Piran", city: "Coast", img: "piran.jpg", region: "bench", day: 0, slot: "Add-on", desc: "Venetian lanes, seafood and Adriatic sunset if the trip tilts coastal." },
+      { id: "jasna", emoji: "📸", title: "Lake Jasna (Kranjska Gora)", city: "Kranjska Gora", img: "jasna.jpg", region: "bench", day: 0, slot: "Add-on", desc: "Photogenic alpine lake near the Vršič pass — a clear-weather scenic stop." },
+      { id: "vipava", emoji: "🍇", title: "Vipava wine valley", city: "Vipava", img: "vipava.jpg", region: "bench", day: 0, slot: "Add-on", desc: "Wine, villages and slower food stops if the group wants less lake time." }
     ];
 
     const defaultState = {
       selectedPlayer: 0,
       ideas: structuredClone(defaultIdeas),
       ideaVotes: {},
+      taskOwners: {},
+      taskOptions: {},
       players: [
         { name: "Jason", initials: "J", colour: colours[0], role: roles[0], vibe: "scenic", progress: 1, completed: { crewLock: true } },
         { name: "Traveller 2", initials: "T2", colour: colours[1], role: roles[1], vibe: null, progress: 0, completed: {} },
@@ -768,6 +845,15 @@
       { id: "offlinePack", icon: "📲", title: "Generate the launch pack", desc: "Tickets, accommodation, cars, maps, insurance and emergency contacts saved.", priority: "P3" }
     ];
 
+    // Always use the current default activity set (with day/region metadata for the itinerary),
+    // while preserving any ideas the group added themselves (id starts with "custom_").
+    function normalizeIdeas(stored) {
+      const base = structuredClone(defaultIdeas);
+      if (!Array.isArray(stored)) return base;
+      const custom = stored.filter(i => i && typeof i.id === "string" && i.id.indexOf("custom_") === 0);
+      return [...base, ...custom];
+    }
+
     let state = loadState();
 
     function loadState() {
@@ -780,8 +866,10 @@
           ...parsed,
           players: parsed.players || structuredClone(defaultState.players),
           groupDone: { ...defaultState.groupDone, ...(parsed.groupDone || {}) },
-          ideas: parsed.ideas || structuredClone(defaultIdeas),
-          ideaVotes: parsed.ideaVotes || {}
+          ideas: normalizeIdeas(parsed.ideas),
+          ideaVotes: parsed.ideaVotes || {},
+          taskOwners: parsed.taskOwners || {},
+          taskOptions: parsed.taskOptions || {}
         };
       } catch (e) {
         return structuredClone(defaultState);
@@ -806,8 +894,10 @@
         ...remote,
         players: remote.players || structuredClone(defaultState.players),
         groupDone: { ...defaultState.groupDone, ...(remote.groupDone || {}) },
-        ideas: remote.ideas || structuredClone(defaultIdeas),
-        ideaVotes: remote.ideaVotes || {}
+        ideas: normalizeIdeas(remote.ideas),
+        ideaVotes: remote.ideaVotes || {},
+        taskOwners: remote.taskOwners || {},
+        taskOptions: remote.taskOptions || {}
       };
       if (typeof localSelected === "number" && state.players[localSelected]) {
         state.selectedPlayer = localSelected;
@@ -1050,11 +1140,14 @@
       const groupHolder = document.getElementById("groupTasks");
       groupHolder.innerHTML = groupTasks.map(task => {
         const done = !!state.groupDone[task.id];
-        return `<label class="task-card ${done ? "group-done" : ""}">
-          <div class="task-icon">${task.icon}</div>
-          <div><div class="task-title">${task.title}</div><div class="task-desc">${task.desc}</div><div class="task-tags"><span class="tag ${task.priority.toLowerCase()}">${task.priority}</span><span class="tag">Group boss</span></div></div>
-          <input class="toggle group-toggle" type="checkbox" data-task="${task.id}" ${done ? "checked" : ""}/>
-        </label>`;
+        return `<div class="task-card group-card ${done ? "group-done" : ""}">
+          <div class="g-top">
+            <div class="task-icon">${task.icon}</div>
+            <div><div class="task-title">${task.title}</div><div class="task-desc">${task.desc}</div><div class="task-tags"><span class="tag ${task.priority.toLowerCase()}">${task.priority}</span><span class="tag">Group boss</span></div></div>
+            <input class="toggle group-toggle" type="checkbox" data-task="${task.id}" ${done ? "checked" : ""}/>
+          </div>
+          ${renderGroupCollab(task.id)}
+        </div>`;
       }).join("");
       groupHolder.querySelectorAll(".group-toggle").forEach(toggle => {
         toggle.addEventListener("change", e => {
@@ -1065,6 +1158,90 @@
           toast(e.target.checked ? "Group boss cleared" : "Group boss reopened");
         });
       });
+      groupHolder.querySelectorAll("[data-claim]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.dataset.claim;
+          state.taskOwners = state.taskOwners || {};
+          if (state.taskOwners[id] === state.selectedPlayer) { delete state.taskOwners[id]; toast("You stepped off this one"); }
+          else { state.taskOwners[id] = state.selectedPlayer; toast(`${selectedPlayer().name} is on it 🙋`); }
+          saveState(); renderTasks();
+        });
+      });
+      groupHolder.querySelectorAll("[data-optadd]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.dataset.optadd;
+          const tEl = groupHolder.querySelector(`[data-optadd-title="${id}"]`);
+          const lEl = groupHolder.querySelector(`[data-optadd-link="${id}"]`);
+          const title = (tEl && tEl.value || "").trim();
+          if (!title) { toast("Add an option name first"); return; }
+          const link = (lEl && lEl.value || "").trim();
+          state.taskOptions = state.taskOptions || {};
+          state.taskOptions[id] = state.taskOptions[id] || [];
+          state.taskOptions[id].push({ id: "o" + Date.now(), by: state.selectedPlayer, title, link, votes: {} });
+          saveState(); renderTasks(); toast("Option shared for the group to vote on");
+        });
+      });
+      groupHolder.querySelectorAll("[data-optvote]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const [id, oid, v] = btn.dataset.optvote.split("|");
+          const arr = (state.taskOptions && state.taskOptions[id]) || [];
+          const o = arr.find(x => x.id === oid);
+          if (!o) return;
+          o.votes = o.votes || {};
+          if (o.votes[state.selectedPlayer] === v) delete o.votes[state.selectedPlayer];
+          else o.votes[state.selectedPlayer] = v;
+          saveState(); renderTasks();
+        });
+      });
+      groupHolder.querySelectorAll("[data-rmopt]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const [id, oid] = btn.dataset.rmopt.split("|");
+          if (state.taskOptions && state.taskOptions[id]) state.taskOptions[id] = state.taskOptions[id].filter(x => x.id !== oid);
+          saveState(); renderTasks(); toast("Option removed");
+        });
+      });
+    }
+
+    function taskOwnerName(taskId) {
+      const idx = state.taskOwners && state.taskOwners[taskId];
+      return (typeof idx === "number" && state.players[idx]) ? state.players[idx].name : null;
+    }
+
+    function renderGroupCollab(taskId) {
+      const owner = taskOwnerName(taskId);
+      const mine = state.taskOwners && state.taskOwners[taskId] === state.selectedPlayer;
+      const opts = (state.taskOptions && state.taskOptions[taskId]) || [];
+      const keenOf = o => Object.values(o.votes || {}).filter(v => v === "keen").length;
+      const maxKeen = opts.length ? Math.max(...opts.map(keenOf)) : 0;
+      const optHtml = opts.map(o => {
+        const tally = { keen: 0, maybe: 0, no: 0 };
+        Object.values(o.votes || {}).forEach(v => { if (tally[v] !== undefined) tally[v]++; });
+        const top = opts.length > 1 && maxKeen > 0 && keenOf(o) === maxKeen;
+        const myVote = (o.votes && o.votes[state.selectedPlayer]) || "";
+        const byName = (typeof o.by === "number" && state.players[o.by]) ? state.players[o.by].name : "someone";
+        const titleHtml = o.link ? `<a href="${escapeAttr(o.link)}" target="_blank" rel="noopener">${escapeHtml(o.title)}</a>` : escapeHtml(o.title);
+        return `<div class="opt ${top ? "top" : ""}">
+          <div class="opt-head"><div class="opt-title">${titleHtml}</div><button class="opt-rm" data-rmopt="${taskId}|${o.id}" title="Remove option">✕</button></div>
+          <div class="opt-by">added by ${escapeHtml(byName)} · ✅ ${tally.keen} · 🤷 ${tally.maybe} · ❌ ${tally.no}${top ? " · 👑 leading" : ""}</div>
+          <div class="opt-votes">
+            <button class="vote-btn keen ${myVote === "keen" ? "active" : ""}" data-optvote="${taskId}|${o.id}|keen">✅ Keen</button>
+            <button class="vote-btn maybe ${myVote === "maybe" ? "active" : ""}" data-optvote="${taskId}|${o.id}|maybe">🤷 Maybe</button>
+            <button class="vote-btn no ${myVote === "no" ? "active" : ""}" data-optvote="${taskId}|${o.id}|no">❌ No</button>
+          </div>
+        </div>`;
+      }).join("");
+      return `<div class="collab">
+        <div class="collab-head">
+          <span class="owner-pill">${owner ? `🙋 <b>${escapeHtml(owner)}</b> is looking into this` : "🙌 No one's claimed this yet"}</span>
+          <button class="btn small ${mine ? "ghost" : "secondary"}" data-claim="${taskId}">${mine ? "Step off" : (owner ? "Take over" : "I'll look into it")}</button>
+        </div>
+        ${optHtml ? `<div class="option-list">${optHtml}</div>` : `<div class="itin-empty">No options shared yet — add one (accom link, car-hire quote, dinner pick…) for the group to vote on 👇</div>`}
+        <div class="add-option">
+          <input type="text" data-optadd-title="${taskId}" placeholder="Option name (e.g. Vila Bled apartment)" />
+          <input type="text" data-optadd-link="${taskId}" placeholder="Paste a link (optional)" />
+          <button class="btn small" data-optadd="${taskId}">Add option</button>
+        </div>
+      </div>`;
     }
 
     function allIdeas() {
@@ -1285,8 +1462,59 @@
     function escapeHtml(str) { return String(str || "").replace(/[&<>"]/g, s => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[s])); }
     function escapeAttr(str) { return escapeHtml(str).replace(/'/g, "&#039;"); }
 
+    // ---- Auto itinerary ----
+    const ITIN_DAYS = [
+      { n: 1, date: "Fri 11 Sep", title: "Trieste → Ljubljana", base: "Base: Ljubljana", anchors: [{ slot: "Midday", t: "Land at Trieste (TRS), pick up cars, drive ~1 h to Ljubljana" }, { slot: "Evening", t: "Settle in, first-night dinner by the river" }] },
+      { n: 2, date: "Sat 12 Sep", title: "Caves & Karst", base: "Base: Ljubljana", anchors: [{ slot: "Evening", t: "Dinner in Ljubljana" }] },
+      { n: 3, date: "Sun 13 Sep", title: "Velika Planina → Bled", base: "Transfer to Bled", anchors: [{ slot: "Midday", t: "Drive north, check into the Bled base" }, { slot: "Evening", t: "First Bled dinner" }] },
+      { n: 4, date: "Mon 14 Sep", title: "Vintgar & Bohinj", base: "Base: Bled", anchors: [{ slot: "Evening", t: "Dinner in Bled" }] },
+      { n: 5, date: "Tue 15 Sep", title: "Bled → fly home", base: "Bled → Trieste", anchors: [{ slot: "Midday", t: "Drive back to Trieste, return cars, fly home (leave a border buffer)" }] }
+    ];
+    const SLOT_RANK = { Morning: 1, Alt: 1, Midday: 2, Anytime: 2, Afternoon: 3, "Add-on": 3, Sunset: 4, Evening: 5 };
+    let itinDay = 1;
+
+    function ideaIsIn(idea) { const t = tallyIdea(idea.id); return t.keen > 0 && t.keen >= t.no; }
+
+    function renderItinerary() {
+      const tabs = document.getElementById("dayTabs");
+      const car = document.getElementById("dayCarousel");
+      const bench = document.getElementById("itinBench");
+      const badge = document.getElementById("itinCountBadge");
+      if (!tabs || !car) return;
+      const chosen = allIdeas().filter(ideaIsIn);
+      const coreIn = chosen.filter(i => i.day >= 1);
+      if (badge) badge.textContent = `${coreIn.length} ${coreIn.length === 1 ? "activity" : "activities"} in`;
+
+      tabs.innerHTML = ITIN_DAYS.map(d => {
+        const cnt = coreIn.filter(i => i.day === d.n).length;
+        return `<button class="day-tab ${d.n === itinDay ? "active" : ""}" data-day="${d.n}"><span>Day ${d.n}${cnt ? " · " + cnt : ""}</span><small>${d.date}</small></button>`;
+      }).join("");
+      tabs.querySelectorAll(".day-tab").forEach(b => b.addEventListener("click", () => { itinDay = Number(b.dataset.day); renderItinerary(); }));
+
+      const d = ITIN_DAYS.find(x => x.n === itinDay) || ITIN_DAYS[0];
+      const dayItems = chosen.filter(i => i.day === d.n).map(i => ({
+        slot: i.slot || "Anytime",
+        title: `${i.emoji} ${i.title}`,
+        note: i.weather ? (i.weather === "clear" ? "Weather call — do this if it's clear" : "Weather call — the low-cloud backup") : i.desc,
+        rank: SLOT_RANK[i.slot] || 2
+      }));
+      const anchors = d.anchors.map(a => ({ slot: a.slot, title: a.t, note: "", anchor: true, rank: SLOT_RANK[a.slot] || 2 }));
+      const rows = [...anchors, ...dayItems].sort((a, b) => a.rank - b.rank);
+      car.innerHTML = `<div class="day-card">
+        <div class="day-head"><div><h3>Day ${d.n} · ${escapeHtml(d.title)}</h3><div class="day-base">${escapeHtml(d.base)} · ${d.date}</div></div></div>
+        ${rows.length ? rows.map(it => `<div class="itin-item ${it.anchor ? "itin-anchor" : ""}"><div class="itin-slot">${escapeHtml(it.slot)}</div><div><div class="itin-title">${escapeHtml(it.title)}</div>${it.note ? `<div class="itin-note">${escapeHtml(it.note)}</div>` : ""}</div></div>`).join("") : `<div class="itin-empty">Nothing voted in for this day yet — vote activities <b>Keen</b> in the Activity Market and they'll drop in here.</div>`}
+      </div>`;
+
+      if (bench) {
+        const benchIn = chosen.filter(i => i.region === "bench");
+        bench.innerHTML = benchIn.length
+          ? `<div class="itin-bench"><h3>🧭 Optional add-ons the group is keen on</h3><div class="micro">These don't fit the core 5-day route, so they'd need a swap or an extra day: <b>${benchIn.map(i => escapeHtml(i.title)).join(", ")}</b>.</div></div>`
+          : "";
+      }
+    }
+
     function renderAll() {
-      renderNodes(); renderTokens(); renderPlayerSelect(); renderTravellerGrid(); renderSelectedPanel(); renderVibePicker(); renderTasks(); renderIdeas(); renderBoardIdeaPreview(); renderNextActions(); renderBadges(); renderRosterEditor(); renderHero();
+      renderNodes(); renderTokens(); renderPlayerSelect(); renderTravellerGrid(); renderSelectedPanel(); renderVibePicker(); renderTasks(); renderIdeas(); renderBoardIdeaPreview(); renderNextActions(); renderBadges(); renderRosterEditor(); renderHero(); renderItinerary();
     }
 
     function toast(message) {
@@ -1350,7 +1578,7 @@
       const desc = document.getElementById("newIdeaDesc").value.trim() || "New group idea. Vote first, commit later.";
       if (!title) { toast("Add an idea name first"); return; }
       state.ideas = allIdeas();
-      state.ideas.push({ id: `custom_${Date.now()}`, emoji: "💡", title, city, desc });
+      state.ideas.push({ id: `custom_${Date.now()}`, emoji: "💡", title, city, img: "", region: "bench", day: 0, slot: "Add-on", desc });
       document.getElementById("newIdeaTitle").value = "";
       document.getElementById("newIdeaCity").value = "";
       document.getElementById("newIdeaDesc").value = "";
@@ -1396,6 +1624,23 @@
       const raw = prompt("Paste JSON snapshot");
       if (!raw) return;
       try { state = { ...structuredClone(defaultState), ...JSON.parse(raw) }; saveState(); renderAll(); toast("Snapshot imported"); } catch (e) { alert("Invalid JSON snapshot"); }
+    });
+
+    document.getElementById("copyItinBtn").addEventListener("click", async () => {
+      const chosen = allIdeas().filter(ideaIsIn);
+      const lines = ["Slovenia Crew Trip — draft itinerary (built from votes)", "11 to 15 Sep 2026 · Trieste → Ljubljana → Bled", ""];
+      ITIN_DAYS.forEach(d => {
+        lines.push(`Day ${d.n} · ${d.title} (${d.date})`);
+        const items = [
+          ...d.anchors.map(a => ({ slot: a.slot, t: a.t, rank: SLOT_RANK[a.slot] || 2 })),
+          ...chosen.filter(i => i.day === d.n).map(i => ({ slot: i.slot || "Anytime", t: i.title + (i.weather ? (i.weather === "clear" ? " (if clear)" : " (if cloudy)") : ""), rank: SLOT_RANK[i.slot] || 2 }))
+        ].sort((a, b) => a.rank - b.rank);
+        items.forEach(it => lines.push(`  • ${it.slot}: ${it.t}`));
+        lines.push("");
+      });
+      const benchIn = chosen.filter(i => i.region === "bench");
+      if (benchIn.length) lines.push("Optional add-ons (need a swap or extra day): " + benchIn.map(i => i.title).join(", "));
+      try { await navigator.clipboard.writeText(lines.join("\n")); toast("Itinerary copied"); } catch (e) { toast("Copy failed — try again"); }
     });
 
     document.getElementById("syncChip").addEventListener("click", () => remotePull({ manual: true }));
