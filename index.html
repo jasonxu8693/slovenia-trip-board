@@ -376,7 +376,7 @@
     .vibe-chip .vibe-name { font-size: 10px; font-weight: 900; letter-spacing: 0.02em; }
 
     .roster-row { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center; padding: 12px; border: 1px solid rgba(255,255,255,0.12); border-radius: 18px; background: rgba(255,255,255,0.05); }
-    .roster-fields { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 10px; }
+    .roster-fields { display: grid; grid-template-columns: 1.2fr 1fr; gap: 10px; }
     .roster-fields select { width: 100%; border: 1px solid rgba(255,255,255,0.14); border-radius: 14px; background: rgba(0,0,0,0.22); color: var(--ink); padding: 11px 12px; outline: none; }
     .roster-fields select option { color: #111; }
     @media (max-width: 620px) { .roster-fields { grid-template-columns: 1fr; } }
@@ -1470,10 +1470,6 @@
           <select data-field="vibe" data-idx="${idx}" aria-label="Vibe for traveller ${idx + 1}">
             <option value="">Pick a vibe…</option>
             ${vibes.map(v => `<option value="${v.id}" ${p.vibe === v.id ? "selected" : ""}>${v.emoji} ${v.name}</option>`).join("")}
-          </select>
-          <select data-field="piece" data-idx="${idx}" aria-label="Board piece for traveller ${idx + 1}">
-            <option value="">Pick a piece…</option>
-            ${pieces.map(pc => `<option value="${escapeAttr(pc)}" ${p.piece === pc ? "selected" : ""}>${pc}</option>`).join("")}
           </select>
         </div>
       </div>`).join("");
