@@ -8,24 +8,23 @@
   <style>
     :root {
       --ink: #f2f6ff;
-      --muted: rgba(242, 246, 255, 0.78);
-      --subtle: rgba(242, 246, 255, 0.56);
-      --line: rgba(255, 255, 255, 0.15);
-      --gold: #ffce7a;
-      --blue: #4f8bff;
-      --blue2: #6ea8ff;
-      --blue-deep: #0b3a8f;
-      --red: #ef4d4d;
-      --red2: #e0322d;
+      --muted: rgba(242, 246, 255, 0.76);
+      --subtle: rgba(242, 246, 255, 0.58);
+      --panel: rgba(12, 24, 50, 0.70);
+      --panel-strong: rgba(8, 16, 34, 0.90);
+      --line: rgba(255, 255, 255, 0.16);
+      --gold: #dbe8ff;
+      --sun: #6ea8ff;
+      --neon: #4f8bff;
+      --pink: #ef4d4d;
       --green: #5fd39a;
       --purple: #8fb6ff;
       --danger: #ff7a7a;
-      --shadow: 0 24px 80px rgba(4, 12, 28, 0.5);
+      --shadow: 0 24px 80px rgba(4, 12, 28, 0.42);
       --radius-xl: 32px;
       --radius-lg: 24px;
       --radius-md: 16px;
       --radius-sm: 12px;
-      --safe-bottom: env(safe-area-inset-bottom, 0px);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
@@ -36,9 +35,9 @@
       min-height: 100vh;
       color: var(--ink);
       background:
-        radial-gradient(circle at 14% 12%, rgba(79, 139, 255, 0.22), transparent 22%),
-        radial-gradient(circle at 84% 16%, rgba(224, 50, 45, 0.16), transparent 24%),
-        radial-gradient(circle at 50% 86%, rgba(255, 255, 255, 0.08), transparent 28%),
+        radial-gradient(circle at 14% 14%, rgba(239, 77, 77, 0.22), transparent 22%),
+        radial-gradient(circle at 84% 16%, rgba(79, 139, 255, 0.24), transparent 24%),
+        radial-gradient(circle at 50% 84%, rgba(219, 232, 255, 0.15), transparent 28%),
         linear-gradient(150deg, #060f20 0%, #0a1a36 36%, #0c2245 68%, #081429 100%);
       overflow-x: hidden;
     }
@@ -50,12 +49,25 @@
       pointer-events: none;
       background-image:
         radial-gradient(circle at 20% 30%, rgba(255,255,255,0.14) 0 2px, transparent 2.5px),
-        radial-gradient(circle at 70% 24%, rgba(110,168,255,0.18) 0 1.6px, transparent 2px),
-        radial-gradient(circle at 45% 70%, rgba(255,255,255,0.12) 0 1.8px, transparent 2.2px),
-        linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+        radial-gradient(circle at 70% 24%, rgba(79,139,255,0.16) 0 1.6px, transparent 2px),
+        radial-gradient(circle at 45% 70%, rgba(239,77,77,0.14) 0 1.8px, transparent 2.2px),
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
       background-size: 240px 240px, 280px 280px, 320px 320px, 48px 48px, 48px 48px;
       mask-image: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent 88%);
+      z-index: -1;
+    }
+
+    body:after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 16% 18%, rgba(255,255,255,0.08), transparent 10%),
+        radial-gradient(circle at 86% 26%, rgba(255,255,255,0.08), transparent 10%),
+        radial-gradient(circle at 28% 80%, rgba(255,255,255,0.08), transparent 10%);
+      mix-blend-mode: screen;
       z-index: -1;
     }
 
@@ -63,14 +75,7 @@
     button, input, select { font: inherit; }
     button { cursor: pointer; }
 
-    .app { width: min(1280px, calc(100% - 28px)); margin: 0 auto; padding: 18px 0 calc(52px + var(--safe-bottom)); }
-
-    /* Slovenian flag ribbon — white / blue / red */
-    .flag-ribbon { display: flex; height: 6px; width: 120px; border-radius: 999px; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.3); }
-    .flag-ribbon i { flex: 1; }
-    .flag-ribbon .fw { background: #ffffff; }
-    .flag-ribbon .fb { background: #0b53c4; }
-    .flag-ribbon .fr { background: #e0322d; }
+    .app { width: min(1280px, calc(100% - 28px)); margin: 0 auto; padding: 18px 0 52px; }
 
     .hero {
       position: relative;
@@ -85,33 +90,46 @@
       box-shadow: var(--shadow);
       isolation: isolate;
     }
-    .hero:after { content: ""; position: absolute; inset: auto 0 0 0; height: 50%; background: linear-gradient(180deg, transparent, rgba(5,11,26,0.5)); pointer-events: none; }
 
-    .hero-content { position: relative; z-index: 1; padding: 28px; display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 28px; min-height: 460px; align-items: end; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 10px; width: fit-content; padding: 8px 14px; border: 1px solid rgba(255,255,255,0.18); border-radius: 999px; background: rgba(8,18,40,0.42); backdrop-filter: blur(14px); color: var(--ink); font-size: 13px; font-weight: 700; letter-spacing: 0.02em; }
-    .hero h1 { margin: 18px 0 12px; font-size: clamp(40px, 7vw, 82px); line-height: 0.92; letter-spacing: -0.07em; max-width: 760px; text-shadow: 0 4px 30px rgba(0,0,0,0.4); }
-    .hero h1 .shine { display: block; background: linear-gradient(100deg, #ffffff, #9cc2ff 46%, #ff8d8a 78%, #ffffff); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .hero p { max-width: 720px; color: rgba(242,246,255,0.92); font-size: 17px; line-height: 1.55; margin: 0; text-shadow: 0 2px 16px rgba(0,0,0,0.5); }
+    /* Slovenian flag ribbon — white / blue / red */
+    .flag-ribbon { display: inline-flex; height: 6px; width: 120px; border-radius: 999px; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.3); flex: none; }
+    .flag-ribbon i { flex: 1; }
+    .flag-ribbon .fw { background: #ffffff; }
+    .flag-ribbon .fb { background: #0b53c4; }
+    .flag-ribbon .fr { background: #e0322d; }
+    .hero:after { content: ""; position: absolute; inset: auto -8% 8% -8%; height: 160px; background:
+      radial-gradient(circle at 20% 0%, rgba(255,255,255,0.16), transparent 28%),
+      radial-gradient(circle at 50% 0%, rgba(79,139,255,0.24), transparent 30%),
+      radial-gradient(circle at 80% 0%, rgba(239,77,77,0.16), transparent 28%);
+      pointer-events: none; filter: blur(18px); opacity: 0.9; }
+
+    .hero-content { position: relative; z-index: 1; padding: 28px; display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 28px; min-height: 420px; align-items: end; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; width: fit-content; padding: 8px 12px; border: 1px solid rgba(255,255,255,0.16); border-radius: 999px; background: rgba(255,255,255,0.08); backdrop-filter: blur(14px); color: var(--muted); font-size: 13px; letter-spacing: 0.02em; }
+    .hero h1 { margin: 18px 0 12px; font-size: clamp(40px, 7vw, 82px); line-height: 0.92; letter-spacing: -0.07em; max-width: 760px; text-shadow: 0 4px 30px rgba(0,0,0,0.5); }
+    .hero h1 .shine { display: block; background: linear-gradient(100deg, #ffffff, #9cc2ff 46%, #ff8d8a 78%, #ffffff); -webkit-background-clip: text; color: transparent; }
+    .hero p { max-width: 720px; color: rgba(242, 246, 255, 0.92); font-size: 17px; line-height: 1.55; margin: 0; text-shadow: 0 2px 16px rgba(0,0,0,0.55); }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
     .btn { border: 0; border-radius: 999px; padding: 13px 17px; color: #fff; background: linear-gradient(135deg, #ef5350, #c81e1e); font-weight: 800; box-shadow: 0 12px 30px rgba(224, 50, 45, 0.32); transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease; }
     .btn:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(224, 50, 45, 0.4); }
     .btn.secondary { color: var(--ink); background: rgba(79,139,255,0.16); border: 1px solid rgba(110,168,255,0.4); box-shadow: none; }
-    .btn.ghost { color: var(--ink); background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); box-shadow: none; }
+    .btn.ghost { color: var(--ink); background: transparent; border: 1px solid rgba(255,255,255,0.18); box-shadow: none; }
     .btn.small { padding: 9px 12px; font-size: 13px; }
     .btn.danger { background: rgba(255,100,100,0.18); color: #ffdada; border: 1px solid rgba(255,100,100,0.32); box-shadow: none; }
 
     .stat-card { align-self: stretch; display: grid; gap: 14px; align-content: end; }
-    .glass { border: 1px solid rgba(255,255,255,0.18); border-radius: var(--radius-lg); background: linear-gradient(180deg, rgba(10,22,48,0.62), rgba(8,16,36,0.5)); backdrop-filter: blur(18px); padding: 18px; }
+    .glass { border: 1px solid rgba(255,255,255,0.16); border-radius: var(--radius-lg); background: linear-gradient(180deg, rgba(255,255,255,0.11), rgba(255,255,255,0.06)); backdrop-filter: blur(18px); padding: 18px; }
+    .flight-card { position: relative; overflow: hidden; }
+    .flight-card:before { content: ""; position: absolute; inset: -60% auto auto -20%; width: 170px; height: 170px; background: radial-gradient(circle, rgba(110,168,255,0.26), transparent 62%); }
     .label { color: var(--subtle); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 800; }
     .big { font-size: 30px; font-weight: 900; letter-spacing: -0.05em; margin-top: 6px; }
     .micro { color: var(--muted); font-size: 13px; line-height: 1.45; }
     .pill-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-    .pill { display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,0.14); background: rgba(0,0,0,0.22); color: var(--muted); border-radius: 999px; padding: 7px 10px; font-size: 12px; font-weight: 700; }
-    .pill.done { color: #c8ffe0; border-color: rgba(95,211,154,0.30); background: rgba(95,211,154,0.12); }
+    .pill { display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,0.14); background: rgba(0,0,0,0.18); color: var(--muted); border-radius: 999px; padding: 7px 10px; font-size: 12px; font-weight: 700; }
+    .pill.done { color: #c8ffe0; border-color: rgba(95,211,154,0.28); background: rgba(95,211,154,0.12); }
     .pill.warn { color: #ffe7ae; border-color: rgba(255,206,122,0.3); background: rgba(255,206,122,0.12); }
-    .pill.hot { color: #ffd6d3; border-color: rgba(239,77,77,0.34); background: rgba(239,77,77,0.14); }
+    .pill.hot { color: #ffd6d3; border-color: rgba(255,92,200,0.3); background: rgba(255,92,200,0.12); }
 
-    .nav { position: sticky; top: 10px; z-index: 20; margin: 18px 0; display: flex; gap: 10px; padding: 8px; border: 1px solid var(--line); background: rgba(8, 18, 38, 0.82); backdrop-filter: blur(18px); border-radius: 999px; overflow-x: auto; box-shadow: 0 12px 38px rgba(4,12,28,0.3); }
+    .nav { position: sticky; top: 10px; z-index: 20; margin: 18px 0; display: flex; gap: 10px; padding: 8px; border: 1px solid var(--line); border-radius: 999px; background: rgba(8, 18, 38, 0.76); backdrop-filter: blur(18px); overflow-x: auto; box-shadow: 0 12px 38px rgba(4,12,28,0.22); }
     .nav button { white-space: nowrap; border: 0; border-radius: 999px; color: var(--muted); background: transparent; padding: 11px 14px; font-weight: 800; font-size: 13px; }
     .nav button.active { color: #0a1733; background: #ffffff; }
 
@@ -120,7 +138,7 @@
     @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
     .layout { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(330px, 0.55fr); gap: 18px; align-items: start; }
-    .panel { border: 1px solid var(--line); border-radius: var(--radius-xl); background: linear-gradient(180deg, rgba(14, 28, 56, 0.74), rgba(8, 16, 34, 0.82)); box-shadow: 0 18px 60px rgba(4,12,28,0.3); backdrop-filter: blur(18px); overflow: hidden; }
+    .panel { border: 1px solid var(--line); border-radius: var(--radius-xl); background: linear-gradient(180deg, rgba(14, 28, 56, 0.72), rgba(8, 16, 34, 0.78)); box-shadow: 0 18px 60px rgba(4,12,28,0.24); backdrop-filter: blur(18px); overflow: hidden; }
     .panel.pad { padding: 20px; }
     .panel-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 20px; border-bottom: 1px solid var(--line); }
     .panel h2, .panel h3 { margin: 0; letter-spacing: -0.035em; }
@@ -138,50 +156,40 @@
       background:
         linear-gradient(180deg, rgba(8, 22, 48, 0.58) 0%, rgba(7, 17, 38, 0.74) 55%, rgba(6, 14, 32, 0.88) 100%),
         url("images/triglav.jpg") center / cover no-repeat;
-      box-shadow: inset 0 0 120px rgba(0,0,0,0.4);
+      box-shadow: inset 0 0 130px rgba(0,0,0,0.45);
     }
-    .board:before { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='1'%3E%3Cpath d='M0 92 C26 70, 44 104, 70 84 S122 70, 180 98'/%3E%3Cpath d='M14 132 C42 112, 63 150, 98 128 S142 120, 170 144'/%3E%3C/g%3E%3C/svg%3E"); opacity: 0.5; }
+    .board:before { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.07)' stroke-width='1'%3E%3Cpath d='M0 92 C26 70, 44 104, 70 84 S122 70, 180 98'/%3E%3Cpath d='M14 132 C42 112, 63 150, 98 128 S142 120, 170 144'/%3E%3C/g%3E%3C/svg%3E"); opacity: 0.7; }
+
 
     .route-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
     .route-line { fill: none; stroke: rgba(255, 255, 255, 0.85); stroke-width: 8; stroke-linecap: round; stroke-dasharray: 2 18; filter: drop-shadow(0 0 8px rgba(79,139,255,0.5)); }
-    .route-shadow { fill: none; stroke: rgba(0, 0, 0, 0.34); stroke-width: 14; stroke-linecap: round; stroke-dasharray: 2 18; }
+    .route-shadow { fill: none; stroke: rgba(0, 0, 0, 0.28); stroke-width: 14; stroke-linecap: round; stroke-dasharray: 2 18; }
 
     .node { position: absolute; z-index: 5; width: 118px; min-height: 112px; transform: translate(-50%, -50%); display: grid; justify-items: center; gap: 7px; text-align: center; }
-    .node-core { width: 62px; height: 62px; border-radius: 22px; display: grid; place-items: center; font-size: 30px; color: #0a1733; background: var(--ink); border: 2px solid rgba(255,255,255,0.5); box-shadow: 0 18px 36px rgba(0,0,0,0.4), 0 0 0 6px rgba(255,255,255,0.08); transition: transform 0.2s ease; }
+    .node-core { width: 62px; height: 62px; border-radius: 22px; display: grid; place-items: center; font-size: 30px; color: #0a1733; background: var(--ink); border: 2px solid rgba(255,255,255,0.4); box-shadow: 0 18px 36px rgba(0,0,0,0.3), 0 0 0 6px rgba(255,255,255,0.08); transition: transform 0.2s ease; }
     .node:hover .node-core { transform: translateY(-4px) rotate(-3deg); }
-    .node-title { font-size: 12px; line-height: 1.15; font-weight: 900; text-shadow: 0 2px 6px rgba(0,0,0,0.8); }
-    .node-meta { font-size: 10px; color: rgba(255,255,255,0.82); font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+    .node-title { font-size: 12px; line-height: 1.15; font-weight: 900; text-shadow: 0 2px 6px rgba(0,0,0,0.6); }
+    .node-meta { font-size: 10px; color: var(--muted); font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
     .node.group .node-core { background: linear-gradient(135deg, #ffffff, #9cc2ff); }
     .node.boss .node-core { background: linear-gradient(135deg, #e0322d, #8f1714); color: white; animation: bossPulse 3s ease-in-out infinite; }
-    .node.personal .node-core { background: linear-gradient(135deg, #ffffff, #dbe8ff); }
-    @keyframes bossPulse { 0%,100% { box-shadow: 0 18px 36px rgba(0,0,0,0.4), 0 0 0 6px rgba(224,50,45,0.12); } 50% { box-shadow: 0 18px 36px rgba(0,0,0,0.4), 0 0 0 12px rgba(224,50,45,0.22); } }
+    .node.personal .node-core { background: linear-gradient(135deg, #f7fbff, #d1e6ff); }
+    @keyframes bossPulse { 0%,100% { box-shadow: 0 18px 36px rgba(0,0,0,0.3), 0 0 0 6px rgba(224,50,45,0.12); } 50% { box-shadow: 0 18px 36px rgba(0,0,0,0.3), 0 0 0 12px rgba(224,50,45,0.22); } }
 
     .token-layer { position: absolute; inset: 0; z-index: 8; pointer-events: none; }
-    .token { position: absolute; width: 38px; height: 38px; border-radius: 16px 16px 16px 6px; transform: translate(-50%, -50%) rotate(-6deg); display: grid; place-items: center; font-weight: 1000; font-size: 15px; color: #0a1733; border: 2px solid rgba(255,255,255,0.78); box-shadow: 0 14px 28px rgba(0,0,0,0.45); transition: left 0.45s cubic-bezier(.2,.8,.2,1), top 0.45s cubic-bezier(.2,.8,.2,1), transform 0.2s ease; }
-    .token.active { z-index: 10; transform: translate(-50%, -50%) rotate(4deg) scale(1.1); box-shadow: 0 16px 34px rgba(0,0,0,0.5), 0 0 0 7px rgba(255,255,255,0.16); }
-    .token:after { content: attr(data-name); position: absolute; top: 42px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: var(--ink); background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.14); border-radius: 999px; padding: 4px 8px; font-size: 10px; opacity: 0; transition: opacity 0.2s ease; }
+    .token { position: absolute; width: 38px; height: 38px; border-radius: 16px 16px 16px 6px; transform: translate(-50%, -50%) rotate(-6deg); display: grid; place-items: center; font-weight: 1000; font-size: 15px; color: #0a1733; border: 2px solid rgba(255,255,255,0.72); box-shadow: 0 14px 28px rgba(0,0,0,0.35); transition: left 0.45s cubic-bezier(.2,.8,.2,1), top 0.45s cubic-bezier(.2,.8,.2,1), transform 0.2s ease; }
+    .token.active { z-index: 10; transform: translate(-50%, -50%) rotate(4deg) scale(1.1); box-shadow: 0 16px 34px rgba(0,0,0,0.42), 0 0 0 7px rgba(255,255,255,0.13); }
+    .token:after { content: attr(data-name); position: absolute; top: 42px; left: 50%; transform: translateX(-50%); white-space: nowrap; color: var(--ink); background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.12); border-radius: 999px; padding: 4px 8px; font-size: 10px; opacity: 0; transition: opacity 0.2s ease; }
     .token.active:after, .token:hover:after { opacity: 1; }
-
-    /* Ljubljana dragon mascot + drifting autumn leaves + coat-of-arms emblem over the photo board */
-    .emblem { position: absolute; top: 5%; right: 7%; width: 70px; height: 84px; z-index: 4; filter: drop-shadow(0 0 18px rgba(11,83,196,0.4)); animation: emblemGlow 5s ease-in-out infinite; }
-    .emblem svg { width: 100%; height: 100%; display: block; }
-    @keyframes emblemGlow { 0%,100% { filter: drop-shadow(0 0 14px rgba(11,83,196,0.32)); } 50% { filter: drop-shadow(0 0 26px rgba(255,255,255,0.4)); } }
-    .dragon-mascot { position: absolute; left: 6%; top: 8%; font-size: 30px; z-index: 4; transform-origin: center; animation: dragonBob 4.2s ease-in-out infinite; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.45)); }
-    .dragon-mascot:after { content: "Ljubljana dragon"; position: absolute; left: 50%; top: 100%; transform: translateX(-50%); white-space: nowrap; font-size: 10px; font-weight: 900; color: #eaf2ff; background: rgba(6,16,34,0.72); border: 1px solid rgba(255,255,255,0.14); border-radius: 999px; padding: 2px 7px; margin-top: 4px; }
-    @keyframes dragonBob { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-7px) rotate(3deg); } }
-    .leaves { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 3; }
-    .leaf { position: absolute; top: -26px; opacity: 0; animation: leafFall linear infinite; will-change: transform, opacity; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3)); }
-    @keyframes leafFall { 0% { transform: translateY(-30px) translateX(0) rotate(0deg); opacity: 0; } 12% { opacity: 0.95; } 88% { opacity: 0.85; } 100% { transform: translateY(900px) translateX(46px) rotate(360deg); opacity: 0; } }
 
     .side-stack { display: grid; gap: 18px; }
     .player-card { padding: 18px; }
     .select-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; margin: 14px 0; }
-    select, input[type="text"] { width: 100%; border: 1px solid rgba(255,255,255,0.16); border-radius: 14px; background: rgba(0,0,0,0.24); color: var(--ink); padding: 12px 13px; outline: none; }
+    select, input[type="text"] { width: 100%; border: 1px solid rgba(255,255,255,0.14); border-radius: 14px; background: rgba(0,0,0,0.2); color: var(--ink); padding: 12px 13px; outline: none; }
     select option { color: #111; }
     .progress-wrap { margin-top: 14px; }
     .progress-head { display: flex; justify-content: space-between; color: var(--muted); font-weight: 800; font-size: 12px; margin-bottom: 8px; }
-    .progress-bar { height: 12px; background: rgba(255,255,255,0.1); border-radius: 999px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
-    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #4f8bff, #ffffff, #e0322d); border-radius: inherit; transition: width 0.35s ease; }
+    .progress-bar { height: 12px; background: rgba(255,255,255,0.09); border-radius: 999px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
+    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #6ea8ff, #5fd39a, #ffce7a); border-radius: inherit; transition: width 0.35s ease; }
 
     .traveller-grid { display: grid; grid-template-columns: 1fr; gap: 9px; margin-top: 14px; }
     .traveller-row { display: grid; grid-template-columns: auto 1fr auto; gap: 9px; align-items: center; padding: 10px; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; background: rgba(255,255,255,0.05); }
@@ -193,48 +201,50 @@
     .task-card { border: 1px solid rgba(255,255,255,0.12); border-radius: 18px; background: rgba(255,255,255,0.06); padding: 14px; display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: start; transition: transform 0.16s ease, border-color 0.16s ease; }
     .task-card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.22); }
     .task-card.completed { background: rgba(95, 211, 154, 0.1); border-color: rgba(95, 211, 154, 0.32); }
-    .task-card.group-done { background: rgba(79, 139, 255, 0.12); border-color: rgba(79, 139, 255, 0.34); }
+    .task-card.group-done { background: rgba(255, 206, 122, 0.1); border-color: rgba(255, 206, 122, 0.28); }
     .task-icon { width: 40px; height: 40px; border-radius: 15px; display: grid; place-items: center; background: rgba(255,255,255,0.12); font-size: 22px; }
     .task-title { font-weight: 950; letter-spacing: -0.02em; }
     .task-desc { color: var(--muted); font-size: 13px; line-height: 1.45; margin-top: 4px; }
     .task-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
     .tag { font-size: 10px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 7px; border-radius: 999px; background: rgba(255,255,255,0.08); color: var(--muted); }
-    .tag.p1 { background: rgba(239,77,77,0.16); color: #ffd6d3; }
+    .tag.p1 { background: rgba(255,100,100,0.14); color: #ffd8d8; }
     .tag.p2 { background: rgba(255,206,122,0.14); color: #ffe7ae; }
-    .tag.p3 { background: rgba(143,182,255,0.14); color: #d7e6ff; }
-    .tag.personal { background: rgba(79,139,255,0.16); color: #d7e6ff; }
+    .tag.p3 { background: rgba(143,182,255,0.14); color: #dbe8ff; }
+    .tag.personal { background: rgba(110,168,255,0.14); color: #d7e6ff; }
     .toggle { appearance: none; width: 50px; height: 30px; border-radius: 999px; background: rgba(255,255,255,0.13); border: 1px solid rgba(255,255,255,0.15); position: relative; transition: background 0.2s ease; margin: 3px 0 0; }
     .toggle:before { content: ""; width: 22px; height: 22px; position: absolute; left: 3px; top: 3px; border-radius: 50%; background: white; transition: transform 0.2s ease; }
     .toggle:checked { background: rgba(95,211,154,0.8); }
     .toggle:checked:before { transform: translateX(20px); }
 
+
     .idea-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 16px; }
     .idea-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-    .idea-card { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.14); border-radius: 24px; background: linear-gradient(180deg, rgba(14,28,56,0.6), rgba(8,16,34,0.6)); display: grid; box-shadow: 0 14px 34px rgba(5,12,28,0.3); }
-    .idea-photo { width: 100%; height: 150px; object-fit: cover; display: block; border-bottom: 1px solid rgba(255,255,255,0.12); }
-    .idea-photo-fallback { width: 100%; height: 150px; display: grid; place-items: center; font-size: 56px; background: linear-gradient(135deg, #1c4ea8, #c81e1e); }
+    .idea-card { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.14); border-radius: 24px; background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05)); display: grid; box-shadow: 0 14px 34px rgba(5,12,28,0.12); }
+    .idea-photo { width: 100%; height: 152px; object-fit: cover; display: block; border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .idea-photo-fallback { width: 100%; height: 152px; display: grid; place-items: center; font-size: 56px; background: linear-gradient(135deg, #1c4ea8, #c81e1e); border-bottom: 1px solid rgba(255,255,255,0.12); }
     .idea-body { padding: 16px; display: grid; gap: 13px; }
+    .idea-card:before { content: ""; position: absolute; width: 160px; height: 160px; border-radius: 50%; right: -60px; top: -78px; background: rgba(255,206,122,0.10); pointer-events: none; }
     .idea-top { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: start; position: relative; }
     .idea-emoji { width: 48px; height: 48px; border-radius: 18px; display: grid; place-items: center; font-size: 26px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.12); }
     .idea-title { font-weight: 1000; letter-spacing: -0.03em; font-size: 17px; }
     .idea-desc { color: var(--muted); font-size: 13px; line-height: 1.45; margin-top: 4px; }
     .idea-city { align-self: start; white-space: nowrap; }
     .vote-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; position: relative; }
-    .vote-btn { border: 1px solid rgba(255,255,255,0.13); border-radius: 14px; background: rgba(0,0,0,0.2); color: var(--muted); padding: 10px 8px; font-weight: 950; font-size: 12px; transition: transform 0.16s ease, background 0.16s ease, border-color 0.16s ease; }
+    .vote-btn { border: 1px solid rgba(255,255,255,0.13); border-radius: 14px; background: rgba(0,0,0,0.18); color: var(--muted); padding: 10px 8px; font-weight: 950; font-size: 12px; transition: transform 0.16s ease, background 0.16s ease, border-color 0.16s ease; }
     .vote-btn:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.24); }
     .vote-btn.active.keen { background: rgba(95,211,154,0.18); color: #c8ffe0; border-color: rgba(95,211,154,0.38); }
     .vote-btn.active.maybe { background: rgba(255,206,122,0.18); color: #ffe7ae; border-color: rgba(255,206,122,0.38); }
-    .vote-btn.active.no { background: rgba(239,77,77,0.2); color: #ffdada; border-color: rgba(239,77,77,0.4); }
+    .vote-btn.active.no { background: rgba(255,100,100,0.18); color: #ffdada; border-color: rgba(255,100,100,0.38); }
     .vote-meter { display: grid; gap: 8px; position: relative; }
     .meter-track { height: 11px; display: flex; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.08); }
     .meter-keen { background: rgba(95,211,154,0.85); }
     .meter-maybe { background: rgba(255,206,122,0.85); }
-    .meter-no { background: rgba(239,77,77,0.85); }
+    .meter-no { background: rgba(255,100,100,0.85); }
     .vote-counts { display: flex; flex-wrap: wrap; gap: 6px; color: var(--subtle); font-size: 11px; font-weight: 850; }
     .idea-status { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 7px 10px; font-size: 11px; font-weight: 1000; letter-spacing: 0.05em; text-transform: uppercase; background: rgba(255,255,255,0.08); color: var(--muted); border: 1px solid rgba(255,255,255,0.12); }
     .idea-status.hot { background: rgba(95,211,154,0.14); color: #c8ffe0; border-color: rgba(95,211,154,0.32); }
     .idea-status.watch { background: rgba(255,206,122,0.14); color: #ffe7ae; border-color: rgba(255,206,122,0.32); }
-    .idea-status.cold { background: rgba(239,77,77,0.16); color: #ffdada; border-color: rgba(239,77,77,0.34); }
+    .idea-status.cold { background: rgba(255,100,100,0.14); color: #ffdada; border-color: rgba(255,100,100,0.32); }
     .idea-summary-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
     .mini-score { border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 12px; background: rgba(255,255,255,0.05); }
     .mini-score .num { font-size: 26px; font-weight: 1000; letter-spacing: -0.05em; }
@@ -242,41 +252,135 @@
     .add-idea-form { display: grid; grid-template-columns: 0.9fr 0.8fr 1.4fr auto; gap: 10px; margin-top: 16px; }
     .idea-help { color: var(--muted); font-size: 13px; line-height: 1.5; }
 
-    /* Auto itinerary (day carousel) */
-    .day-tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 14px; scrollbar-width: none; }
-    .day-tabs::-webkit-scrollbar { display: none; }
-    .day-tab { flex: 0 0 auto; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.05); color: var(--muted); border-radius: 14px; padding: 9px 13px; font-weight: 900; font-size: 12px; display: grid; gap: 2px; min-width: 92px; text-align: left; }
-    .day-tab small { font-weight: 800; color: var(--subtle); font-size: 10px; }
-    .day-tab.active { background: linear-gradient(135deg, #2f6fed, #1c4ea8); color: #fff; border-color: rgba(110,168,255,0.5); }
-    .day-tab.active small { color: rgba(255,255,255,0.85); }
-    .day-card { border: 1px solid rgba(255,255,255,0.14); border-radius: var(--radius-lg); background: rgba(255,255,255,0.05); padding: 16px 18px; }
-    .day-card .day-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 6px; }
-    .day-card .day-head h3 { font-size: 20px; }
-    .day-base { font-size: 12px; color: var(--subtle); font-weight: 800; }
-    .itin-item { display: grid; grid-template-columns: 78px 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(255,255,255,0.08); }
-    .itin-slot { color: #9cc2ff; font-weight: 900; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
-    .itin-title { font-weight: 850; font-size: 14px; }
-    .itin-note { color: var(--muted); font-size: 12px; margin-top: 3px; line-height: 1.45; }
-    .itin-anchor .itin-title { color: var(--muted); font-weight: 700; }
-    .itin-empty { color: var(--subtle); font-size: 13px; padding: 12px 0; line-height: 1.5; }
-    .itin-bench { margin-top: 16px; border: 1px dashed rgba(255,255,255,0.2); border-radius: var(--radius-lg); padding: 14px 16px; background: rgba(255,206,122,0.05); }
-    .itin-bench h3 { font-size: 15px; margin: 0 0 6px; }
-    .itin-main { display: flex; gap: 12px; align-items: flex-start; }
-    .itin-thumb { width: 70px; height: 52px; border-radius: 10px; object-fit: cover; flex: 0 0 auto; border: 1px solid rgba(255,255,255,0.14); }
-    .itin-thumb.fallback { display: grid; place-items: center; font-size: 24px; background: rgba(255,255,255,0.08); }
-    .itin-text { min-width: 0; }
 
-    /* Board-piece picker */
+
+    .planning-hub { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; padding: 16px 20px 0; }
+    .hub-card { text-align: left; border: 1px solid rgba(255,255,255,0.13); border-radius: 22px; background: rgba(255,255,255,0.06); color: var(--ink); padding: 15px; min-height: 118px; display: grid; align-content: start; gap: 8px; transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease; }
+    .hub-card:hover { transform: translateY(-3px); border-color: rgba(255,206,122,0.34); background: rgba(255,255,255,0.09); }
+    .hub-card.primary { background: linear-gradient(135deg, rgba(79,139,255,0.16), rgba(239,77,77,0.10)); border-color: rgba(79,139,255,0.28); box-shadow: 0 16px 42px rgba(79,139,255,0.10); }
+    .hub-icon { font-size: 26px; }
+    .hub-title { font-weight: 1000; letter-spacing: -0.03em; font-size: 16px; }
+    .hub-copy { color: var(--muted); font-size: 12px; line-height: 1.42; }
+    .hub-status { width: fit-content; border-radius: 999px; padding: 6px 9px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.12); color: var(--muted); font-size: 11px; font-weight: 900; }
+
+    .nav button.market-tab { color: #cfe0ff; border: 1px solid rgba(79,139,255,0.28); background: rgba(79,139,255,0.1); }
+    .nav button.market-tab.active { color: #fff; background: linear-gradient(90deg, #2f6fed, #1c4ea8); }
+
+    .activity-spotlight { border-color: rgba(79,139,255,0.24); background: linear-gradient(180deg, rgba(79,139,255,0.10), rgba(255,255,255,0.04)); }
+    .activity-spotlight h3 { font-size: 21px; margin: 8px 0 6px; letter-spacing: -0.04em; }
+    .activity-spotlight p { color: var(--muted); font-size: 13px; line-height: 1.5; margin: 0; }
+    .mini-idea-list { display: grid; gap: 8px; margin: 14px 0; }
+    .mini-idea-row { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center; padding: 9px 10px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.15); }
+    .mini-idea-name { font-weight: 900; font-size: 12px; }
+    .mini-idea-meta { color: var(--subtle); font-size: 11px; }
+
+    .flow-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 16px 0 18px; }
+    .flow-step { border: 1px solid rgba(255,255,255,0.11); border-radius: 18px; background: rgba(255,255,255,0.05); padding: 12px; }
+    .flow-step strong { display: block; font-size: 13px; margin-bottom: 5px; }
+    .flow-step span { display: block; color: var(--muted); font-size: 12px; line-height: 1.35; }
+
+    .quest-controls { display: flex; flex-wrap: wrap; gap: 10px; padding: 16px 20px 20px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .info-card { border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); background: rgba(255,255,255,0.06); padding: 16px; min-height: 140px; position: relative; overflow: hidden; }
+    .info-card:before { content: ""; position: absolute; width: 110px; height: 110px; border-radius: 50%; background: rgba(110,168,255,0.12); right: -32px; top: -34px; }
+    .info-card .emoji { font-size: 34px; margin-bottom: 10px; }
+    .info-card h3 { font-size: 17px; margin: 0 0 8px; }
+    .info-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.48; }
+    .info-card ul { margin: 10px 0 0 18px; padding: 0; color: var(--muted); line-height: 1.5; font-size: 13px; }
+
+    .timeline { display: grid; gap: 10px; }
+    .timeline-item { display: grid; grid-template-columns: 92px 1fr; gap: 12px; padding: 14px; border-radius: 18px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); }
+    .timeline-date { color: var(--gold); font-weight: 1000; font-size: 13px; }
+    .timeline-title { font-weight: 950; }
+    .timeline-body { color: var(--muted); font-size: 13px; margin-top: 4px; line-height: 1.45; }
+
+    .sync-diagram { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
+    .sync-box { border: 1px solid rgba(255,255,255,0.12); border-radius: 22px; padding: 18px; background: rgba(255,255,255,0.06); text-align: center; min-height: 180px; display: grid; align-content: center; gap: 8px; }
+    .sync-box .emoji { font-size: 42px; }
+    .sync-title { font-weight: 1000; }
+    .sync-copy { color: var(--muted); line-height: 1.45; font-size: 13px; }
+
+    .modal { position: fixed; inset: 0; display: none; place-items: center; padding: 18px; background: rgba(2, 8, 18, 0.76); backdrop-filter: blur(14px); z-index: 80; }
+    .modal.active { display: grid; }
+    .modal-card { width: min(780px, 100%); border: 1px solid rgba(255,255,255,0.18); border-radius: 34px; background: linear-gradient(180deg, rgba(14, 28, 56, 0.98), rgba(8, 16, 34, 0.98)); box-shadow: var(--shadow); padding: 24px; }
+    .modal-card h2 { margin: 0 0 8px; font-size: clamp(28px, 6vw, 50px); letter-spacing: -0.06em; }
+    .modal-card p { color: var(--muted); line-height: 1.55; }
+    .personality-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 18px 0; }
+    .personality { border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; background: rgba(255,255,255,0.06); color: var(--ink); padding: 14px 10px; text-align: center; transition: transform 0.18s ease, background 0.18s ease; }
+    .personality:hover, .personality.selected { transform: translateY(-3px); background: rgba(255,206,122,0.18); border-color: rgba(255,206,122,0.36); }
+    .personality .emoji { font-size: 28px; }
+    .personality .name { font-weight: 1000; font-size: 12px; margin-top: 8px; line-height: 1.15; }
+
+    .toast { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%) translateY(20px); opacity: 0; pointer-events: none; z-index: 100; background: rgba(6,16,34,0.94); color: var(--ink); border: 1px solid rgba(255,255,255,0.14); border-radius: 999px; padding: 11px 15px; box-shadow: 0 12px 36px rgba(0,0,0,0.32); transition: opacity 0.2s ease, transform 0.2s ease; font-weight: 800; font-size: 13px; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    .source-note { color: var(--subtle); font-size: 12px; line-height: 1.5; padding: 16px 20px 20px; border-top: 1px solid var(--line); }
+    .source-note a { color: #bcd4ff; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* Live sync chip + confetti (added) */
+    .nav .sync-chip { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; border: 1px solid rgba(255,255,255,0.16); background: rgba(0,0,0,0.24); color: var(--muted); border-radius: 999px; padding: 9px 13px; font-weight: 800; font-size: 12px; transition: background 0.2s ease, border-color 0.2s ease; }
+    .nav .sync-chip:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.26); }
+    .nav .sync-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: #5fd39a; box-shadow: 0 0 10px rgba(95,211,154,0.85); flex: none; }
+    .nav .sync-chip .ico { display: inline-block; font-size: 12px; }
+    .nav .sync-chip.syncing { color: #ffe7ae; border-color: rgba(255,206,122,0.34); }
+    .nav .sync-chip.syncing .dot { background: #ffce7a; animation: syncPulse 0.9s ease-in-out infinite; }
+    .nav .sync-chip.syncing .ico { animation: spin 0.8s linear infinite; }
+    .nav .sync-chip.offline { color: #ffd8d8; border-color: rgba(255,100,100,0.34); }
+    .nav .sync-chip.offline .dot { background: #ff7a7a; box-shadow: 0 0 10px rgba(255,122,122,0.7); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes syncPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+    .sync-live-banner { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; border: 1px solid rgba(95,211,154,0.3); border-radius: var(--radius-lg); background: linear-gradient(135deg, rgba(95,211,154,0.12), rgba(79,139,255,0.06)); padding: 18px; margin-top: 6px; }
+    .sync-live-banner .pulse { width: 46px; height: 46px; border-radius: 16px; display: grid; place-items: center; font-size: 24px; background: rgba(95,211,154,0.16); border: 1px solid rgba(95,211,154,0.3); }
+    .sync-live-banner .s-title { font-weight: 1000; letter-spacing: -0.03em; font-size: 18px; }
+    .sync-live-banner .s-sub { color: var(--muted); font-size: 13px; line-height: 1.45; margin-top: 3px; }
+    .sync-stamp { color: var(--subtle); font-size: 12px; font-weight: 800; margin-top: 6px; }
+    @media (max-width: 620px) { .sync-live-banner { grid-template-columns: auto 1fr; } .sync-live-banner .btn { grid-column: 1 / -1; } }
+
+    .confetti-wrap { position: fixed; inset: 0; pointer-events: none; z-index: 90; overflow: hidden; }
+    .confetti { position: absolute; top: -14px; width: 9px; height: 14px; border-radius: 2px; opacity: 0.95; will-change: transform, opacity; animation: confettiFall linear forwards; }
+    @keyframes confettiFall { 0% { transform: translateY(-10px) rotate(0deg); opacity: 1; } 100% { transform: translateY(102vh) rotate(640deg); opacity: 0.9; } }
+
+    /* Slovenian board scene: coat-of-arms emblem + Ljubljana dragon over the photo board */
+    .emblem { position: absolute; top: 5%; right: 7%; width: 70px; height: 84px; z-index: 4; filter: drop-shadow(0 0 18px rgba(11,83,196,0.4)); animation: emblemGlow 5s ease-in-out infinite; }
+    .emblem svg { width: 100%; height: 100%; display: block; }
+    @keyframes emblemGlow { 0%,100% { filter: drop-shadow(0 0 14px rgba(11,83,196,0.32)); } 50% { filter: drop-shadow(0 0 26px rgba(255,255,255,0.4)); } }
+    .dragon-mascot { position: absolute; left: 6%; top: 8%; font-size: 30px; z-index: 4; transform-origin: center; animation: dragonBob 4.2s ease-in-out infinite; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.45)); }
+    .dragon-mascot:after { content: "Ljubljana dragon"; position: absolute; left: 50%; top: 100%; transform: translateX(-50%); white-space: nowrap; font-size: 10px; font-weight: 900; color: #eaf2ff; background: rgba(6,16,34,0.72); border: 1px solid rgba(255,255,255,0.14); border-radius: 999px; padding: 2px 7px; margin-top: 4px; }
+    @keyframes dragonBob { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-7px) rotate(3deg); } }
+    .leaves { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 3; }
+    .leaf { position: absolute; top: -26px; opacity: 0; animation: leafFall linear infinite; will-change: transform, opacity; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.25)); }
+    @keyframes leafFall { 0% { transform: translateY(-30px) translateX(0) rotate(0deg); opacity: 0; } 12% { opacity: 0.95; } 88% { opacity: 0.85; } 100% { transform: translateY(900px) translateX(46px) rotate(360deg); opacity: 0; } }
+
+    .vibe-block { margin-top: 16px; }
+    .vibe-picker { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 9px; }
+    .vibe-chip { display: grid; justify-items: center; gap: 4px; padding: 10px 6px; border: 1px solid rgba(255,255,255,0.13); border-radius: 15px; background: rgba(0,0,0,0.2); color: var(--muted); transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease; }
+    .vibe-chip:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.26); }
+    .vibe-chip.active { background: rgba(255,206,122,0.18); border-color: rgba(255,206,122,0.42); color: #ffe7ae; box-shadow: 0 8px 22px rgba(255,206,122,0.12); }
+    .vibe-chip .vibe-emoji { font-size: 21px; line-height: 1; }
+    .vibe-chip .vibe-name { font-size: 10px; font-weight: 900; letter-spacing: 0.02em; }
     .piece-picker { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
     .piece-chip { width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.14); background: rgba(0,0,0,0.22); border-radius: 12px; font-size: 19px; line-height: 1; display: grid; place-items: center; transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease; }
     .piece-chip:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.28); }
-    .piece-chip.active { background: rgba(79,139,255,0.22); border-color: rgba(110,168,255,0.55); box-shadow: 0 6px 16px rgba(79,139,255,0.18); }
+    .piece-chip.active { background: rgba(79,139,255,0.2); border-color: rgba(79,139,255,0.5); box-shadow: 0 6px 16px rgba(79,139,255,0.18); }
 
-    /* Bookies tab */
-    .nav button.casino-tab { color: #ffd6c2; border: 1px solid rgba(239,77,77,0.28); background: rgba(239,77,77,0.08); }
+    .roster-row { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center; padding: 12px; border: 1px solid rgba(255,255,255,0.12); border-radius: 18px; background: rgba(255,255,255,0.05); }
+    .roster-fields { display: grid; grid-template-columns: 1.2fr 1fr; gap: 10px; }
+    .roster-fields select { width: 100%; border: 1px solid rgba(255,255,255,0.14); border-radius: 14px; background: rgba(0,0,0,0.2); color: var(--ink); padding: 11px 12px; outline: none; }
+    .roster-fields select option { color: #111; }
+    @media (max-width: 620px) { .roster-fields { grid-template-columns: 1fr; } }
+
+    .token-vibe { position: absolute; top: -11px; right: -11px; width: 20px; height: 20px; border-radius: 50%; background: rgba(6,16,34,0.94); border: 1px solid rgba(255,255,255,0.5); display: grid; place-items: center; font-size: 11px; line-height: 1; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+    .traveller-vibe { font-size: 13px; margin-left: 4px; }
+    .countdown-card .big { background: linear-gradient(100deg, #ffce7a, #ef4d4d 60%, #4f8bff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+    /* The Bookies tab — betting + prizes (added) */
+    .nav button.casino-tab { color: #ffd6c2; border: 1px solid rgba(239,77,77,0.26); background: rgba(239,77,77,0.08); }
     .nav button.casino-tab.active { color: #2a0f0f; background: linear-gradient(90deg, #ffce7a, #ef4d4d); }
+
     .market-list { display: grid; gap: 14px; }
-    .bet-card { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.14); border-radius: 24px; background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.045)); padding: 16px; display: grid; gap: 13px; box-shadow: 0 14px 34px rgba(5,12,28,0.3); }
+    .bet-card { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.14); border-radius: 24px; background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.045)); padding: 16px; display: grid; gap: 13px; box-shadow: 0 14px 34px rgba(5,12,28,0.12); }
     .bet-card:before { content: ""; position: absolute; width: 150px; height: 150px; border-radius: 50%; right: -56px; top: -70px; background: rgba(255,206,122,0.10); pointer-events: none; }
     .bet-card.is-settled { border-color: rgba(95,211,154,0.28); }
     .bet-head { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: start; position: relative; }
@@ -284,14 +388,14 @@
     .bet-title { font-weight: 1000; letter-spacing: -0.03em; font-size: 17px; }
     .bet-desc { color: var(--muted); font-size: 13px; line-height: 1.42; margin-top: 4px; }
     .bet-tags { display: grid; gap: 6px; justify-items: end; align-content: start; }
-    .prize-tag { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 6px 10px; font-size: 11px; font-weight: 900; background: linear-gradient(135deg, rgba(255,206,122,0.22), rgba(239,77,77,0.16)); color: #ffe7ae; border: 1px solid rgba(255,206,122,0.34); white-space: nowrap; max-width: 230px; overflow: hidden; text-overflow: ellipsis; }
+    .prize-tag { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 6px 10px; font-size: 11px; font-weight: 900; letter-spacing: 0.01em; background: linear-gradient(135deg, rgba(255,206,122,0.22), rgba(239,77,77,0.16)); color: #ffe7ae; border: 1px solid rgba(255,206,122,0.34); white-space: nowrap; max-width: 230px; overflow: hidden; text-overflow: ellipsis; }
     .runner-grid { display: grid; gap: 8px; }
     .runner-btn { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; width: 100%; text-align: left; border: 1px solid rgba(255,255,255,0.13); border-radius: 16px; background: rgba(0,0,0,0.2); color: var(--ink); padding: 10px 12px 14px; position: relative; transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease; }
     .runner-btn:hover:not(:disabled) { transform: translateY(-2px); border-color: rgba(255,255,255,0.26); }
     .runner-btn.mine { border-color: rgba(79,139,255,0.5); background: rgba(79,139,255,0.12); box-shadow: 0 8px 22px rgba(79,139,255,0.12); }
     .runner-btn.win { border-color: rgba(95,211,154,0.55); background: rgba(95,211,154,0.16); }
     .runner-btn.locked { cursor: default; }
-    .runner-dot { width: 30px; height: 30px; border-radius: 11px; display: grid; place-items: center; font-size: 15px; color: #06201c; border: 1px solid rgba(255,255,255,0.55); }
+    .runner-dot { width: 30px; height: 30px; border-radius: 11px; display: grid; place-items: center; font-size: 15px; color: #0a1733; border: 1px solid rgba(255,255,255,0.55); }
     .runner-name { font-weight: 850; font-size: 14px; }
     .runner-odds { font-weight: 1000; font-size: 14px; color: #ffe7ae; letter-spacing: -0.02em; }
     .runner-bar { position: absolute; left: 12px; right: 12px; bottom: 6px; height: 3px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow: hidden; }
@@ -321,11 +425,24 @@
     .add-market-form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
     .add-market-form #newMkTitle, .add-market-form #newMkRunnersWrap, .add-market-form #addMarketBtn { grid-column: 1 / -1; }
 
-    /* Crew Desk tab */
-    .nav button.desk-tab { color:#c8ffe0; border:1px solid rgba(95,211,154,0.28); background:rgba(95,211,154,0.08); }
+    /* Crew Desk — hands up, share options, vote (added) */
+    .nav button.desk-tab { color:#c8ffe0; border:1px solid rgba(95,211,154,0.26); background:rgba(95,211,154,0.08); }
     .nav button.desk-tab.active { color:#06231b; background:linear-gradient(90deg,#5fd39a,#4f8bff); }
+    .nav button.plan-tab { color:#dfe7ff; border:1px solid rgba(143,182,255,0.28); background:rgba(143,182,255,0.08); }
+    .nav button.plan-tab.active { color:#0c1430; background:linear-gradient(90deg,#8fb6ff,#4f8bff); }
+
     .desk-list { display:grid; gap:14px; }
-    .desk-room { position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.14); border-radius:24px; background:linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.045)); padding:16px; display:grid; gap:13px; box-shadow:0 14px 34px rgba(5,12,28,0.3); }
+    .task-block { display:grid; gap:0; }
+    .task-expand { display:flex; align-items:center; gap:7px; width:fit-content; margin:6px 0 0 52px; border:1px solid rgba(255,255,255,0.12); border-radius:999px; background:rgba(0,0,0,0.18); color:var(--muted); padding:6px 12px; font-size:11px; font-weight:850; transition:border-color 0.15s ease, color 0.15s ease; }
+    .task-expand:hover { border-color:rgba(255,255,255,0.28); color:var(--ink); }
+    .task-expand.open { color:#c8ffe0; border-color:rgba(95,211,154,0.34); background:rgba(95,211,154,0.08); }
+    .te-arrow { font-size:10px; }
+    .te-meta { color:var(--subtle); font-weight:800; }
+    .task-expand.open .te-meta { color:rgba(200,255,230,0.7); }
+    .task-rooms { display:grid; gap:12px; margin:10px 0 4px 26px; padding-left:14px; border-left:2px solid rgba(95,211,154,0.22); }
+    .task-rooms > .btn { justify-self:start; }
+    @media (max-width:620px){ .task-expand { margin-left:0; } .task-rooms { margin-left:0; padding-left:10px; } }
+    .desk-room { position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.14); border-radius:24px; background:linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.045)); padding:16px; display:grid; gap:13px; box-shadow:0 14px 34px rgba(5,12,28,0.12); }
     .desk-room.is-decided { border-color:rgba(95,211,154,0.32); background:linear-gradient(180deg, rgba(95,211,154,0.10), rgba(255,255,255,0.03)); }
     .desk-head { display:grid; grid-template-columns:auto 1fr auto; gap:12px; align-items:start; }
     .desk-emoji { width:46px; height:46px; border-radius:16px; display:grid; place-items:center; font-size:24px; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.12); }
@@ -358,135 +475,129 @@
     .add-opt input { padding:10px 11px; }
     .add-opt .btn { white-space:nowrap; }
     .opt-notes-in { margin-top:8px; padding:10px 11px; }
+
+    /* Itinerary builder (added) */
+    .plan-toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+    .plan-days { display:grid; gap:12px; margin-top:14px; }
+    .plan-day { border:1px solid rgba(255,255,255,0.12); border-radius:20px; background:rgba(255,255,255,0.05); padding:14px; }
+    .plan-day.is-logistics { background:rgba(255,255,255,0.03); border-style:dashed; }
+    .plan-day-head { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:6px; }
+    .plan-date { font-weight:1000; font-size:14px; color:var(--gold); }
+    .plan-citytag { font-size:10px; font-weight:900; letter-spacing:0.06em; text-transform:uppercase; padding:5px 8px; border-radius:999px; background:rgba(79,139,255,0.14); color:#d7e6ff; }
+    .plan-citytag.bled { background:rgba(239,77,77,0.14); color:#ffd6d3; }
+    .plan-daynote { color:var(--subtle); font-size:12px; flex-basis:100%; }
+    .plan-item { display:grid; grid-template-columns:auto 1fr auto auto auto; gap:9px; align-items:center; padding:9px 10px; border:1px solid rgba(255,255,255,0.1); border-radius:14px; background:rgba(0,0,0,0.16); margin-top:8px; }
+    .pi-titlewrap { cursor:pointer; min-width:0; }
+    .pi-titlewrap:hover .pi-title { text-decoration:underline; text-decoration-color:rgba(255,255,255,0.35); text-underline-offset:3px; }
+    .pi-time { border:1px solid rgba(255,255,255,0.14); border-radius:10px; background:rgba(0,0,0,0.25); color:var(--ink); padding:6px 7px; font-size:11px; font-weight:800; width:88px; }
+    .pi-time::-webkit-calendar-picker-indicator { filter:invert(1); opacity:0.55; cursor:pointer; }
+    .pd-actions { margin-left:auto; display:flex; gap:6px; }
+    .pd-btn { border:1px solid rgba(255,255,255,0.14); border-radius:10px; background:rgba(0,0,0,0.22); color:var(--muted); padding:5px 9px; font-size:11px; font-weight:850; transition:border-color 0.15s ease, color 0.15s ease; }
+    .pd-btn:hover { border-color:rgba(255,255,255,0.3); color:var(--ink); }
+    .plan-day.is-off { opacity:0.55; border-style:dashed; }
+    .day-add { display:grid; grid-template-columns:1fr auto auto; gap:7px; margin-top:8px; }
+    .day-add input[type="text"] { padding:8px 10px; font-size:12px; border-radius:12px; background:rgba(0,0,0,0.14); border-style:dashed; }
+    .day-add input[type="text"]:focus { border-style:solid; }
+    .arr-sub { font-size:10px; font-weight:900; letter-spacing:0.07em; text-transform:uppercase; color:var(--subtle); }
+    .plan-item.dinner { border-color:rgba(255,206,122,0.3); background:rgba(255,206,122,0.08); }
+    .plan-item .pi-emoji { font-size:18px; }
+    .pi-title { font-weight:850; font-size:13px; }
+    .pi-sub { color:var(--subtle); font-size:11px; }
+    a.pi-sub { color:#bcd4ff; text-decoration:underline; text-underline-offset:2px; }
+    .pi-move { border:1px solid rgba(255,255,255,0.14); border-radius:10px; background:rgba(0,0,0,0.25); color:var(--ink); padding:7px 8px; font-size:11px; }
+    .pi-move option { color:#111; }
+    .pi-x { border:1px solid rgba(255,100,100,0.3); border-radius:10px; background:rgba(255,100,100,0.12); color:#ffdada; padding:7px 9px; font-weight:900; }
     .plan-empty-day { color:var(--subtle); font-size:12px; padding:5px 2px; }
-    @media (max-width:620px){ .add-opt { grid-template-columns:1fr; } }
+    .plan-add { display:grid; grid-template-columns:1fr auto auto auto; gap:8px; margin-top:14px; }
+    .plan-add select { width:auto; }
+    @media (max-width:620px){ .add-opt, .plan-add { grid-template-columns:1fr; } .plan-add select { width:100%; } .plan-item { grid-template-columns:auto 1fr; } }
 
-    /* Group-task collaboration: owner + shared options + voting */
-    .group-card { display: block !important; }
-    .group-card .g-top { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: start; }
-    .collab { margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; display: grid; gap: 10px; }
-    .collab-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
-    .owner-pill { font-size: 12.5px; font-weight: 750; color: var(--muted); }
-    .owner-pill b { color: #cfe0ff; }
-    .option-list { display: grid; gap: 8px; }
-    .opt { border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; background: rgba(0,0,0,0.2); padding: 10px 11px; display: grid; gap: 8px; }
-    .opt.top { border-color: rgba(95,211,154,0.42); background: rgba(95,211,154,0.08); }
-    .opt-head { display: flex; justify-content: space-between; gap: 8px; align-items: start; }
-    .opt-title { font-weight: 850; font-size: 13px; }
-    .opt-title a { color: #bcd4ff; text-decoration: underline; text-underline-offset: 2px; }
-    .opt-by { color: var(--subtle); font-size: 11px; }
-    .opt-votes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-    .opt-votes .vote-btn { padding: 7px 6px; font-size: 11px; }
-    .opt-rm { border: 0; background: transparent; color: var(--subtle); font-weight: 900; font-size: 13px; padding: 0 4px; }
-    .opt-rm:hover { color: #ffb3b3; }
-    .add-option { display: grid; grid-template-columns: 1.1fr 1fr auto; gap: 8px; }
-    .add-option input { padding: 9px 10px; font-size: 13px; }
-    @media (max-width: 620px) { .add-option { grid-template-columns: 1fr; } .itin-item { grid-template-columns: 62px 1fr; } }
+    /* Crew arrivals */
+    .arrival-editor { border:1px solid rgba(255,255,255,0.12); border-radius:16px; background:rgba(0,0,0,0.18); padding:12px; display:grid; gap:10px; }
+    .arr-editor-head { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted); font-weight:800; }
+    .arr-editor-head .avatar-dot { width:22px; height:22px; border-radius:8px; font-size:11px; }
+    .arr-fields { display:grid; gap:8px; }
+    .arr-fields input { width:100%; border:1px solid rgba(255,255,255,0.14); border-radius:12px; background:rgba(0,0,0,0.25); color:var(--ink); padding:10px 11px; outline:none; }
+    .arr-fields input::-webkit-calendar-picker-indicator { filter:invert(1); opacity:0.6; cursor:pointer; }
+    .arrival-list { display:grid; gap:8px; }
+    .arrival-row { display:grid; grid-template-columns:auto 1fr; gap:10px; align-items:center; padding:8px 10px; border:1px solid rgba(255,255,255,0.1); border-radius:14px; background:rgba(255,255,255,0.05); }
+    .arrival-row.me { border-color:rgba(79,139,255,0.4); background:rgba(79,139,255,0.08); }
+    .arrival-row .avatar-dot { width:26px; height:26px; border-radius:9px; font-size:11px; }
+    .arr-name { font-weight:850; font-size:13px; }
+    .arr-when { color:var(--muted); font-size:11px; margin-top:2px; line-height:1.35; }
+    .arr-when.unset { color:var(--subtle); font-style:italic; }
+    .arr-foot { color:var(--subtle); font-size:11px; font-weight:800; }
+    .day-arrivals { display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin:0 0 8px; padding:8px 10px; border:1px dashed rgba(79,139,255,0.28); border-radius:12px; background:rgba(79,139,255,0.06); }
+    .day-arrivals .da-label { font-size:11px; font-weight:900; color:#d7e6ff; letter-spacing:0.03em; }
+    .arr-chip { display:inline-flex; align-items:center; gap:5px; border:1px solid rgba(255,255,255,0.16); border-radius:999px; padding:4px 9px; font-size:11px; font-weight:850; background:rgba(0,0,0,0.22); }
+    .arr-chip .ac-dot { width:9px; height:9px; border-radius:50%; flex:none; }
 
-    .planning-hub { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding: 16px 20px 0; }
-    .hub-card { text-align: left; border: 1px solid rgba(255,255,255,0.13); border-radius: 22px; background: rgba(255,255,255,0.06); color: var(--ink); padding: 15px; min-height: 118px; display: grid; align-content: start; gap: 8px; transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease; }
-    .hub-card:hover { transform: translateY(-3px); border-color: rgba(110,168,255,0.4); background: rgba(255,255,255,0.09); }
-    .hub-card.primary { background: linear-gradient(135deg, rgba(79,139,255,0.18), rgba(224,50,45,0.12)); border-color: rgba(79,139,255,0.32); box-shadow: 0 16px 42px rgba(79,139,255,0.12); }
-    .hub-icon { font-size: 26px; }
-    .hub-title { font-weight: 1000; letter-spacing: -0.03em; font-size: 16px; }
-    .hub-copy { color: var(--muted); font-size: 12px; line-height: 1.42; }
-    .hub-status { width: fit-content; border-radius: 999px; padding: 6px 9px; background: rgba(0,0,0,0.22); border: 1px solid rgba(255,255,255,0.12); color: var(--muted); font-size: 11px; font-weight: 900; }
-
-    .nav button.market-tab { color: #cfe0ff; border: 1px solid rgba(79,139,255,0.28); background: rgba(79,139,255,0.1); }
-    .nav button.market-tab.active { color: #fff; background: linear-gradient(90deg, #2f6fed, #1c4ea8); }
-
-    .activity-spotlight { border-color: rgba(79,139,255,0.26); background: linear-gradient(180deg, rgba(79,139,255,0.12), rgba(255,255,255,0.04)); }
-    .activity-spotlight h3 { font-size: 21px; margin: 8px 0 6px; letter-spacing: -0.04em; }
-    .activity-spotlight p { color: var(--muted); font-size: 13px; line-height: 1.5; margin: 0; }
-    .mini-idea-list { display: grid; gap: 8px; margin: 14px 0; }
-    .mini-idea-row { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center; padding: 9px 10px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.18); }
-    .mini-idea-name { font-weight: 900; font-size: 12px; }
-    .mini-idea-meta { color: var(--subtle); font-size: 11px; }
-
-    .flow-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 16px 0 18px; }
-    .flow-step { border: 1px solid rgba(255,255,255,0.11); border-radius: 18px; background: rgba(255,255,255,0.05); padding: 12px; }
-    .flow-step strong { display: block; font-size: 13px; margin-bottom: 5px; }
-    .flow-step span { display: block; color: var(--muted); font-size: 12px; line-height: 1.35; }
-
-    .quest-controls { display: flex; flex-wrap: wrap; gap: 10px; padding: 16px 20px 20px; }
-    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-    .info-card { border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); background: rgba(255,255,255,0.06); padding: 16px; min-height: 140px; position: relative; overflow: hidden; }
-    .info-card:before { content: ""; position: absolute; width: 110px; height: 110px; border-radius: 50%; background: rgba(79,139,255,0.14); right: -32px; top: -34px; }
-    .info-card .emoji { font-size: 34px; margin-bottom: 10px; }
-    .info-card h3 { font-size: 17px; margin: 0 0 8px; }
-    .info-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.48; }
-
-    /* Photo gallery cards in Trip intel */
+    /* Photo gallery (Slovenia in pictures) */
     .photo-gallery { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
     .photo-card { position: relative; border-radius: var(--radius-lg); overflow: hidden; min-height: 190px; border: 1px solid rgba(255,255,255,0.14); display: flex; align-items: flex-end; }
     .photo-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: transform 0.4s ease; }
     .photo-card:hover img { transform: scale(1.05); }
-    .photo-card:after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6,14,30,0) 30%, rgba(6,14,30,0.85)); z-index: 1; }
+    .photo-card:after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,9,18,0) 28%, rgba(8,9,18,0.86)); z-index: 1; }
     .photo-card .cap { position: relative; z-index: 2; padding: 14px; }
     .photo-card .cap strong { display: block; font-size: 16px; letter-spacing: -0.02em; }
     .photo-card .cap span { display: block; color: rgba(242,246,255,0.85); font-size: 12px; margin-top: 3px; line-height: 1.4; }
 
-    .timeline { display: grid; gap: 10px; }
-    .timeline-item { display: grid; grid-template-columns: 100px 1fr; gap: 12px; padding: 14px; border-radius: 18px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); }
-    .timeline-date { color: #ff9d9a; font-weight: 1000; font-size: 13px; }
-    .timeline-title { font-weight: 950; }
-    .timeline-body { color: var(--muted); font-size: 13px; margin-top: 4px; line-height: 1.45; }
+    /* ---- Futurist pass (2026-06-10): pulse feed, ring, dock, micro-motion ---- */
+    @keyframes aurora { 0%, 100% { transform: translate3d(-1.5%, -1%, 0) scale(1); opacity: 0.8; } 50% { transform: translate3d(1.5%, 1.5%, 0) scale(1.05); opacity: 1; } }
+    body:after { animation: aurora 22s ease-in-out infinite; }
+    .hero h1 .shine { background-size: 220% 100%; animation: shineSweep 7s ease-in-out infinite; }
+    @keyframes shineSweep { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    .section.active .layout > .panel, .section.active > .panel { animation: rise 0.45s cubic-bezier(.2,.8,.2,1) both; }
+    .section.active .layout > .side-stack { animation: rise 0.45s cubic-bezier(.2,.8,.2,1) 0.08s both; }
+    .btn:active, .vote-btn:active, .runner-btn:active, .hand-btn:active, .vote-up:active, .vibe-chip:active, .piece-chip:active, .hub-card:active { transform: scale(0.96); }
+    .idea-card, .bet-card, .desk-room { transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+    .idea-card:hover, .bet-card:hover, .desk-room:hover { transform: translateY(-3px); border-color: rgba(79,139,255,0.28); box-shadow: 0 22px 50px rgba(4,12,28,0.35), 0 0 0 1px rgba(79,139,255,0.10); }
 
-    .toast { position: fixed; left: 50%; bottom: calc(18px + var(--safe-bottom)); transform: translateX(-50%) translateY(20px); opacity: 0; pointer-events: none; z-index: 100; background: rgba(6,16,34,0.95); color: var(--ink); border: 1px solid rgba(255,255,255,0.16); border-radius: 999px; padding: 11px 15px; box-shadow: 0 12px 36px rgba(0,0,0,0.4); transition: opacity 0.2s ease, transform 0.2s ease; font-weight: 800; font-size: 13px; }
-    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    /* Live countdown digits */
+    .cd-unit { font-size: 0.48em; opacity: 0.8; margin: 0 9px 0 2px; }
+    @property --ang { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+    .countdown-card { position: relative; }
+    .countdown-card:after { content: ""; position: absolute; inset: -1px; border-radius: var(--radius-lg); padding: 1.5px; background: conic-gradient(from var(--ang), transparent 0 72%, rgba(79,139,255,0.85) 86%, rgba(239,77,77,0.5) 93%, transparent 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: orbit 7s linear infinite; pointer-events: none; }
+    @keyframes orbit { to { --ang: 360deg; } }
 
-    .source-note { color: var(--subtle); font-size: 12px; line-height: 1.5; padding: 16px 20px 20px; border-top: 1px solid var(--line); }
-    .source-note a { color: #bcd4ff; text-decoration: underline; text-underline-offset: 3px; }
+    /* Group progress ring */
+    .ring-row { display: flex; gap: 16px; align-items: center; margin-top: 10px; }
+    .ring-wrap { position: relative; width: 96px; height: 96px; flex: none; }
+    .ring { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .ring-bg { fill: none; stroke: rgba(255,255,255,0.09); stroke-width: 10; }
+    .ring-fill { fill: none; stroke: url(#ringGrad); stroke-width: 10; stroke-linecap: round; stroke-dasharray: 326.73; stroke-dashoffset: 326.73; transition: stroke-dashoffset 0.9s cubic-bezier(.2,.8,.2,1); filter: drop-shadow(0 0 7px rgba(95,211,154,0.45)); }
+    .ring-center { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 1000; font-size: 21px; letter-spacing: -0.04em; }
 
-    /* Live sync chip + confetti */
-    .nav .sync-chip { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; border: 1px solid rgba(255,255,255,0.16); background: rgba(0,0,0,0.28); color: var(--muted); border-radius: 999px; padding: 9px 13px; font-weight: 800; font-size: 12px; transition: background 0.2s ease, border-color 0.2s ease; }
-    .nav .sync-chip:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.26); }
-    .nav .sync-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: #5fd39a; box-shadow: 0 0 10px rgba(95,211,154,0.85); flex: none; }
-    .nav .sync-chip .ico { display: inline-block; font-size: 12px; }
-    .nav .sync-chip.syncing { color: #ffe7ae; border-color: rgba(255,206,122,0.34); }
-    .nav .sync-chip.syncing .dot { background: #ffce7a; animation: syncPulse 0.9s ease-in-out infinite; }
-    .nav .sync-chip.syncing .ico { animation: spin 0.8s linear infinite; }
-    .nav .sync-chip.offline { color: #ffd8d8; border-color: rgba(239,77,77,0.34); }
-    .nav .sync-chip.offline .dot { background: #ef4d4d; box-shadow: 0 0 10px rgba(239,77,77,0.7); }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    @keyframes syncPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+    /* Crew pulse feed */
+    .pulse-feed { display: grid; gap: 8px; margin-top: 12px; max-height: 340px; overflow: auto; }
+    .pulse-row { display: grid; grid-template-columns: auto 1fr; gap: 9px; align-items: start; padding: 9px 10px; border: 1px solid rgba(255,255,255,0.09); border-radius: 14px; background: rgba(255,255,255,0.04); }
+    .pulse-row.fresh { border-color: rgba(79,139,255,0.35); background: rgba(79,139,255,0.07); box-shadow: 0 0 18px rgba(79,139,255,0.10); }
+    .pulse-ico { width: 26px; height: 26px; border-radius: 9px; display: grid; place-items: center; font-size: 13px; border: 1px solid rgba(255,255,255,0.3); }
+    .pulse-msg { font-size: 12.5px; line-height: 1.4; }
+    .pulse-time { color: var(--subtle); font-size: 10px; font-weight: 800; margin-top: 2px; }
 
-    .confetti-wrap { position: fixed; inset: 0; pointer-events: none; z-index: 90; overflow: hidden; }
-    .confetti { position: absolute; top: -14px; width: 9px; height: 14px; border-radius: 2px; opacity: 0.95; will-change: transform, opacity; animation: confettiFall linear forwards; }
-    @keyframes confettiFall { 0% { transform: translateY(-10px) rotate(0deg); opacity: 1; } 100% { transform: translateY(102vh) rotate(640deg); opacity: 0.9; } }
+    /* Mobile bottom dock */
+    .dock { display: none; }
 
-    .vibe-block { margin-top: 16px; }
-    .vibe-picker { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 9px; }
-    .vibe-chip { display: grid; justify-items: center; gap: 4px; padding: 10px 6px; border: 1px solid rgba(255,255,255,0.13); border-radius: 15px; background: rgba(0,0,0,0.22); color: var(--muted); transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease; }
-    .vibe-chip:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.26); }
-    .vibe-chip.active { background: rgba(79,139,255,0.2); border-color: rgba(79,139,255,0.44); color: #dbe8ff; box-shadow: 0 8px 22px rgba(79,139,255,0.14); }
-    .vibe-chip .vibe-emoji { font-size: 21px; line-height: 1; }
-    .vibe-chip .vibe-name { font-size: 10px; font-weight: 900; letter-spacing: 0.02em; }
-
-    .roster-row { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center; padding: 12px; border: 1px solid rgba(255,255,255,0.12); border-radius: 18px; background: rgba(255,255,255,0.05); }
-    .roster-fields { display: grid; grid-template-columns: 1.2fr 1fr; gap: 10px; }
-    .roster-fields select { width: 100%; border: 1px solid rgba(255,255,255,0.14); border-radius: 14px; background: rgba(0,0,0,0.22); color: var(--ink); padding: 11px 12px; outline: none; }
-    .roster-fields select option { color: #111; }
-    @media (max-width: 620px) { .roster-fields { grid-template-columns: 1fr; } }
-
-    .token-vibe { position: absolute; top: -11px; right: -11px; width: 20px; height: 20px; border-radius: 50%; background: rgba(6,16,34,0.95); border: 1px solid rgba(255,255,255,0.5); display: grid; place-items: center; font-size: 11px; line-height: 1; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-    .traveller-vibe { font-size: 13px; margin-left: 4px; }
-    .countdown-card .big { background: linear-gradient(100deg, #ffffff, #9cc2ff 55%, #ff8d8a); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
 
     @media (max-width: 980px) {
       .hero-content { grid-template-columns: 1fr; align-items: end; }
       .layout { grid-template-columns: 1fr; }
-      .grid-3, .grid-2, .idea-grid, .idea-summary-grid, .add-idea-form, .planning-hub, .flow-steps, .photo-gallery { grid-template-columns: 1fr; }
+      .grid-3, .grid-2, .sync-diagram, .idea-grid, .idea-summary-grid, .add-idea-form, .planning-hub, .flow-steps, .photo-gallery { grid-template-columns: 1fr; }
       .board { min-height: 720px; }
+      .personality-grid { grid-template-columns: repeat(2, 1fr); }
       .node { width: 94px; }
       .node-core { width: 54px; height: 54px; border-radius: 19px; font-size: 26px; }
     }
 
     @media (max-width: 620px) {
       .app { width: min(100% - 16px, 1280px); padding-top: 8px; }
-      .hero { min-height: 540px; border-radius: 24px; }
-      .hero-content { padding: 20px; min-height: 540px; }
+      .hero { min-height: 520px; border-radius: 24px; }
+      .hero-content { padding: 20px; min-height: 520px; }
       .panel, .board { border-radius: 24px; }
       .panel-head { display: grid; }
       .board-shell { padding: 8px; }
@@ -497,6 +608,16 @@
       .timeline-item { grid-template-columns: 1fr; }
       .nav { top: 6px; border-radius: 22px; }
       .dragon-mascot, .emblem { transform: scale(0.85); }
+      .add-market-form { grid-template-columns: 1fr; }
+      .bet-head { grid-template-columns: auto 1fr; }
+      .bet-tags { grid-column: 1 / -1; justify-items: start; }
+      .dock { position: fixed; left: 10px; right: 10px; bottom: 10px; z-index: 60; display: flex; gap: 4px; padding: 8px; padding-bottom: calc(8px + env(safe-area-inset-bottom)); border: 1px solid rgba(255,255,255,0.16); border-radius: 24px; background: rgba(8,16,34,0.90); backdrop-filter: blur(20px); box-shadow: 0 18px 50px rgba(0,0,0,0.5); overflow-x: auto; scrollbar-width: none; }
+      .dock::-webkit-scrollbar { display: none; }
+      .dock button { flex: 1 0 auto; min-width: 54px; display: grid; justify-items: center; gap: 3px; border: 0; background: transparent; color: var(--subtle); border-radius: 16px; padding: 7px 6px; font-size: 9.5px; font-weight: 850; }
+      .dock button .d-ico { font-size: 18px; line-height: 1; }
+      .dock button.active { color: #0a1733; background: #ffffff; }
+      .app { padding-bottom: 104px; }
+      .toast { bottom: 88px; }
     }
   </style>
 </head>
@@ -512,6 +633,7 @@
             <button class="btn" data-jump="board">Open board</button>
             <button class="btn secondary" data-jump="tasks">Group tasks</button>
             <button class="btn ghost" data-jump="ideas">Activity Market</button>
+            <button class="btn ghost" data-jump="bookie">🎲 The Bookies</button>
             <button class="btn ghost" data-jump="settings">Set your vibe</button>
           </div>
         </div>
@@ -519,17 +641,26 @@
           <div class="glass countdown-card">
             <div class="label">Countdown to Slovenia</div>
             <div class="big"><span id="countdownDays">—</span></div>
-            <div class="micro" id="countdownSub">Fly Trieste · base Ljubljana then Bled</div>
+            <div class="micro" id="countdownSub">Trieste → Ljubljana → Bled · 11–15 Sep 2026</div>
             <div class="pill-row">
               <span class="pill hot">🍂 Early autumn in the Alps</span>
+              <span class="pill" id="ljubljanaNowPill">🇸🇮 Ljubljana</span>
               <span class="pill" id="travellerCountPill">9 travellers</span>
             </div>
           </div>
           <div class="glass">
             <div class="label">Group progress</div>
-            <div class="big"><span id="heroProgressPct">0%</span></div>
-            <div class="progress-bar" style="margin-top:12px"><div class="progress-fill" id="heroProgressFill"></div></div>
-            <div class="micro" id="heroProgressSub" style="margin-top:10px">Group bosses cleared together.</div>
+            <div class="ring-row">
+              <div class="ring-wrap">
+                <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+                  <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6ea8ff"/><stop offset="0.55" stop-color="#5fd39a"/><stop offset="1" stop-color="#ffce7a"/></linearGradient></defs>
+                  <circle class="ring-bg" cx="60" cy="60" r="52"/>
+                  <circle class="ring-fill" id="heroRing" cx="60" cy="60" r="52"/>
+                </svg>
+                <div class="ring-center"><span id="heroProgressPct">0%</span></div>
+              </div>
+              <div class="micro" id="heroProgressSub">Group bosses cleared together.</div>
+            </div>
           </div>
         </aside>
       </div>
@@ -539,10 +670,10 @@
       <button class="active" data-tab="board">🗺️ Board</button>
       <button data-tab="tasks">🐉 Group tasks</button>
       <button class="market-tab" data-tab="ideas">🎯 Activity Market</button>
-      <button data-tab="itinerary">📅 Itinerary</button>
       <button class="desk-tab" data-tab="desk">🛎️ Crew Desk</button>
-      <button class="casino-tab" data-tab="bookie">🎲 Bookies</button>
-      <button data-tab="intel">📍 Trip intel</button>
+      <button class="plan-tab" data-tab="plan">🗓️ Itinerary</button>
+      <button class="casino-tab" data-tab="bookie">🎲 The Bookies</button>
+      <button data-tab="intel">🧭 Slovenia Pack</button>
       <button data-tab="settings">⚙️ Roster &amp; vibes</button>
       <button class="sync-chip" id="syncChip" title="Tap to pull the latest from the group">
         <span class="dot"></span><span class="ico">↻</span><span id="syncChipText">Live</span>
@@ -573,7 +704,7 @@
               <button class="hub-card" data-jump="tasks">
                 <span class="hub-icon">🐉</span>
                 <span class="hub-title">Group tasks</span>
-                <span class="hub-copy">Route, budget, accommodation, cars and itinerary.</span>
+                <span class="hub-copy">Route, budget, caves, stays, cars and dinners.</span>
                 <span class="hub-status">Shared progress</span>
               </button>
               <button class="hub-card" data-jump="settings">
@@ -581,6 +712,24 @@
                 <span class="hub-title">Roster</span>
                 <span class="hub-copy">Names, vibes and board pieces.</span>
                 <span class="hub-status">Edit roster</span>
+              </button>
+              <button class="hub-card" data-jump="desk">
+                <span class="hub-icon">🛎️</span>
+                <span class="hub-title">Crew Desk</span>
+                <span class="hub-copy">Own a job, share options, vote: accom, cars, dinners.</span>
+                <span class="hub-status" id="boardDeskStatus">0 open · 0 decided</span>
+              </button>
+              <button class="hub-card" data-jump="plan">
+                <span class="hub-icon">🗓️</span>
+                <span class="hub-title">Itinerary</span>
+                <span class="hub-copy">Build the day-by-day plan and set flight times.</span>
+                <span class="hub-status" id="boardPlanStatus">Nothing added yet</span>
+              </button>
+              <button class="hub-card" data-jump="bookie">
+                <span class="hub-icon">🎲</span>
+                <span class="hub-title">The Bookies</span>
+                <span class="hub-copy">Bet on the crew. Win perks and forfeits.</span>
+                <span class="hub-status" id="boardBookieStatus">0 open markets</span>
               </button>
             </div>
             <div class="board-shell">
@@ -604,8 +753,6 @@
               </div>
             </div>
             <div class="quest-controls">
-              <button class="btn small" id="advanceBtn">Move player forward</button>
-              <button class="btn small secondary" id="undoBtn">Move player back</button>
               <button class="btn small ghost" id="copySummaryBtn">Copy summary</button>
               <button class="btn small danger" id="resetBtn">Reset board</button>
             </div>
@@ -625,7 +772,7 @@
               </div>
               <div class="pill-row">
                 <span class="pill" id="selectedRole">Pick a vibe</span>
-                <span class="pill" id="selectedStage">Base camp</span>
+                <span class="pill" id="selectedStage">Spawn point</span>
               </div>
               <div class="vibe-block">
                 <div class="label">Their vibe</div>
@@ -640,6 +787,11 @@
             <div class="panel pad">
               <div class="label">Roster</div>
               <div class="traveller-grid" id="travellerGrid"></div>
+            </div>
+
+            <div class="panel pad">
+              <div class="label" style="display:flex; align-items:center; gap:8px">📡 Crew pulse <span class="pill" id="pulseBadge">live</span></div>
+              <div class="pulse-feed" id="pulseFeed"></div>
             </div>
 
             <div class="panel pad activity-spotlight">
@@ -664,10 +816,10 @@
             <div class="panel-head">
               <div>
                 <h2>Group tasks</h2>
-                <p class="panel-sub">The shared to-do list — the big group decisions. Tick a boss as the crew sorts it.</p>
+                <p class="panel-sub">The shared to-do list. Open <strong>Options &amp; votes</strong> under a task to drop in links and vote right here — then tick the boss and the whole crew's tokens move forward.</p>
               </div>
               <div class="pill-row" style="margin:0">
-                <span class="pill warn" id="groupTasksBadge">0 of 9 done</span>
+                <span class="pill warn" id="groupTasksBadge">0 of 10 done</span>
               </div>
             </div>
             <div style="padding:20px">
@@ -696,6 +848,7 @@
           </aside>
         </div>
       </section>
+
 
       <section id="ideas" class="section">
         <div class="layout">
@@ -751,28 +904,6 @@
         </div>
       </section>
 
-      <section id="itinerary" class="section">
-        <div class="panel pad">
-          <div class="panel-head" style="padding:0 0 18px; border-bottom:0">
-            <div>
-              <h2>Auto itinerary</h2>
-              <p class="panel-sub">Built live from the group's votes — every activity you vote Keen drops into the day it fits best.</p>
-            </div>
-            <div class="pill-row" style="margin:0">
-              <span class="pill" id="itinCountBadge">0 activities in</span>
-            </div>
-          </div>
-          <div class="idea-help" style="margin-bottom:14px">Vote activities <strong>Keen</strong> in the Activity Market (more keen than no = it's in) and they slot into the right day automatically — caves on the Karst day, gorge + lakes on the Bled days, and so on. It's a smart draft to react to, not a lock.</div>
-          <div class="day-tabs" id="dayTabs"></div>
-          <div class="day-carousel" id="dayCarousel"></div>
-          <div id="itinBench"></div>
-          <div class="quest-controls" style="padding:16px 0 0">
-            <button class="btn small" id="copyItinBtn">Copy itinerary</button>
-            <button class="btn small secondary" data-jump="ideas">Back to voting</button>
-          </div>
-        </div>
-      </section>
-
       <section id="desk" class="section">
         <div class="layout">
           <div class="panel pad">
@@ -807,7 +938,55 @@
             <div class="info-card">
               <div class="emoji">🔗</div>
               <h3>Feeds the board</h3>
-              <p>Locking the Ljubljana and Bled stays ticks those group bosses. Locking the car hire ticks <strong>Lock the ride plan</strong>. Decided dinners tick <strong>Book group dinners</strong>.</p>
+              <p>Locking the Ljubljana and Bled stays ticks those bosses. Locking the car hire ticks <strong>Lock the ride plan</strong>. Decided dinners tick <strong>Book group dinners</strong> and drop into the Itinerary list.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="plan" class="section">
+        <div class="layout">
+          <div class="panel pad">
+            <div class="panel-head" style="padding:0 0 18px; border-bottom:0">
+              <div>
+                <h2>Itinerary</h2>
+                <p class="panel-sub">Build it by hand — add items to any day, set times, drag with the day dropdown.</p>
+              </div>
+              <div class="pill-row" style="margin:0">
+                <span class="pill hot" id="planCountBadge">0 placed</span>
+              </div>
+            </div>
+            <div class="idea-help" id="planSummary" style="margin-bottom:14px">Add things to each day below. Use the shortlisted-ideas list on the right for inspiration.</div>
+            <div class="plan-toolbar">
+              <button class="btn small secondary" id="planCopyBtn">Copy itinerary</button>
+              <button class="btn small ghost" id="planClearBtn">Clear all</button>
+            </div>
+            <div class="plan-days" id="planDays"></div>
+            <div class="plan-add">
+              <input type="text" id="planAddTitle" placeholder="Add anything — e.g. Postojna 10:00 tour, or kremšnita stop" />
+              <input type="time" id="planAddTime" class="pi-time" style="width:auto" aria-label="Time (optional)" />
+              <select id="planAddDay" aria-label="Day to add to"></select>
+              <button class="btn small" id="planAddBtn">Add</button>
+            </div>
+          </div>
+          <aside class="side-stack">
+            <div class="panel pad">
+              <div class="label">✈️ Crew flights</div>
+              <p class="panel-sub" style="margin-top:4px">Set when you land and when you fly home — both show on the day. Pick yourself on the Board tab first.</p>
+              <div id="arrivalMe" style="margin-top:12px"></div>
+              <div class="arrival-list" id="arrivalList" style="margin-top:12px"></div>
+              <div class="arr-foot" id="arrivalsBadge" style="margin-top:10px"></div>
+            </div>
+            <div class="panel pad">
+              <div class="label">💡 Shortlisted ideas</div>
+              <p class="panel-sub" style="margin-top:4px">Won the vote in the Activity Market + decided dinners — add the ones you want to a day yourself.</p>
+              <div class="mini-idea-list" id="planFeed" style="margin-top:12px"></div>
+              <button class="btn small ghost" id="planLockBtn" style="margin-top:6px">🔒 Lock this itinerary</button>
+            </div>
+            <div class="info-card">
+              <div class="emoji">🧭</div>
+              <h3>How to build it</h3>
+              <p>Type into the <strong>＋ Add</strong> row on any day (set a time to order things). Tap an item's title to rename, ✎ a day's note, 🚫 to drop a day. Nothing auto-generates — it's all yours to shape.</p>
             </div>
           </aside>
         </div>
@@ -818,7 +997,7 @@
           <div class="panel pad">
             <div class="panel-head" style="padding:0 0 18px; border-bottom:0">
               <div>
-                <h2>Bookies 🎲</h2>
+                <h2>The Bookies 🎲</h2>
                 <p class="panel-sub">Back the crew, win bragging rights and real trip perks. Chips only — no real money.</p>
               </div>
               <div class="pill-row" style="margin:0">
@@ -827,12 +1006,13 @@
                 <span class="pill hot" id="myChipBal">1,000 chips</span>
               </div>
             </div>
-            <div class="idea-help" style="margin-bottom:14px">How the odds work: everyone piles chips onto a runner, and the price is just the whole pot divided by what's riding on that runner — so backing the underdog early gets the best odds. When a bet settles, the pot splits between everyone who backed the winner. Pick yourself with the player dropdown on the Board tab first.</div>
+            <div class="idea-help" style="margin-bottom:14px">How the odds work: everyone piles chips onto a runner, and the price is just the whole pot divided by what's riding on that runner — so backing the underdog early gets you the best odds. When a bet is settled, the pot is split between everyone who backed the winner. Pick yourself with the player dropdown on the Board tab first.</div>
             <div class="market-list" id="marketList"></div>
+
             <h3 style="margin:26px 0 4px">Start your own bet</h3>
             <p class="panel-sub">Make up a challenge, attach a prize or forfeit, and let the group back it.</p>
             <div class="add-market-form">
-              <input type="text" id="newMkTitle" placeholder="What's the bet? e.g. First to lose their voice" />
+              <input type="text" id="newMkTitle" placeholder="What's the bet? e.g. First to fall in a lake" />
               <input type="text" id="newMkDesc" placeholder="One line of detail (optional)" />
               <input type="text" id="newMkPrize" list="prizeOptions" placeholder="Prize or forfeit for the winner (optional)" />
               <datalist id="prizeOptions">
@@ -853,6 +1033,7 @@
               <button class="btn small" id="addMarketBtn">Add bet</button>
             </div>
           </div>
+
           <aside class="side-stack">
             <div class="panel pad">
               <div class="label">Form table</div>
@@ -868,7 +1049,7 @@
             <div class="info-card">
               <div class="emoji">🤝</div>
               <h3>House rules</h3>
-              <p>It's all in good fun. Settle each bet honestly the morning after, and the loser owes the forfeit. No actual cash unless you lot decide otherwise.</p>
+              <p>It's all in good fun. Settle each bet honestly the morning after, and the loser owes the forfeit. No actual cash changes hands unless you lot decide otherwise.</p>
             </div>
           </aside>
         </div>
@@ -878,38 +1059,49 @@
         <div class="panel pad">
           <div class="panel-head" style="padding:0 0 18px; border-bottom:0">
             <div>
-              <h2>Trip facts</h2>
-              <p class="panel-sub">Locked details and planning assumptions.</p>
+              <h2>Slovenia Pack 🇸🇮</h2>
+              <p class="panel-sub">The on-the-ground cheat sheet — save this to your phone before Trieste.</p>
+            </div>
+            <div class="pill-row" style="margin:0">
+              <span class="pill done">Schengen — no border stop ✅</span>
+              <span class="pill warn">€ euro both sides</span>
+              <span class="pill hot">Vignette for the motorway</span>
             </div>
           </div>
 
+          <div class="grid-3">
+            <div class="info-card"><div class="emoji">💶</div><h3>Money</h3><p>Italy and Slovenia both use the <strong>euro</strong> — one currency for the whole trip.</p><ul><li>Cards work almost everywhere; carry a little cash for huts, parking machines and kiosks.</li><li>Slovenia is noticeably cheaper than the UK for food and beer.</li><li>Log shared spend as you go so the last night isn't a spreadsheet.</li></ul></div>
+            <div class="info-card"><div class="emoji">📱</div><h3>Data &amp; apps</h3><p>Most UK plans roam in the EU — check your cap, or grab a cheap <strong>eSIM</strong>.</p><ul><li>Google Maps works great here — still <strong>download offline maps</strong> for the Julian Alps.</li><li>Book <strong>Vintgar</strong> and the <strong>Postojna / Škocjan</strong> tours online before the day.</li></ul></div>
+            <div class="info-card"><div class="emoji">🚘</div><h3>Driving</h3><p>Cars come from <strong>Trieste</strong> and cross the border — no checkpoint, but get it right:</p><ul><li>Confirm <strong>cross-border use</strong> is on the rental agreement.</li><li>Buy the Slovenian <strong>e-vignette</strong> before touching the motorway.</li><li>Italian autostrada tolls; Ljubljana old town is car-free — park on the edge.</li></ul></div>
+          </div>
+
+          <h3 style="margin:24px 0 12px">🆘 If something goes wrong</h3>
+          <div class="grid-2">
+            <div class="info-card"><div class="emoji">🚓</div><h3>Emergency numbers</h3><ul><li><strong>112</strong> — EU-wide emergency (medical, fire, mountain rescue)</li><li><strong>113</strong> — Police (Slovenia)</li><li><strong>1987</strong> — AMZS roadside assistance (Slovenia)</li><li>Save the rental's breakdown number offline too.</li></ul></div>
+            <div class="info-card"><div class="emoji">🛂</div><h3>Entry &amp; admin</h3><ul><li>Schengen — one passport check at Trieste, then <strong>no border stop</strong> into Slovenia.</li><li>UK passports: issued <strong>under 10 years ago</strong> and valid <strong>3+ months</strong> past the return date.</li><li>Bring your <strong>GHIC/EHIC</strong> + travel insurance; allow buffer for entry kiosks at Trieste.</li></ul></div>
+          </div>
+
+          <h3 style="margin:24px 0 12px">🧳 Good to know</h3>
+          <div class="grid-3">
+            <div class="info-card"><div class="emoji">🧥</div><h3>Mid-Sep weather</h3><p>Roughly <strong>10–22°C</strong> — warm lake afternoons, cool alpine evenings, a real chance of a rain day. Layers + a shell. The caves are <strong>~10°C year-round</strong>, so bring a jumper even if it's hot outside.</p></div>
+            <div class="info-card"><div class="emoji">🔌</div><h3>Plugs &amp; power</h3><p>Type <strong>C / F</strong> sockets, 230V — standard Europe. One <strong>UK→EU adapter</strong> each.</p></div>
+            <div class="info-card"><div class="emoji">🍰</div><h3>Eat &amp; drink</h3><ul><li><strong>Kremšnita</strong> at Lake Bled — the non-negotiable ritual.</li><li>Štruklji, big alpine portions; Laško vs Union is the local beer debate.</li><li>Tipping: round up ~10% for good service. Tap water is excellent.</li></ul></div>
+          </div>
+
+          <h3 style="margin:24px 0 12px">🗣️ A few phrases</h3>
+          <div class="grid-2">
+            <div class="info-card"><div class="emoji">🙂</div><h3>The basics</h3><ul><li>Dober dan — <em>DOH-ber dahn</em> · hello / good day</li><li>Hvala — <em>HVAH-la</em> · thank you</li><li>Prosim — <em>PRO-seem</em> · please / you're welcome</li><li>Ja / Ne — yes / no</li></ul></div>
+            <div class="info-card"><div class="emoji">🍻</div><h3>Out &amp; about</h3><ul><li>Koliko stane? — <em>KO-lee-ko STAH-neh</em> · how much?</li><li>Kje je stranišče? — <em>kyeh yeh stra-NEESH-cheh</em> · where's the toilet?</li><li>Na zdravje! — <em>na ZDRAV-yeh</em> · cheers!</li><li>Eno pivo, prosim — one beer, please</li></ul></div>
+          </div>
+
+          <h3 style="margin:24px 0 12px">📸 Slovenia in pictures</h3>
           <div class="photo-gallery">
             <div class="photo-card"><img src="images/bledisland.jpg" alt="Bled Island church" loading="lazy"><div class="cap"><strong>Lake Bled</strong><span>Island church, castle on the cliff, the postcard shot.</span></div></div>
             <div class="photo-card"><img src="images/ljubljana.jpg" alt="Ljubljana old town" loading="lazy"><div class="cap"><strong>Ljubljana</strong><span>Dragon city — Triple Bridge, castle, riverside bars.</span></div></div>
             <div class="photo-card"><img src="images/triglav.jpg" alt="Triglav and the Julian Alps" loading="lazy"><div class="cap"><strong>Julian Alps</strong><span>Triglav, gorges and alpine lakes in Triglav NP.</span></div></div>
-          </div>
-
-          <div class="grid-3" style="margin-top:14px">
-            <div class="info-card"><div class="emoji">📅</div><h3>Dates</h3><p>Fri 11 to Tue 15 Sep 2026. Ljubljana first, then Bled.</p></div>
-            <div class="info-card"><div class="emoji">✈️</div><h3>Route</h3><p>London → <strong>Trieste (TRS)</strong>, then ~1 h drive across the border into Slovenia. Both countries are in Schengen — no border stop.</p></div>
-            <div class="info-card"><div class="emoji">🏔️</div><h3>Why Slovenia</h3><p>Lake Bled, Julian Alps, Karst caves, gorges, alpine lakes and a walkable dragon-stamped capital.</p></div>
-          </div>
-
-          <h3 style="margin:24px 0 12px">Draft rhythm</h3>
-          <div class="timeline">
-            <div class="timeline-item"><div class="timeline-date">Fri 11 Sep</div><div><div class="timeline-title">Land Trieste → Ljubljana</div><div class="timeline-body">Fly into Trieste, pick up cars, drive ~1 h to Ljubljana. Drop bags, compact old town — Dragon Bridge, castle funicular, riverside dinner.</div></div></div>
-            <div class="timeline-item"><div class="timeline-date">Sat 12 Sep</div><div><div class="timeline-title">Karst cave day</div><div class="timeline-body">Postojna Cave train + Predjama Castle (timed tour). Škocjan is the dramatic alternative — and it's right by the Trieste side.</div></div></div>
-            <div class="timeline-item"><div class="timeline-date">Sun 13 Sep</div><div><div class="timeline-title">Velika Planina, then Bled</div><div class="timeline-body">Cable car + chairlift to the herders' huts if operating, then transfer to the Bled base.</div></div></div>
-            <div class="timeline-item"><div class="timeline-date">Mon 14 Sep</div><div><div class="timeline-title">Vintgar + Bohinj</div><div class="timeline-body">Vintgar Gorge early (timed entry), afternoon at Bohinj — Vogel cable car if clear, Savica falls if cloudy.</div></div></div>
-            <div class="timeline-item"><div class="timeline-date">Tue 15 Sep</div><div><div class="timeline-title">Bled → fly home</div><div class="timeline-body">Row to Bled Island, ring the wishing bell, then drive back to Trieste for the flight — leave buffer for the border.</div></div></div>
-          </div>
-
-          <h3 style="margin:24px 0 12px">Planning watchouts</h3>
-          <div class="grid-2">
-            <div class="info-card"><div class="emoji">💶</div><h3>Euro + budget</h3><p>Both Italy and Slovenia use the euro. Set a per-person budget before comparing villa, apartment cluster, cars and food tiers.</p></div>
-            <div class="info-card"><div class="emoji">🚗</div><h3>Cross-border car + vignette</h3><p>Hire from Trieste: confirm cross-border into Slovenia is allowed, buy the Slovenian motorway vignette, and expect Italian autostrada tolls. Ljubljana old town is largely car-free — park on the edge.</p></div>
-            <div class="info-card"><div class="emoji">🧥</div><h3>Caves are cold</h3><p>Postojna is ~10°C year-round. Bring a layer even on a warm September day. Tours are timed — pre-book.</p></div>
-            <div class="info-card"><div class="emoji">🌊</div><h3>Vintgar crowds</h3><p>Vintgar is a timed, one-way boardwalk. Book an early slot and treat it as a planned entry, not a casual stop.</p></div>
+            <div class="photo-card"><img src="images/predjama.jpg" alt="Predjama Castle" loading="lazy"><div class="cap"><strong>Predjama Castle</strong><span>A castle built into a cave mouth above the Karst.</span></div></div>
+            <div class="photo-card"><img src="images/vintgar.jpg" alt="Vintgar Gorge" loading="lazy"><div class="cap"><strong>Vintgar Gorge</strong><span>Emerald river on a timed one-way boardwalk.</span></div></div>
+            <div class="photo-card"><img src="images/bohinj.jpg" alt="Lake Bohinj" loading="lazy"><div class="cap"><strong>Lake Bohinj</strong><span>Bigger, quieter and more alpine than Bled.</span></div></div>
           </div>
         </div>
       </section>
@@ -918,7 +1110,7 @@
         <div class="layout">
           <div class="panel pad">
             <h2>Roster settings</h2>
-            <p class="panel-sub">Rename placeholders once the crew is confirmed.</p>
+            <p class="panel-sub">Rename placeholders once the group is confirmed.</p>
             <div id="rosterEditor" class="task-list" style="margin-top:18px"></div>
           </div>
           <aside class="panel pad">
@@ -931,6 +1123,17 @@
       </section>
     </main>
   </div>
+
+  <nav class="dock" aria-label="Quick navigation">
+    <button data-tab="board" class="active"><span class="d-ico">🗺️</span>Board</button>
+    <button data-tab="tasks"><span class="d-ico">🎬</span>Tasks</button>
+    <button data-tab="ideas"><span class="d-ico">🎯</span>Market</button>
+    <button data-tab="desk"><span class="d-ico">🛎️</span>Desk</button>
+    <button data-tab="plan"><span class="d-ico">🗓️</span>Plan</button>
+    <button data-tab="bookie"><span class="d-ico">🎲</span>Bookies</button>
+    <button data-tab="intel"><span class="d-ico">🧭</span>Pack</button>
+    <button data-tab="settings"><span class="d-ico">⚙️</span>Roster</button>
+  </nav>
 
   <div class="toast" id="toast"></div>
 
@@ -946,17 +1149,21 @@
     let pendingSave = false;
     let lastLocalSaveAt = 0;
 
+    // The board route is now a SHARED progress track: a start, then one stop per
+    // group boss (same order as groupTasks). Every traveller's token sits at the
+    // group's current stop and they all advance together as bosses get cleared.
     const checkpoints = [
-      { id: "spawn", title: "Home check-in", meta: "Start", icon: "✈️", type: "personal", x: 10.5, y: 82 },
-      { id: "crewLock", title: "Crew lock", meta: "P1", icon: "🧑‍🤝‍🧑", type: "personal", x: 22, y: 61 },
-      { id: "ticket", title: "Tickets booked", meta: "P1", icon: "🎟️", type: "personal", x: 26, y: 39 },
-      { id: "routeBoss", title: "Route lock", meta: "Boss", icon: "🗺️", type: "boss", x: 42, y: 22 },
-      { id: "ljubljana", title: "Ljubljana set", meta: "Plan", icon: "🐉", type: "group", x: 63, y: 31 },
-      { id: "caveRun", title: "Cave run", meta: "Book", icon: "🕳️", type: "personal", x: 74, y: 45 },
-      { id: "bledBase", title: "Bled base", meta: "Boss", icon: "🏰", type: "boss", x: 84, y: 61 },
-      { id: "wheels", title: "Ride plan", meta: "Boss", icon: "🚘", type: "boss", x: 76, y: 75 },
-      { id: "admin", title: "Admin clear", meta: "Admin", icon: "🪪", type: "personal", x: 58, y: 77 },
-      { id: "final", title: "Trip ready", meta: "Clear", icon: "✨", type: "personal", x: 42, y: 68 }
+      { id: "spawn", title: "Trip start", meta: "Go", icon: "🛫", type: "personal", x: 10.5, y: 82 },
+      { id: "routeLock", title: "Lock the route", meta: "Boss 1", icon: "🗺️", type: "group", x: 20, y: 63 },
+      { id: "budgetPact", title: "Set the budget", meta: "Boss 2", icon: "💶", type: "group", x: 26, y: 39 },
+      { id: "caveCall", title: "Cave plan", meta: "Boss 3", icon: "🕳️", type: "boss", x: 42, y: 22 },
+      { id: "ljubljanaAccom", title: "Ljubljana stay", meta: "Boss 4", icon: "🏙️", type: "boss", x: 56, y: 26 },
+      { id: "bledAccom", title: "Bled stay", meta: "Boss 5", icon: "🏡", type: "boss", x: 67, y: 36 },
+      { id: "vehicle", title: "Lock the ride", meta: "Boss 6", icon: "🚘", type: "boss", x: 70, y: 53 },
+      { id: "activityShortlist", title: "Activity shortlist", meta: "Boss 7", icon: "⚔️", type: "group", x: 84, y: 61 },
+      { id: "itinerary", title: "Build itinerary", meta: "Boss 8", icon: "📍", type: "group", x: 78, y: 76 },
+      { id: "dinners", title: "Group dinners", meta: "Boss 9", icon: "🍽️", type: "group", x: 60, y: 78 },
+      { id: "offlinePack", title: "Trip ready", meta: "Boss 10", icon: "✨", type: "boss", x: 42, y: 68 }
     ];
 
     const colours = ["#4f8bff", "#ef4d4d", "#5fd39a", "#ffce7a", "#8fb6ff", "#ff9aa2", "#9ec4ff", "#c2b6ff", "#ffffff"];
@@ -976,7 +1183,9 @@
 
     const TRIP_START = new Date(2026, 8, 11); // 11 Sep 2026 (month is 0-indexed)
 
-    // region + day + slot drive the auto-itinerary. day:0 / region:"bench" = optional add-on (not in the core 5 days).
+
+    // region/day/slot metadata is kept from the old auto-itinerary era — the new
+    // engine ignores it, but custom + synced ideas stay compatible.
     const defaultIdeas = [
       { id: "ljubljanaOldTown", emoji: "🐉", title: "Ljubljana old town + castle", city: "Ljubljana", img: "ljubljana.jpg", region: "ljubljana", day: 1, slot: "Afternoon", desc: "Dragon Bridge, Triple Bridge, Central Market, castle funicular and riverside bars. Easy arrival-day win." },
       { id: "postojnaPredjama", emoji: "🕳️", title: "Postojna Cave + Predjama Castle", city: "Karst", img: "predjama.jpg", region: "karst", day: 2, slot: "Morning", desc: "Iconic cave train through huge chambers, then the clifftop castle built into a cave mouth. Best default for a big group." },
@@ -996,6 +1205,9 @@
       { id: "jasna", emoji: "📸", title: "Lake Jasna (Kranjska Gora)", city: "Kranjska Gora", img: "jasna.jpg", region: "bench", day: 0, slot: "Add-on", desc: "Photogenic alpine lake near the Vršič pass — a clear-weather scenic stop." },
       { id: "vipava", emoji: "🍇", title: "Vipava wine valley", city: "Vipava", img: "vipava.jpg", region: "bench", day: 0, slot: "Add-on", desc: "Wine, villages and slower food stops if the group wants less lake time." }
     ];
+
+    // Photo per idea by id — fallback for ideas saved in synced state without an img field.
+    const IDEA_IMG = { ljubljanaOldTown: "ljubljana.jpg", postojnaPredjama: "predjama.jpg", skocjan: "skocjan.jpg", velikaPlanina: "velika.jpg", bledCastle: "bledcastle.jpg", vintgar: "vintgar.jpg", bohinj: "bohinj.jpg", vogel: "vogel.jpg", savica: "savica.jpg", bledIsland: "bledisland.jpg", soca: "soca.jpg", piran: "piran.jpg", jasna: "jasna.jpg", vipava: "vipava.jpg" };
 
     // The Bookies — fun pari-mutuel betting with virtual chips + real trip perks.
     const defaultBookie = {
@@ -1022,22 +1234,29 @@
       ]
     };
 
+    // Itinerary builder — fixed trip skeleton; the crew builds the day-by-day plan onto these days.
+    const TRIP_DAYS = [
+      { id: "d11", iso: "2026-09-11", date: "Fri 11 Sep", city: "Trieste → Ljubljana", logistics: true, note: "Land Trieste, pick up the cars, drive ~1 h — first night in Ljubljana." },
+      { id: "d12", iso: "2026-09-12", date: "Sat 12 Sep", city: "Ljubljana / Karst", note: "Cave day — Postojna + Predjama or Škocjan. Caves are ~10°C, bring a layer." },
+      { id: "d13", iso: "2026-09-13", date: "Sun 13 Sep", city: "Ljubljana → Bled", note: "Velika Planina on the way north if the lifts run, then check into the Bled base." },
+      { id: "d14", iso: "2026-09-14", date: "Mon 14 Sep", city: "Bled / Bohinj", note: "Vintgar early (timed entry), Bohinj after — Vogel if clear, Savica if cloudy." },
+      { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Bled → Home", logistics: true, note: "Last lake morning, then drive back to Trieste, return the cars, fly home." }
+    ];
+
     const defaultState = {
       selectedPlayer: 0,
       ideas: structuredClone(defaultIdeas),
       ideaVotes: {},
-      bookie: structuredClone(defaultBookie),
-      desk: structuredClone(defaultDesk),
       players: [
-        { name: "Jason", initials: "J", colour: colours[0], vibe: "scenic", piece: "📸", progress: 1, completed: { crewLock: true } },
-        { name: "Traveller 2", initials: "T2", colour: colours[1], vibe: null, piece: null, progress: 0, completed: {} },
-        { name: "Traveller 3", initials: "T3", colour: colours[2], vibe: null, piece: null, progress: 0, completed: {} },
-        { name: "Traveller 4", initials: "T4", colour: colours[3], vibe: null, piece: null, progress: 0, completed: {} },
-        { name: "Traveller 5", initials: "T5", colour: colours[4], vibe: null, piece: null, progress: 0, completed: {} },
-        { name: "Traveller 6", initials: "T6", colour: colours[5], vibe: null, piece: null, progress: 0, completed: {} },
-        { name: "Traveller 7", initials: "T7", colour: colours[6], vibe: null, piece: null, progress: 0, completed: {} },
-        { name: "Traveller 8", initials: "T8", colour: colours[7], vibe: null, piece: null, progress: 0, completed: {} },
-        { name: "Traveller 9", initials: "T9", colour: colours[8], vibe: null, piece: null, progress: 0, completed: {} }
+        { name: "Jason", initials: "J", colour: colours[0], vibe: "scenic", piece: "📸" },
+        { name: "Traveller 2", initials: "T2", colour: colours[1], vibe: null, piece: null },
+        { name: "Traveller 3", initials: "T3", colour: colours[2], vibe: null, piece: null },
+        { name: "Traveller 4", initials: "T4", colour: colours[3], vibe: null, piece: null },
+        { name: "Traveller 5", initials: "T5", colour: colours[4], vibe: null, piece: null },
+        { name: "Traveller 6", initials: "T6", colour: colours[5], vibe: null, piece: null },
+        { name: "Traveller 7", initials: "T7", colour: colours[6], vibe: null, piece: null },
+        { name: "Traveller 8", initials: "T8", colour: colours[7], vibe: null, piece: null },
+        { name: "Traveller 9", initials: "T9", colour: colours[8], vibe: null, piece: null }
       ],
       groupDone: {
         routeLock: false,
@@ -1047,22 +1266,15 @@
         bledAccom: false,
         vehicle: false,
         activityShortlist: false,
+        itinerary: false,
         dinners: false,
         offlinePack: false
-      }
+      },
+      bookie: structuredClone(defaultBookie),
+      desk: structuredClone(defaultDesk),
+      plan: { generatedAt: null, items: [] },
+      feed: []
     };
-
-    const personalTasks = [
-      { id: "crewLock", icon: "🧑‍🤝‍🧑", title: "Confirm your details", desc: "Name, contact, passport name, passport expiry and a firm yes or no.", priority: "P1", checkpoint: 1 },
-      { id: "outbound", icon: "🎟️", title: "Outbound flight booked", desc: "Fri 11 Sep, London to Trieste (TRS). Match the group flight or book your own.", priority: "P1", checkpoint: 2 },
-      { id: "return", icon: "↩️", title: "Return flight booked", desc: "Tue 15 Sep, Trieste (TRS) to London.", priority: "P1", checkpoint: 3 },
-      { id: "wishlistVote", icon: "⭐", title: "Vote on activity ideas", desc: "Vote on at least one idea in the Activity Market.", priority: "P2", checkpoint: 4 },
-      { id: "caveBook", icon: "🕳️", title: "Cave tour ticket sorted", desc: "Book your timed Postojna or Škocjan slot once the cave call is locked.", priority: "P2", checkpoint: 5 },
-      { id: "accomShare", icon: "🏡", title: "Accommodation share paid", desc: "Pay your share once the Ljubljana and Bled stays are chosen.", priority: "P2", checkpoint: 6 },
-      { id: "transportShare", icon: "🚘", title: "Car / seat role confirmed", desc: "Confirm driver, navigator or passenger and your car group.", priority: "P2", checkpoint: 7 },
-      { id: "admin", icon: "🪪", title: "Entry admin ready", desc: "Passport valid, GHIC/EHIC, travel insurance and EU roaming or an eSIM sorted.", priority: "P1", checkpoint: 8 },
-      { id: "final", icon: "✨", title: "Packed and offline ready", desc: "Bookings, QR codes, maps and emergency info saved offline. Layers for the caves.", priority: "P2", checkpoint: 9 }
-    ];
 
     const groupTasks = [
       { id: "routeLock", icon: "🗺️", title: "Lock the route", desc: "Confirm dates, the Trieste flights, the cross-border drive and arrival/return times.", priority: "P1" },
@@ -1072,11 +1284,12 @@
       { id: "bledAccom", icon: "🏡", title: "Book the Bled stay", desc: "Group Airbnb or apartment cluster — enough real beds and bathrooms.", priority: "P2" },
       { id: "vehicle", icon: "🚘", title: "Lock the ride plan", desc: "Two hire cars or one 9-seater van from Trieste. Confirm cross-border, drivers and the vignette.", priority: "P2" },
       { id: "activityShortlist", icon: "⚔️", title: "Choose the activity shortlist", desc: "Pick the strongest caves, gorge, cable car and lake days from the Market.", priority: "P2" },
+      { id: "itinerary", icon: "📍", title: "Build the itinerary", desc: "Hand-build the day-by-day plan on the Itinerary tab, then lock it.", priority: "P2" },
       { id: "dinners", icon: "🍽️", title: "Book group dinners", desc: "Reserve Ljubljana and Bled dinners once the stays are set.", priority: "P2" },
       { id: "offlinePack", icon: "📲", title: "Generate the launch pack", desc: "Tickets, accommodation, cars, maps, insurance and emergency contacts saved.", priority: "P3" }
     ];
 
-    // Always use the current default activity set (with day/region metadata for the itinerary),
+    // Always use the current default activity set (with photos + metadata),
     // while preserving any ideas the group added themselves (id starts with "custom_").
     function normalizeIdeas(stored) {
       const base = structuredClone(defaultIdeas);
@@ -1100,7 +1313,9 @@
           ideas: normalizeIdeas(parsed.ideas),
           ideaVotes: parsed.ideaVotes || {},
           bookie: parsed.bookie || structuredClone(defaultBookie),
-          desk: parsed.desk || structuredClone(defaultDesk)
+          desk: parsed.desk || structuredClone(defaultDesk),
+          plan: parsed.plan || { generatedAt: null, items: [] },
+          feed: Array.isArray(parsed.feed) ? parsed.feed : []
         };
       } catch (e) {
         return structuredClone(defaultState);
@@ -1128,7 +1343,9 @@
         ideas: normalizeIdeas(remote.ideas),
         ideaVotes: remote.ideaVotes || {},
         bookie: remote.bookie || structuredClone(defaultBookie),
-        desk: remote.desk || structuredClone(defaultDesk)
+        desk: remote.desk || structuredClone(defaultDesk),
+        plan: remote.plan || { generatedAt: null, items: [] },
+        feed: Array.isArray(remote.feed) ? remote.feed : []
       };
       if (typeof localSelected === "number" && state.players[localSelected]) {
         state.selectedPlayer = localSelected;
@@ -1149,29 +1366,24 @@
     function setSyncChip(kind) {
       const chip = document.getElementById("syncChip");
       const textEl = document.getElementById("syncChipText");
-      const stamp = document.getElementById("syncTabStamp");
       if (chip) chip.classList.remove("syncing", "offline");
       if (kind === "disabled") {
         if (chip) chip.classList.add("offline");
         if (textEl) textEl.textContent = "Local only";
-        if (stamp) stamp.textContent = "Live sync is not configured on this copy of the board.";
         return;
       }
       if (kind === "syncing") {
         if (chip) chip.classList.add("syncing");
         if (textEl) textEl.textContent = "Syncing…";
-        if (stamp) stamp.textContent = "Checking the group sheet…";
         return;
       }
       if (kind === "offline") {
         if (chip) chip.classList.add("offline");
         if (textEl) textEl.textContent = "Offline";
-        if (stamp) stamp.textContent = "Could not reach the sheet. Your changes are still saved on this device.";
         return;
       }
       const rel = lastSyncedAt ? relTime(lastSyncedAt) : null;
       if (textEl) textEl.textContent = rel ? `Live · ${rel}` : "Live";
-      if (stamp) stamp.textContent = rel ? `Last synced ${rel}.` : "Connected to the group sheet.";
     }
 
     function remotePull(opts) {
@@ -1276,9 +1488,10 @@
     function clamp(n, min, max) { return Math.max(min, Math.min(max, n)); }
     function selectedPlayer() { return state.players[state.selectedPlayer] || state.players[0]; }
 
-    function computePlayerProgress(player) {
-      const maxCheckpoint = Math.max(...personalTasks.filter(t => player.completed[t.id]).map(t => t.checkpoint), player.progress || 0);
-      return clamp(maxCheckpoint, 0, checkpoints.length - 1);
+    // Shared progress: the whole crew's token position = how many group bosses are done.
+    function groupProgressIndex() {
+      const done = groupTasks.filter(t => state.groupDone[t.id]).length;
+      return clamp(done, 0, checkpoints.length - 1);
     }
 
     function renderNodes() {
@@ -1295,15 +1508,13 @@
     function renderTokens() {
       const holder = document.getElementById("tokens");
       const used = {};
-      const playerCount = Math.max(state.players.length, 1);
+      const progress = groupProgressIndex();
       holder.innerHTML = state.players.map((p, idx) => {
-        const progress = computePlayerProgress(p);
-        p.progress = progress;
         const cp = checkpoints[progress];
         const key = progress;
         used[key] = used[key] || 0;
         const stackIndex = used[key]++;
-        const angle = (stackIndex / playerCount) * Math.PI * 2;
+        const angle = (stackIndex / Math.max(state.players.length, 1)) * Math.PI * 2;
         const radius = stackIndex === 0 ? 0 : 2.7 + Math.floor((stackIndex - 1) / 6) * 2;
         const x = cp.x + Math.cos(angle) * radius;
         const y = cp.y + Math.sin(angle) * radius;
@@ -1321,12 +1532,11 @@
     function renderTravellerGrid() {
       const holder = document.getElementById("travellerGrid");
       holder.innerHTML = state.players.map((p, idx) => {
-        const progress = computePlayerProgress(p);
         const v = vibeById(p.vibe);
         return `<div class="traveller-row" role="button" tabindex="0" data-player="${idx}">
           <div class="avatar-dot" style="background:${p.colour}">${p.piece ? escapeHtml(p.piece) : escapeHtml(p.initials)}</div>
-          <div><div class="traveller-name">${escapeHtml(p.name)}${v ? `<span class="traveller-vibe">${v.emoji}</span>` : ""}</div><div class="traveller-progress">${v ? v.name + " · " : ""}${checkpoints[progress].title}</div></div>
-          <span class="pill ${idx === state.selectedPlayer ? "done" : ""}">${Math.round(progress / (checkpoints.length - 1) * 100)}%</span>
+          <div><div class="traveller-name">${escapeHtml(p.name)}${v ? `<span class="traveller-vibe">${v.emoji}</span>` : ""}</div><div class="traveller-progress">${v ? v.name : "no vibe yet"}</div></div>
+          ${idx === state.selectedPlayer ? `<span class="pill done">You</span>` : ""}
         </div>`;
       }).join("");
       holder.querySelectorAll(".traveller-row").forEach(row => {
@@ -1336,7 +1546,7 @@
 
     function renderSelectedPanel() {
       const p = selectedPlayer();
-      const progress = computePlayerProgress(p);
+      const progress = groupProgressIndex();
       const percent = Math.round(progress / (checkpoints.length - 1) * 100);
       document.getElementById("selectedName").textContent = p.name;
       document.getElementById("selectedProgress").textContent = `${percent}%`;
@@ -1346,26 +1556,87 @@
       document.getElementById("selectedStage").textContent = checkpoints[progress].title;
     }
 
+    // Which Crew Desk rooms belong under which group task. Custom rooms created
+    // from a task carry a taskId field and match that way.
+    const TASK_ROOM_MAP = {
+      ljubljanaAccom: ["stay_ljubljana"],
+      bledAccom: ["stay_bled"],
+      vehicle: ["car_hire"],
+      dinners: ["dinner_ljubljana", "dinner_bled"]
+    };
+    // Tasks whose "options" live on another tab rather than in desk rooms.
+    const TASK_JUMP = { activityShortlist: { tab: "ideas", label: "🎯 Vote in the Activity Market" }, itinerary: { tab: "plan", label: "🗓️ Open the Itinerary" } };
+    const openTaskPanels = new Set(); // per-device UI state, not synced
+
+    function roomsForTask(taskId) {
+      ensureDesk();
+      const mapped = TASK_ROOM_MAP[taskId] || [];
+      return state.desk.rooms.filter(r => mapped.includes(r.id) || r.taskId === taskId);
+    }
+    function createRoomForTask(taskId) {
+      ensureDesk();
+      const task = groupTasks.find(t => t.id === taskId); if (!task) return;
+      state.desk.rooms.push({ id: `room_task_${taskId}`, taskId, emoji: task.icon, kind: "custom", title: task.title, desc: `Options and votes for: ${task.desc}`, owners: [], options: [], status: "open", chosen: null });
+      openTaskPanels.add(taskId);
+      saveState(); renderAll(); toast("Decision room opened — drop the first option in");
+    }
+
     function renderTasks() {
       const groupHolder = document.getElementById("groupTasks");
       groupHolder.innerHTML = groupTasks.map(task => {
         const done = !!state.groupDone[task.id];
-        return `<label class="task-card ${done ? "group-done" : ""}">
-          <div class="task-icon">${task.icon}</div>
-          <div><div class="task-title">${task.title}</div><div class="task-desc">${task.desc}</div><div class="task-tags"><span class="tag ${task.priority.toLowerCase()}">${task.priority}</span><span class="tag">Group boss</span></div></div>
-          <input class="toggle group-toggle" type="checkbox" data-task="${task.id}" ${done ? "checked" : ""}/>
-        </label>`;
+        const rooms = roomsForTask(task.id);
+        const optCount = rooms.reduce((s, r) => s + (r.options ? r.options.length : 0), 0);
+        const voteCount = rooms.reduce((s, r) => s + (r.options || []).reduce((x, o) => x + optVotes(o), 0), 0);
+        const open = openTaskPanels.has(task.id);
+        const jump = TASK_JUMP[task.id];
+        const summary = rooms.length
+          ? `${rooms.length > 1 ? rooms.length + " rooms · " : ""}${optCount} option${optCount === 1 ? "" : "s"} · ${voteCount} vote${voteCount === 1 ? "" : "s"}`
+          : (jump ? "vote on its tab" : "no options yet");
+        let panel = "";
+        if (open) {
+          const roomCards = rooms.map(deskRoomCard).join("");
+          const jumpBtn = jump ? `<button class="btn small secondary" data-taskjump="${jump.tab}">${jump.label}</button>` : "";
+          const createBtn = (!rooms.length && !jump) ? `<button class="btn small" data-taskroom="${task.id}">➕ Start a decision room for this</button>` : "";
+          panel = `<div class="task-rooms">${roomCards}${jumpBtn}${createBtn}</div>`;
+        }
+        return `<div class="task-block">
+          <label class="task-card ${done ? "group-done" : ""}">
+            <div class="task-icon">${task.icon}</div>
+            <div><div class="task-title">${task.title}</div><div class="task-desc">${task.desc}</div><div class="task-tags"><span class="tag ${task.priority.toLowerCase()}">${task.priority}</span><span class="tag">Group boss</span></div></div>
+            <input class="toggle group-toggle" type="checkbox" data-task="${task.id}" ${done ? "checked" : ""}/>
+          </label>
+          <button class="task-expand ${open ? "open" : ""}" data-taskpanel="${task.id}"><span class="te-arrow">${open ? "▾" : "▸"}</span> Options &amp; votes <span class="te-meta">${summary}</span></button>
+          ${panel}
+        </div>`;
       }).join("");
       groupHolder.querySelectorAll(".group-toggle").forEach(toggle => {
         toggle.addEventListener("change", e => {
           state.groupDone[e.target.dataset.task] = e.target.checked;
+          const task = groupTasks.find(t => t.id === e.target.dataset.task);
+          logEvent(e.target.checked ? "🏆" : "↩️", `${selectedPlayer().name} ${e.target.checked ? "cleared" : "reopened"} the boss “${task ? task.title : "a task"}”`);
+          buzz(e.target.checked ? 12 : 6);
           saveState();
           renderAll();
           if (e.target.checked) celebrate();
           toast(e.target.checked ? "Group boss cleared" : "Group boss reopened");
         });
       });
+      groupHolder.querySelectorAll("[data-taskpanel]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.dataset.taskpanel;
+          if (openTaskPanels.has(id)) openTaskPanels.delete(id); else openTaskPanels.add(id);
+          renderTasks();
+        });
+      });
+      groupHolder.querySelectorAll("[data-taskroom]").forEach(btn => btn.addEventListener("click", () => createRoomForTask(btn.dataset.taskroom)));
+      groupHolder.querySelectorAll("[data-taskjump]").forEach(btn => btn.addEventListener("click", () => {
+        const nav = document.querySelector(`.nav button[data-tab='${btn.dataset.taskjump}']`);
+        if (nav) { nav.click(); document.getElementById(btn.dataset.taskjump).scrollIntoView({ behavior: "smooth", block: "start" }); }
+      }));
+      bindDeskActions(groupHolder);
     }
+
 
     function allIdeas() {
       if (!state.ideas || !Array.isArray(state.ideas)) state.ideas = structuredClone(defaultIdeas);
@@ -1391,43 +1662,37 @@
       return allIdeas().filter(idea => state.ideaVotes?.[idea.id]?.[playerIdx]).length;
     }
 
-    function updateWishlistCheckpoint() {
-      const p = selectedPlayer();
-      p.completed.wishlistVote = selectedPlayerVoteCount(state.selectedPlayer) > 0;
-      if (p.completed.wishlistVote && (p.progress || 0) < 4) p.progress = 4;
-    }
-
     function renderIdeas() {
       const holder = document.getElementById("ideaGrid");
       if (!holder) return;
       const ideas = allIdeas();
-      const playerCount = state.players.length;
       holder.innerHTML = ideas.map(idea => {
         const tally = tallyIdea(idea.id);
         const status = ideaStatus(tally);
         const selectedVote = state.ideaVotes?.[idea.id]?.[state.selectedPlayer] || "";
         const denom = Math.max(tally.total, 1);
-        const photo = idea.img
-          ? `<img class="idea-photo" src="images/${escapeAttr(idea.img)}" alt="${escapeAttr(idea.title)}" loading="lazy" onerror="this.outerHTML='<div class=\\'idea-photo-fallback\\'>${idea.emoji || "💡"}</div>'">`
+        const imgSrc = idea.img || IDEA_IMG[idea.id];
+        const photo = imgSrc
+          ? `<img class="idea-photo" src="images/${escapeAttr(imgSrc)}" alt="${escapeAttr(idea.title)}" loading="lazy" onerror="this.outerHTML='<div class=\\'idea-photo-fallback\\'>${idea.emoji || "💡"}</div>'">`
           : `<div class="idea-photo-fallback">${idea.emoji || "💡"}</div>`;
         return `<article class="idea-card">
           ${photo}
           <div class="idea-body">
-            <div class="idea-top">
-              <div class="idea-emoji">${idea.emoji || "💡"}</div>
-              <div><div class="idea-title">${escapeHtml(idea.title)}</div><div class="idea-desc">${escapeHtml(idea.desc)}</div></div>
-              <span class="idea-status ${status.cls}">${status.label}</span>
-            </div>
-            <div class="pill-row" style="margin:0"><span class="pill idea-city">${escapeHtml(idea.city || "TBC")}</span><span class="pill">${tally.total}/${playerCount} voted</span><span class="pill">Score ${tally.score}</span></div>
-            <div class="vote-row" aria-label="Vote on ${escapeAttr(idea.title)}">
-              <button class="vote-btn keen ${selectedVote === "keen" ? "active" : ""}" data-idea="${idea.id}" data-vote="keen">✅ Keen</button>
-              <button class="vote-btn maybe ${selectedVote === "maybe" ? "active" : ""}" data-idea="${idea.id}" data-vote="maybe">🤷 Maybe</button>
-              <button class="vote-btn no ${selectedVote === "no" ? "active" : ""}" data-idea="${idea.id}" data-vote="no">❌ No</button>
-            </div>
-            <div class="vote-meter">
-              <div class="meter-track"><div class="meter-keen" style="width:${tally.keen / denom * 100}%"></div><div class="meter-maybe" style="width:${tally.maybe / denom * 100}%"></div><div class="meter-no" style="width:${tally.no / denom * 100}%"></div></div>
-              <div class="vote-counts"><span>✅ ${tally.keen} keen</span><span>🤷 ${tally.maybe} maybe</span><span>❌ ${tally.no} no</span></div>
-            </div>
+          <div class="idea-top">
+            <div class="idea-emoji">${idea.emoji || "💡"}</div>
+            <div><div class="idea-title">${escapeHtml(idea.title)}</div><div class="idea-desc">${escapeHtml(idea.desc)}</div></div>
+            <span class="idea-status ${status.cls}">${status.label}</span>
+          </div>
+          <div class="pill-row" style="margin:0"><span class="pill idea-city">${escapeHtml(idea.city || "TBC")}</span><span class="pill">${tally.total}/${state.players.length} voted</span><span class="pill">Score ${tally.score}</span></div>
+          <div class="vote-row" aria-label="Vote on ${escapeAttr(idea.title)}">
+            <button class="vote-btn keen ${selectedVote === "keen" ? "active" : ""}" data-idea="${idea.id}" data-vote="keen">✅ Keen</button>
+            <button class="vote-btn maybe ${selectedVote === "maybe" ? "active" : ""}" data-idea="${idea.id}" data-vote="maybe">🤷 Maybe</button>
+            <button class="vote-btn no ${selectedVote === "no" ? "active" : ""}" data-idea="${idea.id}" data-vote="no">❌ No</button>
+          </div>
+          <div class="vote-meter">
+            <div class="meter-track"><div class="meter-keen" style="width:${tally.keen / denom * 100}%"></div><div class="meter-maybe" style="width:${tally.maybe / denom * 100}%"></div><div class="meter-no" style="width:${tally.no / denom * 100}%"></div></div>
+            <div class="vote-counts"><span>✅ ${tally.keen} keen</span><span>🤷 ${tally.maybe} maybe</span><span>❌ ${tally.no} no</span></div>
+          </div>
           </div>
         </article>`;
       }).join("");
@@ -1435,10 +1700,18 @@
         btn.addEventListener("click", () => {
           const ideaId = btn.dataset.idea;
           const vote = btn.dataset.vote;
+          const idea = allIdeas().find(i => i.id === ideaId);
+          const title = idea ? idea.title : "an idea";
           state.ideaVotes[ideaId] = state.ideaVotes[ideaId] || {};
-          if (state.ideaVotes[ideaId][state.selectedPlayer] === vote) delete state.ideaVotes[ideaId][state.selectedPlayer];
-          else state.ideaVotes[ideaId][state.selectedPlayer] = vote;
-          updateWishlistCheckpoint();
+          if (state.ideaVotes[ideaId][state.selectedPlayer] === vote) {
+            delete state.ideaVotes[ideaId][state.selectedPlayer];
+            logEvent("🗳️", `${selectedPlayer().name} took back their vote on “${title}”`);
+          } else {
+            state.ideaVotes[ideaId][state.selectedPlayer] = vote;
+            const word = vote === "keen" ? "✅ keen on" : vote === "maybe" ? "🤷 maybe on" : "❌ a no on";
+            logEvent("🗳️", `${selectedPlayer().name} is ${word} “${title}”`);
+          }
+          buzz(6);
           saveState(); renderAll(); toast(`${selectedPlayer().name} voted on an idea`);
         });
       });
@@ -1465,21 +1738,18 @@
       status.textContent = `${totalVotes} votes cast · ${selectedVotes} by selected player`;
       holder.innerHTML = ideas.slice(0, 4).map(idea => {
         const tally = tallyIdea(idea.id);
-        const st = ideaStatus(tally);
+        const status = ideaStatus(tally);
         return `<div class="mini-idea-row">
           <span>${idea.emoji || "💡"}</span>
           <div><div class="mini-idea-name">${escapeHtml(idea.title)}</div><div class="mini-idea-meta">${tally.keen} keen · ${tally.maybe} maybe · ${tally.no} no</div></div>
-          <span class="idea-status ${st.cls}">${st.label}</span>
+          <span class="idea-status ${status.cls}">${status.label}</span>
         </div>`;
       }).join("");
     }
 
     function renderNextActions() {
-      const p = selectedPlayer();
-      const openPersonal = personalTasks.filter(t => !p.completed[t.id]).slice(0, 2);
-      const openGroup = groupTasks.filter(t => !state.groupDone[t.id]).slice(0, 1);
-      const actions = [...openPersonal, ...openGroup];
-      document.getElementById("nextActions").innerHTML = actions.map(t => `<div class="task-card" style="grid-template-columns:auto 1fr; padding:12px"><div class="task-icon">${t.icon}</div><div><div class="task-title">${t.title}</div><div class="task-desc">${t.desc}</div></div></div>`).join("") || `<div class="info-card"><div class="emoji">🏆</div><h3>All clear</h3><p>No open actions for the selected view.</p></div>`;
+      const actions = groupTasks.filter(t => !state.groupDone[t.id]).slice(0, 3);
+      document.getElementById("nextActions").innerHTML = actions.map(t => `<div class="task-card" style="grid-template-columns:auto 1fr; padding:12px"><div class="task-icon">${t.icon}</div><div><div class="task-title">${t.title}</div><div class="task-desc">${t.desc}</div></div></div>`).join("") || `<div class="info-card"><div class="emoji">🏆</div><h3>All bosses cleared</h3><p>Every group task is done — the crew's trip-ready. 🎉</p></div>`;
     }
 
     function renderBadges() {
@@ -1487,7 +1757,7 @@
       const vibeBadge = document.getElementById("vibeSummaryBadge");
       if (vibeBadge) vibeBadge.textContent = `${vibeSet}/${state.players.length} vibes set`;
       const groupTotal = groupTasks.length;
-      const groupDone = Object.values(state.groupDone).filter(Boolean).length;
+      const groupDone = groupTasks.filter(t => state.groupDone[t.id]).length;
       const percent = Math.round(groupDone / groupTotal * 100);
       const gpb = document.getElementById("groupProgressBadge");
       if (gpb) gpb.textContent = `Group bosses ${percent}%`;
@@ -1495,23 +1765,41 @@
       if (gtb) gtb.textContent = `${groupDone} of ${groupTotal} done`;
     }
 
-    function renderHero() {
-      const days = Math.ceil((TRIP_START - new Date()) / 86400000);
+    function renderCountdown() {
+      const now = new Date();
+      const ms = TRIP_START - now;
       const daysEl = document.getElementById("countdownDays");
       const subEl = document.getElementById("countdownSub");
       if (daysEl) {
-        if (days > 1) { daysEl.textContent = `${days} days`; if (subEl) subEl.textContent = "until you land in Trieste · 11 Sep 2026"; }
-        else if (days === 1) { daysEl.textContent = "1 day"; if (subEl) subEl.textContent = "Trieste tomorrow — pack the layers"; }
-        else if (days === 0) { daysEl.textContent = "Today ✈️"; if (subEl) subEl.textContent = "Departure day"; }
-        else { daysEl.textContent = "In Slovenia 🇸🇮"; if (subEl) subEl.textContent = "Ljubljana + Bled · 11 to 15 Sep 2026"; }
+        if (ms > 0) {
+          const mins = Math.floor(ms / 60000);
+          const d = Math.floor(mins / 1440), h = Math.floor((mins % 1440) / 60), m = mins % 60;
+          daysEl.innerHTML = `${d}<span class="cd-unit">d</span>${h}<span class="cd-unit">h</span>${m}<span class="cd-unit">m</span>`;
+          if (subEl) subEl.textContent = d >= 1 ? "until you land in Trieste · 11 Sep 2026" : "Trieste is basically today — pack ✈️";
+        } else {
+          daysEl.textContent = "In Slovenia 🇸🇮";
+          if (subEl) subEl.textContent = "Ljubljana + Bled · 11 → 15 Sep 2026";
+        }
       }
-      const groupDone = Object.values(state.groupDone).filter(Boolean).length;
+      const pill = document.getElementById("ljubljanaNowPill");
+      if (pill) {
+        try {
+          const hm = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Ljubljana", hour: "2-digit", minute: "2-digit", hour12: false }).format(now);
+          const hr = Number(hm.split(":")[0]);
+          const ico = hr >= 6 && hr < 17 ? "☀️" : hr < 21 ? "🌆" : "🌙";
+          pill.textContent = `${ico} ${hm} in Ljubljana`;
+        } catch (e) { pill.textContent = "🇸🇮 Ljubljana"; }
+      }
+    }
+
+    function renderHero() {
+      renderCountdown();
+      const groupDone = groupTasks.filter(t => state.groupDone[t.id]).length;
       const pct = Math.round(groupDone / groupTasks.length * 100);
-      const pctEl = document.getElementById("heroProgressPct");
-      const fillEl = document.getElementById("heroProgressFill");
+      tweenNum(document.getElementById("heroProgressPct"), pct, n => `${Math.round(n)}%`);
+      const ring = document.getElementById("heroRing");
+      if (ring) { const C = 2 * Math.PI * 52; ring.style.strokeDashoffset = (C * (1 - pct / 100)).toFixed(1); }
       const subP = document.getElementById("heroProgressSub");
-      if (pctEl) pctEl.textContent = `${pct}%`;
-      if (fillEl) fillEl.style.width = `${pct}%`;
       if (subP) subP.textContent = `${groupDone} of ${groupTasks.length} group bosses cleared together.`;
       const tcp = document.getElementById("travellerCountPill");
       if (tcp) tcp.textContent = `${state.players.length} travellers`;
@@ -1529,9 +1817,10 @@
         btn.addEventListener("click", () => {
           const player = selectedPlayer();
           player.vibe = player.vibe === btn.dataset.vibe ? null : btn.dataset.vibe;
+          const chosen = vibeById(player.vibe);
+          if (chosen) logEvent(chosen.emoji, `${player.name} set their vibe: ${chosen.name}`);
           saveState();
           renderAll();
-          const chosen = vibeById(player.vibe);
           toast(chosen ? `${player.name}: ${chosen.name} ${chosen.emoji}` : `${player.name} cleared their vibe`);
         });
       });
@@ -1547,6 +1836,7 @@
         btn.addEventListener("click", () => {
           const player = selectedPlayer();
           player.piece = player.piece === btn.dataset.piece ? null : btn.dataset.piece;
+          if (player.piece) logEvent("♟️", `${player.name} picked ${player.piece} as their board piece`);
           saveState();
           renderAll();
           toast(player.piece ? `${player.name}'s piece: ${player.piece}` : `${player.name} cleared their piece`);
@@ -1572,7 +1862,7 @@
     function renderRosterEditor() {
       const holder = document.getElementById("rosterEditor");
       holder.innerHTML = state.players.map((p, idx) => `<div class="roster-row">
-        <div class="avatar-dot" style="background:${p.colour}; width:42px; height:42px">${p.piece ? escapeHtml(p.piece) : escapeHtml(p.initials)}</div>
+        <div class="avatar-dot" style="background:${p.colour}; width:42px; height:42px">${escapeHtml(p.initials)}</div>
         <div class="roster-fields">
           <input type="text" value="${escapeAttr(p.name)}" data-field="name" data-idx="${idx}" aria-label="Name for traveller ${idx + 1}" placeholder="Name" />
           <select data-field="vibe" data-idx="${idx}" aria-label="Vibe for traveller ${idx + 1}">
@@ -1584,7 +1874,7 @@
       const onChange = e => {
         const idx = Number(e.target.dataset.idx);
         const field = e.target.dataset.field;
-        state.players[idx][field] = (field === "vibe" || field === "piece") ? (e.target.value || null) : e.target.value;
+        state.players[idx][field] = field === "vibe" ? (e.target.value || null) : e.target.value;
         if (field === "name") state.players[idx].initials = makeInitials(e.target.value, idx);
         saveState();
         renderPlayerSelect(); renderTravellerGrid(); renderTokens(); renderSelectedPanel(); renderVibePicker(); renderPiecePicker(); renderNextActions(); renderBadges();
@@ -1603,64 +1893,61 @@
     function escapeHtml(str) { return String(str || "").replace(/[&<>"]/g, s => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[s])); }
     function escapeAttr(str) { return escapeHtml(str).replace(/'/g, "&#039;"); }
 
-    // ---- Auto itinerary ----
-    const ITIN_DAYS = [
-      { n: 1, date: "Fri 11 Sep", title: "Trieste → Ljubljana", base: "Base: Ljubljana", anchors: [{ slot: "Midday", t: "Land at Trieste (TRS), pick up cars, drive ~1 h to Ljubljana" }, { slot: "Evening", t: "Settle in, first-night dinner by the river" }] },
-      { n: 2, date: "Sat 12 Sep", title: "Caves & Karst", base: "Base: Ljubljana", anchors: [{ slot: "Evening", t: "Dinner in Ljubljana" }] },
-      { n: 3, date: "Sun 13 Sep", title: "Velika Planina → Bled", base: "Transfer to Bled", anchors: [{ slot: "Midday", t: "Drive north, check into the Bled base" }, { slot: "Evening", t: "First Bled dinner" }] },
-      { n: 4, date: "Mon 14 Sep", title: "Vintgar & Bohinj", base: "Base: Bled", anchors: [{ slot: "Evening", t: "Dinner in Bled" }] },
-      { n: 5, date: "Tue 15 Sep", title: "Bled → fly home", base: "Bled → Trieste", anchors: [{ slot: "Midday", t: "Drive back to Trieste, return cars, fly home (leave a border buffer)" }] }
-    ];
-    const SLOT_RANK = { Morning: 1, Alt: 1, Midday: 2, Anytime: 2, Afternoon: 3, "Add-on": 3, Sunset: 4, Evening: 5 };
-    let itinDay = 1;
-
-    function ideaIsIn(idea) { const t = tallyIdea(idea.id); return t.keen > 0 && t.keen >= t.no; }
-
-    function renderItinerary() {
-      const tabs = document.getElementById("dayTabs");
-      const car = document.getElementById("dayCarousel");
-      const bench = document.getElementById("itinBench");
-      const badge = document.getElementById("itinCountBadge");
-      if (!tabs || !car) return;
-      const chosen = allIdeas().filter(ideaIsIn);
-      const coreIn = chosen.filter(i => i.day >= 1);
-      if (badge) badge.textContent = `${coreIn.length} ${coreIn.length === 1 ? "activity" : "activities"} in`;
-
-      tabs.innerHTML = ITIN_DAYS.map(d => {
-        const cnt = coreIn.filter(i => i.day === d.n).length;
-        return `<button class="day-tab ${d.n === itinDay ? "active" : ""}" data-day="${d.n}"><span>Day ${d.n}${cnt ? " · " + cnt : ""}</span><small>${d.date}</small></button>`;
-      }).join("");
-      tabs.querySelectorAll(".day-tab").forEach(b => b.addEventListener("click", () => { itinDay = Number(b.dataset.day); renderItinerary(); }));
-
-      const d = ITIN_DAYS.find(x => x.n === itinDay) || ITIN_DAYS[0];
-      const dayItems = chosen.filter(i => i.day === d.n).map(i => ({
-        slot: i.slot || "Anytime", emoji: i.emoji, title: i.title, img: i.img,
-        note: i.weather ? `${i.desc} (${i.weather === "clear" ? "do this if it's clear" : "the low-cloud backup"})` : i.desc,
-        rank: SLOT_RANK[i.slot] || 2
-      }));
-      const anchors = d.anchors.map(a => ({ slot: a.slot, title: a.t, note: "", emoji: "", img: "", anchor: true, rank: SLOT_RANK[a.slot] || 2 }));
-      const rows = [...anchors, ...dayItems].sort((a, b) => a.rank - b.rank);
-      car.innerHTML = `<div class="day-card">
-        <div class="day-head"><div><h3>Day ${d.n} · ${escapeHtml(d.title)}</h3><div class="day-base">${escapeHtml(d.base)} · ${d.date}</div></div></div>
-        ${rows.length ? rows.map(it => `<div class="itin-item ${it.anchor ? "itin-anchor" : ""}">
-            <div class="itin-slot">${escapeHtml(it.slot)}</div>
-            <div class="itin-main">
-              ${it.anchor ? "" : (it.img ? `<img class="itin-thumb" src="images/${escapeAttr(it.img)}" alt="${escapeAttr(it.title)}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'itin-thumb fallback',textContent:'${it.emoji || "📍"}'}))">` : `<div class="itin-thumb fallback">${it.emoji || "📍"}</div>`)}
-              <div class="itin-text"><div class="itin-title">${escapeHtml((it.emoji ? it.emoji + " " : "") + it.title)}</div>${it.note ? `<div class="itin-note">${escapeHtml(it.note)}</div>` : ""}</div>
-            </div>
-          </div>`).join("") : `<div class="itin-empty">Nothing voted in for this day yet — vote activities <b>Keen</b> in the Activity Market and they'll drop in here.</div>`}
-      </div>`;
-
-      if (bench) {
-        const benchIn = chosen.filter(i => i.region === "bench");
-        bench.innerHTML = benchIn.length
-          ? `<div class="itin-bench"><h3>🧭 Optional add-ons the group is keen on</h3><div class="micro">These don't fit the core 5-day route, so they'd need a swap or an extra day: <b>${benchIn.map(i => escapeHtml(i.title)).join(", ")}</b>.</div></div>`
-          : "";
+    // ---- Crew pulse: a lightweight synced activity feed ----
+    // Every meaningful mutation appends an event (capped at 40) so the group can
+    // see "what happened since I last looked". Synced via the same state blob.
+    const PULSE_SEEN_KEY = "sloveniaPulseSeenV1";
+    const pulseSeenAt = Number(localStorage.getItem(PULSE_SEEN_KEY) || 0);
+    function logEvent(emoji, msg) {
+      if (!Array.isArray(state.feed)) state.feed = [];
+      state.feed.unshift({ t: Date.now(), by: state.selectedPlayer, emoji, msg });
+      if (state.feed.length > 40) state.feed.length = 40;
+    }
+    function renderPulse() {
+      const holder = document.getElementById("pulseFeed");
+      if (!holder) return;
+      const feed = (Array.isArray(state.feed) ? state.feed : []).filter(e => e && e.t);
+      // "New" = things OTHER people did since you last looked at the board.
+      const isFresh = e => e.t > pulseSeenAt && e.by !== state.selectedPlayer;
+      const freshCount = feed.filter(isFresh).length;
+      const badge = document.getElementById("pulseBadge");
+      if (badge) {
+        badge.textContent = freshCount ? `${freshCount} new` : "live";
+        badge.className = freshCount ? "pill hot" : "pill";
+      }
+      holder.innerHTML = feed.length ? feed.slice(0, 14).map(e => {
+        const p = state.players[e.by];
+        return `<div class="pulse-row ${isFresh(e) ? "fresh" : ""}">
+          <span class="pulse-ico" style="background:${p ? p.colour : "rgba(255,255,255,0.15)"}">${e.emoji || "✨"}</span>
+          <div><div class="pulse-msg">${escapeHtml(e.msg)}</div><div class="pulse-time">${relTime(e.t)}</div></div>
+        </div>`;
+      }).join("") : `<div class="micro">Quiet so far — votes, locks, bets and plan changes will show up here.</div>`;
+      // Only mark the feed "seen" while the Board tab is actually on screen.
+      const boardEl = document.getElementById("board");
+      if (boardEl && boardEl.classList.contains("active") && feed.length) {
+        localStorage.setItem(PULSE_SEEN_KEY, String(feed[0].t));
       }
     }
 
-    // ---- The Bookies: pari-mutuel betting with virtual chips ----
+    // Count-up animation for stat numbers (skips the very first paint).
+    function tweenNum(el, to, fmt) {
+      if (!el) return;
+      const from = el.__num != null ? el.__num : to;
+      el.__num = to;
+      if (from === to) { el.textContent = fmt(to); return; }
+      const t0 = performance.now(), dur = 650;
+      (function step(now) {
+        const k = Math.min(1, (now - t0) / dur);
+        el.textContent = fmt(from + (to - from) * (1 - Math.pow(1 - k, 3)));
+        if (k < 1) requestAnimationFrame(step);
+      })(performance.now());
+    }
+
+    function buzz(ms) { try { if (navigator.vibrate) navigator.vibrate(ms); } catch (e) {} }
+
+    // ---- The Bookies: betting + prizes (no real money, chips only) ----
     const DEFAULT_MARKET_IDS = defaultBookie.markets.map(m => m.id);
+
     function ensureBookie() {
       if (!state.bookie || typeof state.bookie !== "object") state.bookie = structuredClone(defaultBookie);
       if (!Array.isArray(state.bookie.markets)) state.bookie.markets = structuredClone(defaultBookie.markets);
@@ -1674,7 +1961,7 @@
         { id: "no", label: "No", emoji: "❌", colour: "#ff7a7a" }
       ];
       if (m.type === "custom" && Array.isArray(m.runners)) return m.runners.map((r, i) => ({ id: String(r.id != null ? r.id : i), label: r.label, emoji: r.emoji || "🎯", colour: colours[i % colours.length] }));
-      return state.players.map((p, i) => ({ id: String(i), label: p.name, emoji: p.piece || (vibeById(p.vibe) || {}).emoji || "🙂", colour: p.colour }));
+      return state.players.map((p, i) => ({ id: String(i), label: p.name, emoji: (vibeById(p.vibe) || {}).emoji || "🙂", colour: p.colour }));
     }
     function runnerById(m, id) { return marketRunners(m).find(r => r.id === String(id)) || null; }
     function marketPool(m) { return Object.values(m.bets).reduce((s, b) => s + (b.stake || 0), 0); }
@@ -1700,6 +1987,7 @@
       ensureBookie();
       return state.bookie.markets.filter(m => m.status === "settled" && m.type !== "yesno" && m.prize && String(m.winner) === String(idx));
     }
+
     function pickRunner(marketId, runnerId) {
       const m = market(marketId); if (!m || m.status === "settled") return;
       const idx = state.selectedPlayer;
@@ -1708,8 +1996,10 @@
       const stake = existing && existing.stake ? existing.stake : Math.min(50, free);
       if (stake <= 0) { toast("You're out of chips"); return; }
       m.bets[idx] = { runner: String(runnerId), stake };
-      saveState(); renderAll();
       const r = runnerById(m, runnerId);
+      logEvent("🎲", `${selectedPlayer().name} backed ${r ? r.label : "a runner"} in “${m.title}”`);
+      buzz(6);
+      saveState(); renderAll();
       toast(`${selectedPlayer().name} backed ${r ? r.label : "a runner"}`);
     }
     function setBetStake(marketId, stake) {
@@ -1737,12 +2027,22 @@
     function settleMarket(marketId, runnerId) {
       const m = market(marketId); if (!m) return;
       m.status = "settled"; m.winner = String(runnerId);
-      saveState(); renderAll(); celebrate();
       const r = runnerById(m, runnerId);
+      logEvent("🏁", `Bet settled — ${r ? r.label : "result in"} takes “${m.title}”${m.type !== "yesno" && m.prize ? ` (${m.prize})` : ""}`);
+      buzz(14);
+      saveState(); renderAll(); celebrate();
       toast(`Settled: ${r ? r.label : "result in"}`);
     }
-    function reopenMarket(marketId) { const m = market(marketId); if (!m) return; m.status = "open"; m.winner = null; saveState(); renderAll(); toast("Market reopened"); }
-    function removeMarket(marketId) { ensureBookie(); state.bookie.markets = state.bookie.markets.filter(m => m.id !== marketId); saveState(); renderAll(); toast("Bet removed"); }
+    function reopenMarket(marketId) {
+      const m = market(marketId); if (!m) return;
+      m.status = "open"; m.winner = null;
+      saveState(); renderAll(); toast("Market reopened");
+    }
+    function removeMarket(marketId) {
+      ensureBookie();
+      state.bookie.markets = state.bookie.markets.filter(m => m.id !== marketId);
+      saveState(); renderAll(); toast("Bet removed");
+    }
     function restoreStarterMarkets() {
       ensureBookie();
       const have = new Set(state.bookie.markets.map(m => m.id));
@@ -1751,27 +2051,32 @@
       saveState(); renderAll();
       toast(added ? `Restored ${added} starter bet${added > 1 ? "s" : ""}` : "Starter bets already here");
     }
+
     function renderBookie() {
       ensureBookie();
       const idx = state.selectedPlayer;
       const startChips = state.bookie.startingChips;
+
+      // Form table (leaderboard)
       const ftHolder = document.getElementById("formTable");
       if (ftHolder) {
-        const table = state.players.map((p, i) => ({ i, p, bal: playerBalance(i), trophies: prizesWon(i).length })).sort((a, b) => b.bal - a.bal || b.trophies - a.trophies);
+        const table = state.players.map((p, i) => ({ i, p, bal: playerBalance(i), trophies: prizesWon(i).length }))
+          .sort((a, b) => b.bal - a.bal || b.trophies - a.trophies);
         ftHolder.innerHTML = table.map((row, rank) => {
           const v = vibeById(row.p.vibe);
           const net = row.bal - startChips;
           const netCls = net > 0 ? "up" : net < 0 ? "down" : "";
           return `<div class="ft-row ${row.i === idx ? "me" : ""}">
             <span class="ft-rank">${rank === 0 ? "👑" : "#" + (rank + 1)}</span>
-            <span class="avatar-dot" style="background:${row.p.colour}">${row.p.piece ? escapeHtml(row.p.piece) : escapeHtml(row.p.initials)}</span>
+            <span class="avatar-dot" style="background:${row.p.colour}">${escapeHtml(row.p.initials)}</span>
             <div class="ft-name">${escapeHtml(row.p.name)}${v ? `<span class="traveller-vibe">${v.emoji}</span>` : ""}${row.trophies ? `<span class="ft-trophies">${"🏆".repeat(Math.min(row.trophies, 4))}</span>` : ""}</div>
             <div class="ft-bal">${row.bal.toLocaleString()}<span class="ft-net ${netCls}">${net > 0 ? "+" : ""}${net.toLocaleString()}</span></div>
           </div>`;
         }).join("");
       }
-      const myBalEl = document.getElementById("myChipBal");
-      if (myBalEl) myBalEl.textContent = `${playerBalance(idx).toLocaleString()} chips`;
+      tweenNum(document.getElementById("myChipBal"), playerBalance(idx), n => `${Math.round(n).toLocaleString()} chips`);
+
+      // Prize shelf
       const upForGrabs = state.bookie.markets.filter(m => m.status !== "settled" && m.type !== "yesno" && m.prize);
       const claimed = state.bookie.markets.filter(m => m.status === "settled" && m.type !== "yesno" && m.prize);
       const shelf = document.getElementById("prizeShelf");
@@ -1780,6 +2085,8 @@
         const won = claimed.map(m => { const r = runnerById(m, m.winner); return `<div class="prize-row claimed"><span class="prize-tag">${escapeHtml(m.prize)}</span><span class="prize-meta">🏆 ${r ? escapeHtml(r.label) : "winner"}</span></div>`; }).join("");
         shelf.innerHTML = (grabs || won) ? (grabs + won) : `<div class="micro">No prizes attached yet. Add a bet with a prize below.</div>`;
       }
+
+      // Markets
       const holder = document.getElementById("marketList");
       if (holder) {
         holder.innerHTML = state.bookie.markets.map(m => {
@@ -1800,20 +2107,23 @@
               <span class="runner-bar"><span style="width:${pct}%; background:${r.colour}"></span></span>
             </button>`;
           }).join("");
+
           let betPanel = "";
           if (!settled) {
             if (myBet) {
               const odds = runnerOdds(m, myBet.runner);
               const r = runnerById(m, myBet.runner);
               const toWin = odds ? Math.round(myBet.stake * odds) : myBet.stake;
-              betPanel = `<div class="bet-strip"><div class="bet-line">Backing <strong>${r ? escapeHtml(r.label) : "—"}</strong> · <strong>${myBet.stake}</strong> chips · to win <strong>${toWin}</strong></div>
+              betPanel = `<div class="bet-strip">
+                <div class="bet-line">Backing <strong>${r ? escapeHtml(r.label) : "—"}</strong> · <strong>${myBet.stake}</strong> chips · to win <strong>${toWin}</strong></div>
                 <div class="stake-row">
                   <button class="btn small ghost" data-act="dec" data-mk="${m.id}">−25</button>
                   <button class="btn small ghost" data-act="inc" data-mk="${m.id}">+25</button>
                   <button class="btn small ghost" data-act="inc100" data-mk="${m.id}">+100</button>
                   <button class="btn small secondary" data-act="max" data-mk="${m.id}">Max</button>
                   <button class="btn small danger" data-act="clear" data-mk="${m.id}">Clear</button>
-                </div></div>`;
+                </div>
+              </div>`;
             } else {
               betPanel = `<div class="bet-strip"><div class="bet-line muted-line">Tap who you're backing — opens with 50 chips, then nudge the stake up or down.</div></div>`;
             }
@@ -1823,9 +2133,11 @@
             const myLine = myBet ? (mineWon ? ` · you won <strong>${Math.round(marketPayout(m, myBet.stake))}</strong>` : ` · you lost <strong>${myBet.stake}</strong>`) : "";
             betPanel = `<div class="bet-strip settled-strip"><div class="bet-line">🏁 Result: <strong>${r ? escapeHtml(r.label) : "—"}</strong>${m.type !== "yesno" && m.prize ? ` wins ${escapeHtml(m.prize)}` : ""}${myLine}</div></div>`;
           }
+
           const settleHtml = settled
             ? `<button class="btn small ghost" data-act="reopen" data-mk="${m.id}">Reopen</button>`
             : `<div class="settle-wrap"><button class="btn small secondary" data-act="settletoggle" data-mk="${m.id}">⚖️ Settle</button><div class="settle-pick" id="settle_${m.id}" hidden>${runners.map(r => `<button class="btn small" data-act="settle" data-mk="${m.id}" data-runner="${r.id}">${r.emoji} ${escapeHtml(r.label)}</button>`).join("")}</div></div>`;
+
           const removable = !DEFAULT_MARKET_IDS.includes(m.id);
           return `<article class="bet-card ${settled ? "is-settled" : ""}">
             <div class="bet-head">
@@ -1838,6 +2150,7 @@
             <div class="bet-foot">${settleHtml}${removable ? `<button class="btn small danger" data-act="remove" data-mk="${m.id}">🗑️ Remove</button>` : ""}</div>
           </article>`;
         }).join("");
+
         holder.querySelectorAll(".runner-btn").forEach(btn => btn.addEventListener("click", () => pickRunner(btn.dataset.mk, btn.dataset.runner)));
         holder.querySelectorAll("[data-act]").forEach(btn => {
           btn.addEventListener("click", () => {
@@ -1854,14 +2167,20 @@
           });
         });
       }
+
+      // Badges
       const openCount = state.bookie.markets.filter(m => m.status !== "settled").length;
-      const ob = document.getElementById("openMarketsBadge"); if (ob) ob.textContent = `${openCount} open market${openCount === 1 ? "" : "s"}`;
-      const pb = document.getElementById("prizesBadge"); if (pb) pb.textContent = `${upForGrabs.length} prize${upForGrabs.length === 1 ? "" : "s"} up for grabs`;
-      const bbs = document.getElementById("boardBookieStatus"); if (bbs) bbs.textContent = `${openCount} open market${openCount === 1 ? "" : "s"}`;
+      const ob = document.getElementById("openMarketsBadge");
+      if (ob) ob.textContent = `${openCount} open market${openCount === 1 ? "" : "s"}`;
+      const pb = document.getElementById("prizesBadge");
+      if (pb) pb.textContent = `${upForGrabs.length} prize${upForGrabs.length === 1 ? "" : "s"} up for grabs`;
+      const bbs = document.getElementById("boardBookieStatus");
+      if (bbs) bbs.textContent = `${openCount} open market${openCount === 1 ? "" : "s"}`;
     }
 
     // ---- Crew Desk: hands up, share options, group vote, lock the pick ----
     const DEFAULT_ROOM_IDS = defaultDesk.rooms.map(r => r.id);
+
     function ensureDesk() {
       if (!state.desk || typeof state.desk !== "object") state.desk = structuredClone(defaultDesk);
       if (!Array.isArray(state.desk.rooms)) state.desk.rooms = structuredClone(defaultDesk.rooms);
@@ -1875,11 +2194,13 @@
     }
     function deskRoom(id) { ensureDesk(); return state.desk.rooms.find(r => r.id === id); }
     function optVotes(o) { return Object.keys(o.votes || {}).length; }
+
     function toggleOwner(id) {
       const r = deskRoom(id); if (!r) return;
       const idx = state.selectedPlayer;
       const on = r.owners.includes(idx);
       r.owners = on ? r.owners.filter(x => x !== idx) : [...r.owners, idx];
+      logEvent("🙋", on ? `${selectedPlayer().name} stepped off “${r.title}”` : `${selectedPlayer().name} is on “${r.title}”`);
       saveState(); renderAll();
       toast(on ? `${selectedPlayer().name} stepped off ${r.title}` : `${selectedPlayer().name} is on ${r.title} 🙋`);
     }
@@ -1888,7 +2209,8 @@
       const idx = state.selectedPlayer;
       const on = r.drivers.includes(idx);
       r.drivers = on ? r.drivers.filter(x => x !== idx) : [...r.drivers, idx];
-      if (!on && !r.owners.includes(idx)) r.owners.push(idx);
+      if (!on && !r.owners.includes(idx)) r.owners.push(idx); // a driver is on the job too
+      logEvent("🚗", on ? `${selectedPlayer().name} is off driving duty` : `${selectedPlayer().name} will drive`);
       saveState(); renderAll();
       toast(on ? `${selectedPlayer().name} is off driving` : `${selectedPlayer().name} will drive 🚗`);
     }
@@ -1898,6 +2220,7 @@
       let link = (data.link || "").trim();
       if (link && !/^https?:\/\//i.test(link)) link = "https://" + link;
       r.options.push({ id: `op_${Date.now()}_${Math.floor(Math.random() * 1000)}`, by: state.selectedPlayer, title: data.title.trim(), link, price: (data.price || "").trim(), notes: (data.notes || "").trim(), votes: { [state.selectedPlayer]: true } });
+      logEvent("📋", `${selectedPlayer().name} shared “${data.title.trim()}” in ${r.title}`);
       saveState(); renderAll(); toast(`${selectedPlayer().name} shared an option`);
     }
     function removeDeskOption(roomId, optId) {
@@ -1910,19 +2233,24 @@
       const r = deskRoom(roomId); if (!r) return;
       const o = r.options.find(x => x.id === optId); if (!o) return;
       const idx = state.selectedPlayer;
-      if (o.votes[idx]) delete o.votes[idx]; else o.votes[idx] = true;
+      if (o.votes[idx]) { delete o.votes[idx]; }
+      else { o.votes[idx] = true; logEvent("👍", `${selectedPlayer().name} backed “${o.title}” in ${r.title}`); }
+      buzz(6);
       saveState(); renderAll();
     }
     function decideRoom(roomId, optId) {
       const r = deskRoom(roomId); if (!r) return;
       r.status = "decided"; r.chosen = optId;
-      syncDeskTasks(); saveState(); renderAll(); celebrate();
       const o = r.options.find(x => x.id === optId);
+      logEvent("🔒", `${r.title} locked in: “${o ? o.title : r.title}”`);
+      buzz(14);
+      syncDeskTasks(); saveState(); renderAll(); celebrate();
       toast(`Locked: ${o ? o.title : r.title}`);
     }
     function reopenRoom(roomId) {
       const r = deskRoom(roomId); if (!r) return;
       r.status = "open"; r.chosen = null;
+      logEvent("🔓", `${selectedPlayer().name} reopened “${r.title}”`);
       syncDeskTasks(); saveState(); renderAll(); toast(`${r.title} reopened`);
     }
     function syncDeskTasks() {
@@ -1940,6 +2268,7 @@
       ensureDesk();
       if (!(title || "").trim()) { toast("Name the decision first"); return; }
       state.desk.rooms.push({ id: `room_${Date.now()}`, emoji: "📌", kind: "custom", title: title.trim(), desc: (desc || "Group decision — put your hand up, share options, vote.").trim(), owners: [], options: [], status: "open", chosen: null });
+      logEvent("🛎️", `${selectedPlayer().name} opened a decision room: “${title.trim()}”`);
       saveState(); renderAll(); toast("Decision room added");
     }
     function removeDeskRoom(roomId) {
@@ -1947,25 +2276,30 @@
       state.desk.rooms = state.desk.rooms.filter(r => r.id !== roomId);
       saveState(); renderAll(); toast("Room removed");
     }
-    function renderDesk() {
-      ensureDesk();
-      const holder = document.getElementById("deskList");
-      if (!holder) return;
+
+    // Builds one decision-room card. Used by the Crew Desk tab AND inline
+    // under matching group tasks — same state, two views.
+    function deskRoomCard(r) {
       const idx = state.selectedPlayer;
       const avatar = i => { const p = state.players[i]; return p ? `<span class="avatar-dot" style="background:${p.colour}">${p.piece ? escapeHtml(p.piece) : escapeHtml(p.initials)}</span>` : ""; };
       const nameOf = i => { const p = state.players[i]; return p ? escapeHtml(p.name) : "—"; };
-      holder.innerHTML = state.desk.rooms.map(r => {
-        const decided = r.status === "decided";
+      const decided = r.status === "decided";
         const opts = (r.options || []).slice().sort((a, b) => optVotes(b) - optVotes(a));
         const topVotes = opts.length ? optVotes(opts[0]) : 0;
-        const ownerChips = r.owners.length ? r.owners.map(i => `<span class="owner-chip">${avatar(i)}${nameOf(i)}</span>`).join("") : `<span class="owner-chip empty">No one yet</span>`;
+        const ownerChips = r.owners.length
+          ? r.owners.map(i => `<span class="owner-chip">${avatar(i)}${nameOf(i)}</span>`).join("")
+          : `<span class="owner-chip empty">No one yet</span>`;
         const meOwner = r.owners.includes(idx);
+
         let driveRow = "";
         if (r.kind === "car") {
-          const dchips = (r.drivers && r.drivers.length) ? r.drivers.map(i => `<span class="owner-chip">🚗 ${avatar(i)}${nameOf(i)}</span>`).join("") : `<span class="owner-chip empty">No driver yet</span>`;
+          const dchips = (r.drivers && r.drivers.length)
+            ? r.drivers.map(i => `<span class="owner-chip">🚗 ${avatar(i)}${nameOf(i)}</span>`).join("")
+            : `<span class="owner-chip empty">No driver yet</span>`;
           const meDriver = r.drivers && r.drivers.includes(idx);
           driveRow = `<div class="crew-row"><span class="crew-label">Driving</span>${dchips}<button class="hand-btn drive ${meDriver ? "on" : ""}" data-desk="drive" data-room="${r.id}">${meDriver ? "🚗 You're driving" : "🚗 I'll drive"}</button></div>`;
         }
+
         const optHtml = opts.length ? opts.map(o => {
           const v = optVotes(o);
           const leading = !decided && v > 0 && v === topVotes;
@@ -1989,6 +2323,7 @@
             </div>
           </div>`;
         }).join("") : `<div class="plan-empty-day">No options shared yet. Add the first one below.</div>`;
+
         const addForm = !decided ? `<div class="add-opt">
           <input type="text" data-room="${r.id}" data-f="title" placeholder="Option name (e.g. Vila Bled apartment)" />
           <input type="text" data-room="${r.id}" data-f="link" placeholder="Link (optional)" />
@@ -1996,11 +2331,13 @@
           <button class="btn small" data-desk="addopt" data-room="${r.id}">Add option</button>
         </div>
         <input type="text" class="opt-notes-in" data-room="${r.id}" data-f="notes" placeholder="One-line note (optional)" />` : "";
+
         const removable = !DEFAULT_ROOM_IDS.includes(r.id);
         const footer = (decided || removable) ? `<div class="bet-foot">
           ${decided ? `<button class="btn small ghost" data-desk="reopen" data-room="${r.id}">Reopen</button>` : ""}
           ${removable ? `<button class="btn small danger" data-desk="delroom" data-room="${r.id}">🗑️ Remove room</button>` : ""}
         </div>` : "";
+
         return `<article class="desk-room ${decided ? "is-decided" : ""}">
           <div class="desk-head">
             <div class="desk-emoji">${r.emoji || "📌"}</div>
@@ -2013,8 +2350,10 @@
           ${addForm}
           ${footer}
         </article>`;
-      }).join("");
-      holder.querySelectorAll("[data-desk]").forEach(btn => {
+    }
+
+    function bindDeskActions(container) {
+      container.querySelectorAll("[data-desk]").forEach(btn => {
         btn.addEventListener("click", () => {
           const act = btn.dataset.desk, room = btn.dataset.room, opt = btn.dataset.opt;
           if (act === "hand") toggleOwner(room);
@@ -2025,11 +2364,20 @@
           else if (act === "delopt") removeDeskOption(room, opt);
           else if (act === "delroom") { if (confirm("Remove this whole decision room for everyone?")) removeDeskRoom(room); }
           else if (act === "addopt") {
-            const get = f => { const el = holder.querySelector(`input[data-room="${room}"][data-f="${f}"]`); return el ? el.value : ""; };
+            const get = f => { const el = container.querySelector(`input[data-room="${room}"][data-f="${f}"]`); return el ? el.value : ""; };
             addDeskOption(room, { title: get("title"), link: get("link"), price: get("price"), notes: get("notes") });
           }
         });
       });
+    }
+
+    function renderDesk() {
+      ensureDesk();
+      const holder = document.getElementById("deskList");
+      if (!holder) return;
+      holder.innerHTML = state.desk.rooms.map(deskRoomCard).join("");
+      bindDeskActions(holder);
+
       const decidedCount = state.desk.rooms.filter(r => r.status === "decided").length;
       const openCount = state.desk.rooms.length - decidedCount;
       const optCount = state.desk.rooms.reduce((s, r) => s + (r.options ? r.options.length : 0), 0);
@@ -2039,9 +2387,241 @@
       const bds = document.getElementById("boardDeskStatus"); if (bds) bds.textContent = `${openCount} open · ${decidedCount} decided`;
     }
 
+    // ---- Itinerary builder: auto-draft from winning votes, then editable ----
+    function cityBucket(city) {
+      const c = (city || "").toLowerCase();
+      const l = c.includes("ljubljana"), b = c.includes("bled") || c.includes("bohinj");
+      if (l && b) return "both"; if (b) return "bled"; if (l) return "ljubljana"; return "both";
+    }
+    function ensurePlan() {
+      if (!state.plan || typeof state.plan !== "object") state.plan = { generatedAt: null, items: [] };
+      if (!Array.isArray(state.plan.items)) state.plan.items = [];
+      if (!state.plan.dayMeta || typeof state.plan.dayMeta !== "object") state.plan.dayMeta = {};
+    }
+    function dayMeta(dayId) { ensurePlan(); return state.plan.dayMeta[dayId] || {}; }
+    function setDayMeta(dayId, patch) { ensurePlan(); state.plan.dayMeta[dayId] = { ...dayMeta(dayId), ...patch }; saveState(); renderAll(); }
+    function dayIsOff(dayId) { return !!dayMeta(dayId).off; }
+    function dayNote(d) { const m = dayMeta(d.id); return m.note != null ? m.note : (d.note || ""); }
+    function toggleDayOff(dayId, off) {
+      const d = TRIP_DAYS.find(x => x.id === dayId); if (!d) return;
+      if (off) {
+        const n = state.plan.items.filter(it => it.dayId === dayId).length;
+        if (n && !confirm(`${d.date} has ${n} item${n > 1 ? "s" : ""} on it — they'll be hidden until the day is re-added. Drop the day?`)) return;
+      }
+      setDayMeta(dayId, { off });
+      toast(off ? `${d.date} dropped from the trip` : `${d.date} is back in the trip`);
+    }
+    function editDayNote(dayId) {
+      const d = TRIP_DAYS.find(x => x.id === dayId); if (!d) return;
+      const next = prompt(`Note for ${d.date}`, dayNote(d) || "");
+      if (next === null) return;
+      setDayMeta(dayId, { note: next.trim() });
+      toast("Day note updated");
+    }
+    function planWinners() {
+      const ideas = allIdeas();
+      let w = ideas.filter(i => ideaStatus(tallyIdea(i.id)).label === "Shortlist");
+      if (w.length === 0) w = ideas.filter(i => tallyIdea(i.id).score > 0);
+      return w.slice().sort((a, b) => tallyIdea(b.id).score - tallyIdea(a.id).score);
+    }
+    // (Auto-draft removed — the itinerary is built manually. planWinners() still
+    // powers the "Shortlisted ideas" reference list in the side panel.)
+    function changeItemDay(itemId, dayId) { ensurePlan(); const it = state.plan.items.find(x => x.id === itemId); if (it) { it.dayId = dayId; saveState(); renderAll(); } }
+    function removePlanItem(itemId) { ensurePlan(); state.plan.items = state.plan.items.filter(x => x.id !== itemId); saveState(); renderAll(); toast("Removed from itinerary"); }
+    function guessEmoji(title) {
+      const t = (title || "").toLowerCase();
+      if (/(flight|fly\b|✈|airport|trs|lju|lhr|stn|ltn)/.test(t)) return "✈️";
+      if (/(taxi|transfer|bus|train|drive|pick.?up)/.test(t)) return "🚐";
+      if (/(dinner|lunch|breakfast|bbq|food|eat|restaurant)/.test(t)) return "🍽️";
+      if (/(check.?in|check.?out|hotel|villa|accom)/.test(t)) return "🏨";
+      return "📍";
+    }
+    function addPlanItem(dayId, title, time) { ensurePlan(); if (!(title || "").trim()) { toast("Type something to add"); return; } state.plan.items.push({ id: `pl_x_${Date.now()}`, dayId, title: title.trim(), emoji: guessEmoji(title), city: "", kind: "activity", note: "", time: time || "" }); const d = TRIP_DAYS.find(x => x.id === dayId); logEvent("🗓️", `${selectedPlayer().name} added “${title.trim()}” to ${d ? d.date : "the plan"}`); saveState(); renderAll(); toast("Added to the day"); }
+    function changeItemTime(itemId, time) { ensurePlan(); const it = state.plan.items.find(x => x.id === itemId); if (it) { it.time = time || ""; saveState(); renderAll(); } }
+    function renamePlanItem(itemId) {
+      ensurePlan(); const it = state.plan.items.find(x => x.id === itemId); if (!it) return;
+      const next = prompt("Rename this item", it.title);
+      if (next === null) return;
+      const t = next.trim(); if (!t) return;
+      it.title = t;
+      saveState(); renderAll(); toast("Renamed");
+    }
+    function clearPlan() { state.plan = { generatedAt: null, items: [] }; saveState(); renderAll(); toast("Itinerary cleared"); }
+
+    function renderPlan() {
+      ensurePlan();
+      const holder = document.getElementById("planDays");
+      if (!holder) return;
+      const items = state.plan.items;
+      const winners = planWinners();
+
+      const ps = document.getElementById("planSummary");
+      if (ps) ps.textContent = items.length
+        ? `${items.length} item${items.length > 1 ? "s" : ""} on the plan. Add more with the ＋ row on any day; set times to order them.`
+        : (winners.length ? `${winners.length} idea${winners.length > 1 ? "s" : ""} won the vote — add the ones you want to a day below.` : "Add items to each day below. Vote on ideas in the Activity Market for inspiration.");
+
+      const dayOpts = sel => TRIP_DAYS.map(d => `<option value="${d.id}" ${d.id === sel ? "selected" : ""}>${d.date}${dayIsOff(d.id) ? " · off" : ""}</option>`).join("");
+      const flightChip = x => `<span class="arr-chip" title="${escapeAttr(x.p.name + (x.a.info ? " · " + x.a.info : ""))}"><span class="ac-dot" style="background:${x.p.colour}"></span>${escapeHtml(x.p.initials)}${x.a.time ? ` · ${escapeHtml(x.a.time)}` : ""}</span>`;
+
+      holder.innerHTML = TRIP_DAYS.map(d => {
+        const dayItems = items.filter(it => it.dayId === d.id).slice().sort((a, b) => (a.time || "99:99").localeCompare(b.time || "99:99"));
+        const cl = d.city.toLowerCase(); const tagCls = (cl.includes("bled") || cl.includes("bohinj")) && !cl.includes("ljubljana") ? "bled" : "";
+        if (dayIsOff(d.id)) {
+          return `<div class="plan-day is-off">
+            <div class="plan-day-head">
+              <span class="plan-date">${d.date}</span>
+              <span class="plan-citytag ${tagCls}">${escapeHtml(d.city)}</span>
+              <span class="plan-daynote">Not in the trip${dayItems.length ? ` · ${dayItems.length} item${dayItems.length > 1 ? "s" : ""} parked here` : ""}.</span>
+              <span class="pd-actions"><button class="pd-btn" data-plan="dayon" data-day="${d.id}">↩️ Re-add day</button></span>
+            </div>
+          </div>`;
+        }
+        const itemsHtml = dayItems.map(it => {
+          const sub = it.kind === "dinner"
+            ? (it.note ? `<a href="${escapeAttr(it.note)}" target="_blank" rel="noopener" class="pi-sub">booking ↗</a>` : `<span class="pi-sub">group dinner</span>`)
+            : (it.city ? `<span class="pi-sub">${escapeHtml(it.city)}</span>` : "");
+          return `<div class="plan-item ${it.kind === "dinner" ? "dinner" : ""}">
+            <span class="pi-emoji">${it.emoji || "📍"}</span>
+            <div class="pi-titlewrap" data-plan="rename" data-item="${it.id}" title="Tap to rename"><div class="pi-title">${escapeHtml(it.title)}</div>${sub}</div>
+            <input type="time" class="pi-time" data-plan="time" data-item="${it.id}" value="${escapeAttr(it.time || "")}" aria-label="Time (optional)" />
+            <select class="pi-move" data-plan="move" data-item="${it.id}" aria-label="Move to another day">${dayOpts(it.dayId)}</select>
+            <button class="pi-x" data-plan="del" data-item="${it.id}" aria-label="Remove">✕</button>
+          </div>`;
+        }).join("") || `<div class="plan-empty-day">${d.logistics ? "Travel / logistics day." : "Open — drop an activity here."}</div>`;
+        const arr = arrivalsForDay(d.iso), dep = departuresForDay(d.iso);
+        const flightsHtml = (arr.length || dep.length)
+          ? `<div class="day-arrivals">${arr.length ? `<span class="da-label">🛬 In</span>${arr.map(flightChip).join("")}` : ""}${dep.length ? `<span class="da-label">🛫 Out</span>${dep.map(flightChip).join("")}` : ""}</div>`
+          : "";
+        const note = dayNote(d);
+        return `<div class="plan-day ${d.logistics ? "is-logistics" : ""}">
+          <div class="plan-day-head">
+            <span class="plan-date">${d.date}</span>
+            <span class="plan-citytag ${tagCls}">${escapeHtml(d.city)}</span>
+            ${note ? `<span class="plan-daynote">${escapeHtml(note)}</span>` : ""}
+            <span class="pd-actions">
+              <button class="pd-btn" data-plan="note" data-day="${d.id}" title="Edit the day note">✎ Note</button>
+              <button class="pd-btn" data-plan="dayoff" data-day="${d.id}" title="Drop this day from the trip">🚫</button>
+            </span>
+          </div>
+          ${flightsHtml}
+          ${itemsHtml}
+          <div class="day-add">
+            <input type="text" data-dayadd="${d.id}" data-f="title" placeholder="＋ Add to ${d.date}…" />
+            <input type="time" class="pi-time" data-dayadd="${d.id}" data-f="time" aria-label="Time (optional)" />
+            <button class="pd-btn" data-plan="dayadd" data-day="${d.id}">Add</button>
+          </div>
+        </div>`;
+      }).join("");
+
+      holder.querySelectorAll('[data-plan="dayadd"]').forEach(b => b.addEventListener("click", () => {
+        const day = b.dataset.day;
+        const tEl = holder.querySelector(`input[data-dayadd="${day}"][data-f="title"]`);
+        const tmEl = holder.querySelector(`input[data-dayadd="${day}"][data-f="time"]`);
+        addPlanItem(day, tEl ? tEl.value : "", tmEl ? tmEl.value : "");
+      }));
+      holder.querySelectorAll('input[data-dayadd][data-f="title"]').forEach(inp => inp.addEventListener("keydown", e => {
+        if (e.key === "Enter") { const btn = holder.querySelector(`[data-plan="dayadd"][data-day="${inp.dataset.dayadd}"]`); if (btn) btn.click(); }
+      }));
+      holder.querySelectorAll('[data-plan="move"]').forEach(sel => sel.addEventListener("change", () => changeItemDay(sel.dataset.item, sel.value)));
+      holder.querySelectorAll('[data-plan="del"]').forEach(b => b.addEventListener("click", () => removePlanItem(b.dataset.item)));
+      holder.querySelectorAll('[data-plan="time"]').forEach(inp => inp.addEventListener("change", () => changeItemTime(inp.dataset.item, inp.value)));
+      holder.querySelectorAll('[data-plan="rename"]').forEach(el => el.addEventListener("click", () => renamePlanItem(el.dataset.item)));
+      holder.querySelectorAll('[data-plan="dayoff"]').forEach(b => b.addEventListener("click", () => toggleDayOff(b.dataset.day, true)));
+      holder.querySelectorAll('[data-plan="dayon"]').forEach(b => b.addEventListener("click", () => toggleDayOff(b.dataset.day, false)));
+      holder.querySelectorAll('[data-plan="note"]').forEach(b => b.addEventListener("click", () => editDayNote(b.dataset.day)));
+
+      const feed = document.getElementById("planFeed");
+      if (feed) {
+        const dinners = state.desk ? state.desk.rooms.filter(r => r.kind === "dinner" && r.status === "decided") : [];
+        feed.innerHTML = (winners.map(i => `<div class="mini-idea-row"><span>${i.emoji || "📍"}</span><div><div class="mini-idea-name">${escapeHtml(i.title)}</div><div class="mini-idea-meta">${escapeHtml(i.city || "TBC")} · score ${tallyIdea(i.id).score}</div></div><span class="idea-status hot">In</span></div>`).join("")
+          + dinners.map(r => { const o = (r.options || []).find(x => x.id === r.chosen); return `<div class="mini-idea-row"><span>${r.emoji || "🍽️"}</span><div><div class="mini-idea-name">${escapeHtml(o ? o.title : r.title)}</div><div class="mini-idea-meta">Decided dinner</div></div><span class="idea-status hot">In</span></div>`; }).join(""))
+          || `<div class="micro">Nothing shortlisted yet. Win some votes in the Activity Market.</div>`;
+      }
+
+      const cb = document.getElementById("planCountBadge"); if (cb) cb.textContent = `${items.length} placed`;
+      const bp = document.getElementById("boardPlanStatus"); if (bp) bp.textContent = items.length ? `${items.length} placed` : "Nothing added yet";
+      const lockBtn = document.getElementById("planLockBtn"); if (lockBtn) lockBtn.textContent = state.groupDone.itinerary ? "✅ Itinerary locked (tap to unlock)" : "🔒 Lock this itinerary";
+      const addDay = document.getElementById("planAddDay");
+      if (addDay) { const cur = addDay.value; addDay.innerHTML = TRIP_DAYS.map(d => `<option value="${d.id}">${d.date}${dayIsOff(d.id) ? " · off" : ""}</option>`).join(""); if (cur) addDay.value = cur; }
+    }
+
+    // ---- Crew flights: each traveller sets their own arrival AND departure ----
+    function ensureFlight(p, key) { if (!p[key] || typeof p[key] !== "object") p[key] = { date: "", time: "", info: "" }; return p[key]; }
+    function tripDayByIso(iso) { return TRIP_DAYS.find(d => d.iso === iso); }
+    function fmtArrivalDate(iso) {
+      if (!iso) return "";
+      const d = tripDayByIso(iso); if (d) return d.date;
+      const dt = new Date(iso + "T00:00:00");
+      return isNaN(dt) ? iso : dt.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
+    }
+    function arrivalWhen(a) {
+      if (!a || !a.date) return "";
+      let s = fmtArrivalDate(a.date);
+      if (a.time) s += " · " + a.time;
+      if (a.info) s += " · " + a.info;
+      return s;
+    }
+    function setMyFlight(key, field, value) {
+      const f = ensureFlight(selectedPlayer(), key);
+      f[field] = value;
+      saveState(); renderAll();
+    }
+    function flightsForDay(iso, key) {
+      if (!iso) return [];
+      return state.players.map((p, i) => ({ i, p, a: p[key] })).filter(x => x.a && x.a.date === iso)
+        .sort((x, y) => (x.a.time || "99:99").localeCompare(y.a.time || "99:99"));
+    }
+    function arrivalsForDay(iso) { return flightsForDay(iso, "arrival"); }
+    function departuresForDay(iso) { return flightsForDay(iso, "departure"); }
+    function renderArrivals() {
+      const me = document.getElementById("arrivalMe");
+      const list = document.getElementById("arrivalList");
+      const badge = document.getElementById("arrivalsBadge");
+      if (!me || !list) return;
+      const p = selectedPlayer(); const a = ensureFlight(p, "arrival"); const dep = ensureFlight(p, "departure");
+      me.innerHTML = `<div class="arrival-editor">
+        <div class="arr-editor-head"><span class="avatar-dot" style="background:${p.colour}">${escapeHtml(p.initials)}</span> Your flights, <strong>${escapeHtml(p.name)}</strong></div>
+        <div class="arr-sub">🛬 Arriving — Trieste (TRS)</div>
+        <div class="arr-fields">
+          <input type="date" id="arrDate" min="2026-09-09" max="2026-09-17" value="${escapeAttr(a.date || "")}" aria-label="Arrival date" />
+          <input type="time" id="arrTime" value="${escapeAttr(a.time || "")}" aria-label="Arrival time" />
+          <input type="text" id="arrInfo" placeholder="Flight / terminal (optional)" value="${escapeAttr(a.info || "")}" aria-label="Arrival flight or terminal" />
+        </div>
+        <div class="arr-sub">🛫 Flying home</div>
+        <div class="arr-fields">
+          <input type="date" id="depDate" min="2026-09-11" max="2026-09-17" value="${escapeAttr(dep.date || "")}" aria-label="Departure date" />
+          <input type="time" id="depTime" value="${escapeAttr(dep.time || "")}" aria-label="Departure time" />
+          <input type="text" id="depInfo" placeholder="Flight / terminal (optional)" value="${escapeAttr(dep.info || "")}" aria-label="Departure flight or terminal" />
+        </div>
+      </div>`;
+      [["arrDate", "arrival", "date"], ["arrTime", "arrival", "time"], ["arrInfo", "arrival", "info"], ["depDate", "departure", "date"], ["depTime", "departure", "time"], ["depInfo", "departure", "info"]].forEach(([id, key, field]) => {
+        document.getElementById(id).addEventListener("change", e => setMyFlight(key, field, field === "info" ? e.target.value.trim() : e.target.value));
+      });
+
+      const rows = state.players.map((pl, i) => ({ i, pl, a: pl.arrival || {}, d: pl.departure || {} }));
+      rows.sort((x, y) => {
+        const kx = x.a.date ? (x.a.date + (x.a.time || "99:99")) : "9999";
+        const ky = y.a.date ? (y.a.date + (y.a.time || "99:99")) : "9999";
+        return kx.localeCompare(ky);
+      });
+      list.innerHTML = rows.map(r => {
+        const inW = arrivalWhen(r.a), outW = arrivalWhen(r.d);
+        return `<div class="arrival-row ${r.i === state.selectedPlayer ? "me" : ""}">
+          <span class="avatar-dot" style="background:${r.pl.colour}">${escapeHtml(r.pl.initials)}</span>
+          <div><div class="arr-name">${escapeHtml(r.pl.name)}</div>
+            <div class="arr-when ${inW ? "" : "unset"}">🛬 ${inW ? escapeHtml(inW) : "arrival not set"}</div>
+            <div class="arr-when ${outW ? "" : "unset"}">🛫 ${outW ? escapeHtml(outW) : "departure not set"}</div>
+          </div>
+        </div>`;
+      }).join("");
+      const nA = state.players.filter(pl => pl.arrival && pl.arrival.date).length;
+      const nD = state.players.filter(pl => pl.departure && pl.departure.date).length;
+      if (badge) badge.textContent = `🛬 ${nA}/${state.players.length} arrivals · 🛫 ${nD}/${state.players.length} departures set`;
+    }
+
     function renderAll() {
-      ensureBookie(); ensureDesk();
-      renderNodes(); renderTokens(); renderPlayerSelect(); renderTravellerGrid(); renderSelectedPanel(); renderVibePicker(); renderPiecePicker(); renderTasks(); renderIdeas(); renderBoardIdeaPreview(); renderNextActions(); renderBadges(); renderRosterEditor(); renderHero(); renderItinerary(); renderBookie(); renderDesk();
+      ensureBookie(); ensureDesk(); ensurePlan();
+      renderNodes(); renderTokens(); renderPlayerSelect(); renderTravellerGrid(); renderSelectedPanel(); renderVibePicker(); renderPiecePicker(); renderTasks(); renderIdeas(); renderBoardIdeaPreview(); renderNextActions(); renderBadges(); renderRosterEditor(); renderHero(); renderBookie(); renderDesk(); renderPlan(); renderArrivals(); renderPulse();
     }
 
     function toast(message) {
@@ -2052,9 +2632,10 @@
     }
 
     function celebrate() {
+      buzz([12, 40, 12]);
       const wrap = document.createElement("div");
       wrap.className = "confetti-wrap";
-      const cols = ["#4f8bff", "#ef4d4d", "#ffffff", "#ffce7a", "#8fb6ff", "#5fd39a"];
+      const cols = ["#4f8bff", "#ef4d4d", "#5fd39a", "#ffce7a", "#8fb6ff", "#f7fbff"];
       for (let i = 0; i < 26; i++) {
         const p = document.createElement("span");
         p.className = "confetti";
@@ -2069,13 +2650,20 @@
       setTimeout(() => wrap.remove(), 2600);
     }
 
-    document.querySelectorAll(".nav button").forEach(btn => {
+    function setActiveTab(tab) {
+      document.querySelectorAll(".nav button[data-tab], .dock button[data-tab]").forEach(b => {
+        const on = b.dataset.tab === tab;
+        b.classList.toggle("active", on);
+        if (on) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current");
+      });
+      document.querySelectorAll(".section").forEach(s => s.classList.toggle("active", s.id === tab));
+      if (tab === "board") renderPulse(); // marks the crew pulse as seen
+    }
+    document.querySelectorAll(".nav button, .dock button").forEach(btn => {
       btn.addEventListener("click", () => {
         if (!btn.dataset.tab) return; // the sync chip is a nav button with no tab
-        document.querySelectorAll(".nav button").forEach(x => x.classList.remove("active"));
-        document.querySelectorAll(".section").forEach(x => x.classList.remove("active"));
-        btn.classList.add("active");
-        document.getElementById(btn.dataset.tab).classList.add("active");
+        setActiveTab(btn.dataset.tab);
+        if (btn.closest(".dock")) document.getElementById(btn.dataset.tab).scrollIntoView({ behavior: "smooth", block: "start" });
       });
     });
 
@@ -2089,8 +2677,6 @@
 
     document.getElementById("playerSelect").addEventListener("change", e => { state.selectedPlayer = Number(e.target.value); saveState(); renderAll(); });
     document.getElementById("focusPlayerBtn").addEventListener("click", () => toast(`${selectedPlayer().name} is selected`));
-    document.getElementById("advanceBtn").addEventListener("click", () => { const p = selectedPlayer(); p.progress = clamp((p.progress || 0) + 1, 0, checkpoints.length - 1); saveState(); renderAll(); toast(`${p.name} moved forward`); });
-    document.getElementById("undoBtn").addEventListener("click", () => { const p = selectedPlayer(); p.progress = clamp((p.progress || 0) - 1, 0, checkpoints.length - 1); saveState(); renderAll(); toast(`${p.name} moved back`); });
     document.getElementById("resetBtn").addEventListener("click", () => { if (confirm("Reset this browser's Slovenia board state?")) { localStorage.removeItem(STORE_KEY); state = loadState(); renderAll(); toast("Board reset"); } });
 
     document.getElementById("addIdeaBtn").addEventListener("click", () => {
@@ -2099,7 +2685,8 @@
       const desc = document.getElementById("newIdeaDesc").value.trim() || "New group idea. Vote first, commit later.";
       if (!title) { toast("Add an idea name first"); return; }
       state.ideas = allIdeas();
-      state.ideas.push({ id: `custom_${Date.now()}`, emoji: "💡", title, city, img: "", region: "bench", day: 0, slot: "Add-on", desc });
+      state.ideas.push({ id: `custom_${Date.now()}`, emoji: "💡", title, city, desc });
+      logEvent("💡", `${selectedPlayer().name} pitched a new idea: “${title}”`);
       document.getElementById("newIdeaTitle").value = "";
       document.getElementById("newIdeaCity").value = "";
       document.getElementById("newIdeaDesc").value = "";
@@ -2120,22 +2707,39 @@
       await navigator.clipboard.writeText(lines.join("\n")); toast("Idea results copied");
     });
 
+
     document.getElementById("copySummaryBtn").addEventListener("click", async () => {
-      const groupDoneCount = Object.values(state.groupDone).filter(Boolean).length;
+      const groupDoneCount = groupTasks.filter(t => state.groupDone[t.id]).length;
       const lines = [
         "Slovenia Crew Trip — Board Summary",
-        "Dates: 11 to 15 Sep 2026",
-        "Route: London to Trieste, drive across the border, base Ljubljana then Bled",
-        `Group boss progress: ${groupDoneCount}/${groupTasks.length}`,
+        "Dates: Fri 11 → Tue 15 Sep 2026",
+        "Route: London → Trieste (TRS), drive across the border — Ljubljana then Bled",
+        `Group boss progress: ${groupDoneCount}/${groupTasks.length} — at "${checkpoints[groupProgressIndex()].title}"`,
         "",
-        "Traveller progress:",
-        ...state.players.map(p => { const v = vibeById(p.vibe); return `• ${p.name}${v ? ` (${v.name})` : ""}: ${checkpoints[computePlayerProgress(p)].title}`; }),
+        "Crew:",
+        ...state.players.map(p => { const v = vibeById(p.vibe); return `• ${p.piece ? p.piece + " " : ""}${p.name}${v ? ` (${v.name})` : ""}`; }),
         "",
         "Shortlist ideas:",
         ...allIdeas().filter(i => ideaStatus(tallyIdea(i.id)).label === "Shortlist").map(i => `• ${i.title} (${i.city})`),
         "",
         "Open group bosses:",
-        ...groupTasks.filter(t => !state.groupDone[t.id]).map(t => `• ${t.title}`)
+        ...groupTasks.filter(t => !state.groupDone[t.id]).map(t => `• ${t.title}`),
+        "",
+        "Crew Desk:",
+        ...(state.desk ? state.desk.rooms : []).map(r => {
+          const o = (r.options || []).find(x => x.id === r.chosen);
+          const owners = r.owners.map(i => state.players[i] ? state.players[i].name : "").filter(Boolean).join(", ");
+          return `• ${r.title}: ${r.status === "decided" ? ("✅ " + (o ? o.title : "decided")) : `open (${(r.options || []).length} option${(r.options || []).length === 1 ? "" : "s"})`}${owners ? ` — on it: ${owners}` : ""}`;
+        }),
+        "",
+        "Draft itinerary:",
+        ...TRIP_DAYS.map(d => { const its = (state.plan ? state.plan.items : []).filter(it => it.dayId === d.id); return `• ${d.date} (${d.city}): ${its.length ? its.map(it => it.title).join("; ") : "—"}`; }),
+        "",
+        "The Bookies — form table:",
+        ...state.players.map((p, i) => ({ name: p.name, bal: playerBalance(i) })).sort((a, b) => b.bal - a.bal).map((r, n) => `${n + 1}. ${r.name}: ${r.bal.toLocaleString()} chips`),
+        "",
+        "Prizes up for grabs:",
+        ...state.bookie.markets.filter(m => m.status !== "settled" && m.type !== "yesno" && m.prize).map(m => `• ${m.prize} — ${m.title}`)
       ];
       await navigator.clipboard.writeText(lines.join("\n")); toast("Summary copied");
     });
@@ -2145,23 +2749,6 @@
       const raw = prompt("Paste JSON snapshot");
       if (!raw) return;
       try { state = { ...structuredClone(defaultState), ...JSON.parse(raw) }; saveState(); renderAll(); toast("Snapshot imported"); } catch (e) { alert("Invalid JSON snapshot"); }
-    });
-
-    document.getElementById("copyItinBtn").addEventListener("click", async () => {
-      const chosen = allIdeas().filter(ideaIsIn);
-      const lines = ["Slovenia Crew Trip — draft itinerary (built from votes)", "11 to 15 Sep 2026 · Trieste → Ljubljana → Bled", ""];
-      ITIN_DAYS.forEach(d => {
-        lines.push(`Day ${d.n} · ${d.title} (${d.date})`);
-        const items = [
-          ...d.anchors.map(a => ({ slot: a.slot, t: a.t, rank: SLOT_RANK[a.slot] || 2 })),
-          ...chosen.filter(i => i.day === d.n).map(i => ({ slot: i.slot || "Anytime", t: i.title + (i.weather ? (i.weather === "clear" ? " (if clear)" : " (if cloudy)") : ""), rank: SLOT_RANK[i.slot] || 2 }))
-        ].sort((a, b) => a.rank - b.rank);
-        items.forEach(it => lines.push(`  • ${it.slot}: ${it.t}`));
-        lines.push("");
-      });
-      const benchIn = chosen.filter(i => i.region === "bench");
-      if (benchIn.length) lines.push("Optional add-ons (need a swap or extra day): " + benchIn.map(i => i.title).join(", "));
-      try { await navigator.clipboard.writeText(lines.join("\n")); toast("Itinerary copied"); } catch (e) { toast("Copy failed — try again"); }
     });
 
     const mkTypeSel = document.getElementById("newMkType");
@@ -2181,15 +2768,45 @@
         m.runners = raw.map((label, i) => ({ id: String(i), label, emoji: "🎯" }));
       }
       ensureBookie(); state.bookie.markets.push(m);
+      logEvent("🎲", `${selectedPlayer().name} started a bet: “${title}”`);
       ["newMkTitle", "newMkDesc", "newMkPrize", "newMkRunners"].forEach(id => { const el = document.getElementById(id); if (el) el.value = ""; });
       saveState(); renderAll(); toast("Bet added");
     });
     const restoreMarketsBtn = document.getElementById("restoreMarketsBtn");
     if (restoreMarketsBtn) restoreMarketsBtn.addEventListener("click", restoreStarterMarkets);
+
     const addRoomBtn = document.getElementById("addRoomBtn");
     if (addRoomBtn) addRoomBtn.addEventListener("click", () => {
       const t = document.getElementById("newRoomTitle"), d = document.getElementById("newRoomDesc");
       addDeskRoom(t.value, d.value); t.value = ""; d.value = "";
+    });
+
+    const planClearBtn = document.getElementById("planClearBtn");
+    if (planClearBtn) planClearBtn.addEventListener("click", () => { if (state.plan.items.length && confirm("Clear the whole itinerary?")) clearPlan(); });
+    const planAddBtn = document.getElementById("planAddBtn");
+    if (planAddBtn) planAddBtn.addEventListener("click", () => { const t = document.getElementById("planAddTitle"), tm = document.getElementById("planAddTime"), dsel = document.getElementById("planAddDay"); addPlanItem(dsel.value || "d12", t.value, tm ? tm.value : ""); t.value = ""; if (tm) tm.value = ""; });
+    const planLockBtn = document.getElementById("planLockBtn");
+    if (planLockBtn) planLockBtn.addEventListener("click", () => { state.groupDone.itinerary = !state.groupDone.itinerary; logEvent(state.groupDone.itinerary ? "🔒" : "🔓", `${selectedPlayer().name} ${state.groupDone.itinerary ? "locked" : "unlocked"} the itinerary`); if (state.groupDone.itinerary) { celebrate(); buzz(14); } saveState(); renderAll(); toast(state.groupDone.itinerary ? "Itinerary locked 🔒" : "Itinerary unlocked"); });
+    const planCopyBtn = document.getElementById("planCopyBtn");
+    if (planCopyBtn) planCopyBtn.addEventListener("click", async () => {
+      const lines = ["Slovenia Crew Trip — Itinerary", "Out Fri 11 Sep 2026 · back Tue 15 Sep 2026 · Trieste → Ljubljana → Bled", ""];
+      const sortByWhen = key => (a, b) => (a[key].date + (a[key].time || "99:99")).localeCompare(b[key].date + (b[key].time || "99:99"));
+      const arrs = state.players.filter(p => p.arrival && p.arrival.date).sort(sortByWhen("arrival"));
+      const deps = state.players.filter(p => p.departure && p.departure.date).sort(sortByWhen("departure"));
+      if (arrs.length) { lines.push("Arrivals:"); arrs.forEach(p => lines.push(`  🛬 ${p.name}: ${arrivalWhen(p.arrival)}`)); lines.push(""); }
+      if (deps.length) { lines.push("Departures:"); deps.forEach(p => lines.push(`  🛫 ${p.name}: ${arrivalWhen(p.departure)}`)); lines.push(""); }
+      TRIP_DAYS.forEach(d => {
+        if (dayIsOff(d.id)) return;
+        const its = state.plan.items.filter(it => it.dayId === d.id).slice().sort((a, b) => (a.time || "99:99").localeCompare(b.time || "99:99"));
+        const arr = arrivalsForDay(d.iso), dep = departuresForDay(d.iso);
+        const note = dayNote(d);
+        lines.push(`${d.date} — ${d.city}${note ? ` (${note})` : ""}`);
+        if (arr.length) lines.push(`  🛬 In: ${arr.map(x => `${x.p.name}${x.a.time ? " " + x.a.time : ""}`).join(", ")}`);
+        if (dep.length) lines.push(`  🛫 Out: ${dep.map(x => `${x.p.name}${x.a.time ? " " + x.a.time : ""}`).join(", ")}`);
+        if (its.length) its.forEach(it => lines.push(`  • ${it.time ? it.time + " — " : ""}${it.title}`));
+        else if (!arr.length && !dep.length) lines.push("  • —");
+      });
+      await navigator.clipboard.writeText(lines.join("\n")); toast("Itinerary copied");
     });
 
     document.getElementById("syncChip").addEventListener("click", () => remotePull({ manual: true }));
@@ -2199,7 +2816,7 @@
     setSyncChip(hasRemoteSync() ? "syncing" : "disabled");
     remotePull({ initial: true });
     startSyncLoops();
-    setInterval(renderHero, 3600000); // refresh the countdown hourly
+    setInterval(renderCountdown, 30000); // keep the countdown + Ljubljana clock ticking
   </script>
 </body>
 </html>
