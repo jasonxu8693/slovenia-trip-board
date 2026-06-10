@@ -704,7 +704,7 @@
               <button class="hub-card" data-jump="tasks">
                 <span class="hub-icon">🐉</span>
                 <span class="hub-title">Group tasks</span>
-                <span class="hub-copy">Route, budget, caves, stays, cars and dinners.</span>
+                <span class="hub-copy">Route, caves, stays, cars and dinners.</span>
                 <span class="hub-status">Shared progress</span>
               </button>
               <button class="hub-card" data-jump="settings">
@@ -819,7 +819,7 @@
                 <p class="panel-sub">The shared to-do list. Open <strong>Options &amp; votes</strong> under a task to drop in links and vote right here — then tick the boss and the whole crew's tokens move forward.</p>
               </div>
               <div class="pill-row" style="margin:0">
-                <span class="pill warn" id="groupTasksBadge">0 of 10 done</span>
+                <span class="pill warn" id="groupTasksBadge">0 of 9 done</span>
               </div>
             </div>
             <div style="padding:20px">
@@ -1154,16 +1154,15 @@
     // group's current stop and they all advance together as bosses get cleared.
     const checkpoints = [
       { id: "spawn", title: "Trip start", meta: "Go", icon: "🛫", type: "personal", x: 10.5, y: 82 },
-      { id: "routeLock", title: "Lock the route", meta: "Boss 1", icon: "🗺️", type: "group", x: 20, y: 63 },
-      { id: "budgetPact", title: "Set the budget", meta: "Boss 2", icon: "💶", type: "group", x: 26, y: 39 },
-      { id: "caveCall", title: "Cave plan", meta: "Boss 3", icon: "🕳️", type: "boss", x: 42, y: 22 },
-      { id: "ljubljanaAccom", title: "Ljubljana stay", meta: "Boss 4", icon: "🏙️", type: "boss", x: 56, y: 26 },
-      { id: "bledAccom", title: "Bled stay", meta: "Boss 5", icon: "🏡", type: "boss", x: 67, y: 36 },
-      { id: "vehicle", title: "Lock the ride", meta: "Boss 6", icon: "🚘", type: "boss", x: 70, y: 53 },
-      { id: "activityShortlist", title: "Activity shortlist", meta: "Boss 7", icon: "⚔️", type: "group", x: 84, y: 61 },
-      { id: "itinerary", title: "Build itinerary", meta: "Boss 8", icon: "📍", type: "group", x: 78, y: 76 },
-      { id: "dinners", title: "Group dinners", meta: "Boss 9", icon: "🍽️", type: "group", x: 60, y: 78 },
-      { id: "offlinePack", title: "Trip ready", meta: "Boss 10", icon: "✨", type: "boss", x: 42, y: 68 }
+      { id: "routeLock", title: "Lock the route", meta: "Boss 1", icon: "🗺️", type: "group", x: 24, y: 52 },
+      { id: "caveCall", title: "Cave plan", meta: "Boss 2", icon: "🕳️", type: "boss", x: 42, y: 22 },
+      { id: "ljubljanaAccom", title: "Ljubljana stay", meta: "Boss 3", icon: "🏙️", type: "boss", x: 56, y: 26 },
+      { id: "bledAccom", title: "Bled stay", meta: "Boss 4", icon: "🏡", type: "boss", x: 67, y: 36 },
+      { id: "vehicle", title: "Lock the ride", meta: "Boss 5", icon: "🚘", type: "boss", x: 70, y: 53 },
+      { id: "activityShortlist", title: "Activity shortlist", meta: "Boss 6", icon: "⚔️", type: "group", x: 84, y: 61 },
+      { id: "itinerary", title: "Build itinerary", meta: "Boss 7", icon: "📍", type: "group", x: 78, y: 76 },
+      { id: "dinners", title: "Group dinners", meta: "Boss 8", icon: "🍽️", type: "group", x: 60, y: 78 },
+      { id: "offlinePack", title: "Trip ready", meta: "Boss 9", icon: "✨", type: "boss", x: 42, y: 68 }
     ];
 
     const colours = ["#4f8bff", "#ef4d4d", "#5fd39a", "#ffce7a", "#8fb6ff", "#ff9aa2", "#9ec4ff", "#c2b6ff", "#ffffff"];
@@ -1260,7 +1259,6 @@
       ],
       groupDone: {
         routeLock: false,
-        budgetPact: false,
         caveCall: false,
         ljubljanaAccom: false,
         bledAccom: false,
@@ -1278,7 +1276,6 @@
 
     const groupTasks = [
       { id: "routeLock", icon: "🗺️", title: "Lock the route", desc: "Confirm dates, the Trieste flights, the cross-border drive and arrival/return times.", priority: "P1" },
-      { id: "budgetPact", icon: "💶", title: "Set the budget", desc: "Agree a per-person budget anchor (roughly £1,000–1,200pp planning baseline).", priority: "P1" },
       { id: "caveCall", icon: "🕳️", title: "Lock the cave plan", desc: "Postojna + Predjama (default) or Škocjan. Then book timed tickets.", priority: "P1" },
       { id: "ljubljanaAccom", icon: "🏙️", title: "Book the Ljubljana stay", desc: "Central, parking-friendly, easy for an arrival night for nine.", priority: "P2" },
       { id: "bledAccom", icon: "🏡", title: "Book the Bled stay", desc: "Group Airbnb or apartment cluster — enough real beds and bathrooms.", priority: "P2" },
