@@ -641,7 +641,7 @@
           <div class="glass countdown-card">
             <div class="label">Countdown to Slovenia</div>
             <div class="big"><span id="countdownDays">—</span></div>
-            <div class="micro" id="countdownSub">Trieste → Ljubljana → Bled · 11–15 Sep 2026</div>
+            <div class="micro" id="countdownSub">Fly Trieste · Bled base · Julian Alps · 11–15 Sep 2026</div>
             <div class="pill-row">
               <span class="pill hot">🍂 Early autumn in the Alps</span>
               <span class="pill" id="ljubljanaNowPill">🇸🇮 Ljubljana</span>
@@ -1186,8 +1186,8 @@
     // region/day/slot metadata is kept from the old auto-itinerary era — the new
     // engine ignores it, but custom + synced ideas stay compatible.
     const defaultIdeas = [
-      { id: "ljubljanaOldTown", emoji: "🐉", title: "Ljubljana old town + castle", city: "Ljubljana", img: "ljubljana.jpg", region: "ljubljana", day: 1, slot: "Afternoon", desc: "Dragon Bridge, Triple Bridge, Central Market, castle funicular and riverside bars. Easy arrival-day win." },
-      { id: "postojnaPredjama", emoji: "🕳️", title: "Postojna Cave + Predjama Castle", city: "Karst", img: "predjama.jpg", region: "karst", day: 2, slot: "Morning", desc: "Iconic cave train through huge chambers, then the clifftop castle built into a cave mouth. Best default for a big group." },
+      { id: "ljubljanaOldTown", emoji: "🐉", title: "Ljubljana old town + castle", city: "Ljubljana", img: "ljubljana.jpg", region: "ljubljana", day: 5, slot: "Midday", desc: "Dragon Bridge, Triple Bridge, castle funicular and riverside bars. Best as a half-day + lunch on the way out (Tue), paired with the caves — no nature day lost." },
+      { id: "postojnaPredjama", emoji: "🕳️", title: "Postojna Cave + Predjama Castle", city: "Karst", img: "predjama.jpg", region: "karst", day: 5, slot: "Afternoon", desc: "Iconic cave train through huge chambers, then the clifftop castle built into a cave mouth. Sits right on the drive south to Trieste — ideal as the last-day stop before the flight." },
       { id: "skocjan", emoji: "🌋", title: "Škocjan Caves", city: "Karst", img: "skocjan.jpg", region: "karst", day: 2, slot: "Alt", desc: "More dramatic underground river canyon (UNESCO), but more walking. The southern cave swap, closest to Trieste." },
       { id: "kriznaJama", emoji: "🕯️", title: "Križna Jama", city: "Karst", img: "", region: "karst", day: 2, slot: "Alt", desc: "The adventurous cave swap — small groups, boats across underground lakes. Book well ahead." },
       { id: "velikaPlanina", emoji: "🚠", title: "Velika Planina", city: "Kamnik", img: "velika.jpg", region: "kamnik", day: 3, slot: "Morning", desc: "Cable car + chairlift to the shepherds' huts. Adds alpine texture on the way north — go only if the lifts run." },
@@ -1235,11 +1235,11 @@
 
     // Itinerary builder — fixed trip skeleton; the crew builds the day-by-day plan onto these days.
     const TRIP_DAYS = [
-      { id: "d11", iso: "2026-09-11", date: "Fri 11 Sep", city: "Trieste → Ljubljana", logistics: true, note: "Land Trieste, pick up the cars, drive ~1 h — first night in Ljubljana." },
-      { id: "d12", iso: "2026-09-12", date: "Sat 12 Sep", city: "Ljubljana / Karst", note: "Cave day — Postojna + Predjama or Škocjan. Caves are ~10°C, bring a layer." },
-      { id: "d13", iso: "2026-09-13", date: "Sun 13 Sep", city: "Ljubljana → Bled", note: "Velika Planina on the way north if the lifts run, then check into the Bled base." },
-      { id: "d14", iso: "2026-09-14", date: "Mon 14 Sep", city: "Bled / Bohinj", note: "Vintgar early (timed entry), Bohinj after — Vogel if clear, Savica if cloudy." },
-      { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Bled → Home", logistics: true, note: "Last lake morning, then drive back to Trieste, return the cars, fly home." }
+      { id: "d11", iso: "2026-09-11", date: "Fri 11 Sep", city: "Land Trieste → Bled", logistics: true, note: "Land Trieste 23:00 (FR168). Grab the hire cars and drive to the Bled base (~1h45) — late one, no plans tonight. (Gentler option: split the drive with a night near Ljubljana.)" },
+      { id: "d12", iso: "2026-09-12", date: "Sat 12 Sep", city: "Bled lake day", note: "Settle into Bled. Vintgar Gorge early (timed entry), row out to Bled Island + the 99 steps, Bled Castle at golden hour, kremšnita by the lake." },
+      { id: "d13", iso: "2026-09-13", date: "Sun 13 Sep", city: "Bohinj & the Alps", note: "Lake Bohinj — quieter, wilder, properly alpine. Vogel cable car if clear, Savica waterfall if cloudy." },
+      { id: "d14", iso: "2026-09-14", date: "Mon 14 Sep", city: "Soča Valley", note: "The wow nature day: over the Vršič pass to Lake Jasna and the emerald Soča (walks / rafting). Or a second slow Bled + Triglav day if the pass feels like too much driving." },
+      { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Ljubljana + caves → home", logistics: true, note: "Full day — flight's not till 22:15. Drive south: half-day Ljubljana + lunch, then Postojna + Predjama caves en route, then Trieste for FR169. Leave a comfy airport buffer. (Skip Ljubljana for more nature if you'd rather.)" }
     ];
 
     const defaultState = {
@@ -2786,7 +2786,7 @@
     if (planLockBtn) planLockBtn.addEventListener("click", () => { state.groupDone.itinerary = !state.groupDone.itinerary; logEvent(state.groupDone.itinerary ? "🔒" : "🔓", `${selectedPlayer().name} ${state.groupDone.itinerary ? "locked" : "unlocked"} the itinerary`); if (state.groupDone.itinerary) { celebrate(); buzz(14); } saveState(); renderAll(); toast(state.groupDone.itinerary ? "Itinerary locked 🔒" : "Itinerary unlocked"); });
     const planCopyBtn = document.getElementById("planCopyBtn");
     if (planCopyBtn) planCopyBtn.addEventListener("click", async () => {
-      const lines = ["Slovenia Crew Trip — Itinerary", "Out Fri 11 Sep 2026 · back Tue 15 Sep 2026 · Trieste → Ljubljana → Bled", ""];
+      const lines = ["Slovenia Crew Trip — Itinerary", "FR168 land Trieste 23:00 Fri 11 Sep · FR169 dep 22:15 Tue 15 Sep · Bled base, Julian Alps", ""];
       const sortByWhen = key => (a, b) => (a[key].date + (a[key].time || "99:99")).localeCompare(b[key].date + (b[key].time || "99:99"));
       const arrs = state.players.filter(p => p.arrival && p.arrival.date).sort(sortByWhen("arrival"));
       const deps = state.players.filter(p => p.departure && p.departure.date).sort(sortByWhen("departure"));
