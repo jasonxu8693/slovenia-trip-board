@@ -626,7 +626,7 @@
     <header class="hero">
       <div class="hero-content">
         <div>
-          <div class="eyebrow"><span class="flag-ribbon"><i class="fw"></i><i class="fb"></i><i class="fr"></i></span> Trieste → Ljubljana · Bled · Julian Alps · 11–15 Sep 2026</div>
+          <div class="eyebrow"><span class="flag-ribbon"><i class="fw"></i><i class="fb"></i><i class="fr"></i></span> Fly Trieste · Bled base · Julian Alps · 11–15 Sep 2026</div>
           <h1><span>Slovenia crew</span><span class="shine">trip board</span></h1>
           <p>Votes, flights, bookings and group progress — one shared board for the whole crew.</p>
           <div class="hero-actions">
@@ -1156,7 +1156,7 @@
       { id: "spawn", title: "Trip start", meta: "Go", icon: "🛫", type: "personal", x: 10.5, y: 82 },
       { id: "routeLock", title: "Lock the route", meta: "Boss 1", icon: "🗺️", type: "group", x: 24, y: 52 },
       { id: "caveCall", title: "Cave plan", meta: "Boss 2", icon: "🕳️", type: "boss", x: 42, y: 22 },
-      { id: "ljubljanaAccom", title: "Ljubljana stay", meta: "Boss 3", icon: "🏙️", type: "boss", x: 56, y: 26 },
+      { id: "ljubljanaAccom", title: "Arrival stay", meta: "Boss 3", icon: "🛏️", type: "boss", x: 56, y: 26 },
       { id: "bledAccom", title: "Bled stay", meta: "Boss 4", icon: "🏡", type: "boss", x: 67, y: 36 },
       { id: "vehicle", title: "Lock the ride", meta: "Boss 5", icon: "🚘", type: "boss", x: 70, y: 53 },
       { id: "activityShortlist", title: "Activity shortlist", meta: "Boss 6", icon: "⚔️", type: "group", x: 84, y: 61 },
@@ -1190,7 +1190,7 @@
       { id: "postojnaPredjama", emoji: "🕳️", title: "Postojna Cave + Predjama Castle", city: "Karst", img: "predjama.jpg", region: "karst", day: 2, slot: "Morning", desc: "Iconic cave train through huge chambers, then the clifftop castle built into a cave mouth. Right by the Friday-night Trieste base — knock it out Saturday morning on the way up to Bled." },
       { id: "skocjan", emoji: "🌋", title: "Škocjan Caves", city: "Karst", img: "skocjan.jpg", region: "karst", day: 2, slot: "Alt", desc: "More dramatic underground river canyon (UNESCO), but more walking. The southern cave swap, closest to Trieste." },
       { id: "kriznaJama", emoji: "🕯️", title: "Križna Jama", city: "Karst", img: "", region: "karst", day: 2, slot: "Alt", desc: "The adventurous cave swap — small groups, boats across underground lakes. Book well ahead." },
-      { id: "velikaPlanina", emoji: "🚠", title: "Velika Planina", city: "Kamnik", img: "velika.jpg", region: "kamnik", day: 3, slot: "Morning", desc: "Cable car + chairlift to the shepherds' huts. Adds alpine texture on the way north — go only if the lifts run." },
+      { id: "velikaPlanina", emoji: "🚠", title: "Velika Planina", city: "Kamnik", img: "velika.jpg", region: "kamnik", day: 0, slot: "Add-on", desc: "Shepherds'-hut plateau by cable car — lovely, but it's over near Kamnik (NE), off the Bled route. An optional detour, not a core day." },
       { id: "bledCastle", emoji: "🏰", title: "Bled Castle", city: "Bled", img: "bledcastle.jpg", region: "bled", day: 3, slot: "Sunset", desc: "Clifftop castle over the lake — best light and views late afternoon." },
       { id: "ojstrica", emoji: "🌄", title: "Ojstrica viewpoint", city: "Bled", img: "", region: "bled", day: 3, slot: "Sunset", desc: "Short steep walk to the classic Bled postcard view. Sunset if the legs are willing." },
       { id: "vintgar", emoji: "🌊", title: "Vintgar Gorge", city: "near Bled", img: "vintgar.jpg", region: "bled", day: 4, slot: "Morning", desc: "Emerald river on a timed one-way boardwalk. Book an early slot to beat the crowds." },
@@ -1212,12 +1212,12 @@
     const defaultBookie = {
       startingChips: 1000,
       markets: [
-        { id: "mk_flights", emoji: "✈️", title: "First to book their flights", desc: "Books and pays for both Trieste legs first.", type: "field", prize: "🛏️ First pick of bedrooms at the Bled house", status: "open", winner: null, bets: {} },
+        { id: "mk_flights", emoji: "✈️", title: "First fully checked in for FR168", desc: "Flights are booked (FR168 out / FR169 back) — who's first to do online check-in + screenshot the boarding pass?", type: "field", prize: "🛏️ First pick of bedrooms at the Bled house", status: "open", winner: null, bets: {} },
         { id: "mk_accomLast", emoji: "💸", title: "Last to pay their accom share", desc: "Wooden spoon for the slowest payer.", type: "field", prize: "🍺 Forfeit: buys the first round of Laško", status: "open", winner: null, bets: {} },
         { id: "mk_driver", emoji: "🚗", title: "Best driver on the mountain roads", desc: "Group vote after the Bohinj / pass drives.", type: "field", prize: "🎶 Controls the aux for a full day", status: "open", winner: null, bets: {} },
         { id: "mk_cave", emoji: "🧥", title: "First to moan it's cold in the cave", desc: "Postojna is 10°C — who cracks first.", type: "field", prize: "📸 Forfeit: group photographer all next day", status: "open", winner: null, bets: {} },
         { id: "mk_steps", emoji: "🔔", title: "First to bottle the 99 steps on Bled Island", desc: "Who taps out on the climb to the bell.", type: "field", prize: "🍰 Buys everyone kremšnita at the lake", status: "open", winner: null, bets: {} },
-        { id: "mk_lost", emoji: "🌙", title: "Do we lose someone in Ljubljana on night one?", desc: "Yes or no. Settle the morning after.", type: "yesno", prize: "", status: "open", winner: null, bets: {} },
+        { id: "mk_lost", emoji: "🌙", title: "Do we lose someone on a night out?", desc: "Any night — Bled or the last one out. Yes or no, settle the morning after.", type: "yesno", prize: "", status: "open", winner: null, bets: {} },
         { id: "mk_vintgar", emoji: "🌅", title: "Does everyone make the early Vintgar start?", desc: "All at the gorge gate on time.", type: "yesno", prize: "", status: "open", winner: null, bets: {} }
       ]
     };
@@ -1225,10 +1225,10 @@
     // Crew Desk — own a job, share options, group votes, owner locks the pick.
     const defaultDesk = {
       rooms: [
-        { id: "stay_ljubljana", emoji: "🏙️", kind: "accom", title: "Ljubljana stay", desc: "Where we base in Ljubljana — central, parking-friendly, room for nine.", owners: [], options: [], status: "open", chosen: null },
-        { id: "stay_bled", emoji: "🏡", kind: "accom", title: "Bled house / stay", desc: "The Bled base — group Airbnb or apartment cluster with enough beds and bathrooms.", owners: [], options: [], status: "open", chosen: null },
+        { id: "stay_ljubljana", emoji: "🛏️", kind: "accom", title: "Friday-night stay (near Trieste)", desc: "One night near Trieste / the Karst to crash after the 23:00 landing — short drive, easy parking for two cars.", owners: [], options: [], status: "open", chosen: null },
+        { id: "stay_bled", emoji: "🏡", kind: "accom", title: "Bled house (3 nights)", desc: "The main base — group Airbnb or apartment cluster for 3 nights, enough real beds and bathrooms.", owners: [], options: [], status: "open", chosen: null },
         { id: "car_hire", emoji: "🚘", kind: "car", title: "Car hire from Trieste", desc: "Two cars or a 9-seater from Trieste, driven across the border. Who's driving and who's researching?", owners: [], drivers: [], options: [], status: "open", chosen: null },
-        { id: "dinner_ljubljana", emoji: "🍖", kind: "dinner", title: "Ljubljana group dinner", desc: "One big group dinner in Ljubljana — riverside or old town.", owners: [], options: [], status: "open", chosen: null },
+        { id: "dinner_ljubljana", emoji: "🍖", kind: "dinner", title: "Last-day meal (Ljubljana / Trieste)", desc: "Tuesday's a travel day — a relaxed Ljubljana lunch on the way out, or a farewell dinner near Trieste before the flight.", owners: [], options: [], status: "open", chosen: null },
         { id: "dinner_bled", emoji: "🍲", kind: "dinner", title: "Bled group dinner", desc: "Lakeside dinner together on a Bled night.", owners: [], options: [], status: "open", chosen: null }
       ]
     };
@@ -1239,7 +1239,7 @@
       { id: "d12", iso: "2026-09-12", date: "Sat 12 Sep", city: "Caves → Bled", note: "Caves first thing, right by where you slept — Postojna + Predjama (or Škocjan). Then the scenic drive up to the Bled base (~1h45). Lakeside evening + first dinner." },
       { id: "d13", iso: "2026-09-13", date: "Sun 13 Sep", city: "Bled lake day", note: "Vintgar Gorge early (timed entry), row out to Bled Island + the 99 steps, Bled Castle at golden hour, kremšnita by the lake." },
       { id: "d14", iso: "2026-09-14", date: "Mon 14 Sep", city: "Big alpine day", note: "One proper mountain day — Lake Bohinj + Vogel cable car (Savica if cloudy), or push to the Soča Valley over the Vršič pass. Pick one, don't cram both." },
-      { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Bled → Ljubljana → fly", logistics: true, note: "Relaxed last day (flight's 22:15). Slow Bled morning, drive to Ljubljana (~40 min) for a half-day + lunch, then on to Trieste for FR169. Caves already done, so no rush." }
+      { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Bled → south → fly", logistics: true, note: "Relaxed last day (flight's 22:15). Slow Bled morning, then drive south. Half-day Ljubljana + lunch is the easy pick — OR skip the city for a Vipava/Karst wine lunch, the Piran coast, or just chill in Trieste before FR169. Caves already done, so no rush." }
     ];
 
     const defaultState = {
@@ -1277,12 +1277,12 @@
     const groupTasks = [
       { id: "routeLock", icon: "🗺️", title: "Lock the route", desc: "Confirm dates, the Trieste flights, the cross-border drive and arrival/return times.", priority: "P1" },
       { id: "caveCall", icon: "🕳️", title: "Lock the cave plan", desc: "Postojna + Predjama (default) or Škocjan. Then book timed tickets.", priority: "P1" },
-      { id: "ljubljanaAccom", icon: "🏙️", title: "Book the Ljubljana stay", desc: "Central, parking-friendly, easy for an arrival night for nine.", priority: "P2" },
+      { id: "ljubljanaAccom", icon: "🛏️", title: "Book the Friday-night stay", desc: "One night near Trieste / the Karst to crash after the 23:00 landing, before driving up to Bled.", priority: "P2" },
       { id: "bledAccom", icon: "🏡", title: "Book the Bled stay", desc: "Group Airbnb or apartment cluster — enough real beds and bathrooms.", priority: "P2" },
       { id: "vehicle", icon: "🚘", title: "Lock the ride plan", desc: "Two hire cars or one 9-seater van from Trieste. Confirm cross-border, drivers and the vignette.", priority: "P2" },
       { id: "activityShortlist", icon: "⚔️", title: "Choose the activity shortlist", desc: "Pick the strongest caves, gorge, cable car and lake days from the Market.", priority: "P2" },
       { id: "itinerary", icon: "📍", title: "Build the itinerary", desc: "Hand-build the day-by-day plan on the Itinerary tab, then lock it.", priority: "P2" },
-      { id: "dinners", icon: "🍽️", title: "Book group dinners", desc: "Reserve Ljubljana and Bled dinners once the stays are set.", priority: "P2" },
+      { id: "dinners", icon: "🍽️", title: "Book group dinners", desc: "Reserve the Bled group dinners (and a last-day meal in Ljubljana or Trieste) once the stays are set.", priority: "P2" },
       { id: "offlinePack", icon: "📲", title: "Generate the launch pack", desc: "Tickets, accommodation, cars, maps, insurance and emergency contacts saved.", priority: "P3" }
     ];
 
@@ -1293,6 +1293,35 @@
       if (!Array.isArray(stored)) return base;
       const custom = stored.filter(i => i && typeof i.id === "string" && i.id.indexOf("custom_") === 0);
       return [...base, ...custom];
+    }
+
+    // Refresh default Crew Desk rooms / Bookies markets to the current labels (titles, descs, prizes)
+    // while preserving live data (owners, options, votes, bets, status). Keeps any custom rooms/bets.
+    function normalizeDeskRooms(stored) {
+      const base = structuredClone(defaultDesk.rooms);
+      if (!Array.isArray(stored)) return base;
+      const byId = {}; stored.forEach(r => { if (r && r.id) byId[r.id] = r; });
+      const baseIds = base.map(r => r.id);
+      const merged = base.map(d => {
+        const s = byId[d.id]; if (!s) return d;
+        const out = { ...d, owners: Array.isArray(s.owners) ? s.owners : [], options: Array.isArray(s.options) ? s.options : [], status: s.status || "open", chosen: s.chosen != null ? s.chosen : null };
+        if (d.kind === "car") out.drivers = Array.isArray(s.drivers) ? s.drivers : [];
+        return out;
+      });
+      const custom = stored.filter(r => r && typeof r.id === "string" && !baseIds.includes(r.id));
+      return [...merged, ...custom];
+    }
+    function normalizeBookieMarkets(stored) {
+      const base = structuredClone(defaultBookie.markets);
+      if (!Array.isArray(stored)) return base;
+      const byId = {}; stored.forEach(m => { if (m && m.id) byId[m.id] = m; });
+      const baseIds = base.map(m => m.id);
+      const merged = base.map(d => {
+        const s = byId[d.id]; if (!s) return d;
+        return { ...d, status: s.status || "open", winner: s.winner != null ? s.winner : null, bets: (s.bets && typeof s.bets === "object") ? s.bets : {} };
+      });
+      const custom = stored.filter(m => m && typeof m.id === "string" && !baseIds.includes(m.id));
+      return [...merged, ...custom];
     }
 
     let state = loadState();
@@ -1309,8 +1338,8 @@
           groupDone: { ...defaultState.groupDone, ...(parsed.groupDone || {}) },
           ideas: normalizeIdeas(parsed.ideas),
           ideaVotes: parsed.ideaVotes || {},
-          bookie: parsed.bookie || structuredClone(defaultBookie),
-          desk: parsed.desk || structuredClone(defaultDesk),
+          bookie: parsed.bookie ? { startingChips: parsed.bookie.startingChips || 1000, markets: normalizeBookieMarkets(parsed.bookie.markets) } : structuredClone(defaultBookie),
+          desk: parsed.desk ? { rooms: normalizeDeskRooms(parsed.desk.rooms) } : structuredClone(defaultDesk),
           plan: parsed.plan || { generatedAt: null, items: [] },
           feed: Array.isArray(parsed.feed) ? parsed.feed : []
         };
@@ -1339,8 +1368,8 @@
         groupDone: { ...defaultState.groupDone, ...(remote.groupDone || {}) },
         ideas: normalizeIdeas(remote.ideas),
         ideaVotes: remote.ideaVotes || {},
-        bookie: remote.bookie || structuredClone(defaultBookie),
-        desk: remote.desk || structuredClone(defaultDesk),
+        bookie: remote.bookie ? { startingChips: remote.bookie.startingChips || 1000, markets: normalizeBookieMarkets(remote.bookie.markets) } : structuredClone(defaultBookie),
+        desk: remote.desk ? { rooms: normalizeDeskRooms(remote.desk.rooms) } : structuredClone(defaultDesk),
         plan: remote.plan || { generatedAt: null, items: [] },
         feed: Array.isArray(remote.feed) ? remote.feed : []
       };
