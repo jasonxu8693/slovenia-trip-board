@@ -86,7 +86,7 @@
       background:
         linear-gradient(180deg, rgba(6, 14, 30, 0.30) 0%, rgba(6, 14, 30, 0.55) 52%, rgba(6, 13, 28, 0.94) 100%),
         linear-gradient(110deg, rgba(8, 24, 56, 0.62), rgba(8, 18, 40, 0.18)),
-        url("images/bled-hero.jpg") center 30% / cover no-repeat;
+        url("images/scene-ojstrica.png") center 46% / cover no-repeat;
       box-shadow: var(--shadow);
       isolation: isolate;
     }
@@ -155,7 +155,7 @@
       border: 1px solid rgba(255,255,255,0.16);
       background:
         linear-gradient(180deg, rgba(8, 22, 48, 0.58) 0%, rgba(7, 17, 38, 0.74) 55%, rgba(6, 14, 32, 0.88) 100%),
-        url("images/triglav.jpg") center / cover no-repeat;
+        url("images/scene-vogel.png") center / cover no-repeat;
       box-shadow: inset 0 0 130px rgba(0,0,0,0.45);
     }
     .board:before { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.07)' stroke-width='1'%3E%3Cpath d='M0 92 C26 70, 44 104, 70 84 S122 70, 180 98'/%3E%3Cpath d='M14 132 C42 112, 63 150, 98 128 S142 120, 170 144'/%3E%3C/g%3E%3C/svg%3E"); opacity: 0.7; }
@@ -580,6 +580,211 @@
     /* Mobile bottom dock */
     .dock { display: none; }
 
+    /* Illustrated alpine atlas pass */
+    body {
+      background:
+        radial-gradient(circle at 16% 10%, rgba(79, 155, 214, 0.22), transparent 24%),
+        radial-gradient(circle at 86% 18%, rgba(31, 143, 110, 0.20), transparent 26%),
+        radial-gradient(circle at 54% 92%, rgba(192, 73, 47, 0.14), transparent 30%),
+        linear-gradient(145deg, #071612 0%, #0e2b23 34%, #10263a 68%, #07131e 100%);
+    }
+    body:before {
+      background-image:
+        linear-gradient(rgba(238,246,243,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(238,246,243,0.035) 1px, transparent 1px),
+        radial-gradient(circle at 22% 28%, rgba(42,167,160,0.20) 0 1.5px, transparent 2px),
+        radial-gradient(circle at 72% 36%, rgba(192,73,47,0.16) 0 1.4px, transparent 2px);
+      background-size: 52px 52px, 52px 52px, 260px 260px, 320px 320px;
+      opacity: 0.9;
+    }
+    body:after {
+      background:
+        radial-gradient(circle at 12% 20%, rgba(238,246,243,0.10), transparent 12%),
+        radial-gradient(circle at 82% 22%, rgba(42,167,160,0.12), transparent 12%),
+        linear-gradient(120deg, transparent 0 28%, rgba(238,246,243,0.035) 28% 29%, transparent 29% 100%);
+      animation: aurora 28s ease-in-out infinite;
+    }
+    .hero {
+      border-color: rgba(238,246,243,0.28);
+      background:
+        linear-gradient(180deg, rgba(7, 22, 18, 0.10) 0%, rgba(7, 22, 18, 0.42) 50%, rgba(7, 19, 30, 0.92) 100%),
+        linear-gradient(105deg, rgba(7, 22, 18, 0.82), rgba(16, 38, 58, 0.18)),
+        url("images/scene-ojstrica.png") center 46% / cover no-repeat;
+      box-shadow: 0 28px 90px rgba(3, 12, 18, 0.46);
+    }
+    .hero:after {
+      background:
+        radial-gradient(circle at 20% 0%, rgba(238,246,243,0.18), transparent 28%),
+        radial-gradient(circle at 52% 0%, rgba(42,167,160,0.24), transparent 30%),
+        radial-gradient(circle at 82% 0%, rgba(192,73,47,0.15), transparent 28%);
+    }
+    .hero h1 { letter-spacing: -0.055em; }
+    .hero h1 .shine {
+      background: linear-gradient(100deg, #ffffff, #dff3ec 36%, #83d2c7 58%, #f0b19e 82%, #ffffff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .eyebrow, .glass, .panel, .modal-card {
+      border-color: rgba(238,246,243,0.20);
+      background: linear-gradient(180deg, rgba(238,246,243,0.12), rgba(7,22,18,0.18));
+    }
+    .nav, .dock {
+      border-color: rgba(238,246,243,0.18);
+      background: rgba(7, 22, 18, 0.82);
+      box-shadow: 0 14px 42px rgba(3,12,18,0.34);
+    }
+    .nav button.active, .dock button.active {
+      color: #071612;
+      background: linear-gradient(135deg, #eef6f3, #bfe7dc);
+    }
+    .btn {
+      background: linear-gradient(135deg, #1f8f6e, #2aa7a0);
+      box-shadow: 0 14px 32px rgba(31,143,110,0.28);
+    }
+    .btn:hover { box-shadow: 0 18px 42px rgba(31,143,110,0.34); }
+    .btn.secondary {
+      background: rgba(42,167,160,0.15);
+      border-color: rgba(42,167,160,0.38);
+    }
+    .btn.ghost {
+      background: rgba(238,246,243,0.06);
+      border-color: rgba(238,246,243,0.18);
+    }
+    .pill, .hub-status {
+      background: rgba(238,246,243,0.08);
+      border-color: rgba(238,246,243,0.15);
+    }
+    .pill.hot, .tag.p1 {
+      color: #ffd8cf;
+      border-color: rgba(192,73,47,0.34);
+      background: rgba(192,73,47,0.14);
+    }
+    .pill.done, .idea-status.hot {
+      color: #c8ffe0;
+      border-color: rgba(31,143,110,0.38);
+      background: rgba(31,143,110,0.15);
+    }
+    .panel {
+      background:
+        linear-gradient(180deg, rgba(238,246,243,0.10), rgba(7,22,18,0.10)),
+        linear-gradient(180deg, rgba(11, 34, 30, 0.78), rgba(7, 19, 30, 0.84));
+    }
+    .board {
+      border-color: rgba(238,246,243,0.22);
+      background:
+        linear-gradient(180deg, rgba(7, 22, 18, 0.36) 0%, rgba(7, 17, 30, 0.66) 60%, rgba(6, 14, 26, 0.84) 100%),
+        url("images/scene-drive.png") center / cover no-repeat;
+      box-shadow: inset 0 0 120px rgba(3,12,18,0.50), 0 20px 60px rgba(3,12,18,0.22);
+    }
+    .route-line {
+      stroke: rgba(238,246,243,0.90);
+      filter: drop-shadow(0 0 8px rgba(42,167,160,0.62));
+    }
+    .node-core {
+      color: #071612;
+      background: linear-gradient(135deg, #eef6f3, #9edfd2);
+      border-color: rgba(238,246,243,0.62);
+    }
+    .node.boss .node-core {
+      background: linear-gradient(135deg, #c0492f, #7c2418);
+    }
+    .hub-card, .task-card, .info-card, .flow-step, .mini-score, .desk-room, .bet-card {
+      border-color: rgba(238,246,243,0.14);
+      background: linear-gradient(180deg, rgba(238,246,243,0.09), rgba(238,246,243,0.045));
+    }
+    .hub-card.primary {
+      background: linear-gradient(135deg, rgba(31,143,110,0.20), rgba(42,167,160,0.10));
+      border-color: rgba(42,167,160,0.36);
+    }
+    .idea-card {
+      border-color: rgba(238,246,243,0.18);
+      background:
+        radial-gradient(circle at 50% 68px, rgba(238,246,243,0.11), transparent 122px),
+        linear-gradient(180deg, rgba(238,246,243,0.10), rgba(238,246,243,0.04));
+    }
+    .idea-photo, .idea-photo-fallback {
+      width: min(170px, calc(100% - 34px));
+      height: min(170px, calc(100vw - 80px));
+      max-height: 170px;
+      margin: 18px auto 0;
+      border: 5px solid rgba(238,246,243,0.84);
+      border-radius: 50%;
+      box-shadow: 0 18px 38px rgba(3,12,18,0.28), 0 0 0 1px rgba(42,167,160,0.32);
+    }
+    .idea-photo {
+      object-fit: cover;
+      display: block;
+      border-bottom: 5px solid rgba(238,246,243,0.84);
+      transition: transform 0.45s ease, box-shadow 0.25s ease;
+    }
+    .idea-card:hover .idea-photo {
+      transform: translateY(-2px) scale(1.035);
+      box-shadow: 0 22px 48px rgba(3,12,18,0.34), 0 0 0 1px rgba(42,167,160,0.46);
+    }
+    .idea-photo-fallback {
+      place-items: center;
+      background: linear-gradient(135deg, #1f8f6e, #4f9bd6);
+      border-bottom: 5px solid rgba(238,246,243,0.84);
+    }
+    .idea-body { padding-top: 14px; }
+    .plan-day {
+      position: relative;
+      overflow: hidden;
+      min-height: 142px;
+      padding-right: 158px;
+      border-color: rgba(238,246,243,0.18);
+      background:
+        linear-gradient(90deg, rgba(31,143,110,0.12), transparent 42%),
+        rgba(238,246,243,0.055);
+    }
+    .plan-day:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 16px;
+      bottom: 16px;
+      width: 4px;
+      border-radius: 999px;
+      background: linear-gradient(#2aa7a0, #c0492f);
+    }
+    .plan-day:after {
+      content: "";
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      width: 108px;
+      height: 108px;
+      transform: translateY(-50%);
+      border-radius: 50%;
+      background: var(--day-scene, linear-gradient(135deg, #1f8f6e, #4f9bd6)) center / cover no-repeat;
+      border: 5px solid rgba(238,246,243,0.84);
+      box-shadow: 0 16px 32px rgba(3,12,18,0.28);
+      opacity: 0.96;
+    }
+    .plan-day.is-logistics {
+      background:
+        linear-gradient(90deg, rgba(79,155,214,0.12), transparent 45%),
+        rgba(238,246,243,0.045);
+    }
+    .plan-item {
+      background: rgba(3,12,18,0.20);
+      border-color: rgba(238,246,243,0.13);
+    }
+    .photo-card {
+      min-height: 220px;
+      border-color: rgba(238,246,243,0.20);
+      box-shadow: 0 18px 42px rgba(3,12,18,0.22);
+    }
+    .photo-card:after {
+      background: linear-gradient(180deg, rgba(7,22,18,0.02) 20%, rgba(7,22,18,0.84));
+    }
+
+    @media (max-width: 620px) {
+      .plan-day { padding-right: 14px; padding-top: 128px; }
+      .plan-day:after { left: 16px; right: auto; top: 16px; transform: none; width: 96px; height: 96px; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
     }
@@ -756,7 +961,7 @@
               <button class="btn small ghost" id="copySummaryBtn">Copy summary</button>
               <button class="btn small danger" id="resetBtn">Reset board</button>
             </div>
-            <div class="source-note">Live group sync is on — your changes save to the shared Google Sheet automatically. Tap the <strong>Live</strong> chip at the top to pull in what the others have done. Everyone should use the same GitHub Pages link. Photos via Wikimedia Commons.</div>
+            <div class="source-note">Live group sync is on — your changes save to the shared Google Sheet automatically. Tap the <strong>Live</strong> chip at the top to pull in what the others have done. Everyone should use the same GitHub Pages link. Illustrated scene set generated for this board.</div>
           </div>
 
           <aside class="side-stack">
@@ -1096,12 +1301,12 @@
 
           <h3 style="margin:24px 0 12px">📸 Slovenia in pictures</h3>
           <div class="photo-gallery">
-            <div class="photo-card"><img src="images/bledisland.jpg" alt="Bled Island church" loading="lazy"><div class="cap"><strong>Lake Bled</strong><span>Island church, castle on the cliff, the postcard shot.</span></div></div>
-            <div class="photo-card"><img src="images/ljubljana.jpg" alt="Ljubljana old town" loading="lazy"><div class="cap"><strong>Ljubljana</strong><span>Dragon city — Triple Bridge, castle, riverside bars.</span></div></div>
-            <div class="photo-card"><img src="images/triglav.jpg" alt="Triglav and the Julian Alps" loading="lazy"><div class="cap"><strong>Julian Alps</strong><span>Triglav, gorges and alpine lakes in Triglav NP.</span></div></div>
-            <div class="photo-card"><img src="images/predjama.jpg" alt="Predjama Castle" loading="lazy"><div class="cap"><strong>Predjama Castle</strong><span>A castle built into a cave mouth above the Karst.</span></div></div>
-            <div class="photo-card"><img src="images/vintgar.jpg" alt="Vintgar Gorge" loading="lazy"><div class="cap"><strong>Vintgar Gorge</strong><span>Emerald river on a timed one-way boardwalk.</span></div></div>
-            <div class="photo-card"><img src="images/bohinj.jpg" alt="Lake Bohinj" loading="lazy"><div class="cap"><strong>Lake Bohinj</strong><span>Bigger, quieter and more alpine than Bled.</span></div></div>
+            <div class="photo-card"><img src="images/scene-bledisland.png" alt="Bled Island church" loading="lazy"><div class="cap"><strong>Lake Bled</strong><span>Island church, castle on the cliff, the postcard shot.</span></div></div>
+            <div class="photo-card"><img src="images/scene-ljubljana.png" alt="Ljubljana old town" loading="lazy"><div class="cap"><strong>Ljubljana</strong><span>Dragon city — Triple Bridge, castle, riverside bars.</span></div></div>
+            <div class="photo-card"><img src="images/scene-vogel.png" alt="Triglav and the Julian Alps" loading="lazy"><div class="cap"><strong>Julian Alps</strong><span>Triglav, gorges and alpine lakes in Triglav NP.</span></div></div>
+            <div class="photo-card"><img src="images/scene-predjama.png" alt="Predjama Castle" loading="lazy"><div class="cap"><strong>Predjama Castle</strong><span>A castle built into a cave mouth above the Karst.</span></div></div>
+            <div class="photo-card"><img src="images/scene-vintgar.png" alt="Vintgar Gorge" loading="lazy"><div class="cap"><strong>Vintgar Gorge</strong><span>Emerald river on a timed one-way boardwalk.</span></div></div>
+            <div class="photo-card"><img src="images/scene-bohinj.png" alt="Lake Bohinj" loading="lazy"><div class="cap"><strong>Lake Bohinj</strong><span>Bigger, quieter and more alpine than Bled.</span></div></div>
           </div>
         </div>
       </section>
@@ -1186,28 +1391,28 @@
     // region/day/slot metadata is kept from the old auto-itinerary era — the new
     // engine ignores it, but custom + synced ideas stay compatible.
     const defaultIdeas = [
-      { id: "ljubljanaOldTown", emoji: "🐉", title: "Ljubljana old town + castle", city: "Ljubljana", img: "ljubljana.jpg", region: "ljubljana", day: 5, slot: "Midday", desc: "Dragon Bridge, Triple Bridge, castle funicular and riverside bars. A relaxed half-day + lunch on the way out (Tue) — it's right on the Bled→Trieste line, so no nature day lost." },
-      { id: "postojnaPredjama", emoji: "🕳️", title: "Postojna Cave + Predjama Castle", city: "Karst", img: "predjama.jpg", region: "karst", day: 2, slot: "Morning", desc: "Iconic cave train through huge chambers, then the clifftop castle built into a cave mouth. Right by the Friday-night Trieste base — knock it out Saturday morning on the way up to Bled." },
-      { id: "skocjan", emoji: "🌋", title: "Škocjan Caves", city: "Karst", img: "skocjan.jpg", region: "karst", day: 2, slot: "Alt", desc: "More dramatic underground river canyon (UNESCO), but more walking. The southern cave swap, closest to Trieste." },
-      { id: "kriznaJama", emoji: "🕯️", title: "Križna Jama", city: "Karst", img: "", region: "karst", day: 2, slot: "Alt", desc: "The adventurous cave swap — small groups, boats across underground lakes. Book well ahead." },
-      { id: "velikaPlanina", emoji: "🚠", title: "Velika Planina", city: "Kamnik", img: "velika.jpg", region: "kamnik", day: 0, slot: "Add-on", desc: "Shepherds'-hut plateau by cable car — lovely, but it's over near Kamnik (NE), off the Bled route. An optional detour, not a core day." },
-      { id: "bledCastle", emoji: "🏰", title: "Bled Castle", city: "Bled", img: "bledcastle.jpg", region: "bled", day: 3, slot: "Sunset", desc: "Clifftop castle over the lake — best light and views late afternoon." },
-      { id: "ojstrica", emoji: "🌄", title: "Ojstrica viewpoint", city: "Bled", img: "", region: "bled", day: 3, slot: "Sunset", desc: "Short steep walk to the classic Bled postcard view. Sunset if the legs are willing." },
-      { id: "vintgar", emoji: "🌊", title: "Vintgar Gorge", city: "near Bled", img: "vintgar.jpg", region: "bled", day: 4, slot: "Morning", desc: "Emerald river on a timed one-way boardwalk. Book an early slot to beat the crowds." },
-      { id: "bohinj", emoji: "🏞️", title: "Lake Bohinj", city: "Bohinj", img: "bohinj.jpg", region: "bohinj", day: 4, slot: "Midday", desc: "Quieter, bigger and more alpine than Bled — swim, kayak or just lap it." },
-      { id: "vogel", emoji: "🏔️", title: "Vogel cable car", city: "Bohinj", img: "vogel.jpg", region: "bohinj", day: 4, slot: "Afternoon", weather: "clear", desc: "Julian Alps panorama above Bohinj. Only worth it on a clear day." },
-      { id: "savica", emoji: "💦", title: "Savica Waterfall", city: "Bohinj", img: "savica.jpg", region: "bohinj", day: 4, slot: "Afternoon", weather: "cloudy", desc: "Short waterfall hike — the easy, low-cloud backup for the Vogel day." },
-      { id: "bledIsland", emoji: "🚣", title: "Row to Bled Island", city: "Bled", img: "bledisland.jpg", region: "bled", day: 5, slot: "Morning", desc: "Pletna boat or row to the island church, 99 steps and the wishing bell — a good slow last morning." },
-      { id: "kremsnita", emoji: "🍰", title: "Bled cream cake (kremšnita)", city: "Bled", img: "", region: "bled", day: 5, slot: "Anytime", desc: "The lakeside ritual. Touristy, non-negotiable." },
-      { id: "soca", emoji: "🚣", title: "Soča Valley (rafting)", city: "Soča", img: "soca.jpg", region: "soca", day: 4, slot: "Midday", desc: "Turquoise river, rafting and mountain roads near Bovec — this is the Monday big-alpine-day option (Vršič pass + the Soča)." },
-      { id: "velikaKorita", emoji: "🏊", title: "Great Soča Gorge swim (Velika korita)", city: "Bovec / Soča", img: "soca-gorge.jpg", region: "soca", day: 4, slot: "Afternoon", desc: "The Great Gorge of the Soča — electric-turquoise pools in a narrow limestone canyon near Bovec, with flat rocks to leap from. The swim spot on the Soča day. Water's properly cold — bring a towel and nerve." },
-      { id: "piran", emoji: "🌅", title: "Piran", city: "Coast", img: "piran.jpg", region: "bench", day: 0, slot: "Add-on", desc: "Venetian lanes, seafood and Adriatic sunset if the trip tilts coastal." },
-      { id: "jasna", emoji: "📸", title: "Lake Jasna (Kranjska Gora)", city: "Kranjska Gora", img: "jasna.jpg", region: "bench", day: 0, slot: "Add-on", desc: "Photogenic alpine lake near the Vršič pass — a clear-weather scenic stop." },
-      { id: "vipava", emoji: "🍇", title: "Vipava wine valley", city: "Vipava", img: "vipava.jpg", region: "bench", day: 0, slot: "Add-on", desc: "Wine, villages and slower food stops if the group wants less lake time." }
+      { id: "ljubljanaOldTown", emoji: "🐉", title: "Ljubljana old town + castle", city: "Ljubljana", img: "scene-ljubljana.png", region: "ljubljana", day: 5, slot: "Midday", desc: "Dragon Bridge, Triple Bridge, castle funicular and riverside bars. A relaxed half-day + lunch on the way out (Tue) — it's right on the Bled→Trieste line, so no nature day lost." },
+      { id: "postojnaPredjama", emoji: "🕳️", title: "Postojna Cave + Predjama Castle", city: "Karst", img: "scene-predjama.png", region: "karst", day: 2, slot: "Morning", desc: "Iconic cave train through huge chambers, then the clifftop castle built into a cave mouth. Right by the Friday-night Trieste base — knock it out Saturday morning on the way up to Bled." },
+      { id: "skocjan", emoji: "🌋", title: "Škocjan Caves", city: "Karst", img: "scene-skocjan.png", region: "karst", day: 2, slot: "Alt", desc: "More dramatic underground river canyon (UNESCO), but more walking. The southern cave swap, closest to Trieste." },
+      { id: "kriznaJama", emoji: "🕯️", title: "Križna Jama", city: "Karst", img: "scene-postojna.png", region: "karst", day: 2, slot: "Alt", desc: "The adventurous cave swap — small groups, boats across underground lakes. Book well ahead." },
+      { id: "velikaPlanina", emoji: "🚠", title: "Velika Planina", city: "Kamnik", img: "scene-velika.png", region: "kamnik", day: 0, slot: "Add-on", desc: "Shepherds'-hut plateau by cable car — lovely, but it's over near Kamnik (NE), off the Bled route. An optional detour, not a core day." },
+      { id: "bledCastle", emoji: "🏰", title: "Bled Castle", city: "Bled", img: "scene-bledcastle.png", region: "bled", day: 3, slot: "Sunset", desc: "Clifftop castle over the lake — best light and views late afternoon." },
+      { id: "ojstrica", emoji: "🌄", title: "Ojstrica viewpoint", city: "Bled", img: "scene-ojstrica.png", region: "bled", day: 3, slot: "Sunset", desc: "Short steep walk to the classic Bled postcard view. Sunset if the legs are willing." },
+      { id: "vintgar", emoji: "🌊", title: "Vintgar Gorge", city: "near Bled", img: "scene-vintgar.png", region: "bled", day: 4, slot: "Morning", desc: "Emerald river on a timed one-way boardwalk. Book an early slot to beat the crowds." },
+      { id: "bohinj", emoji: "🏞️", title: "Lake Bohinj", city: "Bohinj", img: "scene-bohinj.png", region: "bohinj", day: 4, slot: "Midday", desc: "Quieter, bigger and more alpine than Bled — swim, kayak or just lap it." },
+      { id: "vogel", emoji: "🏔️", title: "Vogel cable car", city: "Bohinj", img: "scene-vogel.png", region: "bohinj", day: 4, slot: "Afternoon", weather: "clear", desc: "Julian Alps panorama above Bohinj. Only worth it on a clear day." },
+      { id: "savica", emoji: "💦", title: "Savica Waterfall", city: "Bohinj", img: "scene-savica.png", region: "bohinj", day: 4, slot: "Afternoon", weather: "cloudy", desc: "Short waterfall hike — the easy, low-cloud backup for the Vogel day." },
+      { id: "bledIsland", emoji: "🚣", title: "Row to Bled Island", city: "Bled", img: "scene-bledisland.png", region: "bled", day: 5, slot: "Morning", desc: "Pletna boat or row to the island church, 99 steps and the wishing bell — a good slow last morning." },
+      { id: "kremsnita", emoji: "🍰", title: "Bled cream cake (kremšnita)", city: "Bled", img: "scene-kremsnita.png", region: "bled", day: 5, slot: "Anytime", desc: "The lakeside ritual. Touristy, non-negotiable." },
+      { id: "soca", emoji: "🚣", title: "Soča Valley (rafting)", city: "Soča", img: "scene-soca.png", region: "soca", day: 4, slot: "Midday", desc: "Turquoise river, rafting and mountain roads near Bovec — this is the Monday big-alpine-day option (Vršič pass + the Soča)." },
+      { id: "velikaKorita", emoji: "🏊", title: "Great Soča Gorge swim (Velika korita)", city: "Bovec / Soča", img: "scene-velikakorita.png", region: "soca", day: 4, slot: "Afternoon", desc: "The Great Gorge of the Soča — electric-turquoise pools in a narrow limestone canyon near Bovec, with flat rocks to leap from. The swim spot on the Soča day. Water's properly cold — bring a towel and nerve." },
+      { id: "piran", emoji: "🌅", title: "Piran", city: "Coast", img: "scene-piran.png", region: "bench", day: 0, slot: "Add-on", desc: "Venetian lanes, seafood and Adriatic sunset if the trip tilts coastal." },
+      { id: "jasna", emoji: "📸", title: "Lake Jasna (Kranjska Gora)", city: "Kranjska Gora", img: "scene-jasna.png", region: "bench", day: 0, slot: "Add-on", desc: "Photogenic alpine lake near the Vršič pass — a clear-weather scenic stop." },
+      { id: "vipava", emoji: "🍇", title: "Vipava wine valley", city: "Vipava", img: "scene-vipava.png", region: "bench", day: 0, slot: "Add-on", desc: "Wine, villages and slower food stops if the group wants less lake time." }
     ];
 
     // Photo per idea by id — fallback for ideas saved in synced state without an img field.
-    const IDEA_IMG = { ljubljanaOldTown: "ljubljana.jpg", postojnaPredjama: "predjama.jpg", skocjan: "skocjan.jpg", velikaPlanina: "velika.jpg", bledCastle: "bledcastle.jpg", vintgar: "vintgar.jpg", bohinj: "bohinj.jpg", vogel: "vogel.jpg", savica: "savica.jpg", bledIsland: "bledisland.jpg", soca: "soca.jpg", piran: "piran.jpg", jasna: "jasna.jpg", vipava: "vipava.jpg" };
+    const IDEA_IMG = { ljubljanaOldTown: "scene-ljubljana.png", postojnaPredjama: "scene-predjama.png", skocjan: "scene-skocjan.png", velikaPlanina: "scene-velika.png", bledCastle: "scene-bledcastle.png", vintgar: "scene-vintgar.png", bohinj: "scene-bohinj.png", vogel: "scene-vogel.png", savica: "scene-savica.png", bledIsland: "scene-bledisland.png", soca: "scene-soca.png", ojstrica: "scene-ojstrica.png", kremsnita: "scene-kremsnita.png", velikaKorita: "scene-velikakorita.png", piran: "scene-piran.png", jasna: "scene-jasna.png", vipava: "scene-vipava.png" };
 
     // The Bookies — fun pari-mutuel betting with virtual chips + real trip perks.
     const defaultBookie = {
@@ -1237,11 +1442,19 @@
     // Itinerary builder — fixed trip skeleton; the crew builds the day-by-day plan onto these days.
     const TRIP_DAYS = [
       { id: "d11", iso: "2026-09-11", date: "Fri 11 Sep", city: "Land Trieste — stay local", logistics: true, note: "Land Trieste 23:00 (FR168). Too late to drive far — grab the cars and crash at a bed near Trieste / the Karst (short hop). No plans tonight." },
-      { id: "d12", iso: "2026-09-12", date: "Sat 12 Sep", city: "Caves → Bled", note: "Caves first thing, right by where you slept — Postojna + Predjama (or Škocjan). Then the scenic drive up to the Bled base (~1h45). Lakeside evening + first dinner." },
-      { id: "d13", iso: "2026-09-13", date: "Sun 13 Sep", city: "Bled lake day", note: "Vintgar Gorge early (timed entry), row out to Bled Island + the 99 steps, Bled Castle at golden hour, kremšnita by the lake." },
-      { id: "d14", iso: "2026-09-14", date: "Mon 14 Sep", city: "Big alpine day", note: "One proper mountain day — Lake Bohinj + Vogel cable car (Savica if cloudy), or push to the Soča Valley over the Vršič pass (the Great Soča Gorge / Velika korita swim is the highlight if you go Soča). Pick one, don't cram both." },
-      { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Bled → south → fly", logistics: true, note: "Relaxed last day (flight's 22:15). Slow Bled morning, then drive south. Half-day Ljubljana + lunch is the easy pick — OR skip the city for a Vipava/Karst wine lunch, the Piran coast, or just chill in Trieste before FR169. Caves already done, so no rush." }
+      { id: "d12", iso: "2026-09-12", date: "Sat 12 Sep", city: "Caves → Bled", note: "Postojna Cave + Predjama Castle first thing, right by where you slept. Then the scenic drive up to the Bled base (~1h45). Lakeside evening + first dinner." },
+      { id: "d13", iso: "2026-09-13", date: "Sun 13 Sep", city: "Bled lake day", note: "Vintgar Gorge early (timed entry), then the lake proper — row out to Bled Island + the 99 steps, the Straža summer toboggan (open weekends, 11:00–18:00), Bled Castle at golden hour, kremšnita by the lake." },
+      { id: "d14", iso: "2026-09-14", date: "Mon 14 Sep", city: "Vršič & Soča alpine day", note: "The big drive — Vršič Pass in autumn gold, down into the Soča Valley (Velika korita / the Great Soča Gorge), then back to Bled. Weather hedge: if Vršič is socked in, flip to Velika Planina or a slow Bled day." },
+      { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Bled → Ljubljana → fly", logistics: true, note: "Relaxed last day (flight's 22:15). Checkout, drive south, half-day Ljubljana + lunch on the way out (old town, Triple Bridge, market, castle), then on to Trieste for FR169. Caves already done, so no rush." }
     ];
+
+    const DAY_SCENE = {
+      d11: "scene-trieste.png",
+      d12: "scene-predjama.png",
+      d13: "scene-bledisland.png",
+      d14: "scene-soca.png",
+      d15: "scene-ljubljana.png"
+    };
 
     const defaultState = {
       selectedPlayer: 0,
@@ -2493,8 +2706,9 @@
       holder.innerHTML = TRIP_DAYS.map(d => {
         const dayItems = items.filter(it => it.dayId === d.id).slice().sort((a, b) => (a.time || "99:99").localeCompare(b.time || "99:99"));
         const cl = d.city.toLowerCase(); const tagCls = (cl.includes("bled") || cl.includes("bohinj")) && !cl.includes("ljubljana") ? "bled" : "";
+        const sceneStyle = DAY_SCENE[d.id] ? ` style="--day-scene:url('images/${DAY_SCENE[d.id]}')"` : "";
         if (dayIsOff(d.id)) {
-          return `<div class="plan-day is-off">
+          return `<div class="plan-day is-off"${sceneStyle}>
             <div class="plan-day-head">
               <span class="plan-date">${d.date}</span>
               <span class="plan-citytag ${tagCls}">${escapeHtml(d.city)}</span>
@@ -2520,7 +2734,7 @@
           ? `<div class="day-arrivals">${arr.length ? `<span class="da-label">🛬 In</span>${arr.map(flightChip).join("")}` : ""}${dep.length ? `<span class="da-label">🛫 Out</span>${dep.map(flightChip).join("")}` : ""}</div>`
           : "";
         const note = dayNote(d);
-        return `<div class="plan-day ${d.logistics ? "is-logistics" : ""}">
+        return `<div class="plan-day ${d.logistics ? "is-logistics" : ""}"${sceneStyle}>
           <div class="plan-day-head">
             <span class="plan-date">${d.date}</span>
             <span class="plan-citytag ${tagCls}">${escapeHtml(d.city)}</span>
@@ -2840,10 +3054,4 @@
 
     spawnLeaves();
     renderAll();
-    setSyncChip(hasRemoteSync() ? "syncing" : "disabled");
-    remotePull({ initial: true });
-    startSyncLoops();
-    setInterval(renderCountdown, 30000); // keep the countdown + Ljubljana clock ticking
-  </script>
-</body>
-</html>
+    setActive
