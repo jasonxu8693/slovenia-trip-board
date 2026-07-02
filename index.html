@@ -489,6 +489,20 @@
     .plan-citytag { font-size:10px; font-weight:900; letter-spacing:0.06em; text-transform:uppercase; padding:5px 8px; border-radius:999px; background:rgba(79,139,255,0.14); color:#d7e6ff; }
     .plan-citytag.bled { background:rgba(239,77,77,0.14); color:#ffd6d3; }
     .plan-stay { font-size:10px; font-weight:800; letter-spacing:0.04em; padding:5px 8px; border-radius:999px; background:rgba(255,255,255,0.06); color:var(--subtle); border:1px solid rgba(255,255,255,0.12); }
+    .group-badge { display:inline-flex; align-items:center; gap:6px; font-size:10px; font-weight:900; letter-spacing:.04em; text-transform:uppercase; padding:5px 9px; border-radius:999px; }
+    .group-badge:before { content:""; width:8px; height:8px; border-radius:50%; background:currentColor; }
+    .group-badge.g1 { background:rgba(79,139,255,0.14); color:#a8c8ff; border:1px solid rgba(79,139,255,0.42); }
+    .group-badge.g2 { background:rgba(255,206,122,0.14); color:#ffdfa1; border:1px solid rgba(255,206,122,0.42); }
+    .vp-dayhead .group-badge { margin-top:8px; }
+    .plan-split { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:10px; margin-top:10px; }
+    .split-lane { border-radius:14px; padding:11px 13px; border:1px solid rgba(255,255,255,0.12); background:rgba(0,0,0,0.18); }
+    .split-lane .sl-tag { display:inline-flex; align-items:center; gap:7px; font-size:10.5px; font-weight:900; letter-spacing:.04em; text-transform:uppercase; margin-bottom:7px; }
+    .split-lane .sl-tag:before { content:""; width:9px; height:9px; border-radius:50%; background:currentColor; box-shadow:0 0 10px currentColor; }
+    .split-lane p { margin:0; font-size:12px; line-height:1.5; color:var(--subtle); }
+    .split-lane.g1 { border-color:rgba(79,139,255,0.4); background:rgba(79,139,255,0.09); }
+    .split-lane.g1 .sl-tag { color:#a8c8ff; }
+    .split-lane.g2 { border-color:rgba(255,206,122,0.4); background:rgba(255,206,122,0.09); }
+    .split-lane.g2 .sl-tag { color:#ffdfa1; }
     .plan-daynote { color:var(--subtle); font-size:12px; flex-basis:100%; }
     .plan-item { display:grid; grid-template-columns:auto 1fr auto auto auto; gap:9px; align-items:center; padding:9px 10px; border:1px solid rgba(255,255,255,0.1); border-radius:14px; background:rgba(0,0,0,0.16); margin-top:8px; }
     .pi-titlewrap { cursor:pointer; min-width:0; }
@@ -1519,9 +1533,28 @@
       { id: "d11", iso: "2026-09-11", date: "Fri 11 Sep", city: "Land Trieste — stay local", stay: "Trieste", logistics: true, note: "Land Trieste ~23:00 (FR168). Too late to drive anywhere — grab the cars and crash at a bed by Trieste / the airport. No plans tonight." },
       { id: "d12", iso: "2026-09-12", date: "Sat 12 Sep", city: "Caves → Bled", stay: "Bled", note: "Postojna + Predjama late morning on the way in — keep the cave tight. Reach the Bled base by mid-afternoon, because the Straža summer toboggan is weekend-only and shuts at 18:00: today is the one window to ride it. Lakeside evening + first dinner." },
       { id: "d13", iso: "2026-09-13", date: "Sun 13 Sep", city: "Bled lake day", stay: "Bled", note: "Vintgar Gorge early (timed entry — book ahead), then the lake proper all afternoon: pletna or row out to Bled Island + the 99 steps, loop the lake, Bled Castle at golden hour, kremšnita by the water." },
-      { id: "d14", iso: "2026-09-14", date: "Mon 14 Sep", city: "Vršič & Soča alpine day", stay: "Bled", note: "The big one — Vršič Pass in autumn gold, down into the Soča Valley (Velika korita / the Great Soča Gorge), then back to Bled. Heads-up: ~4 of the crew peel off today and drive to Trieste airport to fly home tonight — sort the cars and whether you drive the pass together or split off. Weather hedge: if Vršič is socked in, flip to Velika Planina or a slow Bled day." },
-      { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Bled → Ljubljana → fly", stay: null, logistics: true, note: "Last day for whoever's left (flight's 22:15). Checkout, drive south, half-day Ljubljana on the way out — old town, Triple Bridge, market, castle, lunch — then on to Trieste for FR169. Caves already done, so no rush." }
+      { id: "d14", iso: "2026-09-14", date: "Mon 14 Sep", city: "Vršič & Soča alpine day", stay: "Bled", note: "The big one — Vršič Pass in autumn gold, down into the Soča Valley (Velika korita / the Great Soča Gorge). Everyone's together for the pass and the valley; late in the day the trip splits into two groups. Weather hedge: if Vršič is socked in, flip to Velika Planina or a slow Bled day.", split: { g1: "Back to Bled for a final lakeside night — Tuesday is yours (Ljubljana on the way out).", g2: "Peel off after the Soča and drive to Trieste airport (~2h) to fly home tonight — leave a buffer for the border + car drop-off." } },
+      { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Bled → Ljubljana → fly", stay: null, logistics: true, group: "g1", note: "Group 1's last day (flight's 22:15). Checkout, drive south, half-day Ljubljana on the way out — old town, Triple Bridge, market, castle, lunch — then on to Trieste for FR169. Caves already done, so no rush." }
     ];
+
+    // The trip forks on Monday: ~4 fly home from Trieste that night (Group 2);
+    // the rest do the full week through Tuesday (Group 1). Colours match the board.
+    const TRIP_GROUPS = {
+      g1: { label: "Group 1", sub: "Full week", colour: "#7fb0ff" },
+      g2: { label: "Group 2", sub: "Home Mon night", colour: "#ffce7a" }
+    };
+    function groupBadge(d) {
+      const g = d && d.group && TRIP_GROUPS[d.group];
+      return g ? `<span class="group-badge ${d.group}">${g.label} · ${g.sub}</span>` : "";
+    }
+    function splitBlock(d) {
+      if (!d || !d.split) return "";
+      const g1 = TRIP_GROUPS.g1, g2 = TRIP_GROUPS.g2;
+      return `<div class="plan-split">`
+        + `<div class="split-lane g1"><span class="sl-tag">${g1.label} · ${g1.sub}</span><p>${escapeHtml(d.split.g1)}</p></div>`
+        + `<div class="split-lane g2"><span class="sl-tag">${g2.label} · ${g2.sub}</span><p>${escapeHtml(d.split.g2)}</p></div>`
+        + `</div>`;
+    }
 
     const DAY_SCENE = {
       d11: "scene-trieste.jpg",
@@ -2814,6 +2847,7 @@
             <span class="plan-date">${d.date}</span>
             <span class="plan-citytag ${tagCls}">${escapeHtml(d.city)}</span>
             ${d.stay ? `<span class="plan-stay">🛏 ${escapeHtml(d.stay)}</span>` : ""}
+            ${groupBadge(d)}
             ${note ? `<span class="plan-daynote">${escapeHtml(note)}</span>` : ""}
             <span class="pd-actions">
               <button class="pd-btn" data-plan="note" data-day="${d.id}" title="Edit the day note">✎ Note</button>
@@ -2821,6 +2855,7 @@
             </span>
           </div>
           ${flightsHtml}
+          ${splitBlock(d)}
           ${itemsHtml}
           <div class="day-add">
             <input type="text" data-dayadd="${d.id}" data-f="title" placeholder="＋ Add to ${d.date}…" />
@@ -3004,6 +3039,7 @@
             <div class="vp-dayeyebrow" style="color:${ac}">Day ${idx + 1} · ${escapeHtml(d.date)}</div>
             <div class="vp-daytitle">${escapeHtml(d.city)}</div>
             ${d.stay ? `<div class="vp-daystay">🛏 ${escapeHtml(d.stay)}</div>` : ""}
+            ${groupBadge(d)}
           </div>${vpMap(ac, d)}</div>`;
         let body;
         if (dayIsOff(d.id)) {
@@ -3023,7 +3059,7 @@
           body = `<div class="vp-route" style="color:${ac}"><div class="vp-spine"></div><div class="vp-trav"></div>${stops}</div>`;
         }
         const note = dayNote(d);
-        return `<section class="vp-slide">${VP_MTN}${head}${note ? `<div class="vp-daynote">${escapeHtml(note)}</div>` : ""}${body}</section>`;
+        return `<section class="vp-slide">${VP_MTN}${head}${note ? `<div class="vp-daynote">${escapeHtml(note)}</div>` : ""}${splitBlock(d)}${body}</section>`;
       }).join("");
 
       const dotsHtml = Array.from({ length: total }, (_, k) => `<button class="vp-dot${k === 0 ? " on" : ""}" data-goslide="${k}" aria-label="Slide ${k + 1}"></button>`).join("");
