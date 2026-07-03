@@ -443,6 +443,12 @@
     .desk-group { margin-bottom:22px; }
     .desk-group-head { font-size:12px; font-weight:900; letter-spacing:0.06em; text-transform:uppercase; color:var(--subtle); margin:4px 0 12px; padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.1); }
     .desk-empty { color:var(--subtle); font-size:13px; padding:8px 2px 4px; }
+    .booked-card { border:1px solid rgba(95,211,154,0.28); border-radius:14px; background:rgba(95,211,154,0.07); padding:11px 13px; margin-bottom:10px; }
+    .booked-head { display:flex; align-items:center; gap:8px; font-size:14px; }
+    .booked-emoji { font-size:17px; }
+    .booked-out { margin:7px 0 9px; font-size:12.5px; color:var(--muted); line-height:1.4; }
+    .booked-reopen { border:0; background:none; color:var(--subtle); font-size:11px; font-weight:800; cursor:pointer; padding:0; }
+    .booked-reopen:hover { color:var(--ink); }
     .owner-chip.removable { cursor:pointer; }
     .owner-chip.removable:hover { border-color:rgba(255,120,120,0.5); }
     .owner-chip .oc-x { opacity:0.5; font-size:10px; }
@@ -1030,7 +1036,7 @@
                 <span class="pill hot" id="deskOptionsBadge">0 options shared</span>
               </div>
             </div>
-            <div class="idea-help" style="margin-bottom:14px">🙋 Tap <strong>“I'll look into this”</strong> to own a job · 📋 share options with a link + price · 👍 the group votes on the best one · ✔️ an owner locks the pick. Pick yourself with the player dropdown on the Board tab first.</div>
+            <div class="idea-help" style="margin-bottom:14px">🙋 Tap <strong>“I'll take it”</strong> to own a job (or assign a mate) · 📋 share options with a link + price · 👍 the group votes · ✅ mark it <strong>Booked</strong> and note what you got. Pick yourself in the Activity Market's crew panel first.</div>
             <div class="desk-list" id="deskList"></div>
             <h3 style="margin:26px 0 4px">Start a new decision room</h3>
             <p class="panel-sub">Anything the group needs to sort — a day trip, a SIM plan, airport transfers.</p>
@@ -1042,15 +1048,15 @@
           </div>
           <aside class="side-stack">
             <div class="panel pad">
-              <div class="label">How it flows</div>
-              <div class="flow-step" style="margin-top:12px"><strong>1. Hands up 🙋</strong><span>Someone owns each job — accom, cars, dinners.</span></div>
-              <div class="flow-step" style="margin-top:10px"><strong>2. Share options 📋</strong><span>Owner posts links + prices for the group.</span></div>
-              <div class="flow-step" style="margin-top:10px"><strong>3. Vote + lock 👍</strong><span>Group thumbs-up the favourite; an owner locks it.</span></div>
+              <div class="label">✅ Booked</div>
+              <p class="panel-sub" style="margin:6px 0 12px">Locked-in decisions — what's feeding the trip.</p>
+              <div id="deskBooked"></div>
             </div>
-            <div class="info-card">
-              <div class="emoji">🔗</div>
-              <h3>Feeds the board</h3>
-              <p>Locking the Ljubljana and Bled stays ticks those bosses. Locking the car hire ticks <strong>Lock the ride plan</strong>. Decided dinners tick <strong>Book group dinners</strong> and drop into the Itinerary list.</p>
+            <div class="panel pad">
+              <div class="label">How it flows</div>
+              <div class="flow-step" style="margin-top:12px"><strong>1. Own it 🙋</strong><span>Take a job yourself, or assign a mate.</span></div>
+              <div class="flow-step" style="margin-top:10px"><strong>2. Share options 📋</strong><span>Post links + prices for the group.</span></div>
+              <div class="flow-step" style="margin-top:10px"><strong>3. Book it ✅</strong><span>Mark it Booked and note what you got.</span></div>
             </div>
           </aside>
         </div>
@@ -2365,6 +2371,7 @@
           else if (act === "delopt") removeDeskOption(room, opt);
           else if (act === "delroom") { if (confirm("Remove this whole decision room for everyone?")) removeDeskRoom(room); }
           else if (act === "logstatus") setRoomLog(room, { status: btn.dataset.val });
+          else if (act === "unbook") unbookRoom(room);
           else if (act === "savelog") { const el = container.querySelector(`input[data-room="${room}"][data-f="logtext"]`); setRoomLog(room, { text: (el ? el.value : "").trim() }); toast("Decision saved"); }
           else if (act === "addopt") {
             const get = f => { const el = container.querySelector(`input[data-room="${room}"][data-f="${f}"]`); return el ? el.value : ""; };
@@ -2375,6 +2382,23 @@
       container.querySelectorAll('select[data-desk="assign"]').forEach(sel => sel.addEventListener("change", () => { if (sel.value !== "") assignOwner(sel.dataset.room, Number(sel.value)); }));
     }
 
+    function deskBookedCard(r) {
+      const out = (r.log && r.log.text) || "";
+      const chosen = (r.chosen && Array.isArray(r.options)) ? ((r.options.find(o => o.id === r.chosen) || {}).title || "") : "";
+      const info = out || chosen || "Booked — add a note with the details.";
+      return `<div class="booked-card">
+        <div class="booked-head"><span class="booked-emoji">${r.emoji || "✅"}</span><strong>${escapeHtml(r.title)}</strong></div>
+        <p class="booked-out">${escapeHtml(info)}</p>
+        <button class="booked-reopen" data-desk="unbook" data-room="${r.id}">↩ Move back to open</button>
+      </div>`;
+    }
+    function unbookRoom(id) {
+      const r = deskRoom(id); if (!r) return;
+      if (!r.log || typeof r.log !== "object") r.log = { status: "open", text: "" };
+      r.log.status = "open";
+      if (r.status === "decided") { r.status = "open"; r.chosen = null; }
+      saveState(); renderAll();
+    }
     function renderDesk() {
       ensureDesk();
       const holder = document.getElementById("deskList");
@@ -2382,14 +2406,18 @@
       const roomBooked = r => (r.log && r.log.status === "booked") || r.status === "decided";
       const openRooms = state.desk.rooms.filter(r => !roomBooked(r));
       const bookedRooms = state.desk.rooms.filter(roomBooked);
-      const deskSection = (title, arr, empty) => `<div class="desk-group"><div class="desk-group-head">${title} · ${arr.length}</div>${arr.length ? arr.map(deskRoomCard).join("") : `<div class="desk-empty">${empty}</div>`}</div>`;
-      holder.innerHTML = deskSection("📋 To sort", openRooms, "Nothing open — nice work.") + deskSection("✅ Booked / done", bookedRooms, "Nothing booked yet.");
+      holder.innerHTML = openRooms.length ? openRooms.map(deskRoomCard).join("") : `<div class="desk-empty">Nothing to sort — it's all booked. 🎉</div>`;
       bindDeskActions(holder);
+      const bookedHolder = document.getElementById("deskBooked");
+      if (bookedHolder) {
+        bookedHolder.innerHTML = bookedRooms.length ? bookedRooms.map(deskBookedCard).join("") : `<div class="desk-empty">Nothing booked yet — mark a decision Booked and it lands here.</div>`;
+        bindDeskActions(bookedHolder);
+      }
 
       const decidedCount = bookedRooms.length;
       const openCount = openRooms.length;
       const optCount = state.desk.rooms.reduce((s, r) => s + (r.options ? r.options.length : 0), 0);
-      const db = document.getElementById("deskDecidedBadge"); if (db) db.textContent = `${decidedCount} decided`;
+      const db = document.getElementById("deskDecidedBadge"); if (db) db.textContent = `${decidedCount} booked`;
       const ob = document.getElementById("deskOpenBadge"); if (ob) ob.textContent = `${openCount} open`;
       const opb = document.getElementById("deskOptionsBadge"); if (opb) opb.textContent = `${optCount} option${optCount === 1 ? "" : "s"} shared`;
       const bds = document.getElementById("boardDeskStatus"); if (bds) bds.textContent = `${openCount} open · ${decidedCount} decided`;
