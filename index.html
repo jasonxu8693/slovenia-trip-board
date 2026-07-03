@@ -440,6 +440,14 @@
     .dl-outcome { font-size:13px; color:var(--ink); background:rgba(255,255,255,0.05); border-radius:10px; padding:8px 10px; line-height:1.42; }
     .dl-edit { display:grid; grid-template-columns:1fr auto; gap:8px; }
     .dl-input { padding:8px 10px; font-size:12.5px; border-radius:10px; background:rgba(0,0,0,0.16); border:1px solid rgba(255,255,255,0.14); color:var(--ink); font-family:inherit; }
+    .desk-group { margin-bottom:22px; }
+    .desk-group-head { font-size:12px; font-weight:900; letter-spacing:0.06em; text-transform:uppercase; color:var(--subtle); margin:4px 0 12px; padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.1); }
+    .desk-empty { color:var(--subtle); font-size:13px; padding:8px 2px 4px; }
+    .owner-chip.removable { cursor:pointer; }
+    .owner-chip.removable:hover { border-color:rgba(255,120,120,0.5); }
+    .owner-chip .oc-x { opacity:0.5; font-size:10px; }
+    .owner-chip.removable:hover .oc-x { opacity:1; color:#ff9c9c; }
+    .assign-select { padding:7px 10px; font-size:12px; border-radius:12px; background:rgba(0,0,0,0.16); border:1px dashed rgba(255,255,255,0.22); color:var(--ink); font-family:inherit; cursor:pointer; }
     .opt-main { display:grid; grid-template-columns:1fr auto; gap:10px; align-items:start; }
     .opt-name { font-weight:900; font-size:14px; letter-spacing:-0.01em; }
     .opt-name a { color:#bcd4ff; text-decoration:underline; text-underline-offset:3px; }
@@ -1267,7 +1275,7 @@
       rooms: [
         { id: "stay_ljubljana", emoji: "🛏️", kind: "accom", title: "Friday-night stay (near Trieste)", desc: "One night near Trieste / the Karst to crash after the 23:00 landing — short drive, easy parking for two cars.", owners: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Trieste stay booked." } },
         { id: "stay_bled", emoji: "🏡", kind: "accom", title: "Bled house (2 nights)", desc: "The main base — group Airbnb or apartments for 2 nights (Sat 12 + Sun 13), enough real beds and bathrooms for all 9.", owners: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Booked — Lake Bled, 2 nights (Sat 12 + Sun 13)." } },
-        { id: "stay_ljubljana_mon", emoji: "🌃", kind: "accom", title: "Monday-night stay (Ljubljana · 5)", desc: "The 5 staying on need a bed in Ljubljana for Mon 14, flying out Tue. Might just grab something central.", owners: [], options: [], status: "open", chosen: null, log: { status: "partial", text: "Might just find something central in Ljubljana." } },
+        { id: "stay_ljubljana_mon", emoji: "🌃", kind: "accom", title: "Monday-night stay (Ljubljana · 5)", desc: "The 5 staying on need a bed in Ljubljana for Mon 14, flying out Tue. Might just grab something central.", owners: [], options: [], status: "open", chosen: null, log: { status: "open", text: "Might just find something central in Ljubljana." } },
         { id: "car_hire", emoji: "🚘", kind: "car", title: "Car hire from Trieste", desc: "Two cars or a 9-seater from Trieste, driven across the border. Who's driving and who's researching?", owners: [], drivers: [], options: [], status: "open", chosen: null, log: { status: "open", text: "" } },
         { id: "dinner_ljubljana", emoji: "🍖", kind: "dinner", title: "Last-day meal (Ljubljana / Trieste)", desc: "Tuesday's a travel day — a relaxed Ljubljana lunch on the way out, or a farewell dinner near Trieste before the flight.", owners: [], options: [], status: "open", chosen: null, log: { status: "open", text: "" } },
         { id: "dinner_bled", emoji: "🍲", kind: "dinner", title: "Bled group dinner", desc: "Lakeside dinner together on a Bled night.", owners: [], options: [], status: "open", chosen: null, log: { status: "open", text: "" } }
@@ -2160,6 +2168,18 @@
       saveState(); renderAll();
       toast(on ? `${selectedPlayer().name} stepped off ${r.title}` : `${selectedPlayer().name} is on ${r.title} 🙋`);
     }
+    function assignOwner(id, playerIdx) {
+      const r = deskRoom(id); if (!r || isNaN(playerIdx)) return;
+      const pname = (state.players[playerIdx] || {}).name || "someone";
+      if (!Array.isArray(r.owners)) r.owners = [];
+      if (!r.owners.includes(playerIdx)) { r.owners.push(playerIdx); logEvent("🙋", `${selectedPlayer().name} put ${pname} on “${r.title}”`); }
+      saveState(); renderAll(); toast(`${pname} is on ${r.title}`);
+    }
+    function unassignOwner(id, playerIdx) {
+      const r = deskRoom(id); if (!r) return;
+      r.owners = (r.owners || []).filter(x => x !== playerIdx);
+      saveState(); renderAll();
+    }
     function toggleDriver(id) {
       const r = deskRoom(id); if (!r || r.kind !== "car") return;
       const idx = state.selectedPlayer;
@@ -2250,8 +2270,10 @@
         const opts = (r.options || []).slice().sort((a, b) => optVotes(b) - optVotes(a));
         const topVotes = opts.length ? optVotes(opts[0]) : 0;
         const ownerChips = r.owners.length
-          ? r.owners.map(i => `<span class="owner-chip">${avatar(i)}${nameOf(i)}</span>`).join("")
+          ? r.owners.map(i => `<button class="owner-chip removable" data-desk="unown" data-room="${r.id}" data-player="${i}" title="Take ${escapeAttr(nameOf(i))} off this">${avatar(i)}${nameOf(i)} <span class="oc-x">✕</span></button>`).join("")
           : `<span class="owner-chip empty">No one yet</span>`;
+        const notOwners = state.players.map((p, i) => i).filter(i => !r.owners.includes(i));
+        const assignSel = notOwners.length ? `<select class="assign-select" data-desk="assign" data-room="${r.id}"><option value="">＋ Put someone on it…</option>${notOwners.map(i => `<option value="${i}">${escapeHtml(nameOf(i))}</option>`).join("")}</select>` : "";
         const meOwner = r.owners.includes(idx);
 
         let driveRow = "";
@@ -2296,15 +2318,16 @@
         <input type="text" class="opt-notes-in" data-room="${r.id}" data-f="notes" placeholder="One-line note (optional)" />` : "";
 
         const removable = !DEFAULT_ROOM_IDS.includes(r.id);
-        const logSt = (r.log && r.log.status) || "open";
+        let logSt = (r.log && r.log.status) || "open";
+        if (logSt === "partial") logSt = "open"; // partial retired — either open or booked
         const logText = (r.log && r.log.text) || "";
-        const logLabel = logSt === "booked" ? "✅ Booked" : logSt === "partial" ? "🟡 Partial" : (decided ? "Decided" : "Open");
-        const logCls = logSt === "booked" ? "done" : logSt === "partial" ? "warn" : (decided ? "hot" : "");
-        const decisionLog = `<div class="decision-log dl-${logSt}">
+        const booked = logSt === "booked" || decided;
+        const logLabel = booked ? "✅ Booked" : "Open";
+        const logCls = booked ? "done" : "";
+        const decisionLog = `<div class="decision-log dl-${booked ? "booked" : "open"}">
           <div class="dl-row"><span class="crew-label">Decision</span>
-            <button class="dl-chip ${logSt === "open" ? "on" : ""}" data-desk="logstatus" data-room="${r.id}" data-val="open">Open</button>
-            <button class="dl-chip warn ${logSt === "partial" ? "on" : ""}" data-desk="logstatus" data-room="${r.id}" data-val="partial">🟡 Partial</button>
-            <button class="dl-chip done ${logSt === "booked" ? "on" : ""}" data-desk="logstatus" data-room="${r.id}" data-val="booked">✅ Booked</button>
+            <button class="dl-chip ${!booked ? "on" : ""}" data-desk="logstatus" data-room="${r.id}" data-val="open">Open</button>
+            <button class="dl-chip done ${booked ? "on" : ""}" data-desk="logstatus" data-room="${r.id}" data-val="booked">✅ Booked</button>
           </div>
           ${logText ? `<div class="dl-outcome">📝 ${escapeHtml(logText)}</div>` : ""}
           <div class="dl-edit"><input type="text" class="dl-input" data-room="${r.id}" data-f="logtext" placeholder="What did we book? e.g. Vila XYZ · Lake Bled · 2 nights · link" value="${escapeAttr(logText)}" /><button class="btn small secondary" data-desk="savelog" data-room="${r.id}">Save</button></div>
@@ -2321,7 +2344,7 @@
             <span class="idea-status ${logCls}">${logLabel}</span>
           </div>
           ${decisionLog}
-          <div class="crew-row"><span class="crew-label">On it</span>${ownerChips}<button class="hand-btn ${meOwner ? "on" : ""}" data-desk="hand" data-room="${r.id}">${meOwner ? "✋ You're on it" : "🙋 I'll look into this"}</button></div>
+          <div class="crew-row"><span class="crew-label">On it</span>${ownerChips}<button class="hand-btn ${meOwner ? "on" : ""}" data-desk="hand" data-room="${r.id}">${meOwner ? "✋ You're on it" : "🙋 I'll take it"}</button>${assignSel}</div>
           ${driveRow}
           <div class="opt-list">${optHtml}</div>
           ${addForm}
@@ -2334,6 +2357,7 @@
         btn.addEventListener("click", () => {
           const act = btn.dataset.desk, room = btn.dataset.room, opt = btn.dataset.opt;
           if (act === "hand") toggleOwner(room);
+          else if (act === "unown") unassignOwner(room, Number(btn.dataset.player));
           else if (act === "drive") toggleDriver(room);
           else if (act === "vote") toggleOptionVote(room, opt);
           else if (act === "pick") { if (confirm("Lock this as the group's pick?")) decideRoom(room, opt); }
@@ -2348,17 +2372,22 @@
           }
         });
       });
+      container.querySelectorAll('select[data-desk="assign"]').forEach(sel => sel.addEventListener("change", () => { if (sel.value !== "") assignOwner(sel.dataset.room, Number(sel.value)); }));
     }
 
     function renderDesk() {
       ensureDesk();
       const holder = document.getElementById("deskList");
       if (!holder) return;
-      holder.innerHTML = state.desk.rooms.map(deskRoomCard).join("");
+      const roomBooked = r => (r.log && r.log.status === "booked") || r.status === "decided";
+      const openRooms = state.desk.rooms.filter(r => !roomBooked(r));
+      const bookedRooms = state.desk.rooms.filter(roomBooked);
+      const deskSection = (title, arr, empty) => `<div class="desk-group"><div class="desk-group-head">${title} · ${arr.length}</div>${arr.length ? arr.map(deskRoomCard).join("") : `<div class="desk-empty">${empty}</div>`}</div>`;
+      holder.innerHTML = deskSection("📋 To sort", openRooms, "Nothing open — nice work.") + deskSection("✅ Booked / done", bookedRooms, "Nothing booked yet.");
       bindDeskActions(holder);
 
-      const decidedCount = state.desk.rooms.filter(r => r.status === "decided").length;
-      const openCount = state.desk.rooms.length - decidedCount;
+      const decidedCount = bookedRooms.length;
+      const openCount = openRooms.length;
       const optCount = state.desk.rooms.reduce((s, r) => s + (r.options ? r.options.length : 0), 0);
       const db = document.getElementById("deskDecidedBadge"); if (db) db.textContent = `${decidedCount} decided`;
       const ob = document.getElementById("deskOpenBadge"); if (ob) ob.textContent = `${openCount} open`;
