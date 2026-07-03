@@ -244,6 +244,13 @@
     .meter-maybe { background: rgba(255,206,122,0.85); }
     .meter-no { background: rgba(255,100,100,0.85); }
     .vote-counts { display: flex; flex-wrap: wrap; gap: 6px; color: var(--subtle); font-size: 11px; font-weight: 850; }
+    .vote-who { display: grid; gap: 7px; margin-top: 10px; padding-top: 10px; border-top: 1px dashed rgba(255,255,255,0.1); }
+    .vote-who.empty { color: var(--subtle); font-size: 11.5px; border-top: 0; padding-top: 0; }
+    .vw-line { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+    .vw-tag { font-size: 11px; font-weight: 900; padding: 2px 4px; }
+    .vw-names { display: flex; flex-wrap: wrap; gap: 6px; }
+    .vw-chip { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 700; padding: 3px 9px 3px 7px; border-radius: 999px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); }
+    .vw-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
     .idea-status { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 7px 10px; font-size: 11px; font-weight: 1000; letter-spacing: 0.05em; text-transform: uppercase; background: rgba(255,255,255,0.08); color: var(--muted); border: 1px solid rgba(255,255,255,0.12); }
     .idea-status.hot { background: rgba(95,211,154,0.14); color: #c8ffe0; border-color: rgba(95,211,154,0.32); }
     .idea-status.watch { background: rgba(255,206,122,0.14); color: #ffe7ae; border-color: rgba(255,206,122,0.32); }
@@ -1244,7 +1251,8 @@
     const defaultDesk = {
       rooms: [
         { id: "stay_ljubljana", emoji: "🛏️", kind: "accom", title: "Friday-night stay (near Trieste)", desc: "One night near Trieste / the Karst to crash after the 23:00 landing — short drive, easy parking for two cars.", owners: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Trieste stay booked." } },
-        { id: "stay_bled", emoji: "🏡", kind: "accom", title: "Bled house (3 nights)", desc: "The main base — group Airbnb or apartment cluster for 3 nights, enough real beds and bathrooms.", owners: [], options: [], status: "open", chosen: null, log: { status: "partial", text: "Booked a place in Lake Bled — 2 nights (confirm the 3rd)." } },
+        { id: "stay_bled", emoji: "🏡", kind: "accom", title: "Bled house (2 nights)", desc: "The main base — group Airbnb or apartments for 2 nights (Sat 12 + Sun 13), enough real beds and bathrooms for all 9.", owners: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Booked — Lake Bled, 2 nights (Sat 12 + Sun 13)." } },
+        { id: "stay_ljubljana_mon", emoji: "🌃", kind: "accom", title: "Monday-night stay (Ljubljana · 5)", desc: "The 5 staying on need a bed in Ljubljana for Mon 14, flying out Tue. Might just grab something central.", owners: [], options: [], status: "open", chosen: null, log: { status: "partial", text: "Might just find something central in Ljubljana." } },
         { id: "car_hire", emoji: "🚘", kind: "car", title: "Car hire from Trieste", desc: "Two cars or a 9-seater from Trieste, driven across the border. Who's driving and who's researching?", owners: [], drivers: [], options: [], status: "open", chosen: null, log: { status: "open", text: "" } },
         { id: "dinner_ljubljana", emoji: "🍖", kind: "dinner", title: "Last-day meal (Ljubljana / Trieste)", desc: "Tuesday's a travel day — a relaxed Ljubljana lunch on the way out, or a farewell dinner near Trieste before the flight.", owners: [], options: [], status: "open", chosen: null, log: { status: "open", text: "" } },
         { id: "dinner_bled", emoji: "🍲", kind: "dinner", title: "Bled group dinner", desc: "Lakeside dinner together on a Bled night.", owners: [], options: [], status: "open", chosen: null, log: { status: "open", text: "" } }
@@ -1254,10 +1262,10 @@
     // Itinerary builder — fixed trip skeleton; the crew builds the day-by-day plan onto these days.
     const TRIP_DAYS = [
       { id: "d11", iso: "2026-09-11", date: "Fri 11 Sep", city: "Land Trieste — stay local", stay: "Trieste", logistics: true, note: "Land Trieste ~23:00 (FR168). Too late to drive anywhere — grab the cars and crash at a bed by Trieste / the airport. No plans tonight." },
-      { id: "d12", iso: "2026-09-12", date: "Sat 12 Sep", city: "Caves → Bled", stay: "Bled", note: "Postojna + Predjama late morning on the way in — keep the cave tight. Reach the Bled base by mid-afternoon, because the Straža summer toboggan is weekend-only and shuts at 18:00: today is the one window to ride it. Lakeside evening + first dinner." },
-      { id: "d13", iso: "2026-09-13", date: "Sun 13 Sep", city: "Bled lake day", stay: "Bled", note: "Vintgar Gorge early (timed entry — book ahead), then the lake proper all afternoon: pletna or row out to Bled Island + the 99 steps, loop the lake, Bled Castle at golden hour, kremšnita by the water." },
-      { id: "d14", iso: "2026-09-14", date: "Mon 14 Sep", city: "Vršič & Soča alpine day", stay: "Bled", note: "The big one — Vršič Pass in autumn gold, down into the Soča Valley (Velika korita / the Great Soča Gorge). Everyone's together for the pass and the valley; late in the day the trip splits into two groups. Weather hedge: if Vršič is socked in, flip to Velika Planina or a slow Bled day.", split: { g1: "Back to Bled for a final lakeside night — Tuesday is yours (Ljubljana on the way out).", g2: "Peel off after the Soča and drive to Trieste airport (~2h) to fly home tonight — leave a buffer for the border + car drop-off." } },
-      { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Bled → Ljubljana → fly", stay: null, logistics: true, group: "g1", note: "Group 1's last day (flight's 22:15). Checkout, drive south, half-day Ljubljana on the way out — old town, Triple Bridge, market, castle, lunch — then on to Trieste for FR169. Caves already done, so no rush." }
+      { id: "d12", iso: "2026-09-12", date: "Sat 12 Sep", city: "Drive up → Bled lake day", stay: "Bled", note: "Straight up to Bled in the morning (~2h from Trieste), then the lake proper — Vintgar early, row out to the island, up to the castle, and the Straža toboggan while it's the weekend. Kremšnita by the water." },
+      { id: "d13", iso: "2026-09-13", date: "Sun 13 Sep", city: "Vršič & Soča alpine day", stay: "Bled", note: "The big one, and everyone's still together — Vršič Pass in autumn gold, down into the Soča Valley (Velika korita). Back to Bled for the last night all nine are here. Weather hedge: if Vršič is socked in, flip to Velika Planina or a slow Bled day." },
+      { id: "d14", iso: "2026-09-14", date: "Mon 14 Sep", city: "Caves → the split", stay: "Ljubljana (5)", note: "Check out of Bled (2 nights done) and head south — Postojna Cave + Predjama Castle on the way, the last thing everyone does together. Then the trip splits.", split: { g1: "The 5 staying on carry on to Ljubljana after the caves — crash there tonight, fly out Tue.", g2: "The 4 heading home peel off after the caves straight to Trieste airport (~1h) for tonight's flight." } },
+      { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Ljubljana → fly home", stay: null, logistics: true, group: "g1", note: "Last day for the 5 who stayed (flight's 22:15). Slow morning in Ljubljana — old town, Triple Bridge, market, castle, lunch — then the drive to Trieste for FR169." }
     ];
 
     // The trip forks on Monday: ~4 fly home from Trieste that night (Group 2);
@@ -1288,38 +1296,37 @@
         book: ["Nothing tonight — just crash", "Confirm cross-border hire + Slovenian e-vignette before the motorway"]
       },
       d12: {
-        accom: { name: "Bled house", meta: "Check in · night 1 of 3", note: "Group Airbnb / apartments — name TBC (locked in Crew Desk)" },
+        accom: { name: "Bled house", meta: "Check in · night 1 of 2 · all 9", note: "Group Airbnb / apartments — name TBC (locked in Crew Desk)" },
         drive: [
-          { leg: "Stay → Postojna", time: "~40 min" },
-          { leg: "Postojna → Predjama", time: "~15 min", note: "Park at the castle lot" },
-          { leg: "Predjama → Bled", time: "~1h30" }
+          { leg: "Trieste → Bled", time: "~2h", note: "Straight up in the morning" },
+          { leg: "Bled → Vintgar Gorge", time: "~10 min", note: "Small car park — go early" }
         ],
-        book: ["Postojna + Predjama timed tickets — book online", "Jumper: the cave is ~10°C", "Straža toboggan: cash, ride before it shuts at 18:00"]
+        book: ["Vintgar timed entry — book the early slot", "Cash for the pletna boat", "Straža toboggan: cash, ride before it shuts at 18:00"]
       },
       d13: {
-        accom: { name: "Bled house", meta: "night 2 of 3" },
-        drive: [
-          { leg: "Bled → Vintgar Gorge", time: "~10 min", note: "Small car park — go early, it fills fast" },
-          { leg: "Vintgar → Bled", time: "~10 min" }
-        ],
-        book: ["Vintgar timed entry — book the early slot", "Cash for the pletna boat", "Kremšnita at the lake"]
-      },
-      d14: {
-        accom: { name: "Bled house", meta: "night 3 of 3", note: "Group 2 checks out today — flying home tonight" },
+        accom: { name: "Bled house", meta: "night 2 of 2 · last night all 9 together" },
         drive: [
           { leg: "Bled → Vršič Pass → Soča / Bovec", time: "~2h", note: "50 hairpins — full tank first" },
-          { leg: "Soča → Bled (Group 1)", time: "~2h" },
-          { leg: "Bled → Trieste airport (Group 2)", time: "~2h", note: "Leave a buffer for drop-off + the flight" }
+          { leg: "Soča → Bled", time: "~2h" }
         ],
-        book: ["Full tank before Vršič", "Swim kit + towel for Velika korita", "Group 2: check in for tonight's flight"]
+        book: ["Full tank before Vršič", "Swim kit + towel for Velika korita"]
+      },
+      d14: {
+        accom: { name: "Ljubljana — TBC", meta: "1 night · the 5 staying on", note: "Might just grab something central — the 4 heading home don't need a bed." },
+        drive: [
+          { leg: "Bled → Postojna", time: "~1h", note: "Check out first" },
+          { leg: "Postojna → Predjama", time: "~15 min" },
+          { leg: "Caves → Trieste airport (the 4)", time: "~1h" },
+          { leg: "Caves → Ljubljana (the 5)", time: "~45 min" }
+        ],
+        book: ["Postojna + Predjama timed tickets — book online", "Jumper: the cave is ~10°C", "The 4: check in for tonight's flight"]
       },
       d15: {
         accom: null,
         drive: [
-          { leg: "Bled → Ljubljana", time: "~40 min", note: "Park on the old-town edge — the centre is car-free" },
           { leg: "Ljubljana → Trieste airport", time: "~1h30", note: "For FR169, dep 22:15" }
         ],
-        book: ["Nothing timed — relaxed last day", "Return the hire cars with a full tank", "Snacks for the drive"]
+        book: ["Slow morning — nothing timed", "Return the hire car(s) with a full tank", "Snacks for the drive"]
       }
     };
     function dayDetail(d) {
@@ -1339,22 +1346,23 @@
         { img: "scene-stay.jpg", title: "Crash near the airport", desc: "Short hop to a bed — no plans tonight, just sleep." }
       ],
       d12: [
-        { img: "scene-postojna.jpg", title: "Postojna Cave", desc: "Ride the little train deep into vast limestone chambers. ~10°C — bring a jumper." },
-        { img: "scene-predjama.jpg", title: "Predjama Castle", desc: "A 700-year-old castle built right into a cave mouth in the cliff." },
-        { img: "scene-drive.jpg", title: "Drive up to Bled", desc: "Scenic ~1h30 north to the lake — check into the Bled house." },
-        { img: "scene-ojstrica.jpg", title: "Straža toboggan", desc: "Summer toboggan down the Straža hill. Weekend-only and shuts at 18:00 — so it's today or not at all." },
-        { img: "scene-dinner.jpg", title: "Lakeside evening", desc: "First group dinner by the water." }
-      ],
-      d13: [
-        { img: "scene-vintgar.jpg", title: "Vintgar Gorge", desc: "Emerald river on a timed one-way boardwalk. Book the early slot to beat the crowds." },
+        { img: "scene-drive.jpg", title: "Drive up to Bled", desc: "Straight up from Trieste (~2h) — check into the Bled house." },
+        { img: "scene-vintgar.jpg", title: "Vintgar Gorge", desc: "Emerald river on a timed boardwalk. Book the early slot to beat the crowds." },
         { img: "scene-bledisland.jpg", title: "Row to Bled Island", desc: "Pletna boat to the island church + the 99 steps to the wishing bell." },
+        { img: "scene-ojstrica.jpg", title: "Straža toboggan", desc: "Summer toboggan down the Straža hill. Weekend-only and shuts at 18:00 — so ride it today." },
         { img: "scene-bledcastle.jpg", title: "Bled Castle", desc: "Clifftop castle over the lake — best light late afternoon." },
         { img: "scene-kremsnita.jpg", title: "Kremšnita", desc: "The lakeside cream-cake ritual. Touristy, non-negotiable." }
       ],
-      d14: [
+      d13: [
         { img: "scene-jasna.jpg", title: "Vršič Pass", desc: "50 hairpins over the Julian Alps in autumn gold. Full tank before you start." },
         { img: "scene-soca.jpg", title: "Soča Valley", desc: "Drop into Bovec beside the electric-turquoise Soča river." },
         { img: "scene-velikakorita.jpg", title: "Velika korita", desc: "The Great Soča Gorge — turquoise pools and flat rocks to leap from. Water's properly cold." }
+      ],
+      d14: [
+        { img: "scene-stay.jpg", title: "Check out of Bled", desc: "Pack up — 2 nights done, everyone heads south." },
+        { img: "scene-postojna.jpg", title: "Postojna Cave", desc: "Ride the little train deep into vast limestone chambers. ~10°C — bring a jumper." },
+        { img: "scene-predjama.jpg", title: "Predjama Castle", desc: "A 700-year-old castle built into a cave mouth — the last thing all nine do together." },
+        { img: "scene-drive.jpg", title: "The split", desc: "4 peel off to Trieste airport to fly home tonight · 5 carry on to Ljubljana." }
       ],
       d15: [
         { img: "scene-ljubljana.jpg", title: "Ljubljana old town", desc: "Half-day in the dragon city — Triple Bridge, market, castle funicular, lunch." },
@@ -1791,6 +1799,11 @@
         const tally = tallyIdea(idea.id);
         const status = ideaStatus(tally);
         const selectedVote = state.ideaVotes?.[idea.id]?.[state.selectedPlayer] || "";
+        const idVoters = state.ideaVotes?.[idea.id] || {};
+        const vGroups = { keen: [], maybe: [], no: [] };
+        Object.keys(idVoters).forEach(pi => { const vv = idVoters[pi]; if (vGroups[vv]) vGroups[vv].push(Number(pi)); });
+        const whoLine = (lab, cls, arr) => arr.length ? `<div class="vw-line"><span class="vw-tag vw-${cls}">${lab}</span><span class="vw-names">${arr.map(pi => { const p = state.players[pi]; return p ? `<span class="vw-chip"><span class="vw-dot" style="background:${p.colour || '#8fb6ff'}"></span>${escapeHtml(p.name)}</span>` : ""; }).join("")}</span></div>` : "";
+        const whoHtml = Object.keys(idVoters).length ? `<div class="vote-who">${whoLine("✅ Keen", "keen", vGroups.keen)}${whoLine("🤷 Maybe", "maybe", vGroups.maybe)}${whoLine("❌ No", "no", vGroups.no)}</div>` : `<div class="vote-who empty">No votes yet — pick yourself in Essentials, then vote.</div>`;
         const denom = Math.max(tally.total, 1);
         const imgSrc = idea.img || IDEA_IMG[idea.id];
         const photo = imgSrc
@@ -1814,6 +1827,7 @@
             <div class="meter-track"><div class="meter-keen" style="width:${tally.keen / denom * 100}%"></div><div class="meter-maybe" style="width:${tally.maybe / denom * 100}%"></div><div class="meter-no" style="width:${tally.no / denom * 100}%"></div></div>
             <div class="vote-counts"><span>✅ ${tally.keen} keen</span><span>🤷 ${tally.maybe} maybe</span><span>❌ ${tally.no} no</span></div>
           </div>
+          ${whoHtml}
           </div>
         </article>`;
       }).join("");
