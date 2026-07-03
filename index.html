@@ -378,55 +378,6 @@
     .traveller-vibe { font-size: 13px; margin-left: 4px; }
     .countdown-card .big { background: linear-gradient(100deg, #ffce7a, #ef4d4d 60%, #4f8bff); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
-    /* The Bookies tab — betting + prizes (added) */
-    .nav button.casino-tab { color: #ffd6c2; border: 1px solid rgba(239,77,77,0.26); background: rgba(239,77,77,0.08); }
-    .nav button.casino-tab.active { color: #2a0f0f; background: linear-gradient(90deg, #ffce7a, #ef4d4d); }
-
-    .market-list { display: grid; gap: 14px; }
-    .bet-card { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.14); border-radius: 24px; background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.045)); padding: 16px; display: grid; gap: 13px; box-shadow: 0 14px 34px rgba(5,12,28,0.12); }
-    .bet-card:before { content: ""; position: absolute; width: 150px; height: 150px; border-radius: 50%; right: -56px; top: -70px; background: rgba(255,206,122,0.10); pointer-events: none; }
-    .bet-card.is-settled { border-color: rgba(95,211,154,0.28); }
-    .bet-head { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: start; position: relative; }
-    .bet-emoji { width: 48px; height: 48px; border-radius: 18px; display: grid; place-items: center; font-size: 26px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.12); }
-    .bet-title { font-weight: 1000; letter-spacing: -0.03em; font-size: 17px; }
-    .bet-desc { color: var(--muted); font-size: 13px; line-height: 1.42; margin-top: 4px; }
-    .bet-tags { display: grid; gap: 6px; justify-items: end; align-content: start; }
-    .prize-tag { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 6px 10px; font-size: 11px; font-weight: 900; letter-spacing: 0.01em; background: linear-gradient(135deg, rgba(255,206,122,0.22), rgba(239,77,77,0.16)); color: #ffe7ae; border: 1px solid rgba(255,206,122,0.34); white-space: nowrap; max-width: 230px; overflow: hidden; text-overflow: ellipsis; }
-    .runner-grid { display: grid; gap: 8px; }
-    .runner-btn { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; width: 100%; text-align: left; border: 1px solid rgba(255,255,255,0.13); border-radius: 16px; background: rgba(0,0,0,0.2); color: var(--ink); padding: 10px 12px 14px; position: relative; transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease; }
-    .runner-btn:hover:not(:disabled) { transform: translateY(-2px); border-color: rgba(255,255,255,0.26); }
-    .runner-btn.mine { border-color: rgba(79,139,255,0.5); background: rgba(79,139,255,0.12); box-shadow: 0 8px 22px rgba(79,139,255,0.12); }
-    .runner-btn.win { border-color: rgba(95,211,154,0.55); background: rgba(95,211,154,0.16); }
-    .runner-btn.locked { cursor: default; }
-    .runner-dot { width: 30px; height: 30px; border-radius: 11px; display: grid; place-items: center; font-size: 15px; color: #0a1733; border: 1px solid rgba(255,255,255,0.55); }
-    .runner-name { font-weight: 850; font-size: 14px; }
-    .runner-odds { font-weight: 1000; font-size: 14px; color: #ffe7ae; letter-spacing: -0.02em; }
-    .runner-bar { position: absolute; left: 12px; right: 12px; bottom: 6px; height: 3px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow: hidden; }
-    .runner-bar > span { display: block; height: 100%; border-radius: inherit; transition: width 0.35s ease; }
-    .bet-strip { border: 1px dashed rgba(255,255,255,0.16); border-radius: 16px; padding: 11px 13px; background: rgba(0,0,0,0.16); display: grid; gap: 10px; }
-    .bet-strip.settled-strip { border-style: solid; border-color: rgba(95,211,154,0.3); background: rgba(95,211,154,0.08); }
-    .bet-line { font-size: 13px; color: var(--ink); line-height: 1.4; }
-    .bet-line.muted-line { color: var(--muted); }
-    .stake-row { display: flex; flex-wrap: wrap; gap: 7px; }
-    .bet-foot { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-    .settle-wrap { display: grid; gap: 8px; }
-    .settle-pick { display: flex; flex-wrap: wrap; gap: 7px; }
-    .form-table { display: grid; gap: 8px; }
-    .ft-row { display: grid; grid-template-columns: auto auto 1fr auto; gap: 10px; align-items: center; padding: 9px 10px; border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; background: rgba(255,255,255,0.05); }
-    .ft-row.me { border-color: rgba(79,139,255,0.4); background: rgba(79,139,255,0.08); }
-    .ft-rank { font-weight: 1000; font-size: 13px; min-width: 26px; text-align: center; }
-    .ft-name { font-weight: 850; font-size: 13px; }
-    .ft-trophies { margin-left: 4px; font-size: 11px; }
-    .ft-bal { font-weight: 1000; font-size: 15px; text-align: right; letter-spacing: -0.02em; }
-    .ft-net { display: block; font-size: 10px; font-weight: 900; color: var(--subtle); }
-    .ft-net.up { color: #5fd39a; }
-    .ft-net.down { color: #ff9c9c; }
-    .prize-shelf { display: grid; gap: 8px; }
-    .prize-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; }
-    .prize-row.claimed { opacity: 0.72; }
-    .prize-meta { color: var(--subtle); font-size: 11px; font-weight: 800; text-align: right; }
-    .add-market-form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
-    .add-market-form #newMkTitle, .add-market-form #newMkRunnersWrap, .add-market-form #addMarketBtn { grid-column: 1 / -1; }
 
     /* Crew Desk — hands up, share options, vote (added) */
     .nav button.desk-tab { color:#c8ffe0; border:1px solid rgba(95,211,154,0.26); background:rgba(95,211,154,0.08); }
@@ -503,6 +454,19 @@
     .split-lane.g1 .sl-tag { color:#a8c8ff; }
     .split-lane.g2 { border-color:rgba(255,206,122,0.4); background:rgba(255,206,122,0.09); }
     .split-lane.g2 .sl-tag { color:#ffdfa1; }
+    .vp-detail { position:relative; z-index:1; display:grid; gap:10px; margin-top:16px; }
+    .vpd-card { border:1px solid rgba(238,246,243,0.14); border-radius:14px; background:rgba(7,22,18,0.42); padding:11px 13px; }
+    .vpd-h { font-size:11px; font-weight:900; letter-spacing:.06em; text-transform:uppercase; color:#bfe7dc; margin-bottom:8px; }
+    .vpd-b { font-size:12.5px; color:var(--ink); line-height:1.5; display:flex; flex-direction:column; gap:3px; }
+    .vpd-b strong { font-weight:800; }
+    .vpd-meta { color:#bfe7dc; font-size:11px; font-weight:700; }
+    .vpd-b > span:not(.vpd-meta) { color:var(--muted); font-size:12px; }
+    .vpd-leg { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 10px; padding:5px 0; border-bottom:1px dashed rgba(238,246,243,0.1); }
+    .vpd-leg:last-child { border-bottom:0; }
+    .vpd-legname { font-weight:600; }
+    .vpd-leg em { font-style:normal; color:#bfe7dc; font-size:11px; font-weight:700; }
+    .vpd-note { flex-basis:100%; color:var(--muted); font-size:11.5px; }
+    .vpd-list { margin:0; padding-left:18px; color:var(--muted); font-size:12.5px; line-height:1.65; }
     .plan-daynote { color:var(--subtle); font-size:12px; flex-basis:100%; }
     .plan-item { display:grid; grid-template-columns:auto 1fr auto auto auto; gap:9px; align-items:center; padding:9px 10px; border:1px solid rgba(255,255,255,0.1); border-radius:14px; background:rgba(0,0,0,0.16); margin-top:8px; }
     .pi-titlewrap { cursor:pointer; min-width:0; }
@@ -1205,7 +1169,6 @@
 
     const colours = ["#4f8bff", "#ef4d4d", "#5fd39a", "#ffce7a", "#8fb6ff", "#ff9aa2", "#9ec4ff", "#c2b6ff", "#ffffff"];
     // Each traveller picks their own board piece (token) — no assigned roles.
-    const pieces = ["♟️", "🦆", "🚗", "🏔️", "🥟", "🍷", "🧭", "🐉", "🚠", "🦌", "📸", "🎒", "🍻", "⛰️", "🐻", "🚀"];
 
     // Each traveller picks their own vibe — shown on their token and roster card.
     const vibes = [
@@ -1298,6 +1261,59 @@
         + `<div class="split-lane g1"><span class="sl-tag">${g1.label} · ${g1.sub}</span><p>${escapeHtml(d.split.g1)}</p></div>`
         + `<div class="split-lane g2"><span class="sl-tag">${g2.label} · ${g2.sub}</span><p>${escapeHtml(d.split.g2)}</p></div>`
         + `</div>`;
+    }
+
+    // Per-day detail revealed when you open a day: sleep, drives, and what to book/bring.
+    // Pre-filled with what we know; hotel names + exact times get confirmed once booked.
+    const DAY_DETAIL = {
+      d11: {
+        accom: { name: "Bed near Trieste airport", meta: "1 night", note: "Book a short hop from TRS — you land ~23:00. Easy parking for two cars." },
+        drive: [{ leg: "Trieste Airport → the bed", time: "short hop", note: "Grab the hire cars first" }],
+        book: ["Nothing tonight — just crash", "Confirm cross-border hire + Slovenian e-vignette before the motorway"]
+      },
+      d12: {
+        accom: { name: "Bled house", meta: "Check in · night 1 of 3", note: "Group Airbnb / apartments — name TBC (locked in Crew Desk)" },
+        drive: [
+          { leg: "Stay → Postojna", time: "~40 min" },
+          { leg: "Postojna → Predjama", time: "~15 min", note: "Park at the castle lot" },
+          { leg: "Predjama → Bled", time: "~1h30" }
+        ],
+        book: ["Postojna + Predjama timed tickets — book online", "Jumper: the cave is ~10°C", "Straža toboggan: cash, ride before it shuts at 18:00"]
+      },
+      d13: {
+        accom: { name: "Bled house", meta: "night 2 of 3" },
+        drive: [
+          { leg: "Bled → Vintgar Gorge", time: "~10 min", note: "Small car park — go early, it fills fast" },
+          { leg: "Vintgar → Bled", time: "~10 min" }
+        ],
+        book: ["Vintgar timed entry — book the early slot", "Cash for the pletna boat", "Kremšnita at the lake"]
+      },
+      d14: {
+        accom: { name: "Bled house", meta: "night 3 of 3", note: "Group 2 checks out today — flying home tonight" },
+        drive: [
+          { leg: "Bled → Vršič Pass → Soča / Bovec", time: "~2h", note: "50 hairpins — full tank first" },
+          { leg: "Soča → Bled (Group 1)", time: "~2h" },
+          { leg: "Bled → Trieste airport (Group 2)", time: "~2h", note: "Leave a buffer for drop-off + the flight" }
+        ],
+        book: ["Full tank before Vršič", "Swim kit + towel for Velika korita", "Group 2: check in for tonight's flight"]
+      },
+      d15: {
+        accom: null,
+        drive: [
+          { leg: "Bled → Ljubljana", time: "~40 min", note: "Park on the old-town edge — the centre is car-free" },
+          { leg: "Ljubljana → Trieste airport", time: "~1h30", note: "For FR169, dep 22:15" }
+        ],
+        book: ["Nothing timed — relaxed last day", "Return the hire cars with a full tank", "Snacks for the drive"]
+      }
+    };
+    function dayDetail(d) {
+      const x = d && DAY_DETAIL[d.id];
+      if (!x) return "";
+      const cards = [];
+      if (x.accom) cards.push(`<div class="vpd-card"><div class="vpd-h">🛏 Sleep</div><div class="vpd-b"><strong>${escapeHtml(x.accom.name)}</strong>${x.accom.meta ? `<span class="vpd-meta">${escapeHtml(x.accom.meta)}</span>` : ""}${x.accom.note ? `<span>${escapeHtml(x.accom.note)}</span>` : ""}</div></div>`);
+      if (x.drive && x.drive.length) cards.push(`<div class="vpd-card"><div class="vpd-h">🚗 Getting around</div><div class="vpd-b">${x.drive.map(l => `<div class="vpd-leg"><span class="vpd-legname">${escapeHtml(l.leg)}</span>${l.time ? `<em>${escapeHtml(l.time)}</em>` : ""}${l.note ? `<span class="vpd-note">${escapeHtml(l.note)}</span>` : ""}</div>`).join("")}</div></div>`);
+      if (x.book && x.book.length) cards.push(`<div class="vpd-card"><div class="vpd-h">🎟 Book / bring</div><ul class="vpd-list">${x.book.map(b => `<li>${escapeHtml(b)}</li>`).join("")}</ul></div>`);
+      return cards.length ? `<div class="vp-detail">${cards.join("")}</div>` : "";
     }
 
     const DAY_SCENE = {
@@ -1586,35 +1602,7 @@
       return clamp(done, 0, checkpoints.length - 1);
     }
 
-    function renderNodes() {
-      const holder = document.getElementById("nodes");
-      holder.innerHTML = checkpoints.map(cp => `
-        <div class="node ${cp.type}" style="left:${cp.x}%; top:${cp.y}%" title="${cp.title}">
-          <div class="node-core">${cp.icon}</div>
-          <div class="node-title">${cp.title}</div>
-          <div class="node-meta">${cp.meta}</div>
-        </div>
-      `).join("");
-    }
 
-    function renderTokens() {
-      const holder = document.getElementById("tokens");
-      const used = {};
-      const progress = groupProgressIndex();
-      holder.innerHTML = state.players.map((p, idx) => {
-        const cp = checkpoints[progress];
-        const key = progress;
-        used[key] = used[key] || 0;
-        const stackIndex = used[key]++;
-        const angle = (stackIndex / Math.max(state.players.length, 1)) * Math.PI * 2;
-        const radius = stackIndex === 0 ? 0 : 2.7 + Math.floor((stackIndex - 1) / 6) * 2;
-        const x = cp.x + Math.cos(angle) * radius;
-        const y = cp.y + Math.sin(angle) * radius;
-        const v = vibeById(p.vibe);
-        const face = p.piece ? escapeHtml(p.piece) : escapeHtml(p.initials);
-        return `<div class="token ${idx === state.selectedPlayer ? "active" : ""}" data-name="${escapeHtml(p.name)}${v ? " · " + v.name : ""}" style="left:${x}%; top:${y}%; background:${p.colour}" onclick="void(0)">${face}${v ? `<span class="token-vibe">${v.emoji}</span>` : ""}</div>`;
-      }).join("");
-    }
 
     function renderPlayerSelect() {
       const sel = document.getElementById("playerSelect");
@@ -1636,17 +1624,6 @@
       });
     }
 
-    function renderSelectedPanel() {
-      const p = selectedPlayer();
-      const progress = groupProgressIndex();
-      const percent = Math.round(progress / (checkpoints.length - 1) * 100);
-      document.getElementById("selectedName").textContent = p.name;
-      document.getElementById("selectedProgress").textContent = `${percent}%`;
-      document.getElementById("selectedProgressFill").style.width = `${percent}%`;
-      const sv = vibeById(p.vibe);
-      document.getElementById("selectedRole").textContent = `${p.piece || "♟️"} ${sv ? sv.name : "pick a vibe"}`;
-      document.getElementById("selectedStage").textContent = checkpoints[progress].title;
-    }
 
     // Which Crew Desk rooms belong under which group task. Custom rooms created
     // from a task carry a taskId field and match that way.
@@ -1840,23 +1817,7 @@
       }).join("");
     }
 
-    function renderNextActions() {
-      const actions = groupTasks.filter(t => !state.groupDone[t.id]).slice(0, 3);
-      document.getElementById("nextActions").innerHTML = actions.map(t => `<div class="task-card" style="grid-template-columns:auto 1fr; padding:12px"><div class="task-icon">${t.icon}</div><div><div class="task-title">${t.title}</div><div class="task-desc">${t.desc}</div></div></div>`).join("") || `<div class="info-card"><div class="emoji">🏆</div><h3>All bosses cleared</h3><p>Every group task is done — the crew's trip-ready. 🎉</p></div>`;
-    }
 
-    function renderBadges() {
-      const vibeSet = state.players.filter(p => p.vibe).length;
-      const vibeBadge = document.getElementById("vibeSummaryBadge");
-      if (vibeBadge) vibeBadge.textContent = `${vibeSet}/${state.players.length} vibes set`;
-      const groupTotal = groupTasks.length;
-      const groupDone = groupTasks.filter(t => state.groupDone[t.id]).length;
-      const percent = Math.round(groupDone / groupTotal * 100);
-      const gpb = document.getElementById("groupProgressBadge");
-      if (gpb) gpb.textContent = `Group bosses ${percent}%`;
-      const gtb = document.getElementById("groupTasksBadge");
-      if (gtb) gtb.textContent = `${groupDone} of ${groupTotal} done`;
-    }
 
     function renderCountdown() {
       const now = new Date();
@@ -1887,70 +1848,12 @@
 
     function renderHero() {
       renderCountdown();
-      const groupDone = groupTasks.filter(t => state.groupDone[t.id]).length;
-      const pct = Math.round(groupDone / groupTasks.length * 100);
-      const heroPct = document.getElementById("heroProgressPct"); if (heroPct) tweenNum(heroPct, pct, n => `${Math.round(n)}%`);
-      const ring = document.getElementById("heroRing");
-      if (ring) { const C = 2 * Math.PI * 52; ring.style.strokeDashoffset = (C * (1 - pct / 100)).toFixed(1); }
-      const subP = document.getElementById("heroProgressSub");
-      if (subP) subP.textContent = `${groupDone} of ${groupTasks.length} group bosses cleared together.`;
       const tcp = document.getElementById("travellerCountPill");
       if (tcp) tcp.textContent = `${state.players.length} travellers`;
     }
 
-    function renderVibePicker() {
-      const holder = document.getElementById("vibePicker");
-      if (!holder) return;
-      const p = selectedPlayer();
-      holder.innerHTML = vibes.map(v => `
-        <button class="vibe-chip ${p.vibe === v.id ? "active" : ""}" data-vibe="${v.id}" title="${escapeAttr(v.tag)}">
-          <span class="vibe-emoji">${v.emoji}</span><span class="vibe-name">${v.name}</span>
-        </button>`).join("");
-      holder.querySelectorAll(".vibe-chip").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const player = selectedPlayer();
-          player.vibe = player.vibe === btn.dataset.vibe ? null : btn.dataset.vibe;
-          const chosen = vibeById(player.vibe);
-          if (chosen) logEvent(chosen.emoji, `${player.name} set their vibe: ${chosen.name}`);
-          saveState();
-          renderAll();
-          toast(chosen ? `${player.name}: ${chosen.name} ${chosen.emoji}` : `${player.name} cleared their vibe`);
-        });
-      });
-    }
 
-    function renderPiecePicker() {
-      const holder = document.getElementById("piecePicker");
-      if (!holder) return;
-      const p = selectedPlayer();
-      holder.innerHTML = pieces.map(pc => `
-        <button class="piece-chip ${p.piece === pc ? "active" : ""}" data-piece="${escapeAttr(pc)}" title="Use ${escapeAttr(pc)} as your board piece">${pc}</button>`).join("");
-      holder.querySelectorAll(".piece-chip").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const player = selectedPlayer();
-          player.piece = player.piece === btn.dataset.piece ? null : btn.dataset.piece;
-          if (player.piece) logEvent("♟️", `${player.name} picked ${player.piece} as their board piece`);
-          saveState();
-          renderAll();
-          toast(player.piece ? `${player.name}'s piece: ${player.piece}` : `${player.name} cleared their piece`);
-        });
-      });
-    }
 
-    function spawnLeaves() {
-      const holder = document.getElementById("leaves");
-      if (!holder) return;
-      const glyphs = ["🍁", "🍂", "🍃"];
-      let html = "";
-      for (let i = 0; i < 11; i++) {
-        const left = Math.round(Math.random() * 100);
-        const dur = (7 + Math.random() * 8).toFixed(1);
-        const delay = (Math.random() * 12).toFixed(1);
-        const size = (14 + Math.random() * 12).toFixed(0);
-        html += `<span class="leaf" style="left:${left}%; font-size:${size}px; animation-duration:${dur}s; animation-delay:-${delay}s;">${glyphs[i % 3]}</span>`;
-      }
-      holder.innerHTML = html;
-    }
 
     function renderRosterEditor() {
       const holder = document.getElementById("rosterEditor");
@@ -1995,31 +1898,6 @@
       if (!Array.isArray(state.feed)) state.feed = [];
       state.feed.unshift({ t: Date.now(), by: state.selectedPlayer, emoji, msg });
       if (state.feed.length > 40) state.feed.length = 40;
-    }
-    function renderPulse() {
-      const holder = document.getElementById("pulseFeed");
-      if (!holder) return;
-      const feed = (Array.isArray(state.feed) ? state.feed : []).filter(e => e && e.t);
-      // "New" = things OTHER people did since you last looked at the board.
-      const isFresh = e => e.t > pulseSeenAt && e.by !== state.selectedPlayer;
-      const freshCount = feed.filter(isFresh).length;
-      const badge = document.getElementById("pulseBadge");
-      if (badge) {
-        badge.textContent = freshCount ? `${freshCount} new` : "live";
-        badge.className = freshCount ? "pill hot" : "pill";
-      }
-      holder.innerHTML = feed.length ? feed.slice(0, 14).map(e => {
-        const p = state.players[e.by];
-        return `<div class="pulse-row ${isFresh(e) ? "fresh" : ""}">
-          <span class="pulse-ico" style="background:${p ? p.colour : "rgba(255,255,255,0.15)"}">${e.emoji || "✨"}</span>
-          <div><div class="pulse-msg">${escapeHtml(e.msg)}</div><div class="pulse-time">${relTime(e.t)}</div></div>
-        </div>`;
-      }).join("") : `<div class="micro">Quiet so far — votes, locks, bets and plan changes will show up here.</div>`;
-      // Only mark the feed "seen" while the Board tab is actually on screen.
-      const boardEl = document.getElementById("board");
-      if (boardEl && boardEl.classList.contains("active") && feed.length) {
-        localStorage.setItem(PULSE_SEEN_KEY, String(feed[0].t));
-      }
     }
 
     // Count-up animation for stat numbers (skips the very first paint).
@@ -2145,131 +2023,6 @@
       toast(added ? `Restored ${added} starter bet${added > 1 ? "s" : ""}` : "Starter bets already here");
     }
 
-    function renderBookie() {
-      ensureBookie();
-      const idx = state.selectedPlayer;
-      const startChips = state.bookie.startingChips;
-
-      // Form table (leaderboard)
-      const ftHolder = document.getElementById("formTable");
-      if (ftHolder) {
-        const table = state.players.map((p, i) => ({ i, p, bal: playerBalance(i), trophies: prizesWon(i).length }))
-          .sort((a, b) => b.bal - a.bal || b.trophies - a.trophies);
-        ftHolder.innerHTML = table.map((row, rank) => {
-          const v = vibeById(row.p.vibe);
-          const net = row.bal - startChips;
-          const netCls = net > 0 ? "up" : net < 0 ? "down" : "";
-          return `<div class="ft-row ${row.i === idx ? "me" : ""}">
-            <span class="ft-rank">${rank === 0 ? "👑" : "#" + (rank + 1)}</span>
-            <span class="avatar-dot" style="background:${row.p.colour}">${escapeHtml(row.p.initials)}</span>
-            <div class="ft-name">${escapeHtml(row.p.name)}${v ? `<span class="traveller-vibe">${v.emoji}</span>` : ""}${row.trophies ? `<span class="ft-trophies">${"🏆".repeat(Math.min(row.trophies, 4))}</span>` : ""}</div>
-            <div class="ft-bal">${row.bal.toLocaleString()}<span class="ft-net ${netCls}">${net > 0 ? "+" : ""}${net.toLocaleString()}</span></div>
-          </div>`;
-        }).join("");
-      }
-      tweenNum(document.getElementById("myChipBal"), playerBalance(idx), n => `${Math.round(n).toLocaleString()} chips`);
-
-      // Prize shelf
-      const upForGrabs = state.bookie.markets.filter(m => m.status !== "settled" && m.type !== "yesno" && m.prize);
-      const claimed = state.bookie.markets.filter(m => m.status === "settled" && m.type !== "yesno" && m.prize);
-      const shelf = document.getElementById("prizeShelf");
-      if (shelf) {
-        const grabs = upForGrabs.map(m => `<div class="prize-row"><span class="prize-tag">${escapeHtml(m.prize)}</span><span class="prize-meta">${escapeHtml(m.title)}</span></div>`).join("");
-        const won = claimed.map(m => { const r = runnerById(m, m.winner); return `<div class="prize-row claimed"><span class="prize-tag">${escapeHtml(m.prize)}</span><span class="prize-meta">🏆 ${r ? escapeHtml(r.label) : "winner"}</span></div>`; }).join("");
-        shelf.innerHTML = (grabs || won) ? (grabs + won) : `<div class="micro">No prizes attached yet. Add a bet with a prize below.</div>`;
-      }
-
-      // Markets
-      const holder = document.getElementById("marketList");
-      if (holder) {
-        holder.innerHTML = state.bookie.markets.map(m => {
-          const runners = marketRunners(m);
-          const pool = marketPool(m);
-          const myBet = m.bets[idx];
-          const settled = m.status === "settled";
-          const runnerHtml = runners.map(r => {
-            const rp = runnerPool(m, r.id);
-            const odds = runnerOdds(m, r.id);
-            const pct = pool > 0 ? Math.round(rp / pool * 100) : 0;
-            const mine = myBet && String(myBet.runner) === r.id;
-            const win = settled && String(m.winner) === r.id;
-            return `<button class="runner-btn ${mine ? "mine" : ""} ${win ? "win" : ""} ${settled ? "locked" : ""}" data-mk="${m.id}" data-runner="${r.id}" ${settled ? "disabled" : ""}>
-              <span class="runner-dot" style="background:${r.colour}">${r.emoji}</span>
-              <span class="runner-name">${escapeHtml(r.label)}</span>
-              <span class="runner-odds">${odds ? odds.toFixed(2) + "×" : "open"}</span>
-              <span class="runner-bar"><span style="width:${pct}%; background:${r.colour}"></span></span>
-            </button>`;
-          }).join("");
-
-          let betPanel = "";
-          if (!settled) {
-            if (myBet) {
-              const odds = runnerOdds(m, myBet.runner);
-              const r = runnerById(m, myBet.runner);
-              const toWin = odds ? Math.round(myBet.stake * odds) : myBet.stake;
-              betPanel = `<div class="bet-strip">
-                <div class="bet-line">Backing <strong>${r ? escapeHtml(r.label) : "—"}</strong> · <strong>${myBet.stake}</strong> chips · to win <strong>${toWin}</strong></div>
-                <div class="stake-row">
-                  <button class="btn small ghost" data-act="dec" data-mk="${m.id}">−25</button>
-                  <button class="btn small ghost" data-act="inc" data-mk="${m.id}">+25</button>
-                  <button class="btn small ghost" data-act="inc100" data-mk="${m.id}">+100</button>
-                  <button class="btn small secondary" data-act="max" data-mk="${m.id}">Max</button>
-                  <button class="btn small danger" data-act="clear" data-mk="${m.id}">Clear</button>
-                </div>
-              </div>`;
-            } else {
-              betPanel = `<div class="bet-strip"><div class="bet-line muted-line">Tap who you're backing — opens with 50 chips, then nudge the stake up or down.</div></div>`;
-            }
-          } else {
-            const r = runnerById(m, m.winner);
-            const mineWon = myBet && String(myBet.runner) === String(m.winner);
-            const myLine = myBet ? (mineWon ? ` · you won <strong>${Math.round(marketPayout(m, myBet.stake))}</strong>` : ` · you lost <strong>${myBet.stake}</strong>`) : "";
-            betPanel = `<div class="bet-strip settled-strip"><div class="bet-line">🏁 Result: <strong>${r ? escapeHtml(r.label) : "—"}</strong>${m.type !== "yesno" && m.prize ? ` wins ${escapeHtml(m.prize)}` : ""}${myLine}</div></div>`;
-          }
-
-          const settleHtml = settled
-            ? `<button class="btn small ghost" data-act="reopen" data-mk="${m.id}">Reopen</button>`
-            : `<div class="settle-wrap"><button class="btn small secondary" data-act="settletoggle" data-mk="${m.id}">⚖️ Settle</button><div class="settle-pick" id="settle_${m.id}" hidden>${runners.map(r => `<button class="btn small" data-act="settle" data-mk="${m.id}" data-runner="${r.id}">${r.emoji} ${escapeHtml(r.label)}</button>`).join("")}</div></div>`;
-
-          const removable = !DEFAULT_MARKET_IDS.includes(m.id);
-          return `<article class="bet-card ${settled ? "is-settled" : ""}">
-            <div class="bet-head">
-              <div class="bet-emoji">${m.emoji || "🎲"}</div>
-              <div class="bet-titlewrap"><div class="bet-title">${escapeHtml(m.title)}</div><div class="bet-desc">${escapeHtml(m.desc || "")}</div></div>
-              <div class="bet-tags">${m.prize && m.type !== "yesno" ? `<span class="prize-tag">${escapeHtml(m.prize)}</span>` : ""}<span class="pill">${pool} in pot</span><span class="idea-status ${settled ? "" : "hot"}">${settled ? "Settled" : "Open"}</span></div>
-            </div>
-            <div class="runner-grid">${runnerHtml}</div>
-            ${betPanel}
-            <div class="bet-foot">${settleHtml}${removable ? `<button class="btn small danger" data-act="remove" data-mk="${m.id}">🗑️ Remove</button>` : ""}</div>
-          </article>`;
-        }).join("");
-
-        holder.querySelectorAll(".runner-btn").forEach(btn => btn.addEventListener("click", () => pickRunner(btn.dataset.mk, btn.dataset.runner)));
-        holder.querySelectorAll("[data-act]").forEach(btn => {
-          btn.addEventListener("click", () => {
-            const id = btn.dataset.mk; const act = btn.dataset.act;
-            if (act === "dec") adjustBet(id, -25);
-            else if (act === "inc") adjustBet(id, 25);
-            else if (act === "inc100") adjustBet(id, 100);
-            else if (act === "max") maxBet(id);
-            else if (act === "clear") setBetStake(id, 0);
-            else if (act === "reopen") reopenMarket(id);
-            else if (act === "remove") { if (confirm("Remove this bet for everyone?")) removeMarket(id); }
-            else if (act === "settletoggle") { const el = document.getElementById("settle_" + id); if (el) el.hidden = !el.hidden; }
-            else if (act === "settle") { if (confirm("Settle this bet? This pays out everyone's chips.")) settleMarket(id, btn.dataset.runner); }
-          });
-        });
-      }
-
-      // Badges
-      const openCount = state.bookie.markets.filter(m => m.status !== "settled").length;
-      const ob = document.getElementById("openMarketsBadge");
-      if (ob) ob.textContent = `${openCount} open market${openCount === 1 ? "" : "s"}`;
-      const pb = document.getElementById("prizesBadge");
-      if (pb) pb.textContent = `${upForGrabs.length} prize${upForGrabs.length === 1 ? "" : "s"} up for grabs`;
-      const bbs = document.getElementById("boardBookieStatus");
-      if (bbs) bbs.textContent = `${openCount} open market${openCount === 1 ? "" : "s"}`;
-    }
 
     // ---- Crew Desk: hands up, share options, group vote, lock the pick ----
     const DEFAULT_ROOM_IDS = defaultDesk.rooms.map(r => r.id);
@@ -2804,7 +2557,7 @@
           body = `<div class="vp-route" style="color:${ac}"><div class="vp-spine"></div><div class="vp-trav"></div>${stops}</div>`;
         }
         const note = dayNote(d);
-        return `<section class="vp-slide">${VP_MTN}${head}${note ? `<div class="vp-daynote">${escapeHtml(note)}</div>` : ""}${splitBlock(d)}${body}</section>`;
+        return `<section class="vp-slide">${VP_MTN}${head}${note ? `<div class="vp-daynote">${escapeHtml(note)}</div>` : ""}${splitBlock(d)}${body}${dayDetail(d)}</section>`;
       }).join("");
 
       const dotsHtml = Array.from({ length: total }, (_, k) => `<button class="vp-dot${k === 0 ? " on" : ""}" data-goslide="${k}" aria-label="Slide ${k + 1}"></button>`).join("");
@@ -2898,8 +2651,6 @@
     });
 
     document.getElementById("playerSelect").addEventListener("change", e => { state.selectedPlayer = Number(e.target.value); saveState(); renderAll(); });
-    document.getElementById("focusPlayerBtn")?.addEventListener("click", () => toast(`${selectedPlayer().name} is selected`));
-    document.getElementById("resetBtn")?.addEventListener("click", () => { if (confirm("Reset this browser's Slovenia board state?")) { localStorage.removeItem(STORE_KEY); state = loadState(); renderAll(); toast("Board reset"); } });
 
     document.getElementById("addIdeaBtn").addEventListener("click", () => {
       const title = document.getElementById("newIdeaTitle").value.trim();
@@ -3033,7 +2784,6 @@
 
     document.getElementById("syncChip").addEventListener("click", () => remotePull({ manual: true }));
 
-    spawnLeaves();
     renderAll();
     setActiveTab("plan");
     setSyncChip(hasRemoteSync() ? "syncing" : "disabled");
