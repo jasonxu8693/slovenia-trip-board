@@ -978,6 +978,15 @@
           </div>
           <aside class="side-stack">
             <div class="panel pad">
+              <div class="label">👥 The crew</div>
+              <p class="panel-sub" style="margin:6px 0 12px">Pick yourself, then vote — so every vote is attributed to you.</p>
+              <div class="select-row" style="margin-bottom:14px">
+                <select id="playerSelect" aria-label="You are"></select>
+              </div>
+              <div class="traveller-grid" id="travellerGrid"></div>
+              <details style="margin-top:14px"><summary class="label" style="cursor:pointer">✎ Rename crew</summary><div id="rosterEditor" class="task-list" style="margin-top:10px"></div></details>
+            </div>
+            <div class="panel pad">
               <div class="label">Decision logic</div>
               <div class="idea-summary-grid">
                 <div class="mini-score"><div class="num" id="hotIdeaCount">0</div><div class="txt">Strong shortlist ideas</div></div>
@@ -1101,24 +1110,13 @@
           <div class="panel-head" style="padding:0 0 18px; border-bottom:0">
             <div>
               <h2>Essentials 🇸🇮</h2>
-              <p class="panel-sub">The crew + the on-the-ground cheat sheet — save this to your phone before Trieste.</p>
+              <p class="panel-sub">The on-the-ground cheat sheet — save this to your phone before Trieste.</p>
             </div>
             <div class="pill-row" style="margin:0">
               <span class="pill done">Schengen — no border stop ✅</span>
               <span class="pill warn">€ euro both sides</span>
               <span class="pill hot">Vignette for the motorway</span>
             </div>
-          </div>
-
-          <div class="crew-block" style="margin:0 0 22px; padding:16px 18px; border:1px solid rgba(255,255,255,0.12); border-radius:18px; background:rgba(255,255,255,0.03)">
-            <h3 style="margin:0 0 4px">👥 The crew</h3>
-            <p class="panel-sub" style="margin:0 0 14px">Pick yourself to vote in the Activity Market &amp; Crew Desk. Rename the placeholders once the group is confirmed.</p>
-            <div class="select-row" style="margin-bottom:16px">
-              <select id="playerSelect" aria-label="You are"></select>
-            </div>
-            <div class="traveller-grid" id="travellerGrid"></div>
-            <div class="label" style="margin-top:18px">Rename travellers</div>
-            <div id="rosterEditor" class="task-list" style="margin-top:10px"></div>
           </div>
 
           <div class="grid-3">
@@ -1173,7 +1171,7 @@
       <h2>Who are you?</h2>
       <p>Tap your name so your votes and jobs stay separate from everyone else's. This is saved on your device — you're only asked once.</p>
       <div class="who-grid" id="whoGrid"></div>
-      <p class="panel-sub" style="margin-top:16px">Names still generic? Rename the placeholders in <strong>Essentials → 👥 The crew</strong>, then reopen this from the “not you?” button when you vote.</p>
+      <p class="panel-sub" style="margin-top:16px">Rename anyone under <strong>👥 The crew</strong> in the Activity Market. Reopen this any time from the “not you?” button when you vote.</p>
     </div>
   </div>
 
