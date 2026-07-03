@@ -316,6 +316,13 @@
     .modal-card { width: min(780px, 100%); border: 1px solid rgba(255,255,255,0.18); border-radius: 34px; background: linear-gradient(180deg, rgba(14, 28, 56, 0.98), rgba(8, 16, 34, 0.98)); box-shadow: var(--shadow); padding: 24px; }
     .modal-card h2 { margin: 0 0 8px; font-size: clamp(28px, 6vw, 50px); letter-spacing: -0.06em; }
     .modal-card p { color: var(--muted); line-height: 1.55; }
+    .who-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; margin-top:18px; }
+    .who-btn { display:flex; align-items:center; gap:10px; padding:12px 14px; border:1px solid rgba(255,255,255,0.16); border-radius:16px; background:rgba(255,255,255,0.05); color:var(--ink); font-size:15px; font-weight:800; cursor:pointer; text-align:left; }
+    .who-btn:hover { background:rgba(255,255,255,0.12); border-color:rgba(255,255,255,0.4); }
+    .who-btn.me { border-color:rgba(95,211,154,0.5); background:rgba(95,211,154,0.12); }
+    .who-dot { width:12px; height:12px; border-radius:50%; flex-shrink:0; }
+    .who-bar { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:0 0 16px; padding:10px 13px; border:1px solid rgba(127,176,255,0.3); border-radius:14px; background:rgba(127,176,255,0.08); font-size:13px; }
+    .who-bar strong { color:#dfe7ff; }
     .personality-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 18px 0; }
     .personality { border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; background: rgba(255,255,255,0.06); color: var(--ink); padding: 14px 10px; text-align: center; transition: transform 0.18s ease, background 0.18s ease; }
     .personality:hover, .personality.selected { transform: translateY(-3px); background: rgba(255,206,122,0.18); border-color: rgba(255,206,122,0.36); }
@@ -959,6 +966,7 @@
               <div class="idea-help">Rule of thumb: 5+ keen = shortlist · 3+ no = discuss · mostly maybe = optional.</div>
               <button class="btn small secondary" id="copyIdeasBtn">Copy vote summary</button>
             </div>
+            <div class="who-bar">🙋 You're voting as <strong id="whoName">—</strong> <button class="btn small ghost" id="changeWhoBtn" style="margin-left:auto">Not you? Pick yourself</button></div>
             <div class="idea-grid" id="ideaGrid"></div>
             <h3 style="margin:24px 0 8px">Add a new idea</h3>
             <div class="add-idea-form">
@@ -1159,6 +1167,15 @@
     <button data-tab="desk"><span class="d-ico">🛎️</span>Desk</button>
     <button data-tab="intel"><span class="d-ico">🧭</span>Essentials</button>
   </nav>
+
+  <div class="modal" id="whoModal">
+    <div class="modal-card">
+      <h2>Who are you?</h2>
+      <p>Tap your name so your votes and jobs stay separate from everyone else's. This is saved on your device — you're only asked once.</p>
+      <div class="who-grid" id="whoGrid"></div>
+      <p class="panel-sub" style="margin-top:16px">Names still generic? Rename the placeholders in <strong>Essentials → 👥 The crew</strong>, then reopen this from the “not you?” button when you vote.</p>
+    </div>
+  </div>
 
   <div class="toast" id="toast"></div>
 
@@ -1498,6 +1515,20 @@
       return REMOTE_API_URL && REMOTE_API_URL.startsWith("https://script.google.com/");
     }
 
+    function mergeIdeaVotes(local, remote, me) {
+      local = local || {}; remote = remote || {};
+      const out = {};
+      new Set([...Object.keys(remote), ...Object.keys(local)]).forEach(id => {
+        const m = { ...(remote[id] || {}) };
+        const lo = local[id];
+        if (lo && typeof me === "number") {
+          if (Object.prototype.hasOwnProperty.call(lo, me)) m[me] = lo[me];        // my in-flight vote is authoritative
+          else if (Object.prototype.hasOwnProperty.call(m, me)) delete m[me];      // I took mine back on this device
+        }
+        out[id] = m;
+      });
+      return out;
+    }
     function mergeRemoteState(remote) {
       if (!remote || typeof remote !== "object") return;
       // "Who am I" is a per-device choice — never let a remote sync change it.
@@ -1508,7 +1539,7 @@
         players: remote.players || structuredClone(defaultState.players),
         groupDone: { ...defaultState.groupDone, ...(remote.groupDone || {}) },
         ideas: normalizeIdeas(remote.ideas),
-        ideaVotes: remote.ideaVotes || {},
+        ideaVotes: mergeIdeaVotes(state.ideaVotes, remote.ideaVotes, localSelected),
         bookie: remote.bookie ? { startingChips: remote.bookie.startingChips || 1000, markets: normalizeBookieMarkets(remote.bookie.markets) } : structuredClone(defaultBookie),
         desk: remote.desk ? { rooms: normalizeDeskRooms(remote.desk.rooms) } : structuredClone(defaultDesk),
         plan: remote.plan || { generatedAt: null, items: [] },
@@ -1520,6 +1551,21 @@
       localStorage.setItem(STORE_KEY, JSON.stringify(state));
     }
 
+    const WHOAMI_KEY = "sloveniaCrewWhoami";
+    function whoamiSaved() { try { const v = localStorage.getItem(WHOAMI_KEY); return v == null ? null : Number(v); } catch (e) { return null; } }
+    function openWhoModal() {
+      const grid = document.getElementById("whoGrid"), modal = document.getElementById("whoModal");
+      if (!grid || !modal) return;
+      grid.innerHTML = state.players.map((p, idx) => `<button class="who-btn ${idx === state.selectedPlayer ? "me" : ""}" data-who="${idx}"><span class="who-dot" style="background:${p.colour || '#8fb6ff'}"></span>${escapeHtml(p.name)}</button>`).join("");
+      grid.querySelectorAll("[data-who]").forEach(b => b.addEventListener("click", () => {
+        const idx = Number(b.dataset.who);
+        state.selectedPlayer = idx;
+        try { localStorage.setItem(WHOAMI_KEY, String(idx)); } catch (e) {}
+        modal.classList.remove("active");
+        saveState(); renderAll(); toast(`You're set as ${state.players[idx].name}`);
+      }));
+      modal.classList.add("active");
+    }
     function relTime(ts) {
       const s = Math.round((Date.now() - ts) / 1000);
       if (s < 10) return "just now";
@@ -1794,6 +1840,7 @@
     function renderIdeas() {
       const holder = document.getElementById("ideaGrid");
       if (!holder) return;
+      const wn = document.getElementById("whoName"); if (wn) wn.textContent = selectedPlayer().name;
       const ideas = allIdeas();
       holder.innerHTML = ideas.map(idea => {
         const tally = tallyIdea(idea.id);
@@ -2738,7 +2785,8 @@
       });
     });
 
-    document.getElementById("playerSelect").addEventListener("change", e => { state.selectedPlayer = Number(e.target.value); saveState(); renderAll(); });
+    document.getElementById("playerSelect").addEventListener("change", e => { state.selectedPlayer = Number(e.target.value); try { localStorage.setItem(WHOAMI_KEY, String(state.selectedPlayer)); } catch (err) {} saveState(); renderAll(); });
+    document.getElementById("changeWhoBtn")?.addEventListener("click", openWhoModal);
 
     document.getElementById("addIdeaBtn").addEventListener("click", () => {
       const title = document.getElementById("newIdeaTitle").value.trim();
@@ -2874,6 +2922,9 @@
 
     renderAll();
     setActiveTab("plan");
+    const savedWho = whoamiSaved();
+    if (savedWho != null && state.players[savedWho]) state.selectedPlayer = savedWho;
+    else openWhoModal();
     setSyncChip(hasRemoteSync() ? "syncing" : "disabled");
     remotePull({ initial: true });
     startSyncLoops();
