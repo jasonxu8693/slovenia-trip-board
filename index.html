@@ -415,6 +415,17 @@
     .opt-card { position:relative; border:1px solid rgba(255,255,255,0.12); border-radius:16px; background:rgba(0,0,0,0.18); padding:11px 12px; }
     .opt-card.leading { border-color:rgba(255,206,122,0.4); background:rgba(255,206,122,0.08); }
     .opt-card.chosen { border-color:rgba(95,211,154,0.5); background:rgba(95,211,154,0.12); }
+    .decision-log { border:1px solid rgba(255,255,255,0.1); border-radius:14px; padding:10px 12px; margin:2px 0 12px; background:rgba(0,0,0,0.14); display:grid; gap:9px; }
+    .decision-log.dl-partial { border-color:rgba(255,206,122,0.4); background:rgba(255,206,122,0.07); }
+    .decision-log.dl-booked { border-color:rgba(95,211,154,0.4); background:rgba(95,211,154,0.08); }
+    .dl-row { display:flex; flex-wrap:wrap; gap:7px; align-items:center; }
+    .dl-chip { border:1px solid rgba(255,255,255,0.16); background:rgba(255,255,255,0.05); color:var(--ink); border-radius:999px; padding:5px 11px; font-size:12px; font-weight:800; cursor:pointer; }
+    .dl-chip.on { background:rgba(255,255,255,0.16); border-color:rgba(255,255,255,0.4); }
+    .dl-chip.warn.on { background:rgba(255,206,122,0.22); border-color:rgba(255,206,122,0.5); color:#ffe7ae; }
+    .dl-chip.done.on { background:rgba(95,211,154,0.22); border-color:rgba(95,211,154,0.5); color:#bff3d6; }
+    .dl-outcome { font-size:13px; color:var(--ink); background:rgba(255,255,255,0.05); border-radius:10px; padding:8px 10px; line-height:1.42; }
+    .dl-edit { display:grid; grid-template-columns:1fr auto; gap:8px; }
+    .dl-input { padding:8px 10px; font-size:12.5px; border-radius:10px; background:rgba(0,0,0,0.16); border:1px solid rgba(255,255,255,0.14); color:var(--ink); font-family:inherit; }
     .opt-main { display:grid; grid-template-columns:1fr auto; gap:10px; align-items:start; }
     .opt-name { font-weight:900; font-size:14px; letter-spacing:-0.01em; }
     .opt-name a { color:#bcd4ff; text-decoration:underline; text-underline-offset:3px; }
@@ -467,6 +478,11 @@
     .vpd-leg em { font-style:normal; color:#bfe7dc; font-size:11px; font-weight:700; }
     .vpd-note { flex-basis:100%; color:var(--muted); font-size:11.5px; }
     .vpd-list { margin:0; padding-left:18px; color:var(--muted); font-size:12.5px; line-height:1.65; }
+    .vpa { position:relative; z-index:1; display:grid; gap:10px; margin-top:14px; }
+    .vpa-card { display:grid; grid-template-columns:auto 1fr; gap:13px; align-items:center; border:1px solid rgba(238,246,243,0.12); border-radius:16px; background:rgba(7,22,18,0.42); padding:10px 12px; }
+    .vpa-img { width:66px; height:66px; border-radius:14px; object-fit:cover; }
+    .vpa-txt h4 { margin:0 0 3px; font-size:15px; font-weight:800; letter-spacing:-0.01em; color:#eef6f3; }
+    .vpa-txt p { margin:0; font-size:12.5px; color:var(--muted); line-height:1.45; }
     .plan-daynote { color:var(--subtle); font-size:12px; flex-basis:100%; }
     .plan-item { display:grid; grid-template-columns:auto 1fr auto auto auto; gap:9px; align-items:center; padding:9px 10px; border:1px solid rgba(255,255,255,0.1); border-radius:14px; background:rgba(0,0,0,0.16); margin-top:8px; }
     .pi-titlewrap { cursor:pointer; min-width:0; }
@@ -1227,11 +1243,11 @@
     // Crew Desk — own a job, share options, group votes, owner locks the pick.
     const defaultDesk = {
       rooms: [
-        { id: "stay_ljubljana", emoji: "🛏️", kind: "accom", title: "Friday-night stay (near Trieste)", desc: "One night near Trieste / the Karst to crash after the 23:00 landing — short drive, easy parking for two cars.", owners: [], options: [], status: "open", chosen: null },
-        { id: "stay_bled", emoji: "🏡", kind: "accom", title: "Bled house (3 nights)", desc: "The main base — group Airbnb or apartment cluster for 3 nights, enough real beds and bathrooms.", owners: [], options: [], status: "open", chosen: null },
-        { id: "car_hire", emoji: "🚘", kind: "car", title: "Car hire from Trieste", desc: "Two cars or a 9-seater from Trieste, driven across the border. Who's driving and who's researching?", owners: [], drivers: [], options: [], status: "open", chosen: null },
-        { id: "dinner_ljubljana", emoji: "🍖", kind: "dinner", title: "Last-day meal (Ljubljana / Trieste)", desc: "Tuesday's a travel day — a relaxed Ljubljana lunch on the way out, or a farewell dinner near Trieste before the flight.", owners: [], options: [], status: "open", chosen: null },
-        { id: "dinner_bled", emoji: "🍲", kind: "dinner", title: "Bled group dinner", desc: "Lakeside dinner together on a Bled night.", owners: [], options: [], status: "open", chosen: null }
+        { id: "stay_ljubljana", emoji: "🛏️", kind: "accom", title: "Friday-night stay (near Trieste)", desc: "One night near Trieste / the Karst to crash after the 23:00 landing — short drive, easy parking for two cars.", owners: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Trieste stay booked." } },
+        { id: "stay_bled", emoji: "🏡", kind: "accom", title: "Bled house (3 nights)", desc: "The main base — group Airbnb or apartment cluster for 3 nights, enough real beds and bathrooms.", owners: [], options: [], status: "open", chosen: null, log: { status: "partial", text: "Booked a place in Lake Bled — 2 nights (confirm the 3rd)." } },
+        { id: "car_hire", emoji: "🚘", kind: "car", title: "Car hire from Trieste", desc: "Two cars or a 9-seater from Trieste, driven across the border. Who's driving and who's researching?", owners: [], drivers: [], options: [], status: "open", chosen: null, log: { status: "open", text: "" } },
+        { id: "dinner_ljubljana", emoji: "🍖", kind: "dinner", title: "Last-day meal (Ljubljana / Trieste)", desc: "Tuesday's a travel day — a relaxed Ljubljana lunch on the way out, or a farewell dinner near Trieste before the flight.", owners: [], options: [], status: "open", chosen: null, log: { status: "open", text: "" } },
+        { id: "dinner_bled", emoji: "🍲", kind: "dinner", title: "Bled group dinner", desc: "Lakeside dinner together on a Bled night.", owners: [], options: [], status: "open", chosen: null, log: { status: "open", text: "" } }
       ]
     };
 
@@ -1316,6 +1332,41 @@
       return cards.length ? `<div class="vp-detail">${cards.join("")}</div>` : "";
     }
 
+    // Each day built out as a visual list of activities: photo + short "what it is".
+    const DAY_ACTS = {
+      d11: [
+        { img: "scene-trieste.jpg", title: "Land at Trieste", desc: "Touch down ~23:00 on FR168 and grab the two hire cars." },
+        { img: "scene-stay.jpg", title: "Crash near the airport", desc: "Short hop to a bed — no plans tonight, just sleep." }
+      ],
+      d12: [
+        { img: "scene-postojna.jpg", title: "Postojna Cave", desc: "Ride the little train deep into vast limestone chambers. ~10°C — bring a jumper." },
+        { img: "scene-predjama.jpg", title: "Predjama Castle", desc: "A 700-year-old castle built right into a cave mouth in the cliff." },
+        { img: "scene-drive.jpg", title: "Drive up to Bled", desc: "Scenic ~1h30 north to the lake — check into the Bled house." },
+        { img: "scene-ojstrica.jpg", title: "Straža toboggan", desc: "Summer toboggan down the Straža hill. Weekend-only and shuts at 18:00 — so it's today or not at all." },
+        { img: "scene-dinner.jpg", title: "Lakeside evening", desc: "First group dinner by the water." }
+      ],
+      d13: [
+        { img: "scene-vintgar.jpg", title: "Vintgar Gorge", desc: "Emerald river on a timed one-way boardwalk. Book the early slot to beat the crowds." },
+        { img: "scene-bledisland.jpg", title: "Row to Bled Island", desc: "Pletna boat to the island church + the 99 steps to the wishing bell." },
+        { img: "scene-bledcastle.jpg", title: "Bled Castle", desc: "Clifftop castle over the lake — best light late afternoon." },
+        { img: "scene-kremsnita.jpg", title: "Kremšnita", desc: "The lakeside cream-cake ritual. Touristy, non-negotiable." }
+      ],
+      d14: [
+        { img: "scene-jasna.jpg", title: "Vršič Pass", desc: "50 hairpins over the Julian Alps in autumn gold. Full tank before you start." },
+        { img: "scene-soca.jpg", title: "Soča Valley", desc: "Drop into Bovec beside the electric-turquoise Soča river." },
+        { img: "scene-velikakorita.jpg", title: "Velika korita", desc: "The Great Soča Gorge — turquoise pools and flat rocks to leap from. Water's properly cold." }
+      ],
+      d15: [
+        { img: "scene-ljubljana.jpg", title: "Ljubljana old town", desc: "Half-day in the dragon city — Triple Bridge, market, castle funicular, lunch." },
+        { img: "scene-drive.jpg", title: "Drive to Trieste", desc: "South to the airport for FR169, departing 22:15." }
+      ]
+    };
+    function dayActs(d) {
+      const acts = d && DAY_ACTS[d.id];
+      if (!acts || !acts.length) return "";
+      return `<div class="vpa">${acts.map(a => `<div class="vpa-card"><img class="vpa-img" src="images/${a.img}" alt="${escapeAttr(a.title)}" loading="lazy"><div class="vpa-txt"><h4>${escapeHtml(a.title)}</h4><p>${escapeHtml(a.desc)}</p></div></div>`).join("")}</div>`;
+    }
+
     const DAY_SCENE = {
       d11: "scene-trieste.jpg",
       d12: "scene-predjama.jpg",
@@ -1386,7 +1437,7 @@
       const baseIds = base.map(r => r.id);
       const merged = base.map(d => {
         const s = byId[d.id]; if (!s) return d;
-        const out = { ...d, owners: Array.isArray(s.owners) ? s.owners : [], options: Array.isArray(s.options) ? s.options : [], status: s.status || "open", chosen: s.chosen != null ? s.chosen : null };
+        const out = { ...d, owners: Array.isArray(s.owners) ? s.owners : [], options: Array.isArray(s.options) ? s.options : [], status: s.status || "open", chosen: s.chosen != null ? s.chosen : null, log: (s.log && typeof s.log === "object") ? { status: s.log.status || "open", text: s.log.text || "" } : (d.log || { status: "open", text: "" }) };
         if (d.kind === "car") out.drivers = Array.isArray(s.drivers) ? s.drivers : [];
         return out;
       });
@@ -2099,6 +2150,13 @@
       logEvent("🔓", `${selectedPlayer().name} reopened “${r.title}”`);
       syncDeskTasks(); saveState(); renderAll(); toast(`${r.title} reopened`);
     }
+    function setRoomLog(roomId, patch) {
+      const r = deskRoom(roomId); if (!r) return;
+      if (!r.log || typeof r.log !== "object") r.log = { status: "open", text: "" };
+      Object.assign(r.log, patch);
+      if (patch.status) logEvent(patch.status === "booked" ? "✅" : patch.status === "partial" ? "🟡" : "📋", `${selectedPlayer().name} marked “${r.title}” ${patch.status}`);
+      saveState(); renderAll();
+    }
     function syncDeskTasks() {
       ensureDesk();
       const lj = state.desk.rooms.find(r => r.id === "stay_ljubljana");
@@ -2179,6 +2237,19 @@
         <input type="text" class="opt-notes-in" data-room="${r.id}" data-f="notes" placeholder="One-line note (optional)" />` : "";
 
         const removable = !DEFAULT_ROOM_IDS.includes(r.id);
+        const logSt = (r.log && r.log.status) || "open";
+        const logText = (r.log && r.log.text) || "";
+        const logLabel = logSt === "booked" ? "✅ Booked" : logSt === "partial" ? "🟡 Partial" : (decided ? "Decided" : "Open");
+        const logCls = logSt === "booked" ? "done" : logSt === "partial" ? "warn" : (decided ? "hot" : "");
+        const decisionLog = `<div class="decision-log dl-${logSt}">
+          <div class="dl-row"><span class="crew-label">Decision</span>
+            <button class="dl-chip ${logSt === "open" ? "on" : ""}" data-desk="logstatus" data-room="${r.id}" data-val="open">Open</button>
+            <button class="dl-chip warn ${logSt === "partial" ? "on" : ""}" data-desk="logstatus" data-room="${r.id}" data-val="partial">🟡 Partial</button>
+            <button class="dl-chip done ${logSt === "booked" ? "on" : ""}" data-desk="logstatus" data-room="${r.id}" data-val="booked">✅ Booked</button>
+          </div>
+          ${logText ? `<div class="dl-outcome">📝 ${escapeHtml(logText)}</div>` : ""}
+          <div class="dl-edit"><input type="text" class="dl-input" data-room="${r.id}" data-f="logtext" placeholder="What did we book? e.g. Vila XYZ · Lake Bled · 2 nights · link" value="${escapeAttr(logText)}" /><button class="btn small secondary" data-desk="savelog" data-room="${r.id}">Save</button></div>
+        </div>`;
         const footer = (decided || removable) ? `<div class="bet-foot">
           ${decided ? `<button class="btn small ghost" data-desk="reopen" data-room="${r.id}">Reopen</button>` : ""}
           ${removable ? `<button class="btn small danger" data-desk="delroom" data-room="${r.id}">🗑️ Remove room</button>` : ""}
@@ -2188,8 +2259,9 @@
           <div class="desk-head">
             <div class="desk-emoji">${r.emoji || "📌"}</div>
             <div><div class="desk-title">${escapeHtml(r.title)}</div><div class="desk-desc">${escapeHtml(r.desc || "")}</div></div>
-            <span class="idea-status ${decided ? "hot" : ""}">${decided ? "Decided" : "Open"}</span>
+            <span class="idea-status ${logCls}">${logLabel}</span>
           </div>
+          ${decisionLog}
           <div class="crew-row"><span class="crew-label">On it</span>${ownerChips}<button class="hand-btn ${meOwner ? "on" : ""}" data-desk="hand" data-room="${r.id}">${meOwner ? "✋ You're on it" : "🙋 I'll look into this"}</button></div>
           ${driveRow}
           <div class="opt-list">${optHtml}</div>
@@ -2209,6 +2281,8 @@
           else if (act === "reopen") reopenRoom(room);
           else if (act === "delopt") removeDeskOption(room, opt);
           else if (act === "delroom") { if (confirm("Remove this whole decision room for everyone?")) removeDeskRoom(room); }
+          else if (act === "logstatus") setRoomLog(room, { status: btn.dataset.val });
+          else if (act === "savelog") { const el = container.querySelector(`input[data-room="${room}"][data-f="logtext"]`); setRoomLog(room, { text: (el ? el.value : "").trim() }); toast("Decision saved"); }
           else if (act === "addopt") {
             const get = f => { const el = container.querySelector(`input[data-room="${room}"][data-f="${f}"]`); return el ? el.value : ""; };
             addDeskOption(room, { title: get("title"), link: get("link"), price: get("price"), notes: get("notes") });
@@ -2557,7 +2631,7 @@
           body = `<div class="vp-route" style="color:${ac}"><div class="vp-spine"></div><div class="vp-trav"></div>${stops}</div>`;
         }
         const note = dayNote(d);
-        return `<section class="vp-slide">${VP_MTN}${head}${note ? `<div class="vp-daynote">${escapeHtml(note)}</div>` : ""}${splitBlock(d)}${body}${dayDetail(d)}</section>`;
+        return `<section class="vp-slide">${VP_MTN}${head}${splitBlock(d)}${dayActs(d)}${dayDetail(d)}</section>`;
       }).join("");
 
       const dotsHtml = Array.from({ length: total }, (_, k) => `<button class="vp-dot${k === 0 ? " on" : ""}" data-goslide="${k}" aria-label="Slide ${k + 1}"></button>`).join("");
