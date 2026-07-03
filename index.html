@@ -934,7 +934,7 @@
           <div class="hero-actions">
             <button class="btn" data-jump="plan">Open itinerary</button>
             <button class="btn secondary" data-jump="ideas">Activity Market</button>
-            <button class="btn ghost" data-jump="desk">Crew Desk</button>
+            <button class="btn ghost" data-jump="desk">Open Decisions</button>
             <button class="btn ghost" data-jump="intel">Essentials</button>
           </div>
         </div>
@@ -956,7 +956,7 @@
     <nav class="nav" aria-label="App sections">
       <button class="plan-tab active" data-tab="plan">🗓️ Itinerary</button>
       <button class="market-tab" data-tab="ideas">🎯 Activity Market</button>
-      <button class="desk-tab" data-tab="desk">🛎️ Crew Desk</button>
+      <button class="desk-tab" data-tab="desk">🛎️ Open Decisions</button>
       <button data-tab="intel">🧭 Essentials</button>
       <button class="sync-chip" id="syncChip" title="Tap to pull the latest from the group">
         <span class="dot"></span><span class="ico">↻</span><span id="syncChipText">Live</span>
@@ -1036,8 +1036,8 @@
           <div class="panel pad">
             <div class="panel-head" style="padding:0 0 18px; border-bottom:0">
               <div>
-                <h2>Crew Desk</h2>
-                <p class="panel-sub">Put your hand up, share options, vote. Where group jobs get owned and decisions get made.</p>
+                <h2>Open Decisions</h2>
+                <p class="panel-sub">Everything still to sort — put your hand up, share options, vote. Booked ones move to the settled column.</p>
               </div>
               <div class="pill-row" style="margin:0">
                 <span class="pill done" id="deskDecidedBadge">0 decided</span>
@@ -1185,7 +1185,7 @@
   <nav class="dock" aria-label="Quick navigation">
     <button data-tab="plan" class="active"><span class="d-ico">🗓️</span>Plan</button>
     <button data-tab="ideas"><span class="d-ico">🎯</span>Market</button>
-    <button data-tab="desk"><span class="d-ico">🛎️</span>Desk</button>
+    <button data-tab="desk"><span class="d-ico">🛎️</span>Decisions</button>
     <button data-tab="intel"><span class="d-ico">🧭</span>Essentials</button>
   </nav>
 
@@ -1290,7 +1290,11 @@
       rooms: [
         { id: "stay_ljubljana", emoji: "🛏️", kind: "accom", title: "Friday-night stay (near Trieste)", desc: "One night near Trieste / the Karst to crash after the 23:00 landing — short drive, easy parking for two cars.", owners: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Trieste stay booked." } },
         { id: "stay_bled", emoji: "🏡", kind: "accom", title: "Bled house (2 nights)", desc: "The main base — group Airbnb or apartments for 2 nights (Sat 12 + Sun 13), enough real beds and bathrooms for all 9.", owners: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Booked — Lake Bled, 2 nights (Sat 12 + Sun 13)." } },
-        { id: "stay_ljubljana_mon", emoji: "🌃", kind: "accom", title: "Monday-night stay (Ljubljana · 5)", desc: "The 5 staying on need a bed in Ljubljana for Mon 14, flying out Tue. Might just grab something central.", owners: [], options: [], status: "open", chosen: null, log: { status: "open", text: "Might just find something central in Ljubljana." } },
+        { id: "stay_ljubljana_mon", emoji: "🌃", kind: "accom", title: "Monday-night stay (Ljubljana · 5)", desc: "The 5 staying on need a bed in Ljubljana for Mon 14, flying out Tue. 3 places shortlisted below — 👍 the one you'd stay in.", owners: [], options: [
+          { id: "seed_mon_central_parking", by: 0, title: "2BR apartment · central + free parking", link: "https://www.airbnb.com.au/rooms/13541700?adults=5&check_in=2026-09-14&check_out=2026-09-15", price: "", notes: "2 bedrooms, central location with free parking for the two hire cars — and walkable to the old town.", votes: {} },
+          { id: "seed_mon_loft", by: 0, title: "Old-town loft (central)", link: "https://www.airbnb.com.au/rooms/550707516643191531?adults=5&check_in=2026-09-14&check_out=2026-09-15", price: "", notes: "Bright loft in the heart of the old town — walk to everything. Loft layout, so likely tighter for 5; parking isn't listed (old town's a low-traffic zone).", votes: {} },
+          { id: "seed_mon_condo", by: 0, title: "2BR condo · kitchen + parking", link: "https://www.airbnb.com.au/rooms/46930605?adults=5&check_in=2026-09-14&check_out=2026-09-15", price: "", notes: "Deluxe 2-bed with kitchen, parking and pet-friendly. Comfy, but the address reads as general Ljubljana — probably further from the old town.", votes: {} }
+        ], status: "open", chosen: null, log: { status: "open", text: "3 options shared — 👍 vote the one you'd stay in." } },
         { id: "car_hire", emoji: "🚘", kind: "car", title: "Car hire from Trieste", desc: "Two cars or a 9-seater from Trieste, driven across the border. Who's driving and who's researching?", owners: [], drivers: [], options: [], status: "open", chosen: null, log: { status: "open", text: "" } },
         { id: "dinner_ljubljana", emoji: "🍖", kind: "dinner", title: "Last-day meal (Ljubljana / Trieste)", desc: "Tuesday's a travel day — a relaxed Ljubljana lunch on the way out, or a farewell dinner near Trieste before the flight.", owners: [], options: [], status: "open", chosen: null, log: { status: "open", text: "" } },
         { id: "dinner_bled", emoji: "🍲", kind: "dinner", title: "Bled group dinner", desc: "Lakeside dinner together on a Bled night.", owners: [], options: [], status: "open", chosen: null, log: { status: "open", text: "" } }
@@ -1334,7 +1338,7 @@
         book: ["Nothing tonight — just crash", "Confirm cross-border hire + Slovenian e-vignette before the motorway"]
       },
       d12: {
-        accom: { name: "Bled house", meta: "Check in · night 1 of 2 · all 9", note: "Group Airbnb / apartments — name TBC (locked in Crew Desk)" },
+        accom: { name: "Bled house", meta: "Check in · night 1 of 2 · all 9", note: "Group Airbnb / apartments — name TBC (locked in Open Decisions)" },
         drive: [
           { leg: "Trieste → Bled", time: "~2h", note: "Straight up in the morning" },
           { leg: "Bled → Vintgar Gorge", time: "~10 min", note: "Small car park — go early" }
@@ -1350,7 +1354,7 @@
         book: ["Full tank before Vršič", "Swim kit + towel for Velika korita"]
       },
       d14: {
-        accom: { name: "Ljubljana — TBC", meta: "1 night · the 5 staying on", note: "Might just grab something central — the 4 heading home don't need a bed." },
+        accom: { name: "Ljubljana — TBC", meta: "1 night · the 5 staying on", note: "3 places shortlisted in Open Decisions — 👍 vote the night's stay. The 4 heading home don't need a bed." },
         drive: [
           { leg: "Bled → Postojna", time: "~1h", note: "Check out first" },
           { leg: "Postojna → Predjama", time: "~15 min" },
@@ -1483,7 +1487,14 @@
       const baseIds = base.map(r => r.id);
       const merged = base.map(d => {
         const s = byId[d.id]; if (!s) return d;
-        const out = { ...d, owners: Array.isArray(s.owners) ? s.owners : [], options: Array.isArray(s.options) ? s.options : [], status: s.status || "open", chosen: s.chosen != null ? s.chosen : null, log: (s.log && typeof s.log === "object") ? { status: s.log.status || "open", text: s.log.text || "" } : (d.log || { status: "open", text: "" }) };
+        // Keep the group's shared options (they carry the votes), then make sure any seeded
+        // default options are still present (matched by id) so curated shortlists always show
+        // even after a remote sync that predates them.
+        let mergedOptions = Array.isArray(s.options) ? s.options.slice() : [];
+        if (Array.isArray(d.options) && d.options.length) {
+          d.options.forEach(defOpt => { if (defOpt && defOpt.id && !mergedOptions.some(o => o && o.id === defOpt.id)) mergedOptions.push(structuredClone(defOpt)); });
+        }
+        const out = { ...d, owners: Array.isArray(s.owners) ? s.owners : [], options: mergedOptions, status: s.status || "open", chosen: s.chosen != null ? s.chosen : null, log: (s.log && typeof s.log === "object") ? { status: s.log.status || "open", text: s.log.text || "" } : (d.log || { status: "open", text: "" }) };
         if (d.kind === "car") out.drivers = Array.isArray(s.drivers) ? s.drivers : [];
         return out;
       });
@@ -2913,7 +2924,7 @@
         "Open group bosses:",
         ...groupTasks.filter(t => !state.groupDone[t.id]).map(t => `• ${t.title}`),
         "",
-        "Crew Desk:",
+        "Open Decisions:",
         ...(state.desk ? state.desk.rooms : []).map(r => {
           const o = (r.options || []).find(x => x.id === r.chosen);
           const owners = r.owners.map(i => state.players[i] ? state.players[i].name : "").filter(Boolean).join(", ");
