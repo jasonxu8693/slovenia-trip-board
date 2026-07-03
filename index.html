@@ -1405,15 +1405,15 @@
       ideas: structuredClone(defaultIdeas),
       ideaVotes: {},
       players: [
-        { name: "Jason", initials: "J", colour: colours[0], vibe: "scenic", piece: "📸" },
-        { name: "Traveller 2", initials: "T2", colour: colours[1], vibe: null, piece: null },
-        { name: "Traveller 3", initials: "T3", colour: colours[2], vibe: null, piece: null },
-        { name: "Traveller 4", initials: "T4", colour: colours[3], vibe: null, piece: null },
-        { name: "Traveller 5", initials: "T5", colour: colours[4], vibe: null, piece: null },
-        { name: "Traveller 6", initials: "T6", colour: colours[5], vibe: null, piece: null },
-        { name: "Traveller 7", initials: "T7", colour: colours[6], vibe: null, piece: null },
-        { name: "Traveller 8", initials: "T8", colour: colours[7], vibe: null, piece: null },
-        { name: "Traveller 9", initials: "T9", colour: colours[8], vibe: null, piece: null }
+        { name: "Jason Xu", initials: "JX", colour: colours[0], vibe: "scenic", piece: "📸" },
+        { name: "Sarah Wu", initials: "SW", colour: colours[1], vibe: null, piece: null },
+        { name: "Elizabeth Trinh", initials: "ET", colour: colours[2], vibe: null, piece: null },
+        { name: "Heidi", initials: "H", colour: colours[3], vibe: null, piece: null },
+        { name: "Jason Vo", initials: "JV", colour: colours[4], vibe: null, piece: null },
+        { name: "Katrina Jiang", initials: "KJ", colour: colours[5], vibe: null, piece: null },
+        { name: "Steph Trinh", initials: "ST", colour: colours[6], vibe: null, piece: null },
+        { name: "Yan Hao", initials: "YH", colour: colours[7], vibe: null, piece: null },
+        { name: "Michael", initials: "M", colour: colours[8], vibe: null, piece: null }
       ],
       groupDone: {
         routeLock: false,
@@ -2724,7 +2724,20 @@
         : "Build it by hand — add stops to any day, set times, rename, or drop a day.";
     }
 
+    const CREW = ["Jason Xu", "Sarah Wu", "Elizabeth Trinh", "Heidi", "Jason Vo", "Katrina Jiang", "Steph Trinh", "Yan Hao", "Michael"];
+    function reconcilePlayerNames() {
+      if (!Array.isArray(state.players)) return;
+      state.players.forEach((p, idx) => {
+        if (idx >= CREW.length || !p) return;
+        const nm = (p.name || "").trim();
+        // upgrade only leftover placeholders / the old default — never overwrite a real rename
+        if (nm === "" || /^Traveller\s*\d+$/i.test(nm) || (idx === 0 && (nm === "Jason" || nm === "Jason Xu"))) {
+          if (p.name !== CREW[idx]) { p.name = CREW[idx]; p.initials = makeInitials(CREW[idx], idx); }
+        }
+      });
+    }
     function renderAll() {
+      reconcilePlayerNames();
       ensureBookie(); ensureDesk(); ensurePlan();
       renderPlayerSelect(); renderTravellerGrid(); renderRosterEditor(); renderIdeas(); renderHero(); renderDesk(); renderPlan(); renderVisualItinerary(); renderArrivals();
     }
