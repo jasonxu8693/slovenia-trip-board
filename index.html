@@ -1292,14 +1292,14 @@
     // Crew Desk — own a job, share options, group votes, owner locks the pick.
     const defaultDesk = {
       rooms: [
-        { id: "stay_ljubljana", emoji: "🛏️", kind: "accom", title: "Friday-night stay (near Trieste)", desc: "One night near Trieste / the Karst to crash after the 23:00 landing — short drive, easy parking for two cars.", owners: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Booked via a friend — chasing the address, check-in + parking details." } },
+        { id: "stay_ljubljana", emoji: "🛏️", kind: "accom", title: "Friday-night stay (near Trieste)", desc: "One night near Trieste / the Karst to crash after the 23:00 landing — short drive, easy parking for two cars.", owners: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Booked (via a friend) — Hotel Al Gelso, Monfalcone, ~15 min from TRS. No hotel parking (pay public nearby)." } },
         { id: "stay_bled", emoji: "🏡", kind: "accom", title: "Bled house (2 nights)", desc: "The main base — group Airbnb or apartments for 2 nights (Sat 12 + Sun 13), enough real beds and bathrooms for all 9.", owners: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Booked — Vila Klif, Ambrož pod Krvavcem (Krvavec), 2 nights (Sat 12 + Sun 13). ~45 min from Bled; caps at 8 — we're 9." } },
         { id: "stay_ljubljana_mon", emoji: "🌃", kind: "accom", title: "Monday-night stay (Ljubljana · 5)", desc: "The 5 staying on need a bed in Ljubljana for Mon 14, flying out Tue. 3 places shortlisted below — 👍 the one you'd stay in.", owners: [], options: [
           { id: "seed_mon_central_parking", by: 0, title: "2BR apartment · central + free parking", link: "https://www.airbnb.com.au/rooms/13541700?adults=5&check_in=2026-09-14&check_out=2026-09-15", price: "", notes: "2 bedrooms, central location with free parking for the two hire cars — and walkable to the old town.", votes: {} },
           { id: "seed_mon_loft", by: 0, title: "Old-town loft (central)", link: "https://www.airbnb.com.au/rooms/550707516643191531?adults=5&check_in=2026-09-14&check_out=2026-09-15", price: "", notes: "Bright loft in the heart of the old town — walk to everything. Loft layout, so likely tighter for 5; parking isn't listed (old town's a low-traffic zone).", votes: {} },
           { id: "seed_mon_condo", by: 0, title: "2BR condo · kitchen + parking", link: "https://www.airbnb.com.au/rooms/46930605?adults=5&check_in=2026-09-14&check_out=2026-09-15", price: "", notes: "Deluxe 2-bed with kitchen, parking and pet-friendly. Comfy, but the address reads as general Ljubljana — probably further from the old town.", votes: {} }
         ], status: "open", chosen: null, log: { status: "open", text: "3 options shared — 👍 vote the one you'd stay in." } },
-        { id: "car_hire", emoji: "🚘", kind: "car", title: "Car hire from Trieste", desc: "Two cars or a 9-seater from Trieste, driven across the border. Who's driving and who's researching?", owners: [], drivers: [], options: [], status: "open", chosen: null, log: { status: "open", text: "" } },
+        { id: "car_hire", emoji: "🚘", kind: "car", title: "Car hire from Trieste", desc: "Two cars from Trieste, driven across the border. Booked by Jason V + Hao (on their accounts).", owners: [], drivers: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Booked by Jason V + Hao (on their accounts). Confirm cross-border cover + Slovenian vignette." } },
         { id: "dinner_ljubljana", emoji: "🍖", kind: "dinner", title: "Last-day meal (Ljubljana / Trieste)", desc: "Tuesday's a travel day — a relaxed Ljubljana lunch on the way out, or a farewell dinner near Trieste before the flight.", owners: [], options: [], status: "open", chosen: null, log: { status: "open", text: "" } },
         { id: "dinner_bled", emoji: "🍲", kind: "dinner", title: "Bled group dinner", desc: "Lakeside dinner together on a Bled night.", owners: [], options: [], status: "open", chosen: null, log: { status: "open", text: "" } }
       ]
@@ -1338,19 +1338,23 @@
     const DAY_DETAIL = {
       d11: {
         accom: {
-          name: "Trieste night — booked (via a friend)",
-          meta: "1 night · all 9",
-          note: "A mate has sorted tonight's stay near Trieste. Still need the address, check-in time, door code, parking for 2 cars and the split — chase them and drop it in here."
+          name: "Hotel Al Gelso (Antica Locanda al Gelso)",
+          meta: "1 night · all 9 · booked via a friend",
+          note: "Monfalcone, ~15 min from the airport — booked by a mate (on their account, so no confirmation in our inbox). Heads up: it's in the pedestrian old town with no hotel car park — you park in paid public parking nearby, which matters with two hire cars.",
+          address: "Via Sant'Ambrogio 22, 34074 Monfalcone (FVG)",
+          maps: "https://www.google.com/maps/search/?api=1&query=Hotel+Al+Gelso+Via+Sant%27Ambrogio+22+Monfalcone",
+          access: "3★ with a restaurant + bar · ~6 km / 15 min from Trieste airport",
+          link: "https://www.booking.com/hotel/it/hotelalgelso.en-gb.html"
         },
         drive: [
           { leg: "Land Trieste (TRS) — FR168", time: "arr 23:00", note: "London Stansted 19:55 → Trieste 23:00 · Ryanair ref OSU7WL" },
-          { leg: "Pick up 2 hire cars at TRS", time: "", note: "Late landing — check the rental desk is open at 23:00 or has a key-safe" },
-          { leg: "TRS → tonight's bed", time: "short hop", note: "Too late to drive far — just crash" }
+          { leg: "Pick up 2 hire cars at TRS", time: "", note: "Booked by Jason V + Hao — confirm the desk covers a 23:00 pickup" },
+          { leg: "TRS → Hotel Al Gelso, Monfalcone", time: "~15 min", note: "Then find the paid public parking near the old town" }
         ],
         book: [
-          "Get the address + door code + parking from the friend who booked it",
-          "Confirm the hire-car desk covers a 23:00 pickup (or after-hours key collection)",
-          "Buy the Slovenian e-vignette online before you touch the motorway"
+          "Get who-booked-it + check-in details from the friend (late 23:00-ish arrival — make sure the room's held)",
+          "Sort where the two hire cars park overnight (no hotel car park)",
+          "Buy the Slovenian e-vignette before the motorway — unless the rental already includes it (ask Jason V / Hao)"
         ]
       },
       d12: {
