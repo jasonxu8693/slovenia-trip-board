@@ -511,6 +511,8 @@
     .vpd-leg em { font-style:normal; color:#bfe7dc; font-size:11px; font-weight:700; }
     .vpd-note { flex-basis:100%; color:var(--muted); font-size:11.5px; }
     .vpd-list { margin:0; padding-left:18px; color:var(--muted); font-size:12.5px; line-height:1.65; }
+    .vpd-a { color:#9be3d1; font-weight:700; text-decoration:underline; text-underline-offset:2px; }
+    .vpd-b > span a.vpd-a { font-size:inherit; }
     .vpa { position:relative; z-index:1; display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:14px; margin-top:16px; }
     .vpa-card { display:flex; flex-direction:column; border:1px solid rgba(238,246,243,0.12); border-radius:16px; background:rgba(7,22,18,0.42); overflow:hidden; }
     .vpa-img { width:100%; aspect-ratio:3/2; height:auto; object-fit:cover; display:block; transition:transform .4s ease; }
@@ -1290,8 +1292,8 @@
     // Crew Desk — own a job, share options, group votes, owner locks the pick.
     const defaultDesk = {
       rooms: [
-        { id: "stay_ljubljana", emoji: "🛏️", kind: "accom", title: "Friday-night stay (near Trieste)", desc: "One night near Trieste / the Karst to crash after the 23:00 landing — short drive, easy parking for two cars.", owners: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Trieste stay booked." } },
-        { id: "stay_bled", emoji: "🏡", kind: "accom", title: "Bled house (2 nights)", desc: "The main base — group Airbnb or apartments for 2 nights (Sat 12 + Sun 13), enough real beds and bathrooms for all 9.", owners: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Booked — Lake Bled, 2 nights (Sat 12 + Sun 13)." } },
+        { id: "stay_ljubljana", emoji: "🛏️", kind: "accom", title: "Friday-night stay (near Trieste)", desc: "One night near Trieste / the Karst to crash after the 23:00 landing — short drive, easy parking for two cars.", owners: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Booked via a friend — chasing the address, check-in + parking details." } },
+        { id: "stay_bled", emoji: "🏡", kind: "accom", title: "Bled house (2 nights)", desc: "The main base — group Airbnb or apartments for 2 nights (Sat 12 + Sun 13), enough real beds and bathrooms for all 9.", owners: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Booked — Vila Klif, Ambrož pod Krvavcem (Krvavec), 2 nights (Sat 12 + Sun 13). ~45 min from Bled; caps at 8 — we're 9." } },
         { id: "stay_ljubljana_mon", emoji: "🌃", kind: "accom", title: "Monday-night stay (Ljubljana · 5)", desc: "The 5 staying on need a bed in Ljubljana for Mon 14, flying out Tue. 3 places shortlisted below — 👍 the one you'd stay in.", owners: [], options: [
           { id: "seed_mon_central_parking", by: 0, title: "2BR apartment · central + free parking", link: "https://www.airbnb.com.au/rooms/13541700?adults=5&check_in=2026-09-14&check_out=2026-09-15", price: "", notes: "2 bedrooms, central location with free parking for the two hire cars — and walkable to the old town.", votes: {} },
           { id: "seed_mon_loft", by: 0, title: "Old-town loft (central)", link: "https://www.airbnb.com.au/rooms/550707516643191531?adults=5&check_in=2026-09-14&check_out=2026-09-15", price: "", notes: "Bright loft in the heart of the old town — walk to everything. Loft layout, so likely tighter for 5; parking isn't listed (old town's a low-traffic zone).", votes: {} },
@@ -1335,50 +1337,180 @@
     // Pre-filled with what we know; hotel names + exact times get confirmed once booked.
     const DAY_DETAIL = {
       d11: {
-        accom: { name: "Bed near Trieste airport", meta: "1 night", note: "Book a short hop from TRS — you land ~23:00. Easy parking for two cars." },
-        drive: [{ leg: "Trieste Airport → the bed", time: "short hop", note: "Grab the hire cars first" }],
-        book: ["Nothing tonight — just crash", "Confirm cross-border hire + Slovenian e-vignette before the motorway"]
+        accom: {
+          name: "Trieste night — booked (via a friend)",
+          meta: "1 night · all 9",
+          note: "A mate has sorted tonight's stay near Trieste. Still need the address, check-in time, door code, parking for 2 cars and the split — chase them and drop it in here."
+        },
+        drive: [
+          { leg: "Land Trieste (TRS) — FR168", time: "arr 23:00", note: "London Stansted 19:55 → Trieste 23:00 · Ryanair ref OSU7WL" },
+          { leg: "Pick up 2 hire cars at TRS", time: "", note: "Late landing — check the rental desk is open at 23:00 or has a key-safe" },
+          { leg: "TRS → tonight's bed", time: "short hop", note: "Too late to drive far — just crash" }
+        ],
+        book: [
+          "Get the address + door code + parking from the friend who booked it",
+          "Confirm the hire-car desk covers a 23:00 pickup (or after-hours key collection)",
+          "Buy the Slovenian e-vignette online before you touch the motorway"
+        ]
       },
       d12: {
-        accom: { name: "Bled house", meta: "Check in · night 1 of 2 · all 9", note: "Group Airbnb / apartments — name TBC (locked in Open Decisions)" },
+        accom: {
+          name: "Vila Klif — group chalet",
+          meta: "Check in from 15:00 · night 1 of 2",
+          note: "The booked 2-night base — a ski/hike chalet with sauna + PS5. Heads up: it's up at Krvavec, ~45 min from Bled (not lakeside), and the listing caps at 8 guests — we're 9, so that needs sorting.",
+          address: "Ambrož pod Krvavcem 49, 4207 Cerklje na Gorenjskem",
+          maps: "https://www.google.com/maps/search/?api=1&query=Ambro%C5%BE+pod+Krvavcem+49+Cerklje+na+Gorenjskem",
+          checkin: "Sat 12 Sep, after 15:00",
+          checkout: "Mon 14 Sep, by 10:00",
+          access: "Self check-in with keypad · exterior cameras on site · no pets",
+          price: "~£346 total (~£43pp for 8) · host Igor Burgar",
+          link: "https://www.airbnb.com/rooms/1328844305934967312"
+        },
         drive: [
-          { leg: "Trieste → Bled", time: "~2h", note: "Straight up in the morning" },
-          { leg: "Bled → Vintgar Gorge", time: "~10 min", note: "Small car park — go early" }
+          { leg: "Trieste → Vila Klif (Krvavec)", time: "~1h45", note: "Cross-border; e-vignette on first" },
+          { leg: "House → Bled", time: "~45 min", note: "The lake is the day's hub, not the doorstep" },
+          { leg: "Bled → Vintgar (Central/LIP car park)", time: "~15 min", note: "Park at Central Vintgar, free P1 shuttle to the gorge" }
         ],
-        book: ["Vintgar timed entry — book the early slot", "Cash for the pletna boat", "Straža toboggan: cash, ride before it shuts at 18:00"]
+        guide: [
+          {
+            icon: "🚣", title: "Rowing out to Bled Island",
+            lines: [
+              "Rent your own wooden rowboat: ~€15–25 the first hour, boats seat 3–5. Hire at the Castle (Grajska) boathouse, Pension Pletna, or the Velika Zaka end.",
+              "Or the traditional pletna gondola: €20pp return, cash only, ~15–20 min each way + ~40 min on the island.",
+              "The island: 99 stone steps up; €12pp covers the church + bell tower — ring the wishing bell 3×. Allow 40–60 min."
+            ]
+          },
+          {
+            icon: "🏰", title: "Up to Bled Castle",
+            lines: [
+              "Walk up: steep but short forest path from above the Castle Bathing Area — ~15–20 min, moderate.",
+              "Or drive up: small car park (Grajska cesta 61) ~€3/hr, fills by 10:00.",
+              "Entry €19pp; open daily 08:00–20:00 in September. Best light late afternoon."
+            ]
+          },
+          {
+            icon: "🛷", title: "Straža summer toboggan",
+            lines: [
+              "€14 adult — includes the chairlift up + 3 toboggan rides down the 520 m track.",
+              "September = weekends only, 11:00–18:00, so Sat 12th works. Won't run in rain or under 10°C — weather call on the day."
+            ]
+          },
+          {
+            icon: "🌊", title: "Vintgar Gorge", link: "https://tickets.vintgar.si", linkLabel: "Pre-book timed entry ↗",
+            lines: [
+              "€15pp, timed hourly slots — book ahead online, it sells out by midday in peak.",
+              "Boardwalk one-way ~1.6 km / 45 min. You can't walk back through — you loop back overland (~5.7 km total, 2.5–3 h) or shuttle."
+            ]
+          }
+        ],
+        book: [
+          "Get the keypad code from host Igor the day before",
+          "Pre-book the Vintgar timed slot (tickets.vintgar.si)",
+          "Cash for the pletna boat + island church (~€20 + €12pp)",
+          "Straža: cash, ride before it shuts at 18:00"
+        ]
       },
       d13: {
-        accom: { name: "Bled house", meta: "night 2 of 2 · last night all 9 together" },
+        accom: { name: "Vila Klif — group chalet", meta: "night 2 of 2 · last night all together", note: "Same base at Krvavec. Big drive day — Vršič is ~1h+ each way from here, so out early and back before dark." },
         drive: [
-          { leg: "Bled → Vršič Pass → Soča / Bovec", time: "~2h", note: "50 hairpins — full tank first" },
-          { leg: "Soča → Bled", time: "~2h" }
+          { leg: "House → Kranjska Gora (foot of the pass)", time: "~1h", note: "Fill the tank here — no fuel on the pass" },
+          { leg: "Over Vršič → Soča / Bovec", time: "~1.5–2h", note: "50 hairpins, low gear both ways" },
+          { leg: "Soča → house", time: "~2h+", note: "Long day — head back before dark" }
         ],
-        book: ["Full tank before Vršič", "Swim kit + towel for Velika korita"]
+        guide: [
+          {
+            icon: "⛰️", title: "Driving the Vršič Pass",
+            lines: [
+              "50 numbered hairpins (24 up, 26 down), some cobbled. Open May–late Oct, so mid-Sept is fine.",
+              "Stops on the way: Lake Jasna, the Russian Chapel, the summit, the Soča source.",
+              "Allow a half-day (4–6 h) with stops. No petrol on the pass — fuel up in Kranjska Gora or Bovec."
+            ]
+          },
+          {
+            icon: "💦", title: "Velika korita (Great Soča Gorge)",
+            lines: [
+              "Deep emerald canyon on the Soča. Small car park by the road, ~5–10 min walk to the suspension bridge and down to the water.",
+              "Swim/wade spot — but the water is cold and fast, so take care. Bring swim kit, towel + water shoes."
+            ]
+          },
+          {
+            icon: "🌦️", title: "If Vršič is socked in (Plan B)",
+            lines: [
+              "The Krvavec cable car is right by the house; Velika Planina's shepherd huts (near Kamnik) are also close.",
+              "Or a slow Bled day: the flat lakeside loop (~6 km) + the castle."
+            ]
+          }
+        ],
+        book: ["Full tank in Kranjska Gora before the pass", "Swim kit + towel + water shoes for Velika korita", "Check the mountain forecast the night before"]
       },
       d14: {
-        accom: { name: "Ljubljana — TBC", meta: "1 night · the 5 staying on", note: "3 places shortlisted in Open Decisions — 👍 vote the night's stay. The 4 heading home don't need a bed." },
+        accom: { name: "Ljubljana — the 5 staying on", meta: "1 night · Group 1 only", note: "Check out of Vila Klif by 10:00. 3 places shortlisted in Open Decisions — 👍 vote the night's stay. The 4 flying home don't need a bed." },
         drive: [
-          { leg: "Bled → Postojna", time: "~1h", note: "Check out first" },
+          { leg: "House → Postojna", time: "~1h", note: "Check out by 10:00 first" },
           { leg: "Postojna → Predjama", time: "~15 min" },
-          { leg: "Caves → Trieste airport (the 4)", time: "~1h" },
+          { leg: "Caves → Trieste airport (the 4)", time: "~1h", note: "For tonight's flight home" },
           { leg: "Caves → Ljubljana (the 5)", time: "~45 min" }
         ],
-        book: ["Postojna + Predjama timed tickets — book online", "Jumper: the cave is ~10°C", "The 4: check in for tonight's flight"]
+        guide: [
+          {
+            icon: "🕳️", title: "Postojna Cave + Predjama Castle", link: "https://www.postojnska-jama.eu/en/tickets/", linkLabel: "Book combined tickets ↗",
+            lines: [
+              "Combined ticket ~€40.30pp — book online 48h+ ahead; you reserve a fixed cave entry time (QR ticket).",
+              "The cave is a constant ~10°C — bring a warm layer.",
+              "~90 min for the cave (electric train + guided walk) + ~1h for Predjama castle."
+            ]
+          },
+          {
+            icon: "🔀", title: "The Monday split",
+            lines: [
+              "The 4 heading home peel off after the caves → Trieste airport (~1h) for tonight's flight.",
+              "The 5 staying carry on to Ljubljana (~45 min) and fly out Tuesday.",
+              "Decide who's in which car — the split sets the Tuesday car plan too."
+            ]
+          }
+        ],
+        book: ["Book Postojna + Predjama combined tickets (fixed cave time)", "Warm layer for the ~10°C cave", "The 4: check in for tonight's flight", "Agree which car goes to Trieste vs Ljubljana"]
       },
       d15: {
         accom: null,
         drive: [
-          { leg: "Ljubljana → Trieste airport", time: "~1h30", note: "For FR169, dep 22:15" }
+          { leg: "Ljubljana → Trieste airport", time: "~1h30", note: "For FR169, dep 22:15" },
+          { leg: "Return the hire car(s)", time: "", note: "Full tank — confirm the drop-off is open for a late flight" }
         ],
-        book: ["Slow morning — nothing timed", "Return the hire car(s) with a full tank", "Snacks for the drive"]
+        guide: [
+          {
+            icon: "🐉", title: "Ljubljana on foot (half-day)",
+            lines: [
+              "Old town is pedestrian: Prešeren Square, the Triple Bridge, Dragon Bridge, the riverside, the Central Market.",
+              "Castle funicular ~€6 return (or walk up the footpath ~10 min, free).",
+              "Park on the edge — Kongresni trg underground garage ~€1.50/hr; the core has no street parking."
+            ]
+          }
+        ],
+        book: ["Slow morning — nothing timed", "Return the hire car(s) with a full tank; check drop-off hours for a 22:15 flight", "Snacks for the drive to Trieste"]
       }
     };
     function dayDetail(d) {
       const x = d && DAY_DETAIL[d.id];
       if (!x) return "";
       const cards = [];
-      if (x.accom) cards.push(`<div class="vpd-card"><div class="vpd-h">🛏 Sleep</div><div class="vpd-b"><strong>${escapeHtml(x.accom.name)}</strong>${x.accom.meta ? `<span class="vpd-meta">${escapeHtml(x.accom.meta)}</span>` : ""}${x.accom.note ? `<span>${escapeHtml(x.accom.note)}</span>` : ""}</div></div>`);
+      if (x.accom) {
+        const a = x.accom;
+        let rows = `<strong>${escapeHtml(a.name)}</strong>`;
+        if (a.meta) rows += `<span class="vpd-meta">${escapeHtml(a.meta)}</span>`;
+        if (a.note) rows += `<span>${escapeHtml(a.note)}</span>`;
+        if (a.address) rows += `<span>📍 ${escapeHtml(a.address)}${a.maps ? ` · <a class="vpd-a" href="${escapeAttr(a.maps)}" target="_blank" rel="noopener">map</a>` : ""}</span>`;
+        if (a.checkin || a.checkout) rows += `<span>🔑 ${a.checkin ? "In " + escapeHtml(a.checkin) : ""}${a.checkin && a.checkout ? " · " : ""}${a.checkout ? "Out " + escapeHtml(a.checkout) : ""}</span>`;
+        if (a.access) rows += `<span>${escapeHtml(a.access)}</span>`;
+        if (a.price) rows += `<span>💶 ${escapeHtml(a.price)}</span>`;
+        if (a.link) rows += `<span><a class="vpd-a" href="${escapeAttr(a.link)}" target="_blank" rel="noopener">View the listing ↗</a></span>`;
+        cards.push(`<div class="vpd-card"><div class="vpd-h">🛏 Sleep</div><div class="vpd-b">${rows}</div></div>`);
+      }
       if (x.drive && x.drive.length) cards.push(`<div class="vpd-card"><div class="vpd-h">🚗 Getting around</div><div class="vpd-b">${x.drive.map(l => `<div class="vpd-leg"><span class="vpd-legname">${escapeHtml(l.leg)}</span>${l.time ? `<em>${escapeHtml(l.time)}</em>` : ""}${l.note ? `<span class="vpd-note">${escapeHtml(l.note)}</span>` : ""}</div>`).join("")}</div></div>`);
+      if (x.guide && x.guide.length) x.guide.forEach(g => {
+        const linkHtml = g.link ? `<li><a class="vpd-a" href="${escapeAttr(g.link)}" target="_blank" rel="noopener">${escapeHtml(g.linkLabel || "Book / info ↗")}</a></li>` : "";
+        cards.push(`<div class="vpd-card"><div class="vpd-h">${escapeHtml(g.icon || "ℹ️")} ${escapeHtml(g.title)}</div><ul class="vpd-list">${g.lines.map(l => `<li>${escapeHtml(l)}</li>`).join("")}${linkHtml}</ul></div>`);
+      });
       if (x.book && x.book.length) cards.push(`<div class="vpd-card"><div class="vpd-h">🎟 Book / bring</div><ul class="vpd-list">${x.book.map(b => `<li>${escapeHtml(b)}</li>`).join("")}</ul></div>`);
       return cards.length ? `<div class="vp-detail">${cards.join("")}</div>` : "";
     }
@@ -1390,7 +1522,7 @@
         { img: "scene-stay.jpg", title: "Crash near the airport", desc: "Short hop to a bed — no plans tonight, just sleep." }
       ],
       d12: [
-        { img: "scene-drive.jpg", title: "Drive up to Bled", desc: "Straight up from Trieste (~2h) — check into the Bled house." },
+        { img: "scene-drive.jpg", title: "Drive up to the house", desc: "Up from Trieste (~1h45) to Vila Klif at Krvavec, then over to Bled (~45 min) for the lake." },
         { img: "scene-vintgar.jpg", title: "Vintgar Gorge", desc: "Emerald river on a timed boardwalk. Book the early slot to beat the crowds." },
         { img: "scene-bledisland.jpg", title: "Row to Bled Island", desc: "Pletna boat to the island church + the 99 steps to the wishing bell." },
         { img: "scene-ojstrica.jpg", title: "Straža toboggan", desc: "Summer toboggan down the Straža hill. Weekend-only and shuts at 18:00 — so ride it today." },
