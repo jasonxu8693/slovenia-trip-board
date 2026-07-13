@@ -757,6 +757,15 @@
       transform: translateY(-2px) scale(1.035);
       box-shadow: 0 22px 48px rgba(3,12,18,0.34), 0 0 0 1px rgba(42,167,160,0.46);
     }
+    .itin-badge {
+      position: absolute; top: 12px; left: 12px; z-index: 3;
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 10.5px; font-weight: 900; letter-spacing: 0.02em;
+      padding: 5px 10px; border-radius: 999px;
+      box-shadow: 0 6px 16px rgba(4,12,28,0.30);
+    }
+    .itin-badge.in { background: rgba(31,143,110,0.94); color: #eafff7; border: 1px solid rgba(255,255,255,0.28); }
+    .itin-badge.out { background: rgba(12,22,40,0.74); color: #c9d4e6; border: 1px solid rgba(255,255,255,0.16); }
     .idea-photo-fallback {
       place-items: center;
       background: linear-gradient(135deg, #1f8f6e, #4f9bd6);
@@ -1271,6 +1280,15 @@
       { id: "jasna", emoji: "📸", title: "Lake Jasna (Kranjska Gora)", city: "Kranjska Gora", img: "scene-jasna.jpg", region: "bench", day: 0, slot: "Add-on", desc: "Photogenic alpine lake near the Vršič pass — a clear-weather scenic stop." },
       { id: "vipava", emoji: "🍇", title: "Vipava wine valley", city: "Vipava", img: "scene-vipava.jpg", region: "bench", day: 0, slot: "Add-on", desc: "Wine, villages and slower food stops if the group wants less lake time." }
     ];
+
+    // Which Market ideas are actually in the built itinerary (DAY_ACTS / day details).
+    // Used to badge each card "In the itinerary" vs "Not in the itinerary".
+    const ITINERARY_IDEA_IDS = new Set([
+      "vintgar", "ojstrica", "bledCastle", "bledIsland", "kremsnita",  // Sat — Bled day
+      "soca", "velikaKorita", "jasna",                                  // Sun — Vršič & Soča (jasna is a drive stop)
+      "postojnaPredjama",                                               // Mon — caves
+      "ljubljanaOldTown"                                                // Tue — Ljubljana
+    ]);
 
     // Photo per idea by id — fallback for ideas saved in synced state without an img field.
     const IDEA_IMG = { ljubljanaOldTown: "scene-ljubljana.jpg", postojnaPredjama: "scene-predjama.jpg", skocjan: "scene-skocjan.jpg", velikaPlanina: "scene-velika.jpg", bledCastle: "scene-bledcastle.jpg", vintgar: "scene-vintgar.jpg", bohinj: "scene-bohinj.jpg", vogel: "scene-vogel.jpg", savica: "scene-savica.jpg", bledIsland: "scene-bledisland.jpg", soca: "scene-soca.jpg", ojstrica: "scene-ojstrica.jpg", kremsnita: "scene-kremsnita.jpg", velikaKorita: "scene-velikakorita.jpg", piran: "scene-piran.jpg", jasna: "scene-jasna.jpg", vipava: "scene-vipava.jpg" };
@@ -2035,7 +2053,12 @@
         const photo = imgSrc
           ? `<img class="idea-photo" src="images/${escapeAttr(imgSrc)}" alt="${escapeAttr(idea.title)}" loading="lazy" onerror="this.outerHTML='<div class=\\'idea-photo-fallback\\'>${idea.emoji || "💡"}</div>'">`
           : `<div class="idea-photo-fallback">${idea.emoji || "💡"}</div>`;
+        const inItin = ITINERARY_IDEA_IDS.has(idea.id);
+        const itinBadge = inItin
+          ? `<span class="itin-badge in">📍 In the itinerary</span>`
+          : `<span class="itin-badge out">Not in the itinerary</span>`;
         return `<article class="idea-card">
+          ${itinBadge}
           ${photo}
           <div class="idea-body">
           <div class="idea-top">
