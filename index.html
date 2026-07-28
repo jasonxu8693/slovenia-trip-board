@@ -1310,15 +1310,15 @@
     // Crew Desk — own a job, share options, group votes, owner locks the pick.
     const defaultDesk = {
       rooms: [
-        { id: "crew_extra_spot", emoji: "🙋", kind: "custom", title: "Room for one more? (Michael out, a Steph asking)", desc: "Michael's off the trip, so we're 8. Another Steph wants in. Two things actually bind. ① 🏡 Vila Klif sleeps 8 — at 8 we're an exact fit, so a 9th needs the host's OK and probably an extra-guest fee. ② 🚗 THE MONDAY CAR: after the caves one car goes to Trieste with the home group and gets dropped there, so Group 1 continues to Ljubljana in ONE car. That car is already full at 5 — a 6th person cannot ride it. So she can only stay through Tuesday if we upsize that car to a 7-seater, or she buses Ljubljana→Trieste (FlixBus ~1h30 to Trieste Centrale, then ~30 min on to the airport). Softer: 🏨 Trieste Fri room config · ✈️ her own FR168/FR169 seat, or price a Ryanair name-change of Michael's · 🌃 Ljubljana Mon is NOT booked yet, so re-sizing it for 6 costs nothing. Vote below.", owners: [], options: [
+        { id: "crew_extra_spot", emoji: "🙋", kind: "custom", title: "Room for one more? (Michael out, a Steph asking)", desc: "Michael's off the trip, so we're 8. Another Steph wants in. Where it stands: 🌃 LJUBLJANA IS FINE — Vila Emona is booked for 5 and the house rules allow 6, so there's a bed for her (just update the guest count with the host; free cancellation until 15:00 on Tue 9 Sept if we'd rather move). 🏡 BLED IS TIGHT — Vila Klif sleeps 8 and at 8 we're an exact fit, so a 9th needs the host's OK and probably an extra-guest fee. 🚗 THE MONDAY CAR IS THE REAL BLOCKER — after the caves one car goes to Trieste with the home group and is dropped there, so Group 1 carries on to Ljubljana in ONE car that's already full at 5. A 6th cannot ride it. Staying through Tuesday therefore needs a 7-seater, or she buses Ljubljana→Trieste (FlixBus ~1h30, then ~30 min on to the airport). Also to sort: 🏨 the Trieste Friday room config · ✈️ her own FR168/FR169 seat, or price a Ryanair name-change of Michael's. Vote below.", owners: [], options: [
           { id: "seed_spot_partial", by: 0, title: "Yes — but she flies home Monday night with Group 2", link: "", price: "", notes: "The version that works with what's already booked. Fri–Mon she's the 9th at Vila Klif and the 9th across two cars; Monday she rides the Trieste car (3 → 4, plenty of room) and flies home. Ljubljana Monday stays a 5. No car upsize needed.", votes: {} },
-          { id: "seed_spot_full", by: 0, title: "Yes — full trip, and we upsize the Ljubljana car", link: "", price: "", notes: "She stays to Tuesday, so Group 1 is 6 in one car. Only works if the car going on to Ljubljana is a 7-seater — worth checking now, since the board still has car hire OPEN. Also needs a Ljubljana place for 6 instead of 5 (nothing booked, so free to change).", votes: {} },
-          { id: "seed_spot_bus", by: 0, title: "Yes — full trip, she buses to the airport Tuesday", link: "https://global.flixbus.com/bus-routes/bus-ljubljana-trieste", price: "~£10", notes: "No car upsize: she stays in Ljubljana with us and takes the FlixBus to Trieste Centrale (~1h30, ~15/day) on Tuesday, then a local bus or taxi ~30 min out to the airport. Cheap, but she'd travel separately on the last day — check it lands well before FR169 at 22:15.", votes: {} },
+          { id: "seed_spot_full", by: 0, title: "Yes — full trip, and we upsize the Ljubljana car", link: "", price: "", notes: "She stays to Tuesday, so Group 1 is 6 in one car. The bed's already there (Vila Emona takes 6), so this hinges entirely on the car being a 7-seater — worth checking now, since the board still has car hire OPEN and it may not even be booked.", votes: {} },
+          { id: "seed_spot_bus", by: 0, title: "Yes — full trip, she buses to the airport Tuesday", link: "https://global.flixbus.com/bus-routes/bus-ljubljana-trieste", price: "~£10", notes: "No car upsize needed: she sleeps at Vila Emona with us (it takes 6) and takes the FlixBus to Trieste Centrale (~1h30, ~15/day) on Tuesday, then a local bus or taxi ~30 min out to the airport. Cheap, but she'd travel separately on the last day — check it lands well before FR169 at 22:15.", votes: {} },
           { id: "seed_spot_no", by: 0, title: "No — keep it at 8", link: "", price: "", notes: "8 is the clean number: exact fit at Vila Klif, comfortable in two cars, one car for the Ljubljana leg with a spare seat, no host conversation, no new flight booking.", votes: {} }
         ], status: "open", chosen: null, log: { status: "open", text: "Open — Michael is out (roster now 8). To confirm: are the two cars actually booked and what are the seat counts, will Vila Klif take a 9th, and the Trieste Friday room config." } },
         { id: "stay_ljubljana", emoji: "🛏️", kind: "accom", title: "Friday-night stay (near Trieste)", desc: "One night near Trieste / the Karst to crash after the 23:00 landing — short drive, easy parking for two cars.", owners: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Booked (via a friend) — Hotel Al Gelso, Monfalcone, ~15 min from TRS. No hotel parking (pay public nearby)." } },
         { id: "stay_bled", emoji: "🏡", kind: "accom", title: "Bled house (2 nights)", desc: "The main base — Vila Klif for 2 nights (Sat 12 + Sun 13). The listing sleeps 8 and we're 8: an exact fit, no spare bed. A 9th would need the host's OK and probably an extra-guest fee.", owners: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Booked — Vila Klif, Ambrož pod Krvavcem (Krvavec), 2 nights (Sat 12 + Sun 13). ~45 min from Bled. Listing caps at 8 — with Michael out we're exactly 8, so it now fits, but there's no spare bed." } },
-        { id: "stay_ljubljana_mon", emoji: "🌃", kind: "accom", title: "Monday-night stay (Ljubljana · 5)", desc: "NOT booked yet — the only accom still open. The 5 staying on need a bed in Ljubljana for Mon 14, flying out Tue. 3 places shortlisted below (all sized for 5) — 👍 the one you'd stay in. If the extra Steph stays through Tuesday this becomes a 6, so it's worth settling the roster question above first.", owners: [], options: [
+        { id: "stay_ljubljana_mon", emoji: "🌃", kind: "accom", title: "Monday-night stay (Ljubljana · 5)", desc: "BOOKED — Vila Emona, Barjanska cesta 10, for the 5 staying on (Mon 14 → Tue 15). House rules allow 6 guests max and it's booked for 5, so there IS a bed for a 6th — but the reservation guest count has to be updated with the host, and that may change the price. Free cancellation until 15:00 on Tue 9 Sept, so that's the deadline to switch to a bigger place if we end up needing one.", owners: [], options: [
           { id: "seed_mon_central_parking", by: 0, title: "2BR apartment · central + free parking", link: "https://www.airbnb.com.au/rooms/13541700?adults=5&check_in=2026-09-14&check_out=2026-09-15", price: "", notes: "2 bedrooms, central location with free parking for the two hire cars — and walkable to the old town.", votes: {} },
           { id: "seed_mon_loft", by: 0, title: "Old-town loft (central)", link: "https://www.airbnb.com.au/rooms/550707516643191531?adults=5&check_in=2026-09-14&check_out=2026-09-15", price: "", notes: "Bright loft in the heart of the old town — walk to everything. Loft layout, so likely tighter for 5; parking isn't listed (old town's a low-traffic zone).", votes: {} },
           { id: "seed_mon_condo", by: 0, title: "2BR condo · kitchen + parking", link: "https://www.airbnb.com.au/rooms/46930605?adults=5&check_in=2026-09-14&check_out=2026-09-15", price: "", notes: "Deluxe 2-bed with kitchen, parking and pet-friendly. Comfy, but the address reads as general Ljubljana — probably further from the old town.", votes: {} }
@@ -1480,7 +1480,18 @@
         book: ["Full tank in Kranjska Gora before the pass", "Swim kit + towel + water shoes for Velika korita", "Check the mountain forecast the night before"]
       },
       d14: {
-        accom: { name: "Ljubljana — the 5 staying on", meta: "1 night · Group 1 only", note: "Check out of Vila Klif by 10:00. Ljubljana stay for the 5 (see Open Decisions). The 3 flying home don't need a bed." },
+        accom: {
+          name: "Vila Emona — deluxe 2-bedroom apartment",
+          meta: "1 night · Group 1 only (the 5) · booked",
+          note: "Entire 2-bed apartment with kitchen and parking. House rules cap it at 6 guests and we're booked for 5. Check out of Vila Klif by 10:00 first; the 3 flying home don't need a bed. Free cancellation until 15:00 on Tue 9 Sept.",
+          address: "Barjanska cesta 10, 1000 Ljubljana",
+          maps: "https://www.google.com/maps/search/?api=1&query=Barjanska+cesta+10+1000+Ljubljana+Slovenia",
+          checkin: "Mon 14 Sep, after 15:00",
+          checkout: "Tue 15 Sep, by 10:00",
+          access: "Parking · kitchen · pet friendly · exterior security cameras · quiet hours 22:00–07:00",
+          price: "£295.62 total (~£59pp for 5) · charged 1 Sept · host Vila Emona +386 31 702 940 · ref HMQEXQX3YX",
+          link: "https://www.airbnb.com.au/rooms/46930605"
+        },
         drive: [
           { leg: "House → Postojna", time: "~1h", note: "Check out by 10:00 first" },
           { leg: "Postojna → Predjama", time: "~15 min" },
@@ -1598,6 +1609,7 @@
 
     const defaultState = {
       selectedPlayer: 0,
+      logFacts: {},
       ideas: structuredClone(defaultIdeas),
       ideaVotes: {},
       players: [
@@ -3034,6 +3046,33 @@
       const sel = shiftIdx(state.selectedPlayer, gone);
       state.selectedPlayer = (sel === null) ? 0 : sel;
     }
+    // A room's log/status is remote-owned, so a booking confirmed off-board (an email,
+    // a WhatsApp) can leave the board stale forever. These stamp the truth in ONCE per
+    // version — bump `v` to re-apply — after which the crew can still edit it in-app.
+    const ROOM_LOG_FACTS = {
+      stay_ljubljana_mon: {
+        v: "2026-07-28-vila-emona",
+        status: "booked",
+        chosen: "seed_mon_condo",
+        text: "Booked — Vila Emona, Barjanska cesta 10, Ljubljana. Mon 14 (from 15:00) → Tue 15 (by 10:00). 2-bed apartment, parking + kitchen, £295.62 for 5. Caps at 6 guests, so one more can fit if the guest count is updated with the host. Free cancellation until 15:00 on Tue 9 Sept. Ref HMQEXQX3YX."
+      }
+    };
+    function reconcileRoomLogs() {
+      if (!state.desk || !Array.isArray(state.desk.rooms)) return false;
+      if (!state.logFacts || typeof state.logFacts !== "object") state.logFacts = {};
+      let changed = false;
+      Object.keys(ROOM_LOG_FACTS).forEach(id => {
+        const f = ROOM_LOG_FACTS[id];
+        if (state.logFacts[id] === f.v) return;              // already applied on this board
+        const r = state.desk.rooms.find(x => x.id === id);
+        if (!r) return;
+        r.log = { status: f.status, text: f.text };
+        if (f.chosen && (r.options || []).some(o => o.id === f.chosen)) { r.status = "decided"; r.chosen = f.chosen; }
+        state.logFacts[id] = f.v;
+        changed = true;
+      });
+      return changed;
+    }
     function reconcileCrewRemovals() {
       if (!Array.isArray(state.players)) return false;
       let changed = false;
@@ -3057,8 +3096,12 @@
       });
     }
     function renderAll() {
-      // Purge anyone who has dropped off the trip, then push the cleaned roster to the group.
-      if (reconcileCrewRemovals()) { try { saveState(); } catch (e) {} }
+      // Purge anyone who has dropped off the trip and stamp in off-board bookings,
+      // then push the corrected state to the group.
+      ensureDesk();
+      const fixedCrew = reconcileCrewRemovals();
+      const fixedLogs = reconcileRoomLogs();
+      if (fixedCrew || fixedLogs) { try { saveState(); } catch (e) {} }
       reconcilePlayerNames();
       ensureBookie(); ensureDesk(); ensurePlan();
       renderPlayerSelect(); renderTravellerGrid(); renderRosterEditor(); renderIdeas(); renderHero(); renderDesk(); renderPlan(); renderVisualItinerary(); renderArrivals();
