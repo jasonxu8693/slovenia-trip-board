@@ -959,7 +959,7 @@
             <div class="pill-row">
               <span class="pill hot">🍂 Early autumn in the Alps</span>
               <span class="pill" id="ljubljanaNowPill">🇸🇮 Ljubljana</span>
-              <span class="pill" id="travellerCountPill">9 travellers</span>
+              <span class="pill" id="travellerCountPill">8 travellers</span>
             </div>
           </div>
         </aside>
@@ -1310,14 +1310,19 @@
     // Crew Desk — own a job, share options, group votes, owner locks the pick.
     const defaultDesk = {
       rooms: [
+        { id: "crew_extra_spot", emoji: "🙋", kind: "custom", title: "Room for one more? (Michael out, a Steph asking)", desc: "Michael's off the trip, so we're 8. Another Steph wants in — but 8 is the exact cap of the Bled house, so a 9th body puts us back over it (the same squeeze we'd already accepted when we were 9). What actually gives: 🏡 Vila Klif sleeps 8 — a 9th needs the host's OK and probably an extra-guest fee · 🚘 two hire cars — 9 + bags only works if both are 5-seaters (Jason V + Hao to confirm the car classes) · 🏨 Trieste Fri night — depends on the room config booked via the friend · ✈️ FR168/FR169 — she needs her own seat, or Ryanair name-change Michael's onto her (price both) · 🌃 Ljubljana Mon — only bites if she stays to Tue, the 3 shortlisted places are sized for 5. Vote below.", owners: [], options: [
+          { id: "seed_spot_full", by: 0, title: "Yes — she takes Michael's place for the full trip", link: "", price: "", notes: "Back to 9: over the Vila Klif cap by one and 9 across two cars, exactly the setup we'd already signed up for. Needs the host's OK on 9 and both cars to be 5-seaters. If she stays to Tue, the Ljubljana shortlist has to be re-sized for 6.", votes: {} },
+          { id: "seed_spot_partial", by: 0, title: "Yes, but she flies home Monday with Group 2", link: "", price: "", notes: "Same Bled/car squeeze Fri–Mon, but the Ljubljana Monday stay stays at 5 and the shortlist below still works. Group 2 goes back to 4 for the Trieste run.", votes: {} },
+          { id: "seed_spot_no", by: 0, title: "No — keep it at 8", link: "", price: "", notes: "8 is the clean number: exact fit at Vila Klif, comfortable in two cars, no host conversation, no new flight booking.", votes: {} }
+        ], status: "open", chosen: null, log: { status: "open", text: "Open — Michael is out (roster now 8). Blocking facts to confirm: car seat counts, whether Vila Klif will take a 9th, and the Trieste room config." } },
         { id: "stay_ljubljana", emoji: "🛏️", kind: "accom", title: "Friday-night stay (near Trieste)", desc: "One night near Trieste / the Karst to crash after the 23:00 landing — short drive, easy parking for two cars.", owners: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Booked (via a friend) — Hotel Al Gelso, Monfalcone, ~15 min from TRS. No hotel parking (pay public nearby)." } },
-        { id: "stay_bled", emoji: "🏡", kind: "accom", title: "Bled house (2 nights)", desc: "The main base — group Airbnb or apartments for 2 nights (Sat 12 + Sun 13), enough real beds and bathrooms for all 9.", owners: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Booked — Vila Klif, Ambrož pod Krvavcem (Krvavec), 2 nights (Sat 12 + Sun 13). ~45 min from Bled; caps at 8 — we're 9." } },
+        { id: "stay_bled", emoji: "🏡", kind: "accom", title: "Bled house (2 nights)", desc: "The main base — group Airbnb for 2 nights (Sat 12 + Sun 13), enough real beds and bathrooms for all 8.", owners: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Booked — Vila Klif, Ambrož pod Krvavcem (Krvavec), 2 nights (Sat 12 + Sun 13). ~45 min from Bled. Listing caps at 8 — with Michael out we're exactly 8, so it now fits, but there's no spare bed." } },
         { id: "stay_ljubljana_mon", emoji: "🌃", kind: "accom", title: "Monday-night stay (Ljubljana · 5)", desc: "The 5 staying on need a bed in Ljubljana for Mon 14, flying out Tue. 3 places shortlisted below — 👍 the one you'd stay in.", owners: [], options: [
           { id: "seed_mon_central_parking", by: 0, title: "2BR apartment · central + free parking", link: "https://www.airbnb.com.au/rooms/13541700?adults=5&check_in=2026-09-14&check_out=2026-09-15", price: "", notes: "2 bedrooms, central location with free parking for the two hire cars — and walkable to the old town.", votes: {} },
           { id: "seed_mon_loft", by: 0, title: "Old-town loft (central)", link: "https://www.airbnb.com.au/rooms/550707516643191531?adults=5&check_in=2026-09-14&check_out=2026-09-15", price: "", notes: "Bright loft in the heart of the old town — walk to everything. Loft layout, so likely tighter for 5; parking isn't listed (old town's a low-traffic zone).", votes: {} },
           { id: "seed_mon_condo", by: 0, title: "2BR condo · kitchen + parking", link: "https://www.airbnb.com.au/rooms/46930605?adults=5&check_in=2026-09-14&check_out=2026-09-15", price: "", notes: "Deluxe 2-bed with kitchen, parking and pet-friendly. Comfy, but the address reads as general Ljubljana — probably further from the old town.", votes: {} }
         ], status: "open", chosen: null, log: { status: "open", text: "3 options shared — 👍 vote the one you'd stay in." } },
-        { id: "car_hire", emoji: "🚘", kind: "car", title: "Car hire from Trieste", desc: "Two cars from Trieste, driven across the border. Booked by Jason V + Hao (on their accounts).", owners: [], drivers: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Booked by Jason V + Hao (on their accounts). Confirm cross-border cover + Slovenian vignette." } },
+        { id: "car_hire", emoji: "🚘", kind: "car", title: "Car hire from Trieste", desc: "Two cars from Trieste, driven across the border. Booked by Jason V + Hao (on their accounts).", owners: [], drivers: [], options: [], status: "open", chosen: null, log: { status: "booked", text: "Booked by Jason V + Hao (on their accounts). Confirm cross-border cover + Slovenian vignette. Seat count on the two booked cars still to be confirmed — that's what decides whether a 9th person fits." } },
         { id: "dinner_ljubljana", emoji: "🍖", kind: "dinner", title: "Last-day meal (Ljubljana / Trieste)", desc: "Tuesday's a travel day — a relaxed Ljubljana lunch on the way out, or a farewell dinner near Trieste before the flight.", owners: [], options: [], status: "open", chosen: null, log: { status: "open", text: "" } },
         { id: "dinner_bled", emoji: "🍲", kind: "dinner", title: "Bled group dinner", desc: "Lakeside dinner together on a Bled night.", owners: [], options: [], status: "open", chosen: null, log: { status: "open", text: "" } }
       ]
@@ -1327,12 +1332,12 @@
     const TRIP_DAYS = [
       { id: "d11", iso: "2026-09-11", date: "Fri 11 Sep", city: "Land Trieste — stay local", stay: "Trieste", logistics: true, note: "Land Trieste ~23:00 (FR168). Too late to drive anywhere — grab the cars and crash at a bed by Trieste / the airport. No plans tonight." },
       { id: "d12", iso: "2026-09-12", date: "Sat 12 Sep", city: "Drive up → Bled lake day", stay: "Bled", note: "Straight up to Bled in the morning (~2h from Trieste), then the lake proper — Vintgar early, row out to the island, up to the castle, and the Straža toboggan while it's the weekend. Kremšnita by the water." },
-      { id: "d13", iso: "2026-09-13", date: "Sun 13 Sep", city: "Vršič & Soča alpine day", stay: "Bled", note: "The big one, and everyone's still together — Vršič Pass in autumn gold, down into the Soča Valley (Velika korita). Back to Bled for the last night all nine are here. Weather hedge: if Vršič is socked in, flip to Velika Planina or a slow Bled day." },
-      { id: "d14", iso: "2026-09-14", date: "Mon 14 Sep", city: "Caves → the split", stay: "Ljubljana (5)", note: "Check out of Bled (2 nights done) and head south — Postojna Cave + Predjama Castle on the way, the last thing everyone does together. Then the trip splits.", split: { g1: "Jason X, Sarah, Jason V, Katrina & Steph carry on to Ljubljana after the caves, fly out Tue.", g2: "Hao, Michael, Heidi & Liz peel off after the caves to Trieste airport (~1h) for tonight's flight." } },
+      { id: "d13", iso: "2026-09-13", date: "Sun 13 Sep", city: "Vršič & Soča alpine day", stay: "Bled", note: "The big one, and everyone's still together — Vršič Pass in autumn gold, down into the Soča Valley (Velika korita). Back to Bled for the last night all eight are here. Weather hedge: if Vršič is socked in, flip to Velika Planina or a slow Bled day." },
+      { id: "d14", iso: "2026-09-14", date: "Mon 14 Sep", city: "Caves → the split", stay: "Ljubljana (5)", note: "Check out of Bled (2 nights done) and head south — Postojna Cave + Predjama Castle on the way, the last thing everyone does together. Then the trip splits.", split: { g1: "Jason X, Sarah, Jason V, Katrina & Steph carry on to Ljubljana after the caves, fly out Tue.", g2: "Hao, Heidi & Liz peel off after the caves to Trieste airport (~1h) for tonight's flight." } },
       { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Ljubljana → fly home", stay: null, logistics: true, group: "g1", note: "Last day for the 5 who stayed (flight's 22:15). Slow morning in Ljubljana — old town, Triple Bridge, market, castle, lunch — then the drive to Trieste for FR169." }
     ];
 
-    // The trip forks on Monday: ~4 fly home from Trieste that night (Group 2);
+    // The trip forks on Monday: 3 fly home from Trieste that night (Group 2);
     // the rest do the full week through Tuesday (Group 1). Colours match the board.
     const TRIP_GROUPS = {
       g1: { label: "Group 1", sub: "Full week", colour: "#7fb0ff" },
@@ -1357,7 +1362,7 @@
       d11: {
         accom: {
           name: "Hotel Al Gelso (Antica Locanda al Gelso)",
-          meta: "1 night · all 9",
+          meta: "1 night · all 8",
           note: "Monfalcone, ~15 min from Trieste airport. In the pedestrian old town — no hotel car park, use paid public parking nearby.",
           address: "Via Sant'Ambrogio 22, 34074 Monfalcone (FVG)",
           maps: "https://www.google.com/maps/search/?api=1&query=Hotel+Al+Gelso+Via+Sant%27Ambrogio+22+Monfalcone",
@@ -1379,7 +1384,7 @@
         accom: {
           name: "Vila Klif — group chalet",
           meta: "Check in from 15:00 · night 1 of 2",
-          note: "Ski/hike chalet with sauna + PS5, up at Krvavec — ~45 min from Bled. Listing sleeps 8 (group of 9).",
+          note: "Ski/hike chalet with sauna + PS5, up at Krvavec — ~45 min from Bled. Listing sleeps 8 and we're 8 — an exact fit, no spare bed.",
           address: "Ambrož pod Krvavcem 49, 4207 Cerklje na Gorenjskem",
           maps: "https://www.google.com/maps/search/?api=1&query=Ambro%C5%BE+pod+Krvavcem+49+Cerklje+na+Gorenjskem",
           checkin: "Sat 12 Sep, after 15:00",
@@ -1474,11 +1479,11 @@
         book: ["Full tank in Kranjska Gora before the pass", "Swim kit + towel + water shoes for Velika korita", "Check the mountain forecast the night before"]
       },
       d14: {
-        accom: { name: "Ljubljana — the 5 staying on", meta: "1 night · Group 1 only", note: "Check out of Vila Klif by 10:00. Ljubljana stay for the 5 (see Open Decisions). The 4 flying home don't need a bed." },
+        accom: { name: "Ljubljana — the 5 staying on", meta: "1 night · Group 1 only", note: "Check out of Vila Klif by 10:00. Ljubljana stay for the 5 (see Open Decisions). The 3 flying home don't need a bed." },
         drive: [
           { leg: "House → Postojna", time: "~1h", note: "Check out by 10:00 first" },
           { leg: "Postojna → Predjama", time: "~15 min" },
-          { leg: "Caves → Trieste airport (the 4)", time: "~1h", note: "The other car — for tonight's flight home" },
+          { leg: "Caves → Trieste airport (the 3)", time: "~1h", note: "The other car — for tonight's flight home" },
           { leg: "Caves → Ljubljana (the 5)", time: "~45 min", note: "Jason V's car" }
         ],
         guide: [
@@ -1493,13 +1498,13 @@
           {
             icon: "🔀", title: "The Monday split",
             lines: [
-              "Home Mon night (the 4): Hao, Michael, Heidi & Liz → Trieste airport (~1h) for tonight's flight.",
+              "Home Mon night (the 3): Hao, Heidi & Liz → Trieste airport (~1h) for tonight's flight.",
               "Staying to Tue (the 5): Jason X, Sarah, Jason V, Katrina & Steph → Ljubljana (~45 min).",
-              "Cars: Jason V's car takes the 5 on to Ljubljana; the other car runs the 4 back to Trieste."
+              "Cars: Jason V's car takes the 5 on to Ljubljana; the other car runs the 3 back to Trieste."
             ]
           }
         ],
-        book: ["Book Postojna + Predjama combined tickets (fixed cave time)", "Warm layer for the ~10°C cave", "The 4: check in for tonight's flight", "Cars: Jason V's → Ljubljana (the 5) · other → Trieste (the 4)"]
+        book: ["Book Postojna + Predjama combined tickets (fixed cave time)", "Warm layer for the ~10°C cave", "The 3: check in for tonight's flight", "Cars: Jason V's → Ljubljana (the 5) · other → Trieste (the 3)"]
       },
       d15: {
         accom: null,
@@ -1568,7 +1573,7 @@
       d14: [
         { img: "scene-stay.jpg", title: "Check out of Bled", desc: "Pack up — 2 nights done, everyone heads south." },
         { img: "scene-postojna.jpg", title: "Postojna Cave", desc: "Ride the little train deep into vast limestone chambers. ~10°C — bring a jumper." },
-        { img: "scene-predjama.jpg", title: "Predjama Castle", desc: "A 700-year-old castle built into a cave mouth — the last thing all nine do together." },
+        { img: "scene-predjama.jpg", title: "Predjama Castle", desc: "A 700-year-old castle built into a cave mouth — the last thing all eight do together." },
         { img: "scene-drive.jpg", title: "The split", desc: "4 peel off to Trieste airport to fly home tonight · 5 carry on to Ljubljana." }
       ],
       d15: [
@@ -1602,8 +1607,7 @@
         { name: "Jason Vo", initials: "JV", colour: colours[4], vibe: null, piece: null },
         { name: "Katrina Jiang", initials: "KJ", colour: colours[5], vibe: null, piece: null },
         { name: "Steph Trinh", initials: "ST", colour: colours[6], vibe: null, piece: null },
-        { name: "Yan Hao", initials: "YH", colour: colours[7], vibe: null, piece: null },
-        { name: "Michael", initials: "M", colour: colours[8], vibe: null, piece: null }
+        { name: "Yan Hao", initials: "YH", colour: colours[7], vibe: null, piece: null }
       ],
       groupDone: {
         routeLock: false,
@@ -1627,7 +1631,7 @@
       { id: "caveCall", icon: "🕳️", title: "Lock the cave plan", desc: "Postojna + Predjama (default) or Škocjan. Then book timed tickets.", priority: "P1" },
       { id: "ljubljanaAccom", icon: "🛏️", title: "Book the Friday-night stay", desc: "One night near Trieste / the Karst to crash after the 23:00 landing, before driving up to Bled.", priority: "P2" },
       { id: "bledAccom", icon: "🏡", title: "Book the Bled stay", desc: "Group Airbnb or apartment cluster — enough real beds and bathrooms.", priority: "P2" },
-      { id: "vehicle", icon: "🚘", title: "Lock the ride plan", desc: "Two hire cars or one 9-seater van from Trieste. Confirm cross-border, drivers and the vignette.", priority: "P2" },
+      { id: "vehicle", icon: "🚘", title: "Lock the ride plan", desc: "Two hire cars from Trieste — confirm the seat counts, cross-border cover, drivers and the vignette.", priority: "P2" },
       { id: "activityShortlist", icon: "⚔️", title: "Choose the activity shortlist", desc: "Pick the strongest caves, gorge, cable car and lake days from the Market.", priority: "P2" },
       { id: "itinerary", icon: "📍", title: "Build the itinerary", desc: "Hand-build the day-by-day plan on the Itinerary tab, then lock it.", priority: "P2" },
       { id: "dinners", icon: "🍽️", title: "Book group dinners", desc: "Reserve the Bled group dinners (and a last-day meal in Ljubljana or Trieste) once the stays are set.", priority: "P2" },
@@ -2971,7 +2975,75 @@
         : "Build it by hand — add stops to any day, set times, rename, or drop a day.";
     }
 
-    const CREW = ["Jason Xu", "Sarah Wu", "Elizabeth Trinh", "Heidi", "Jason Vo", "Katrina Jiang", "Steph Trinh", "Yan Hao", "Michael"];
+    const CREW = ["Jason Xu", "Sarah Wu", "Elizabeth Trinh", "Heidi", "Jason Vo", "Katrina Jiang", "Steph Trinh", "Yan Hao"];
+
+    // People who have dropped off the trip. Group state is synced and remote wins on merge,
+    // so editing defaultState.players alone does NOT remove them from the live board —
+    // this runs on every render and purges them (plus their index-keyed votes) from synced state.
+    const REMOVED_CREW = ["michael"];
+    function remapIndexMap(obj, gone) {
+      if (!obj || typeof obj !== "object") return obj;
+      const out = {};
+      Object.keys(obj).forEach(k => {
+        const n = Number(k);
+        if (!Number.isInteger(n)) { out[k] = obj[k]; return; }
+        if (n === gone) return;                       // their vote/bet leaves with them
+        out[n > gone ? n - 1 : n] = obj[k];           // everyone above shifts down one
+      });
+      return out;
+    }
+    function remapIndexList(arr, gone) {
+      if (!Array.isArray(arr)) return arr;
+      return arr.filter(i => Number.isInteger(i) ? i !== gone : true)
+                .map(i => (Number.isInteger(i) && i > gone) ? i - 1 : i);
+    }
+    function shiftIdx(v, gone) {
+      if (!Number.isInteger(v)) return v;
+      if (v === gone) return null;
+      return v > gone ? v - 1 : v;
+    }
+    function dropPlayerAt(gone) {
+      state.players.splice(gone, 1);
+      // Activity Market votes
+      if (state.ideaVotes && typeof state.ideaVotes === "object") {
+        Object.keys(state.ideaVotes).forEach(id => { state.ideaVotes[id] = remapIndexMap(state.ideaVotes[id], gone); });
+      }
+      // Open Decisions: owners, drivers, option votes and who shared each option
+      if (state.desk && Array.isArray(state.desk.rooms)) {
+        state.desk.rooms.forEach(r => {
+          r.owners = remapIndexList(r.owners, gone);
+          if (Array.isArray(r.drivers)) r.drivers = remapIndexList(r.drivers, gone);
+          if (Array.isArray(r.options)) r.options.forEach(o => {
+            o.votes = remapIndexMap(o.votes, gone);
+            const b = shiftIdx(o.by, gone);
+            o.by = (b === null) ? 0 : b;              // orphaned options fall back to the organiser
+          });
+        });
+      }
+      // Legacy bookie state (tab retired, data still synced)
+      if (state.bookie && Array.isArray(state.bookie.markets)) {
+        state.bookie.markets.forEach(m => { m.bets = remapIndexMap(m.bets, gone); });
+      }
+      // Activity feed: their own log lines go with them, the rest shift down
+      if (Array.isArray(state.feed)) {
+        state.feed = state.feed.filter(f => !(f && f.by === gone));
+        state.feed.forEach(f => { const b = shiftIdx(f.by, gone); if (b !== null) f.by = b; });
+      }
+      // "Who am I" on this device
+      const sel = shiftIdx(state.selectedPlayer, gone);
+      state.selectedPlayer = (sel === null) ? 0 : sel;
+    }
+    function reconcileCrewRemovals() {
+      if (!Array.isArray(state.players)) return false;
+      let changed = false;
+      for (let i = state.players.length - 1; i >= 0; i--) {
+        const nm = ((state.players[i] || {}).name || "").trim().toLowerCase();
+        if (!REMOVED_CREW.includes(nm)) continue;
+        dropPlayerAt(i);
+        changed = true;
+      }
+      return changed;
+    }
     function reconcilePlayerNames() {
       if (!Array.isArray(state.players)) return;
       state.players.forEach((p, idx) => {
@@ -2984,6 +3056,8 @@
       });
     }
     function renderAll() {
+      // Purge anyone who has dropped off the trip, then push the cleaned roster to the group.
+      if (reconcileCrewRemovals()) { try { saveState(); } catch (e) {} }
       reconcilePlayerNames();
       ensureBookie(); ensureDesk(); ensurePlan();
       renderPlayerSelect(); renderTravellerGrid(); renderRosterEditor(); renderIdeas(); renderHero(); renderDesk(); renderPlan(); renderVisualItinerary(); renderArrivals();
