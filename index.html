@@ -946,7 +946,6 @@
           <p>Your day-by-day plan, flights and bookings — one shared board for the whole crew.</p>
           <div class="hero-actions">
             <button class="btn" data-jump="plan">Open itinerary</button>
-            <button class="btn secondary" data-jump="ideas">Activity Market</button>
             <button class="btn ghost" data-jump="desk">Open Decisions</button>
             <button class="btn ghost" data-jump="intel">Essentials</button>
           </div>
@@ -968,7 +967,6 @@
 
     <nav class="nav" aria-label="App sections">
       <button class="plan-tab active" data-tab="plan">🗓️ Itinerary</button>
-      <button class="market-tab" data-tab="ideas">🎯 Activity Market</button>
       <button class="desk-tab" data-tab="desk">🛎️ Open Decisions</button>
       <button data-tab="intel">🧭 Essentials</button>
       <button class="sync-chip" id="syncChip" title="Tap to pull the latest from the group">
@@ -979,70 +977,6 @@
     <main>
 
 
-
-      <section id="ideas" class="section">
-        <div class="layout">
-          <div class="panel pad">
-            <div class="panel-head" style="padding:0 0 18px; border-bottom:0">
-              <div>
-                <h2>Activity Market</h2>
-                <p class="panel-sub">Vote on ideas before they become itinerary items.</p>
-              </div>
-              <div class="pill-row" style="margin:0">
-                <span class="pill done" id="ideasHotBadge">0 shortlist ideas</span>
-                <span class="pill warn" id="ideasVotesBadge">0 votes cast</span>
-              </div>
-            </div>
-            <div class="flow-steps">
-              <div class="flow-step"><strong>1. Pick yourself</strong><span>Use the player dropdown.</span></div>
-              <div class="flow-step"><strong>2. Vote lightly</strong><span>Keen, maybe or no.</span></div>
-              <div class="flow-step"><strong>3. Shortlist later</strong><span>Shortlist the strongest ideas later.</span></div>
-            </div>
-            <div class="idea-toolbar">
-              <div class="idea-help">Rule of thumb: 5+ keen = shortlist · 3+ no = discuss · mostly maybe = optional.</div>
-              <button class="btn small secondary" id="copyIdeasBtn">Copy vote summary</button>
-            </div>
-            <div class="who-bar">🙋 You're voting as <strong id="whoName">—</strong> <button class="btn small ghost" id="changeWhoBtn" style="margin-left:auto">Not you? Pick yourself</button></div>
-            <div class="idea-grid" id="ideaGrid"></div>
-            <h3 style="margin:24px 0 8px">Add a new idea</h3>
-            <div class="add-idea-form">
-              <input type="text" id="newIdeaTitle" placeholder="Idea name" />
-              <input type="text" id="newIdeaCity" placeholder="Ljubljana, Bled, Bohinj…" />
-              <input type="text" id="newIdeaDesc" placeholder="Why it could be good" />
-              <button class="btn small" id="addIdeaBtn">Add idea</button>
-            </div>
-          </div>
-          <aside class="side-stack">
-            <div class="panel pad">
-              <div class="label">👥 The crew</div>
-              <p class="panel-sub" style="margin:6px 0 12px">Pick yourself, then vote — so every vote is attributed to you.</p>
-              <div class="select-row" style="margin-bottom:14px">
-                <select id="playerSelect" aria-label="You are"></select>
-              </div>
-              <div class="traveller-grid" id="travellerGrid"></div>
-              <details style="margin-top:14px"><summary class="label" style="cursor:pointer">✎ Rename crew</summary><div id="rosterEditor" class="task-list" style="margin-top:10px"></div></details>
-            </div>
-            <div class="panel pad">
-              <div class="label">Decision logic</div>
-              <div class="idea-summary-grid">
-                <div class="mini-score"><div class="num" id="hotIdeaCount">0</div><div class="txt">Strong shortlist ideas</div></div>
-                <div class="mini-score"><div class="num" id="maybeIdeaCount">0</div><div class="txt">Maybe list</div></div>
-                <div class="mini-score"><div class="num" id="blockedIdeaCount">0</div><div class="txt">Needs discussion</div></div>
-              </div>
-              <div class="info-card" style="margin-top:14px">
-                <div class="emoji">💡</div>
-                <h3>Wishlist checkpoint</h3>
-                <p>Vote on one idea to clear your wishlist checkpoint.</p>
-              </div>
-              <div class="info-card" style="margin-top:12px">
-                <div class="emoji">⛰️</div>
-                <h3>Weather call</h3>
-                <p>Vogel is only worth it on a clear day. Savica waterfall is the low-cloud backup — keep both alive until 48h before.</p>
-              </div>
-            </div>
-          </aside>
-        </div>
-      </section>
 
       <section id="desk" class="section">
         <div class="layout">
@@ -1058,7 +992,7 @@
                 <span class="pill hot" id="deskOptionsBadge">0 options shared</span>
               </div>
             </div>
-            <div class="idea-help" style="margin-bottom:14px">🙋 Tap <strong>“I'll take it”</strong> to own a job (or assign a mate) · 📋 share options with a link + price · 👍 the group votes · ✅ mark it <strong>Booked</strong> and note what you got. Pick yourself in the Activity Market's crew panel first.</div>
+            <div class="idea-help" style="margin-bottom:14px">🙋 Tap <strong>“I'll take it”</strong> to own a job (or assign a mate) · 📋 share options with a link + price · 👍 the group votes · ✅ mark it <strong>Booked</strong> and note what you got. Pick yourself in the crew panel first.</div>
             <div class="desk-list" id="deskList"></div>
             <h3 style="margin:26px 0 4px">Start a new decision room</h3>
             <p class="panel-sub">Anything the group needs to sort — a day trip, a SIM plan, airport transfers.</p>
@@ -1069,6 +1003,16 @@
             </div>
           </div>
           <aside class="side-stack">
+            <div class="panel pad">
+              <div class="label">👥 The crew</div>
+              <p class="panel-sub" style="margin:6px 0 12px">Pick yourself first — that's how the jobs you take get your name on them.</p>
+              <div class="select-row" style="margin-bottom:14px">
+                <select id="playerSelect" aria-label="You are"></select>
+              </div>
+              <div class="traveller-grid" id="travellerGrid"></div>
+              <button class="btn small ghost" id="changeWhoBtn" style="margin-top:12px">Not you? Pick yourself</button>
+              <details style="margin-top:14px"><summary class="label" style="cursor:pointer">✎ Rename crew</summary><div id="rosterEditor" class="task-list" style="margin-top:10px"></div></details>
+            </div>
             <div class="panel pad">
               <div class="label">✅ Booked</div>
               <p class="panel-sub" style="margin:6px 0 12px">Locked-in decisions — what's feeding the trip.</p>
@@ -1126,10 +1070,9 @@
               <div class="arr-foot" id="arrivalsBadge" style="margin-top:10px"></div>
             </div>
             <div class="panel pad">
-              <div class="label">💡 Shortlisted ideas</div>
-              <p class="panel-sub" style="margin-top:4px">Won the vote in the Activity Market + decided dinners — add the ones you want to a day yourself.</p>
-              <div class="mini-idea-list" id="planFeed" style="margin-top:12px"></div>
-              <button class="btn small ghost" id="planLockBtn" style="margin-top:6px">🔒 Lock this itinerary</button>
+              <div class="label">💡 This plan</div>
+              <p class="panel-sub" style="margin-top:4px">Add anything you fancy to a day yourself — the days already hold the booked stuff.</p>
+              <button class="btn small ghost" id="planLockBtn" style="margin-top:12px">🔒 Lock this itinerary</button>
             </div>
             <div class="info-card">
               <div class="emoji">🧭</div>
@@ -1197,7 +1140,6 @@
 
   <nav class="dock" aria-label="Quick navigation">
     <button data-tab="plan" class="active"><span class="d-ico">🗓️</span>Plan</button>
-    <button data-tab="ideas"><span class="d-ico">🎯</span>Market</button>
     <button data-tab="desk"><span class="d-ico">🛎️</span>Decisions</button>
     <button data-tab="intel"><span class="d-ico">🧭</span>Essentials</button>
   </nav>
@@ -1207,7 +1149,7 @@
       <h2>Who are you?</h2>
       <p>Tap your name so your votes and jobs stay separate from everyone else's. This is saved on your device — you're only asked once.</p>
       <div class="who-grid" id="whoGrid"></div>
-      <p class="panel-sub" style="margin-top:16px">Rename anyone under <strong>👥 The crew</strong> in the Activity Market. Reopen this any time from the “not you?” button when you vote.</p>
+      <p class="panel-sub" style="margin-top:16px">Rename anyone under <strong>👥 The crew</strong> in Open Decisions. Reopen this any time from the “not you?” button there.</p>
     </div>
   </div>
 
@@ -1387,7 +1329,7 @@
         book: [
           "Confirm late check-in for the ~23:00 arrival",
           "Sort overnight parking for the two cars",
-          "Slovenian vignette before the motorway (unless the rental includes it)"
+          "Vignette is on the rentals — Jason V + Hao are sorting it at pick-up"
         ]
       },
       d12: {
@@ -1657,7 +1599,8 @@
         { name: "Jason Vo", initials: "JV", colour: colours[4], vibe: null, piece: null },
         { name: "Katrina Jiang", initials: "KJ", colour: colours[5], vibe: null, piece: null },
         { name: "Steph Trinh", initials: "ST", colour: colours[6], vibe: null, piece: null },
-        { name: "Yan Hao", initials: "YH", colour: colours[7], vibe: null, piece: null }
+        { name: "Yan Hao", initials: "YH", colour: colours[7], vibe: null, piece: null },
+        { name: "Steph", initials: "S", colour: "#f0a6ff", vibe: null, piece: null }
       ],
       groupDone: {
         routeLock: false,
@@ -1990,7 +1933,7 @@
       dinners: ["dinner_ljubljana", "dinner_bled"]
     };
     // Tasks whose "options" live on another tab rather than in desk rooms.
-    const TASK_JUMP = { activityShortlist: { tab: "ideas", label: "🎯 Vote in the Activity Market" }, itinerary: { tab: "plan", label: "🗓️ Open the Itinerary" } };
+    const TASK_JUMP = { activityShortlist: { tab: "desk", label: "🛎️ Open Decisions" }, itinerary: { tab: "plan", label: "🗓️ Open the Itinerary" } };
     const openTaskPanels = new Set(); // per-device UI state, not synced
 
     function roomsForTask(taskId) {
@@ -2738,7 +2681,7 @@
       const ps = document.getElementById("planSummary");
       if (ps) ps.textContent = items.length
         ? `${items.length} item${items.length > 1 ? "s" : ""} on the plan. Add more with the ＋ row on any day; set times to order them.`
-        : (winners.length ? `${winners.length} idea${winners.length > 1 ? "s" : ""} won the vote — add the ones you want to a day below.` : "Add items to each day below. Vote on ideas in the Activity Market for inspiration.");
+        : "Add items to each day below — set times to order them.";
 
       const dayOpts = sel => TRIP_DAYS.map(d => `<option value="${d.id}" ${d.id === sel ? "selected" : ""}>${d.date}${dayIsOff(d.id) ? " · off" : ""}</option>`).join("");
       const flightChip = x => `<span class="arr-chip" title="${escapeAttr(x.p.name + (x.a.info ? " · " + x.a.info : ""))}"><span class="ac-dot" style="background:${x.p.colour}"></span>${escapeHtml(x.p.initials)}${x.a.time ? ` · ${escapeHtml(x.a.time)}` : ""}</span>`;
@@ -2813,14 +2756,6 @@
       holder.querySelectorAll('[data-plan="dayoff"]').forEach(b => b.addEventListener("click", () => toggleDayOff(b.dataset.day, true)));
       holder.querySelectorAll('[data-plan="dayon"]').forEach(b => b.addEventListener("click", () => toggleDayOff(b.dataset.day, false)));
       holder.querySelectorAll('[data-plan="note"]').forEach(b => b.addEventListener("click", () => editDayNote(b.dataset.day)));
-
-      const feed = document.getElementById("planFeed");
-      if (feed) {
-        const dinners = state.desk ? state.desk.rooms.filter(r => r.kind === "dinner" && r.status === "decided") : [];
-        feed.innerHTML = (winners.map(i => `<div class="mini-idea-row"><span>${i.emoji || "📍"}</span><div><div class="mini-idea-name">${escapeHtml(i.title)}</div><div class="mini-idea-meta">${escapeHtml(i.city || "TBC")} · score ${tallyIdea(i.id).score}</div></div><span class="idea-status hot">In</span></div>`).join("")
-          + dinners.map(r => { const o = (r.options || []).find(x => x.id === r.chosen); return `<div class="mini-idea-row"><span>${r.emoji || "🍽️"}</span><div><div class="mini-idea-name">${escapeHtml(o ? o.title : r.title)}</div><div class="mini-idea-meta">Decided dinner</div></div><span class="idea-status hot">In</span></div>`; }).join(""))
-          || `<div class="micro">Nothing shortlisted yet. Win some votes in the Activity Market.</div>`;
-      }
 
       const cb = document.getElementById("planCountBadge"); if (cb) cb.textContent = `${items.length} placed`;
       const bp = document.getElementById("boardPlanStatus"); if (bp) bp.textContent = items.length ? `${items.length} placed` : "Nothing added yet";
@@ -3025,12 +2960,38 @@
         : "Build it by hand — add stops to any day, set times, rename, or drop a day.";
     }
 
-    const CREW = ["Jason Xu", "Sarah Wu", "Elizabeth Trinh", "Heidi", "Jason Vo", "Katrina Jiang", "Steph Trinh", "Yan Hao"];
+    const CREW = ["Jason Xu", "Sarah Wu", "Elizabeth Trinh", "Heidi", "Jason Vo", "Katrina Jiang", "Steph Trinh", "Yan Hao", "Steph"];
 
     // People who have dropped off the trip. Group state is synced and remote wins on merge,
     // so editing defaultState.players alone does NOT remove them from the live board —
     // this runs on every render and purges them (plus their index-keyed votes) from synced state.
     const REMOVED_CREW = ["michael"];
+
+    // People who JOINED after the board went out. Same problem in reverse: remote wins on
+    // merge, so adding to defaultState.players never reaches the live board. Appending at
+    // the end is safe because every synced structure is keyed by player index — nothing
+    // shifts. Stamped once per key so renaming her later doesn't re-add a duplicate.
+    const CREW_ADDITIONS = [
+      { key: "crew_add_steph_9th", v: "2026-09-02", name: "Steph", initials: "S", colour: "#f0a6ff" }
+    ];
+    function reconcileCrewAdditions() {
+      if (!Array.isArray(state.players)) return false;
+      if (!state.logFacts || typeof state.logFacts !== "object") state.logFacts = {};
+      let changed = false;
+      CREW_ADDITIONS.forEach(a => {
+        if (state.logFacts[a.key] === a.v) return;                     // already applied here
+        const already = state.players.some(p => p && (p.name || "").trim().toLowerCase() === a.name.toLowerCase());
+        if (!already) {
+          state.players.push({
+            name: a.name, initials: a.initials, colour: a.colour, vibe: null, piece: null,
+            arrival: { date: "", time: "", info: "" }, departure: { date: "", time: "", info: "" }
+          });
+          changed = true;
+        }
+        state.logFacts[a.key] = a.v;
+      });
+      return changed;
+    }
     function remapIndexMap(obj, gone) {
       if (!obj || typeof obj !== "object") return obj;
       const out = {};
@@ -3054,7 +3015,7 @@
     }
     function dropPlayerAt(gone) {
       state.players.splice(gone, 1);
-      // Activity Market votes
+      // Legacy activity votes (Market tab removed 2026-09-02; state kept so sync stays stable)
       if (state.ideaVotes && typeof state.ideaVotes === "object") {
         Object.keys(state.ideaVotes).forEach(id => { state.ideaVotes[id] = remapIndexMap(state.ideaVotes[id], gone); });
       }
@@ -3088,14 +3049,29 @@
     // version — bump `v` to re-apply — after which the crew can still edit it in-app.
     const ROOM_LOG_FACTS = {
       stay_bled: {
-        v: "2026-09-02-klif-nine",
+        v: "2026-09-02-klif-nine-b",
         status: "booked",
-        text: "Booked — Vila Klif, Ambrož pod Krvavcem (Krvavec), 2 nights (Sat 12 + Sun 13). ~45 min from Bled, NOT on the lake. Listing caps at 8 and we are 9 with Steph — worth squaring the extra guest with host Igor before we arrive, and grabbing the keypad code off him the day before."
+        text: "Booked — Vila Klif, Ambrož pod Krvavcem (Krvavec), 2 nights (Sat 12 + Sun 13). ~45 min from Bled, NOT on the lake. Listing sleeps 8 and we're 9, so someone's on a sofa — sort that out between us on arrival. Get the keypad code off host Igor the day before."
       },
       act_postojna: {
         v: "2026-09-01-cave-1100-booked",
         status: "booked",
         text: "Booked — Postojna Cave, 11:00 train, Mon 14 Sep, €34.90pp (cave only). Be at the park by 10:30; boarding is 10:45. Cave runs 11:00–12:30. The cars then split at the cave car park: the airport four go straight to Trieste (~1h, there ~13:45), the Ljubljana five take in Predjama from the outside on the way."
+      },
+      car_hire: {
+        v: "2026-09-02-vignette-with-rental",
+        status: "booked",
+        text: "Booked by Jason V + Hao on their own accounts. Slovenian e-vignette comes with the rentals — they're sorting it at pick-up, so nothing to buy separately. Still worth a look at the paperwork for cross-border cover, and checking the Tuesday drop-off is staffed for a 22:15 flight."
+      },
+      dinner_bled: {
+        v: "2026-09-02-winging-it",
+        status: "booked",
+        text: "Winging it — no booking. We'll find somewhere on the night."
+      },
+      dinner_ljubljana: {
+        v: "2026-09-02-winging-it",
+        status: "booked",
+        text: "Winging it — no booking. Whatever's open near the old town, or something by the airport."
       },
       act_vintgar: {
         v: "2026-09-01-vintgar-optional",
@@ -3157,8 +3133,9 @@
       // then push the corrected state to the group.
       ensureDesk();
       const fixedCrew = reconcileCrewRemovals();
+      const addedCrew = reconcileCrewAdditions();
       const fixedLogs = reconcileRoomLogs();
-      if (fixedCrew || fixedLogs) { try { saveState(); } catch (e) {} }
+      if (fixedCrew || addedCrew || fixedLogs) { try { saveState(); } catch (e) {} }
       reconcilePlayerNames();
       ensureBookie(); ensureDesk(); ensurePlan();
       renderPlayerSelect(); renderTravellerGrid(); renderRosterEditor(); renderIdeas(); renderHero(); renderDesk(); renderPlan(); renderVisualItinerary(); renderArrivals();
@@ -3223,7 +3200,7 @@
     document.getElementById("playerSelect").addEventListener("change", e => { state.selectedPlayer = Number(e.target.value); try { localStorage.setItem(WHOAMI_KEY, String(state.selectedPlayer)); } catch (err) {} saveState(); renderAll(); });
     document.getElementById("changeWhoBtn")?.addEventListener("click", openWhoModal);
 
-    document.getElementById("addIdeaBtn").addEventListener("click", () => {
+    document.getElementById("addIdeaBtn")?.addEventListener("click", () => {
       const title = document.getElementById("newIdeaTitle").value.trim();
       const city = document.getElementById("newIdeaCity").value.trim() || "TBC";
       const desc = document.getElementById("newIdeaDesc").value.trim() || "New group idea. Vote first, commit later.";
