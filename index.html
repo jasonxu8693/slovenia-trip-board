@@ -3214,21 +3214,6 @@
       saveState(); renderAll(); toast("Idea added");
     });
 
-    document.getElementById("copyIdeasBtn").addEventListener("click", async () => {
-      const lines = [
-        "Slovenia Crew Trip — Idea Votes",
-        `Selected traveller: ${selectedPlayer().name}`,
-        "",
-        ...allIdeas().map(idea => {
-          const t = tallyIdea(idea.id);
-          const status = ideaStatus(t).label;
-          return `• ${idea.title} (${idea.city}): ${status}, ${t.keen} keen, ${t.maybe} maybe, ${t.no} no`;
-        })
-      ];
-      await navigator.clipboard.writeText(lines.join("\n")); toast("Idea results copied");
-    });
-
-
     document.getElementById("copySummaryBtn")?.addEventListener("click", async () => {
       const groupDoneCount = groupTasks.filter(t => state.groupDone[t.id]).length;
       const lines = [
