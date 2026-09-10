@@ -1433,7 +1433,7 @@
       { id: "d11", iso: "2026-09-11", date: "Fri 11 Sep", city: "Land Trieste — stay local", stay: "Trieste", logistics: true, note: "Land Trieste ~23:00 (FR168). Too late to drive anywhere — grab the cars and crash at a bed by Trieste / the airport. No plans tonight." },
       { id: "d12", iso: "2026-09-12", date: "Sat 12 Sep", city: "Drive up → Bled lake day", stay: "Krvavec house", note: "Up from Trieste (~1h45) to the house at Krvavec, then over to Bled (~45 min) for the lake. No gorge and nothing timed, so there's no alarm after the 23:00 landing — the only fixed point is check-in from 15:00. Three of the castle, the Ojstrica sunset, the Straža toboggan and rowing to the island fit comfortably. Kremšnita fits anywhere." },
       { id: "d13", iso: "2026-09-13", date: "Sun 13 Sep", city: "Vršič & Soča alpine day", stay: "Krvavec house", note: "The big one, and all nine are still together — Vršič Pass in autumn gold, down into the Soča Valley (Velika korita). It's ~5h of driving all in, so start early and head back before dark. Weather hedge: if Vršič is socked in, flip to Velika Planina or a slow Bled day." },
-      { id: "d14", iso: "2026-09-14", date: "Mon 14 Sep", city: "Caves → the split", stay: "Ljubljana (5)", note: "Check out of the Krvavec house (2 nights done) and head south — the 11:00 cave at Postojna is booked, and it's the last thing all nine do together. We split in the cave car park straight afterwards.", split: { g1: "Jason X, Sarah, Jason V, Katrina & Steph T take in Predjama from the outside, then on to Ljubljana. Fly out Tue.", g2: "Hao, Heidi, Liz & Steph go straight from the cave to Trieste airport (~1h) for the 16:55." } },
+      { id: "d14", iso: "2026-09-14", date: "Mon 14 Sep", city: "Caves → the split", stay: "Ljubljana (5)", note: "Check out of the Krvavec house (2 nights done) and head south — the 11:00 cave at Postojna is booked, and it's the last thing all nine do together. We split in the cave car park straight afterwards.", split: { g1: "Jason X, Sarah, Jason V, Katrina & Steph T take in Predjama from the outside, then on to Ljubljana. Fly out Tue.", g2: "Hao, Heidi, Phi & Steph go straight from the cave to Trieste airport (~1h) for the 16:55." } },
       { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Ljubljana → fly home", stay: null, logistics: true, group: "g1", note: "Last day for the 5 who stayed (flight's 22:15). Slow morning in Ljubljana — old town, Triple Bridge, market, castle, lunch — then the drive to Trieste for FR169." }
     ];
 
@@ -1627,7 +1627,7 @@
           {
             icon: "🔀", title: "The Monday split",
             lines: [
-              "Home Mon night (the 4): Hao, Heidi, Liz & Steph → straight from the cave to Trieste airport (~1h) for the 16:55.",
+              "Home Mon night (the 4): Hao, Heidi, Phi & Steph → straight from the cave to Trieste airport (~1h) for the 16:55.",
               "Staying to Tue (the 5): Jason X, Sarah, Jason V, Katrina & Steph → Ljubljana (~45 min).",
               "Cars: they part in the cave car park — Jason V's takes the 5 via Predjama to Ljubljana, the other runs the 4 to Trieste and is dropped there."
             ]
@@ -1742,13 +1742,13 @@
       players: [
         { name: "Jason Xu", initials: "JX", colour: colours[0], vibe: "scenic", piece: "📸" },
         { name: "Sarah Wu", initials: "SW", colour: colours[1], vibe: null, piece: null },
-        { name: "Elizabeth Trinh", initials: "ET", colour: colours[2], vibe: null, piece: null },
         { name: "Heidi", initials: "H", colour: colours[3], vibe: null, piece: null },
         { name: "Jason Vo", initials: "JV", colour: colours[4], vibe: null, piece: null },
         { name: "Katrina Jiang", initials: "KJ", colour: colours[5], vibe: null, piece: null },
         { name: "Steph Trinh", initials: "ST", colour: colours[6], vibe: null, piece: null },
         { name: "Yan Hao", initials: "YH", colour: colours[7], vibe: null, piece: null },
-        { name: "Steph", initials: "S", colour: "#f0a6ff", vibe: null, piece: null }
+        { name: "Steph", initials: "S", colour: "#f0a6ff", vibe: null, piece: null },
+        { name: "Phi", initials: "P", colour: "#7ee0d8", vibe: null, piece: null }
       ],
       groupDone: {
         routeLock: false,
@@ -3108,19 +3108,20 @@
         : "Build it by hand — add stops to any day, set times, rename, or drop a day.";
     }
 
-    const CREW = ["Jason Xu", "Sarah Wu", "Elizabeth Trinh", "Heidi", "Jason Vo", "Katrina Jiang", "Steph Trinh", "Yan Hao", "Steph"];
+    const CREW = ["Jason Xu", "Sarah Wu", "Heidi", "Jason Vo", "Katrina Jiang", "Steph Trinh", "Yan Hao", "Steph", "Phi"];
 
     // People who have dropped off the trip. Group state is synced and remote wins on merge,
     // so editing defaultState.players alone does NOT remove them from the live board —
     // this runs on every render and purges them (plus their index-keyed votes) from synced state.
-    const REMOVED_CREW = ["michael"];
+    const REMOVED_CREW = ["michael", "elizabeth trinh"];
 
     // People who JOINED after the board went out. Same problem in reverse: remote wins on
     // merge, so adding to defaultState.players never reaches the live board. Appending at
     // the end is safe because every synced structure is keyed by player index — nothing
     // shifts. Stamped once per key so renaming her later doesn't re-add a duplicate.
     const CREW_ADDITIONS = [
-      { key: "crew_add_steph_9th", v: "2026-09-02", name: "Steph", initials: "S", colour: "#f0a6ff" }
+      { key: "crew_add_steph_9th", v: "2026-09-02", name: "Steph", initials: "S", colour: "#f0a6ff" },
+      { key: "crew_add_phi", v: "2026-09-10", name: "Phi", initials: "P", colour: "#7ee0d8" }
     ];
     function reconcileCrewAdditions() {
       if (!Array.isArray(state.players)) return false;
