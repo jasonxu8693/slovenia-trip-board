@@ -1434,7 +1434,7 @@
       { id: "d12", iso: "2026-09-12", date: "Sat 12 Sep", city: "Drive up → Bled lake day", stay: "Krvavec house", note: "Up from Trieste (~1h45) to the house at Krvavec, then over to Bled (~45 min) for the lake. No gorge and nothing timed, so there's no alarm after the 23:00 landing — the only fixed point is check-in from 15:00. Three of the castle, the Ojstrica sunset, the Straža toboggan and rowing to the island fit comfortably. Kremšnita fits anywhere." },
       { id: "d13", iso: "2026-09-13", date: "Sun 13 Sep", city: "Vršič & Soča alpine day", stay: "Krvavec house", note: "The big one, and all nine are still together — Vršič Pass in autumn gold, down into the Soča Valley (Velika korita). It's ~5h of driving all in, so start early and head back before dark. Weather hedge: if Vršič is socked in, flip to Velika Planina or a slow Bled day." },
       { id: "d14", iso: "2026-09-14", date: "Mon 14 Sep", city: "Caves → the split", stay: "Ljubljana (5)", note: "Check out of the Krvavec house (2 nights done) and head south — the 11:00 cave at Postojna is booked, and it's the last thing all nine do together. We split in the cave car park straight afterwards.", split: { g1: "Jason X, Sarah, Jason V, Katrina & Steph T take in Predjama from the outside, then on to Ljubljana. Fly out Tue.", g2: "Hao, Heidi, Phi & Steph go straight from the cave to Trieste airport (~1h) for the 16:55." } },
-      { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Ljubljana → fly home", stay: null, logistics: true, group: "g1", note: "Last day for the 5 who stayed (flight's 22:15). Slow morning in Ljubljana — old town, Triple Bridge, market, castle, lunch — then the drive to Trieste for FR169." }
+      { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Ljubljana → fly home", stay: null, logistics: true, group: "g1", note: "Last day for the 5 who stayed. Slow morning in Ljubljana — old town, Triple Bridge, market, castle, lunch — then away by ~18:30 for Trieste. FR169 departs 22:15 and lands Stansted 23:25." }
     ];
 
     // The trip forks on Monday: 3 fly home from Trieste that night (Group 2);
@@ -1648,8 +1648,9 @@
       d15: {
         accom: null,
         drive: [
-          { leg: "Ljubljana → Trieste airport", time: "~1h30", note: "For FR169, dep 22:15" },
-          { leg: "Return the last hire car", time: "", note: "Full tank — confirm the drop-off is staffed for a 22:15 flight" }
+          { leg: "Ljubljana → Trieste airport", time: "~1h30", note: "Leave by ~18:30 — you've a car to drop and security to clear before the gate shuts at 21:45" },
+          { leg: "Return the last hire car", time: "", note: "Full tank — confirm the drop-off is staffed for a 22:15 flight" },
+          { leg: "Fly home — FR169", time: "dep 22:15", note: "Trieste 22:15 → London Stansted 23:25 (UK time) · gate closes 21:45 · Ryanair ref OSU7WL · Jason X + Katrina on this booking" }
         ],
         guide: [
           {
@@ -1661,7 +1662,7 @@
             ]
           }
         ],
-        book: ["Slow morning — nothing timed", "Return the last hire car with a full tank; check drop-off hours for a 22:15 flight", "Snacks for the drive to Trieste"]
+        book: ["Slow morning — nothing timed", "Check in for FR169 in the Ryanair app — opens 24h before (Mon 22:15). Digital boarding pass only, no printouts", "Leave Ljubljana by ~18:30 · gate closes 21:45", "Return the last hire car with a full tank; check drop-off hours for a 22:15 flight", "Snacks for the drive to Trieste"]
       }
     };
     function dayDetail(d) {
@@ -1717,7 +1718,7 @@
       ],
       d15: [
         { img: "scene-ljubljana.jpg", title: "Ljubljana old town", desc: "Half-day in the dragon city — Triple Bridge, market, castle funicular, lunch." },
-        { img: "scene-drive.jpg", title: "Drive to Trieste", desc: "South to the airport for FR169, departing 22:15." }
+        { img: "scene-drive.jpg", title: "Fly home — FR169", desc: "Leave Ljubljana ~18:30 for Trieste. FR169 departs 22:15 (gate shuts 21:45) and lands London Stansted 23:25." }
       ]
     };
     function dayActs(d) {
@@ -3123,6 +3124,30 @@
       { key: "crew_add_steph_9th", v: "2026-09-02", name: "Steph", initials: "S", colour: "#f0a6ff" },
       { key: "crew_add_phi", v: "2026-09-10", name: "Phi", initials: "P", colour: "#7ee0d8" }
     ];
+    // Flights confirmed off-board (from the Ryanair itinerary email). Per-player arrival and
+    // departure are synced state, so defaults never reach the live board. Stamped once per
+    // version and matched by NAME, not index, so a crew splice can never misfile them.
+    const PLAYER_FLIGHT_FACTS = [
+      { key: "flights_osu7wl", v: "2026-09-10", names: ["jason xu", "katrina jiang"],
+        arrival:   { date: "2026-09-11", time: "23:00", info: "FR168 Stansted → Trieste · OSU7WL" },
+        departure: { date: "2026-09-15", time: "22:15", info: "FR169 Trieste → Stansted, lands 23:25 · OSU7WL" } }
+    ];
+    function reconcilePlayerFlights() {
+      if (!Array.isArray(state.players)) return false;
+      if (!state.logFacts || typeof state.logFacts !== "object") state.logFacts = {};
+      let changed = false;
+      PLAYER_FLIGHT_FACTS.forEach(f => {
+        if (state.logFacts[f.key] === f.v) return;                     // already applied here
+        state.players.forEach(p => {
+          if (!p || !f.names.includes((p.name || "").trim().toLowerCase())) return;
+          p.arrival = { ...f.arrival };
+          p.departure = { ...f.departure };
+          changed = true;
+        });
+        state.logFacts[f.key] = f.v;
+      });
+      return changed;
+    }
     function reconcileCrewAdditions() {
       if (!Array.isArray(state.players)) return false;
       if (!state.logFacts || typeof state.logFacts !== "object") state.logFacts = {};
@@ -3283,8 +3308,9 @@
       ensureDesk();
       const fixedCrew = reconcileCrewRemovals();
       const addedCrew = reconcileCrewAdditions();
+      const fixedFlights = reconcilePlayerFlights();
       const fixedLogs = reconcileRoomLogs();
-      if (fixedCrew || addedCrew || fixedLogs) { try { saveState(); } catch (e) {} }
+      if (fixedCrew || addedCrew || fixedFlights || fixedLogs) { try { saveState(); } catch (e) {} }
       reconcilePlayerNames();
       ensureBookie(); ensureDesk(); ensurePlan();
       renderPlayerSelect(); renderTravellerGrid(); renderRosterEditor(); renderIdeas(); renderHero(); renderDesk(); renderPlan(); renderVisualItinerary(); renderArrivals();
