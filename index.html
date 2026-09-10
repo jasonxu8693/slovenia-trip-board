@@ -934,6 +934,24 @@
       .vp-map { width: 64px; }
     }
     @media (prefers-reduced-motion: reduce) { .vp-scene, .vp-spine, .vp-trav { animation: none !important; opacity: 1 !important; transform: none !important; } }
+
+    /* Weather strip + packing checklist (added 2026-09-10, day before the trip) */
+    .wx-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(158px, 1fr)); gap: 10px; margin: 14px 0 6px; }
+    .wx-day { border: 1px solid var(--line); border-radius: 16px; padding: 12px 13px; background: rgba(10,20,42,0.5); }
+    .wx-day.alert { border-color: rgba(239,77,77,0.55); background: rgba(239,77,77,0.11); }
+    .wx-day .wd-date { font-size: 11.5px; font-weight: 800; color: var(--muted); letter-spacing: 0.03em; text-transform: uppercase; }
+    .wx-day .wd-temp { font-size: 21px; font-weight: 800; margin: 5px 0 1px; letter-spacing: -0.035em; }
+    .wx-day .wd-sky { font-size: 12.5px; color: #cfe0ff; font-weight: 600; }
+    .wx-day .wd-note { font-size: 12px; color: var(--muted); margin-top: 7px; line-height: 1.45; }
+    .pack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr)); gap: 14px; margin-top: 14px; }
+    .pack-card { border: 1px solid var(--line); border-radius: 16px; padding: 14px 15px; background: rgba(10,20,42,0.45); }
+    .pack-card.key { border-color: rgba(255,206,122,0.45); background: rgba(255,206,122,0.07); }
+    .pack-card h4 { margin: 0 0 4px; font-size: 14.5px; letter-spacing: -0.02em; }
+    .pack-card .pc-why { font-size: 12px; color: var(--muted); margin: 0 0 9px; line-height: 1.45; }
+    .pack-item { display: flex; gap: 9px; align-items: flex-start; padding: 5px 0; font-size: 13.5px; line-height: 1.42; cursor: pointer; }
+    .pack-item input { margin-top: 2px; width: 16px; height: 16px; accent-color: #5fd39a; flex: none; cursor: pointer; }
+    .pack-item.done > span { opacity: 0.42; text-decoration: line-through; }
+    .pack-foot { display: flex; align-items: center; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
   </style>
 </head>
 <body>
@@ -1098,10 +1116,140 @@
             </div>
           </div>
 
+
+          <h3 style="margin:4px 0 2px">🌦️ The actual forecast</h3>
+          <p class="panel-sub">Pulled 10 Sep for each place we're actually standing — not a seasonal average. Trieste on the coast runs ~8°C warmer than the pass.</p>
+          <div class="wx-strip">
+            <div class="wx-day alert">
+              <div class="wd-date">Fri 11 · Trieste</div>
+              <div class="wd-temp">17–25°C</div>
+              <div class="wd-sky">⛈️ Thunderstorms</div>
+              <div class="wd-note">~47mm and hail possible, 100%. We land at 23:00 straight into it — expect a wet drive and possible delays.</div>
+            </div>
+            <div class="wx-day">
+              <div class="wd-date">Sat 12 · Bled</div>
+              <div class="wd-temp">10–21°C</div>
+              <div class="wd-sky">☁️ Dry, 0% rain</div>
+              <div class="wd-note">The good day. Cold start, warm afternoon, no rain at all. Sunset 19:21 — Ojstrica works. Toboggan will run.</div>
+            </div>
+            <div class="wx-day">
+              <div class="wd-date">Sun 13 · Vršič</div>
+              <div class="wd-temp">6–13°C</div>
+              <div class="wd-sky">🌫️ Dry but foggy</div>
+              <div class="wd-note">Fog at altitude, so the pass views are a gamble. The Soča valley below is 13–21°C and fine.</div>
+            </div>
+            <div class="wx-day">
+              <div class="wd-date">Mon 14 · Postojna</div>
+              <div class="wd-temp">14–22°C</div>
+              <div class="wd-sky">🌦️ Showers about</div>
+              <div class="wd-note">26–62% depending where you are. Barely matters — we're underground for the main event.</div>
+            </div>
+            <div class="wx-day">
+              <div class="wd-date">Tue 15 · Ljubljana</div>
+              <div class="wd-temp">13–23°C</div>
+              <div class="wd-sky">🌤️ Fog then sun</div>
+              <div class="wd-note">Morning fog burning off to a dry, warm day. Good last morning for the old town.</div>
+            </div>
+          </div>
+          <p class="panel-sub" style="margin-top:10px">🏡 <strong>The house at Krvavec (900m) runs cold:</strong> 9–19°C across our stay, and <strong>9–12°C at night</strong>. It's not lake weather up there — bring something warm for the evenings.</p>
+
+          <h3 style="margin:26px 0 2px">🧳 Packing list</h3>
+          <p class="panel-sub">Built around this forecast and what we've actually booked. Ticks save on your own phone — they're private to you, not shared.</p>
+          <div class="pack-grid" id="packList">
+
+            <div class="pack-card key">
+              <h4>⛈️ Friday night — read first</h4>
+              <p class="pc-why">We land at 23:00 into a thunderstorm with hail. Plan for it now, not at the carousel.</p>
+              <label class="pack-item"><input type="checkbox" data-pack="fri_shell"><span>Waterproof in your <strong>cabin bag</strong>, not buried at the bottom</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="fri_charge"><span>Phone fully charged before landing — dark, wet drive to Monfalcone</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="fri_park"><span>Al Gelso has <strong>no car park</strong> — someone on bags while the others find paid public parking</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="fri_delay"><span>Check FR168 status before leaving for Stansted</span></label>
+            </div>
+
+            <div class="pack-card key">
+              <h4>🎒 Documents</h4>
+              <p class="pc-why">The stuff that ends the trip before it starts.</p>
+              <label class="pack-item"><input type="checkbox" data-pack="doc_pass"><span>Passport — issued under 10 years ago, valid past 15 Dec</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="doc_checkin"><span>Ryanair check-in done + boarding pass saved offline</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="doc_ghic"><span>GHIC/EHIC + travel insurance details saved offline</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="doc_licence"><span>Driving licence — <strong>Jason V + Hao especially</strong></span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="doc_refs"><span>Rental refs + breakdown number saved offline</span></label>
+            </div>
+
+            <div class="pack-card">
+              <h4>🧅 Layers — 6°C to 25°C</h4>
+              <p class="pc-why">That's the real spread: Vršič at dawn vs Trieste in the afternoon. Layers, not one big coat.</p>
+              <label class="pack-item"><input type="checkbox" data-pack="lay_mid"><span>Warm mid-layer — fleece or hoodie</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="lay_shell"><span>Waterproof shell</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="lay_tees"><span>T-shirts / shorts for the 21–25°C afternoons</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="lay_trousers"><span>Long trousers for evenings — 9–12°C at the house</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="lay_beanie"><span>Beanie / light gloves if you feel the cold on the pass</span></label>
+            </div>
+
+            <div class="pack-card">
+              <h4>🏊 Soča swim — Sunday</h4>
+              <p class="pc-why">Velika korita is 10–12°C <em>year-round</em>, whatever the air says. The limestone is sharp.</p>
+              <label class="pack-item"><input type="checkbox" data-pack="soca_swim"><span>Swimwear — doubles for the sauna at the house</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="soca_towel"><span>Quick-dry towel</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="soca_shoes"><span><strong>Water shoes</strong> or old trainers — the rock cuts</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="soca_drybag"><span>Dry bag or carrier bag for wet kit in the car</span></label>
+            </div>
+
+            <div class="pack-card">
+              <h4>🕳️ Cave day — Monday</h4>
+              <p class="pc-why">Postojna is a constant 10°C and we're in there 90 minutes on the 11:00 train.</p>
+              <label class="pack-item"><input type="checkbox" data-pack="cave_jumper"><span>A proper jumper — not just a t-shirt and optimism</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="cave_shoes"><span>Closed shoes — the walkways are wet</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="cave_sick"><span>Motion-sickness tablets — Vršič is 50 hairpins the day before</span></label>
+            </div>
+
+            <div class="pack-card">
+              <h4>👟 Feet</h4>
+              <p class="pc-why">Ojstrica is steep, the island is 99 steps, and there's a fair bit of walking on wet boardwalk.</p>
+              <label class="pack-item"><input type="checkbox" data-pack="feet_trainers"><span>Trainers with actual grip — Ojstrica gets slippery</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="feet_socks"><span>Spare socks (Soča day, guaranteed)</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="feet_flips"><span>Flip-flops for the house</span></label>
+            </div>
+
+            <div class="pack-card">
+              <h4>🔌 Tech</h4>
+              <p class="pc-why">Two cars, mountain roads and patchy signal in the Julian Alps.</p>
+              <label class="pack-item"><input type="checkbox" data-pack="tech_adapter"><span>UK→EU adapter (Type C/F) — one each, don't share one</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="tech_bank"><span>Power bank</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="tech_mount"><span>Phone mount + car charger for each car</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="tech_maps"><span><strong>Download offline maps</strong> for the Julian Alps before you fly</span></label>
+            </div>
+
+            <div class="pack-card">
+              <h4>💶 Cash — about €70pp</h4>
+              <p class="pc-why">Several of the good bits are cash-only, and the machines up the mountain aren't.</p>
+              <label class="pack-item"><input type="checkbox" data-pack="cash_pletna"><span>Pletna boat ~€20 + island church €12 — <strong>cash only</strong></span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="cash_straza"><span>Straža toboggan €14</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="cash_parking"><span>Coins for parking machines — incl. Predjama ~€3/hr</span></label>
+            </div>
+
+            <div class="pack-card">
+              <h4>💊 Easy to forget</h4>
+              <p class="pc-why">Small things that get expensive or annoying to buy out there.</p>
+              <label class="pack-item"><input type="checkbox" data-pack="sm_suncream"><span>Sun cream — UV is strong at altitude even under cloud</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="sm_sunnies"><span>Sunglasses — low autumn sun straight down the valleys</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="sm_torch"><span>Head torch — sunset is 19:21 and Ojstrica descends in dusk</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="sm_meds"><span>Regular meds + painkillers</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="sm_bottle"><span>Refillable bottle — Slovenian tap water is excellent</span></label>
+            </div>
+
+          </div>
+          <div class="pack-foot">
+            <span class="pill done" id="packBadge">0 packed</span>
+            <button class="btn small ghost" id="packReset">Reset my list</button>
+            <span class="micro">Saved on this phone only — your ticks aren't shared with the group.</span>
+          </div>
+
+          <h3 style="margin:26px 0 12px">🧭 On the ground</h3>
           <div class="grid-3">
             <div class="info-card"><div class="emoji">💶</div><h3>Money</h3><p>Italy and Slovenia both use the <strong>euro</strong> — one currency for the whole trip.</p><ul><li>Cards work almost everywhere; carry a little cash for huts, parking machines and kiosks.</li><li>Slovenia is noticeably cheaper than the UK for food and beer.</li><li>Log shared spend as you go so the last night isn't a spreadsheet.</li></ul></div>
-            <div class="info-card"><div class="emoji">📱</div><h3>Data &amp; apps</h3><p>Most UK plans roam in the EU — check your cap, or grab a cheap <strong>eSIM</strong>.</p><ul><li>Google Maps works great here — still <strong>download offline maps</strong> for the Julian Alps.</li><li>Book <strong>Vintgar</strong> and the <strong>Postojna / Škocjan</strong> tours online before the day.</li></ul></div>
-            <div class="info-card"><div class="emoji">🚘</div><h3>Driving</h3><p>Cars come from <strong>Trieste</strong> and cross the border — no checkpoint, but get it right:</p><ul><li>Confirm <strong>cross-border use</strong> is on the rental agreement.</li><li>Buy the Slovenian <strong>e-vignette</strong> before touching the motorway.</li><li>Italian autostrada tolls; Ljubljana old town is car-free — park on the edge.</li></ul></div>
+            <div class="info-card"><div class="emoji">📱</div><h3>Data &amp; apps</h3><p>Most UK plans roam in the EU — check your cap, or grab a cheap <strong>eSIM</strong>.</p><ul><li>Google Maps works great here — still <strong>download offline maps</strong> for the Julian Alps.</li><li>Postojna is <strong>booked</strong> (11:00 Mon). Vintgar isn't in the group plan — book your own if you want it.</li></ul></div>
+            <div class="info-card"><div class="emoji">🚘</div><h3>Driving</h3><p>Cars come from <strong>Trieste</strong> and cross the border — no checkpoint, but get it right:</p><ul><li>Confirm <strong>cross-border use</strong> is on the rental agreement.</li><li>Slovenian <strong>e-vignette</strong> comes with the rentals — Jason V + Hao sorting it at pick-up.</li><li>Italian autostrada tolls; Ljubljana old town is car-free — park on the edge.</li></ul></div>
           </div>
 
           <h3 style="margin:24px 0 12px">🆘 If something goes wrong</h3>
@@ -1112,7 +1260,7 @@
 
           <h3 style="margin:24px 0 12px">🧳 Good to know</h3>
           <div class="grid-3">
-            <div class="info-card"><div class="emoji">🧥</div><h3>Mid-Sep weather</h3><p>Roughly <strong>10–22°C</strong> — warm lake afternoons, cool alpine evenings, a real chance of a rain day. Layers + a shell. The caves are <strong>~10°C year-round</strong>, so bring a jumper even if it's hot outside.</p></div>
+            <div class="info-card"><div class="emoji">🧥</div><h3>Weather in one line</h3><p><strong>6°C on Vršič to 25°C in Trieste.</strong> Friday storms, then dry Sat–Sun, showers Monday. The house is 9–12°C at night. Caves are ~10°C year-round. See the full forecast at the top of this tab.</p></div>
             <div class="info-card"><div class="emoji">🔌</div><h3>Plugs &amp; power</h3><p>Type <strong>C / F</strong> sockets, 230V — standard Europe. One <strong>UK→EU adapter</strong> each.</p></div>
             <div class="info-card"><div class="emoji">🍰</div><h3>Eat &amp; drink</h3><ul><li><strong>Kremšnita</strong> at Lake Bled — the non-negotiable ritual.</li><li>Štruklji, big alpine portions; Laško vs Union is the local beer debate.</li><li>Tipping: round up ~10% for good service. Tap water is excellent.</li></ul></div>
           </div>
@@ -3318,6 +3466,47 @@
     document.getElementById("syncChip").addEventListener("click", () => remotePull({ manual: true }));
 
     renderAll();
+    // Packing ticks are deliberately localStorage-only, NOT synced group state —
+    // nine people ticking one shared list would just fight each other.
+    const PACK_KEY = "slovenia_packing_v1";
+    function initPacking() {
+      const wrap = document.getElementById("packList");
+      if (!wrap) return;
+      let done = {};
+      try { done = JSON.parse(localStorage.getItem(PACK_KEY) || "{}") || {}; } catch (e) { done = {}; }
+      const rows = Array.from(wrap.querySelectorAll(".pack-item"));
+      const badge = document.getElementById("packBadge");
+      function sync() {
+        let n = 0;
+        rows.forEach(row => {
+          const cb = row.querySelector("input");
+          if (!cb) return;
+          const on = !!done[cb.dataset.pack];
+          cb.checked = on;
+          row.classList.toggle("done", on);
+          if (on) n++;
+        });
+        if (badge) badge.textContent = n + " / " + rows.length + " packed";
+      }
+      rows.forEach(row => {
+        const cb = row.querySelector("input");
+        if (!cb) return;
+        cb.addEventListener("change", () => {
+          if (cb.checked) done[cb.dataset.pack] = 1; else delete done[cb.dataset.pack];
+          try { localStorage.setItem(PACK_KEY, JSON.stringify(done)); } catch (e) {}
+          sync();
+        });
+      });
+      document.getElementById("packReset")?.addEventListener("click", () => {
+        done = {};
+        try { localStorage.removeItem(PACK_KEY); } catch (e) {}
+        sync();
+        toast("Packing list reset");
+      });
+      sync();
+    }
+    initPacking();
+
     setActiveTab("plan");
     const savedWho = whoamiSaved();
     if (savedWho != null && state.players[savedWho]) state.selectedPlayer = savedWho;
