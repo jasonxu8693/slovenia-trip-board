@@ -1431,7 +1431,7 @@
     // Itinerary builder — fixed trip skeleton; the crew builds the day-by-day plan onto these days.
     const TRIP_DAYS = [
       { id: "d11", iso: "2026-09-11", date: "Fri 11 Sep", city: "Land Trieste — stay local", stay: "Trieste", logistics: true, note: "Land Trieste ~23:00 (FR168). Too late to drive anywhere — grab the cars and crash at a bed by Trieste / the airport. No plans tonight." },
-      { id: "d12", iso: "2026-09-12", date: "Sat 12 Sep", city: "Drive up → Bled lake day", stay: "Krvavec house", note: "Up from Trieste (~1h45) to the house at Krvavec, then over to Bled (~45 min) for the lake. No gorge and nothing timed, so there's no alarm after the 23:00 landing — the only fixed point is check-in from 15:00. Three of the castle, the Ojstrica sunset, the Straža toboggan and rowing to the island fit comfortably. Kremšnita fits anywhere." },
+      { id: "d12", iso: "2026-09-12", date: "Sat 12 Sep", city: "Drive up → Bled lake day", stay: "Krvavec house", note: "Straight from Monfalcone to Bled (~1h50) — the house doesn't open till 15:00, so the lake comes first with the bags in the boots. Toboggan, lunch + kremšnita, the island, the castle. Leave Bled ~17:15, big food shop at Mercator Cerklje on the way (shops are shut Sunday), and into the house by ~18:45 in daylight." },
       { id: "d13", iso: "2026-09-13", date: "Sun 13 Sep", city: "Vršič & Soča alpine day", stay: "Krvavec house", note: "The big one, and all nine are still together. Over Vršič, then down the Soča: the walk to the river's source, lunch in Bovec, Virje waterfall, and Velika korita on the way back. Forecast is dry but foggy up top — none of the valley stops need a view. If the summit is clear, swap Bovec for the Slemenova špica hike. ~5h of driving; home ~18:30." },
       { id: "d14", iso: "2026-09-14", date: "Mon 14 Sep", city: "Caves → the split", stay: "Ljubljana (5)", note: "Check out of the Krvavec house (2 nights done) and head south — the 11:00 cave at Postojna is booked, and it's the last thing all nine do together. We split in the cave car park straight afterwards.", split: { g1: "Jason X, Sarah, Jason V, Katrina & Steph T take in Predjama from the outside, then on to Ljubljana. Fly out Tue.", g2: "Hao, Heidi, Phi & Steph go straight from the cave to Trieste airport (~1h) for the 16:55." } },
       { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Ljubljana → fly home", stay: null, logistics: true, group: "g1", note: "Last day for the 5 who stayed. Slow morning in Ljubljana — old town, Triple Bridge, market, castle, lunch — then away by ~18:30 for Trieste. FR169 departs 22:15 and lands Stansted 23:25." }
@@ -1483,37 +1483,55 @@
       d12: {
         accom: {
           name: "Vila Klif — group chalet",
-          meta: "Check in from 15:00 · night 1 of 2",
-          note: "Ski/hike chalet with sauna + PS5, up at Krvavec — ~45 min from Bled, NOT on the lake. Listing sleeps 8 and we're 9 with Steph squeezed in.",
+          meta: "Self check-in from 15:00 (keypad) · night 1 of 2",
+          note: "Ski/hike chalet with sauna + PS5, up at Krvavec — ~50 min from Bled, NOT on the lake. Listing sleeps 8 and we're 9 with Steph squeezed in.",
           address: "Ambrož pod Krvavcem 49, 4207 Cerklje na Gorenjskem",
           maps: "https://www.google.com/maps/search/?api=1&query=Ambro%C5%BE+pod+Krvavcem+49+Cerklje+na+Gorenjskem",
           checkin: "Sat 12 Sep, after 15:00",
           checkout: "Mon 14 Sep, by 10:00",
           access: "Self check-in with keypad · exterior cameras on site · no pets",
-          price: "~£346 total (~£38pp across 9) · host Igor Burgar · square the 9th guest with him",
+          price: "~£346 total (~£38pp across 9) · host Igor Burgar",
           link: "https://www.airbnb.com/rooms/1328844305934967312"
         },
         drive: [
-          { leg: "Trieste → Vila Klif (Krvavec)", time: "~1h45", note: "Cross-border; e-vignette on first" },
-          { leg: "House → Bled", time: "~45 min", note: "Each way, every day — and in the dark coming home. Nominate a driver." },
+          { leg: "Monfalcone → Bled", time: "~1h50", note: "163 km, cross-border (vignette's on the rentals). Straight to the lake — going via the house first costs ~50 min and it's locked till 15:00" },
+          { leg: "Park: P03 Centralno parkirišče", time: "all day", note: "225 spaces, no time limit, €2.50/hr (~€15 per car for the day), card or EasyPark. Bags in the boots, nothing on the seats" },
+          { leg: "Bled → Mercator Supermarket Cerklje", time: "~35 min", note: "Slovenska cesta 10 · Sat 07:00–21:00 · CLOSED Sunday — the only shop run before Monday" },
+          { leg: "Mercator → Vila Klif", time: "~20 min", note: "Self check-in with the keypad, any time after 15:00 — aim to be in before the 19:21 sunset" },
           { leg: "Bled → Vintgar (optional, if anyone's going)", time: "~15 min", note: "Not in the group plan — park at Central Vintgar LIP, free shuttle to the gorge" }
         ],
         guide: [
           {
-            icon: "🏡", title: "Heads up — the house is NOT at the lake",
+            icon: "🗓️", title: "Saturday, in order", link: "https://www.google.com/maps/search/?api=1&query=Centralno+parkiri%C5%A1%C4%8De+Bled", linkLabel: "P03 car park ↗",
             lines: [
-              "Vila Klif is up at Krvavec, ~45 min from Bled. Everything lakeside is a day trip, and every evening at the lake ends with a 45-minute mountain drive home in the dark.",
-              "So pick the designated driver before anyone starts on the Laško, and decide as a group whether the night finishes at the lake or back near the house.",
-              "No shop at the door either — grab food and drink on the way up, or coming back through Kranj."
+              "09:30 leave Al Gelso · ~11:20 Bled — both cars into P03 for the whole day.",
+              "~11:30 Straža toboggan first — it opens at 11:00 and it's the only thing today with a cut-off (shuts 18:00). Then lunch by the water, kremšnita for pudding.",
+              "~14:00 out to the island (~1h30) · ~15:45 walk up to the castle for the late-afternoon light.",
+              "~17:15 leave Bled · ~17:50 Mercator Cerklje · ~18:45 into the house, before the 19:21 sunset. Sauna."
             ]
           },
           {
-            icon: "⚖️", title: "Saturday, realistically",
+            icon: "🧳", title: "The bags — the cars are the luggage storage",
             lines: [
-              "The gorge is out, so nothing on this day is timed. After a 23:00 landing that's the right call — no alarm, breakfast in Trieste, on the road when everyone's up.",
-              "The only fixed point is check-in at the house from 15:00. The 1h45 drive up is the day's one commitment.",
-              "Three of these fit comfortably: Bled Castle · Ojstrica at sunset · the Straža toboggan (weekend-only, shuts 18:00) · rowing to the island. The toboggan is the one with a real cut-off, so if it's wanted, do it before the castle.",
-              "Kremšnita is a 20-minute sit-down — it fits anywhere."
+              "The house is locked till 15:00, so everything stays in the cars until we get there. Bags in the boots, out of sight, nothing on the seats.",
+              "P03 is Bled's biggest car park — 225 spaces, no time limit, a couple of minutes from the promenade. Park once and walk: the toboggan, the pletna boats and the castle path are all close.",
+              "Proper left-luggage does exist (TIC Bled, ~€3 a bag, office hours only), but with nine bags and two cars it isn't worth the faff."
+            ]
+          },
+          {
+            icon: "🛒", title: "The food shop — don't skip it", link: "https://www.google.com/maps/search/?api=1&query=Mercator+Supermarket+Cerklje+Slovenska+cesta+10", linkLabel: "Mercator ↗",
+            lines: [
+              "Slovenian supermarkets are shut on Sunday, and Sunday is the 08:45 Vršič start. So this one shop covers Saturday dinner, Sunday breakfast, snacks for the pass, Sunday dinner and Monday breakfast (we leave at 08:30).",
+              "Mercator Supermarket Cerklje, Slovenska cesta 10 — on the way from Bled (adds ~2 min). Open Saturday 07:00–21:00.",
+              "Water, beer and ice too — the house is up a mountain road with nothing at the door."
+            ]
+          },
+          {
+            icon: "🌅", title: "Want the Ojstrica sunset instead of the castle?",
+            lines: [
+              "Sunset is 19:21. Staying for it means the ~1h drive to the house in the dark, with Mercator Cerklje close to shutting.",
+              "So if you pick it: shop at Mercator Bled first (P01, first hour free) around 17:30, go up Ojstrica from Velika Zaka (7 min from the centre), then drive — house ~20:45.",
+              "Designated driver either way — it's a mountain road up to the house."
             ]
           },
           {
@@ -1557,9 +1575,12 @@
         ],
         book: [
           "Get the keypad code from host Igor the day before",
-          "Only if you're doing the gorge solo: book your own Vintgar slot (tickets.vintgar.si)",
+          "Big food shop at Mercator Cerklje on the way to the house — shops are shut Sunday, so buy Saturday dinner through Monday breakfast",
+          "Card or EasyPark for P03 (€2.50/hr, ~€15 per car for the day)",
+          "Bags in the boots, out of sight — nothing on the seats",
           "Cash for the pletna boat + island church (~€20 + €12pp)",
-          "Straža: cash, ride before it shuts at 18:00"
+          "Straža: cash, and do it first — shuts at 18:00",
+          "Only if you're doing the gorge solo: book your own Vintgar slot (tickets.vintgar.si)"
         ]
       },
       d13: {
@@ -1736,13 +1757,14 @@
         { img: "scene-stay.jpg", title: "Crash near the airport", desc: "Short hop to a bed — no plans tonight, just sleep." }
       ],
       d12: [
-        { img: "scene-drive.jpg", title: "Drive up to the house", desc: "Fixed. Up from Trieste (~1h45) to Vila Klif at Krvavec — the house is 45 min from Bled, so the lake is a day trip, not the doorstep." },
-        { img: "scene-straza.jpg", title: "Straža toboggan", desc: "Lake option. Chairlift up, toboggan down the 520 m track, €14. Weekend-only in Sept and shuts at 18:00 — the only thing all day with a cut-off." },
-        { img: "scene-bledcastle.jpg", title: "Bled Castle", desc: "Lake option. Clifftop walls, courtyard and wine cellar, €19pp. Best late afternoon, then straight on to the viewpoint." },
-        { img: "scene-ojstrica.jpg", title: "Ojstrica viewpoint", desc: "Lake option. Short steep hike (~20 min from Velika Zaka) to the classic postcard view — the sunset finale." },
-        { img: "scene-bledisland.jpg", title: "Row to Bled Island", desc: "Lake option. Pletna or self-row to the island church + the 99 steps to the wishing bell. Allow ~1h30 all in." },
-        { img: "scene-vintgar.jpg", title: "Vintgar Gorge (optional)", desc: "Not in the group plan any more. Solo add-on only — €15pp, timed ticket, book your own at tickets.vintgar.si." },
-        { img: "scene-kremsnita.jpg", title: "Kremšnita", desc: "Always on. The lakeside cream-cake ritual — 20 minutes, fits anywhere. Touristy, non-negotiable." }
+        { img: "scene-drive.jpg", title: "Straight to Bled", desc: "Monfalcone → Bled, ~1h50. The house is locked till 15:00, so the lake comes first — both cars into P03 for the day, bags in the boots." },
+        { img: "scene-straza.jpg", title: "Straža toboggan — first", desc: "Opens 11:00, weekend-only in Sept, shuts 18:00 — the one thing today with a cut-off, so do it before the queues. Chairlift up, toboggan down, €14." },
+        { img: "scene-kremsnita.jpg", title: "Lunch + kremšnita", desc: "Lunch by the water, then the lakeside cream-cake ritual. Touristy, non-negotiable." },
+        { img: "scene-bledisland.jpg", title: "Row to Bled Island", desc: "Pletna or self-row to the island church + the 99 steps to the wishing bell. Allow ~1h30 all in." },
+        { img: "scene-bledcastle.jpg", title: "Bled Castle", desc: "Walk up from the lake (15–20 min) for the late-afternoon light. Clifftop walls, courtyard and wine cellar, €19pp." },
+        { img: "scene-ojstrica.jpg", title: "Ojstrica — the sunset swap", desc: "Instead of the castle, if the group wants the sunset (19:21). Means a dark drive to the house — shop in Bled first if you pick this." },
+        { img: "scene-stay.jpg", title: "Food shop + check in", desc: "Mercator Cerklje on the way (open till 21:00, shut Sunday) — buy Saturday dinner through Monday breakfast. Into the house ~18:45, in daylight." },
+        { img: "scene-vintgar.jpg", title: "Vintgar Gorge (optional)", desc: "Not in the group plan any more. Solo add-on only — €15pp, timed ticket, book your own at tickets.vintgar.si." }
       ],
       d13: [
         { img: "scene-jasna.jpg", title: "Vršič Pass", desc: "50 hairpins over the Julian Alps. Full tank first — and the summit car park is barrier-controlled now, 80 spaces." },
