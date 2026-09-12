@@ -1364,8 +1364,10 @@
       { id: "savica", emoji: "💦", title: "Savica Waterfall", city: "Bohinj", img: "scene-savica.jpg", region: "bohinj", day: 4, slot: "Afternoon", weather: "cloudy", desc: "Short waterfall hike — the easy, low-cloud backup for the Vogel day." },
       { id: "bledIsland", emoji: "🚣", title: "Row to Bled Island", city: "Bled", img: "scene-bledisland.jpg", region: "bled", day: 5, slot: "Morning", desc: "Pletna boat or row to the island church, 99 steps and the wishing bell — a good slow last morning." },
       { id: "kremsnita", emoji: "🍰", title: "Bled cream cake (kremšnita)", city: "Bled", img: "scene-kremsnita.jpg", region: "bled", day: 5, slot: "Anytime", desc: "The lakeside ritual. Touristy, non-negotiable." },
-      { id: "soca", emoji: "🚣", title: "Soča Valley (rafting)", city: "Soča", img: "scene-soca.jpg", region: "soca", day: 4, slot: "Midday", desc: "Turquoise river, rafting and mountain roads near Bovec — this is the Monday big-alpine-day option (Vršič pass + the Soča)." },
-      { id: "velikaKorita", emoji: "🏊", title: "Great Soča Gorge swim (Velika korita)", city: "Bovec / Soča", img: "scene-velikakorita.jpg", region: "soca", day: 4, slot: "Afternoon", desc: "The Great Gorge of the Soča — electric-turquoise pools in a narrow limestone canyon near Bovec, with flat rocks to leap from. The swim spot on the Soča day. Water's properly cold — bring a towel and nerve." },
+      { id: "soca", emoji: "🚗", title: "Vršič Pass + Soča valley", city: "Soča", img: "scene-soca.jpg", region: "soca", day: 4, slot: "All day", desc: "The Sunday drive: 50 hairpins to 1,611 m, then down the Trenta valley beside the river. No rafting booked, this is the scenic day." },
+      { id: "velikaKorita", emoji: "🌊", title: "Great Soča Gorge (Velika korita)", city: "Bovec / Soča", img: "scene-velikakorita.jpg", region: "soca", day: 4, slot: "Midday", desc: "Turquoise pools in a narrow limestone canyon. Walk the rim from the bridge, 30 min, flat. Swimming and jumping inside the protected section is forbidden and the water is under 10°C." },
+      { id: "brjeka", emoji: "🧺", title: "Brv Brjeka picnic", city: "Čezsoča", img: "scene-soca.jpg", region: "soca", day: 4, slot: "Lunch", desc: "Suspension footbridge over the Soča with small beaches on both banks. No road access, park across the river and walk in. The two hour lunch stop on the Soča day." },
+      { id: "virje", emoji: "🌊", title: "Virje waterfall", city: "Plužna / Bovec", img: "soca-gorge.jpg", region: "soca", day: 4, slot: "Afternoon", desc: "Above Bovec. Five to ten minutes downhill on gravel to a 20 m wide fall over mossy rock into an emerald pool, fed by a 7°C karst spring. Paid parking, card or EasyPark." },
       { id: "piran", emoji: "🌅", title: "Piran", city: "Coast", img: "scene-piran.jpg", region: "bench", day: 0, slot: "Add-on", desc: "Venetian lanes, seafood and Adriatic sunset if the trip tilts coastal." },
       { id: "jasna", emoji: "📸", title: "Lake Jasna (Kranjska Gora)", city: "Kranjska Gora", img: "scene-jasna.jpg", region: "bench", day: 0, slot: "Add-on", desc: "Photogenic alpine lake near the Vršič pass — a clear-weather scenic stop." },
       { id: "vipava", emoji: "🍇", title: "Vipava wine valley", city: "Vipava", img: "scene-vipava.jpg", region: "bench", day: 0, slot: "Add-on", desc: "Wine, villages and slower food stops if the group wants less lake time." }
@@ -1375,13 +1377,13 @@
     // Used to badge each card "In the itinerary" vs "Not in the itinerary".
     const ITINERARY_IDEA_IDS = new Set([
       "vintgar", "ojstrica", "bledCastle", "bledIsland", "kremsnita",  // Sat — Bled day
-      "soca", "velikaKorita", "jasna",                                  // Sun — Vršič & Soča (jasna is a drive stop)
+      "soca", "velikaKorita", "jasna", "brjeka", "virje",                                  // Sun — Vršič & Soča (jasna is a drive stop)
       "postojnaPredjama",                                               // Mon — caves
       "ljubljanaOldTown"                                                // Tue — Ljubljana
     ]);
 
     // Photo per idea by id — fallback for ideas saved in synced state without an img field.
-    const IDEA_IMG = { ljubljanaOldTown: "scene-ljubljana.jpg", postojnaPredjama: "scene-predjama.jpg", skocjan: "scene-skocjan.jpg", velikaPlanina: "scene-velika.jpg", bledCastle: "scene-bledcastle.jpg", vintgar: "scene-vintgar.jpg", bohinj: "scene-bohinj.jpg", vogel: "scene-vogel.jpg", savica: "scene-savica.jpg", bledIsland: "scene-bledisland.jpg", soca: "scene-soca.jpg", ojstrica: "scene-ojstrica.jpg", kremsnita: "scene-kremsnita.jpg", velikaKorita: "scene-velikakorita.jpg", piran: "scene-piran.jpg", jasna: "scene-jasna.jpg", vipava: "scene-vipava.jpg" };
+    const IDEA_IMG = { ljubljanaOldTown: "scene-ljubljana.jpg", postojnaPredjama: "scene-predjama.jpg", skocjan: "scene-skocjan.jpg", velikaPlanina: "scene-velika.jpg", bledCastle: "scene-bledcastle.jpg", vintgar: "scene-vintgar.jpg", bohinj: "scene-bohinj.jpg", vogel: "scene-vogel.jpg", savica: "scene-savica.jpg", bledIsland: "scene-bledisland.jpg", soca: "scene-soca.jpg", ojstrica: "scene-ojstrica.jpg", kremsnita: "scene-kremsnita.jpg", velikaKorita: "scene-velikakorita.jpg", piran: "scene-piran.jpg", jasna: "scene-jasna.jpg", brjeka: "scene-soca.jpg", virje: "soca-gorge.jpg", vipava: "scene-vipava.jpg" };
 
     // The Bookies — fun pari-mutuel betting with virtual chips + real trip perks.
     const defaultBookie = {
@@ -1432,7 +1434,7 @@
     const TRIP_DAYS = [
       { id: "d11", iso: "2026-09-11", date: "Fri 11 Sep", city: "Land Trieste — stay local", stay: "Trieste", logistics: true, note: "Land Trieste ~23:00 (FR168). Too late to drive anywhere — grab the cars and crash at a bed by Trieste / the airport. No plans tonight." },
       { id: "d12", iso: "2026-09-12", date: "Sat 12 Sep", city: "Drive up → Bled lake day", stay: "Krvavec house", note: "Straight from Monfalcone to Bled (~1h50) — the house doesn't open till 15:00, so the lake comes first with the bags in the boots. Toboggan, lunch + kremšnita, the island, the castle. Leave Bled ~17:15, big food shop at Mercator Cerklje on the way (shops are shut Sunday), and into the house by ~18:45 in daylight." },
-      { id: "d13", iso: "2026-09-13", date: "Sun 13 Sep", city: "Vršič & Soča alpine day", stay: "Krvavec house", note: "The big one, and all nine are still together. Over Vršič, then down the Soča: the walk to the river's source, lunch in Bovec, Virje waterfall, and Velika korita on the way back. Forecast is dry but foggy up top — none of the valley stops need a view. If the summit is clear, swap Bovec for the Slemenova špica hike. ~5h of driving; home ~18:30." },
+      { id: "d13", iso: "2026-09-13", date: "Sun 13 Sep", city: "Vršič & Soča alpine day", stay: "Krvavec house", note: "The big one, and all nine are still together. Four stops and one long lunch: Lake Jasna, the Vršič summit, the Velika korita gorge rim, then a two hour picnic by the river and Virje waterfall. Hiking and swimming are both out, so this is a scenic drive with a proper sit down in the middle. Food must be bought Saturday, every shop is shut Sunday. ~4h45 of driving; leave 09:00, home ~19:15." },
       { id: "d14", iso: "2026-09-14", date: "Mon 14 Sep", city: "Caves → the split", stay: "Ljubljana (5)", note: "Check out of the Krvavec house (2 nights done) and head south — the 11:00 cave at Postojna is booked, and it's the last thing all nine do together. We split in the cave car park straight afterwards.", split: { g1: "Jason X, Sarah, Jason V, Katrina & Steph T take in Predjama from the outside, then on to Ljubljana. Fly out Tue.", g2: "Hao, Heidi, Phi & Steph go straight from the cave to Trieste airport (~1h) for the 16:55." } },
       { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Ljubljana → fly home", stay: null, logistics: true, group: "g1", note: "Last day for the 5 who stayed. Slow morning in Ljubljana — old town, Triple Bridge, market, castle, lunch — then away by ~18:30 for Trieste. FR169 departs 22:15 and lands Stansted 23:25." }
     ];
@@ -1584,76 +1586,79 @@
         ]
       },
       d13: {
-        accom: { name: "Vila Klif — group chalet", meta: "night 2 of 2", note: "Same base at Krvavec. Vršič is ~1h+ each way." },
+        accom: { name: "Vila Klif, group chalet", meta: "night 2 of 2", note: "Same base at Krvavec. The Soča valley is a long round trip, roughly 2h15 each way." },
         drive: [
-          { leg: "House → Kranjska Gora (foot of the pass)", time: "~1h", note: "Leave 08:45 · fill the tank here — no fuel on the pass" },
-          { leg: "Over Vršič → Soča source (hairpin 49)", time: "~45 min", note: "50 hairpins, low gear · summit car park is barrier-controlled since 1 Sep — 80 spaces, free, in only if there's room" },
-          { leg: "Soča source → Bovec", time: "~35 min", note: "Down the Trenta valley alongside the river" },
-          { leg: "Bovec → Virje waterfall (Plužna)", time: "~5 min", note: "Small car park ~€4/hr, then a flat 10-min walk" },
-          { leg: "Bovec → Velika korita", time: "~15 min", note: "On the way BACK · car park ~€3/hr, rammed 11:00–15:00 so later is easier" },
-          { leg: "Velika korita → back over Vršič → house", time: "~2h15", note: "Away by ~16:15 → home ~18:30, well before the 19:19 sunset" }
+          { leg: "House to Kranjska Gora", time: "~1h10", note: "Leave 09:00 · fill the tank here, no fuel on the pass or in Trenta" },
+          { leg: "Kranjska Gora to Vršič summit", time: "~35 min", note: "24 hairpins, low gear · summit car park is barrier controlled since 1 Sep, 80 spaces, free, in only if there is room" },
+          { leg: "Summit down to Velika korita", time: "~1h05", note: "26 hairpins into Trenta, then down the valley beside the river" },
+          { leg: "Velika korita to the picnic spot", time: "~20 min", note: "Brv Brjeka near Čezsoča, or stay at the Lepena confluence beach if it looks better on the day" },
+          { leg: "Picnic to Virje (Plužna)", time: "~15 min", note: "Last stretch into Plužna is one car wide and two way, go slowly" },
+          { leg: "Virje, back over Vršič, house", time: "~2h15", note: "Away by 17:00 to be home ~19:15, just before sunset at 19:19" }
         ],
         guide: [
           {
-            icon: "⛰️", title: "Driving the Vršič Pass",
+            icon: "\uD83D\uDDD3\uFE0F", title: "Sunday, in order",
             lines: [
-              "50 numbered hairpins (24 up, 26 down), some cobbled. Open May–late Oct, so mid-Sept is fine.",
-              "NEW since 1 Sep: the summit car park is down to 80 spaces behind a barrier — you only get in if there's room. Free until the end of 2026. Two cars need two spaces, so don't bank on both stopping at the top on a busy Sunday.",
-              "Stops on the way: Lake Jasna, the Russian Chapel, the summit, the Soča source.",
-              "No petrol on the pass — fuel up in Kranjska Gora or Bovec."
+              "09:00 leave the house · 10:15 Kranjska Gora and Lake Jasna, 20 min, fuel · 11:05 Vršič summit, 35 min.",
+              "12:40 Velika korita, walk the gorge rim first while everyone is hungry.",
+              "13:15 picnic, and this is the point of the day. Two full hours by the water, until 15:15.",
+              "15:45 Virje waterfall · 17:00 leave the valley · ~19:15 home. Sunset 19:19."
             ]
           },
           {
-            icon: "🗓️", title: "Sunday, in order (the fog plan)",
+            icon: "\uD83E\uDDFA", title: "The picnic, two hours",
             lines: [
-              "08:45 leave the house · ~09:45 Kranjska Gora, fill up · ~10:30 Vršič summit — quick stop, barrier permitting.",
-              "~11:00 Source of the Soča walk · ~12:50 Bovec for lunch · ~14:15 Virje waterfall.",
-              "~15:20 Velika korita on the way BACK — its car park is packed 11:00–15:00, and we drive past it again anyway. Then over the pass, home ~18:30. Sunset is 19:19.",
-              "Clear at the summit? Swap to Slemenova špica instead — see below."
+              "Brv Brjeka is the pick: a suspension footbridge over the Soča just outside Čezsoča, on the Soča Trail, with small beaches on both banks. You cannot drive to it, park across the river and walk in, which is why it stays quiet. The descent to the beach is rough underfoot.",
+              "The Lepena confluence beach beside Velika korita is the fallback: less pretty, more room for nine, and you are already there.",
+              "Look at both and decide on the day. Brjeka is prettier, Lepena is easier.",
+              "Bring blankets or towels, river stones are hard. Carry everything out, this is inside Triglav National Park."
             ]
           },
           {
-            icon: "🏔️", title: "Slemenova špica — only if it's clear at the top", link: "https://www.google.com/maps/search/?api=1&query=Slemenova+%C5%A1pica", linkLabel: "Map ↗",
+            icon: "\u26F0\uFE0F", title: "Driving the Vršič Pass",
             lines: [
-              "The best short hike off Vršič: 5.7 km return, ~550 m of climbing, 3–4 h, easy-moderate. Starts from the summit car park. Steepest (and dullest) bit is the first climb through the spruce.",
-              "The whole point is the view — a wall of peaks, and Italy and Austria on a clear day. Sunday's forecast is fog up high, so decide at the summit, not tonight.",
-              "If you go, it replaces Bovec and Virje: summit ~10:30–14:00, then the Soča source and Velika korita on the way down, home ~19:00. Needs a summit parking space."
+              "50 numbered hairpins, some cobbled. Open May to late Oct, so mid September is fine.",
+              "The summit car park has been barrier controlled since 1 Sep, down to 80 spaces, free until the end of 2026. You only get in if there is room, and two cars need two spaces, so do not bank on both stopping at the top on a Sunday.",
+              "No fuel anywhere on the pass. Fill up in Kranjska Gora.",
+              "The Russian Chapel is at bend 8 with a small pull in. Not in the plan, but you drive past it, so it is a 10 minute stop if anyone changes their mind."
             ]
           },
           {
-            icon: "💧", title: "Source of the Soča", link: "https://www.google.com/maps/search/?api=1&query=Ko%C4%8Da+pri+izviru+So%C4%8De", linkLabel: "Map ↗",
+            icon: "\uD83D\uDCA6", title: "Velika korita (Great Soča Gorge)", link: "https://www.google.com/maps/search/?api=1&query=Velika+korita+So%C4%8De+parkiri%C5%A1%C4%8De", linkLabel: "Map \u2197",
             lines: [
-              "Where the river starts: a spring welling out of a cave in the rock face. Near the bottom of the Trenta side, turn off at hairpin 49 and drive ~1.3 km up to the Koča pri izviru Soče hut.",
-              "Small car park at the hut, plus ~20 overflow spaces on the approach road. Price not confirmed — have a card or coins.",
-              "~1 km up, ~100 m of climbing, 1–1.5 h return. The last stretch is steep with a steel-cable handrail and slippery when wet — proper grip, not flip-flops.",
-              "Fog-proof: it's a spring in a gorge, there's no view to lose. The hut does food and drinks (May–Oct)."
+              "Deep emerald canyon where the river is squeezed into a channel a few metres wide, about 750 m long. Car park by the road, roughly 3 euro an hour, packed 11:00 to 15:00.",
+              "Walk the rim from the bridge, 30 min. That is the whole stop.",
+              "Swimming and jumping inside the protected section is forbidden. The water sits below 10°C with a strong current in a narrow channel, so this is not a rule worth testing."
             ]
           },
           {
-            icon: "🌊", title: "Virje waterfall", link: "https://www.google.com/maps/search/?api=1&query=Slap+Virje+Plu%C5%BEna", linkLabel: "Map ↗",
+            icon: "\uD83C\uDF0A", title: "Virje waterfall", link: "https://www.google.com/maps/search/?api=1&query=Slap+Virje+Plu%C5%BEna", linkLabel: "Map \u2197",
             lines: [
-              "Just above Bovec in Plužna, ~5 min drive. Small car park ~€4/hr, then a flat 10-minute walk.",
-              "A wide curtain of water dropping into a clear emerald pool — the photo of the day, and it doesn't care about fog.",
-              "Want bigger? Boka waterfall, ~5 km south of Bovec on the Žaga road, is Slovenia's mightiest at 144 m. Roadside car park for ~20–25 cars by the bridge; 15 min steep-ish up to the first viewpoint. The higher viewpoints are 45–60 min over loose, cable-assisted rock — skip if it's wet."
+              "About 5 km above Bovec via Plužna, then five to ten minutes downhill on gravel. Roughly 20 m wide, splitting into strands over mossy rock into an emerald pool.",
+              "Fed by the Gljun, a karst spring off the Kanin range that surfaces at about 7°C. September means less volume than spring but the pool colour holds.",
+              "Parking: sources differ, either 5 euro for two hours or about 4 euro an hour. Carry a card and coins, EasyPark also works. Motorhomes and buses are not allowed.",
+              "Sources also disagree on whether you can get in the pool. Read the sign on the day."
             ]
           },
           {
-            icon: "💦", title: "Velika korita (Great Soča Gorge)", link: "https://www.google.com/maps/search/?api=1&query=Velika+korita+So%C4%8De+parkiri%C5%A1%C4%8De", linkLabel: "Map ↗",
+            icon: "\u2702\uFE0F", title: "What we cut, and why",
             lines: [
-              "Deep emerald canyon on the Soča. Parkirišče Velika korita Soče by the road, ~€3/hr; packed 11:00–15:00, which is why it's our last stop. ~5–10 min walk to the suspension bridge.",
-              "Not swimming? Still worth it — walk the gorge rim from the bridge, 20–30 min. The Soča Trail runs right past if you want longer.",
-              "If anyone does swim: it's 10–12°C and fast. Water shoes, calm pools only."
+              "Slemenova špica and the Soča source: both need real climbing, and the source path ends on a steep cable railed section. The group ruled out hiking.",
+              "Boka waterfall: flow drops to as little as 2 cubic metres a second at the end of summer against 100 in spring, and the viewpoint is a 15 to 20 minute uphill walk, not the roadside glance it looks like.",
+              "Kozjak: the best waterfall in the valley, but it is at Kobarid, 30 min further south, with a 3.5 km walk and 5 euro a head entry. Roughly three extra hours, the night before a 10:00 checkout.",
+              "Kluže fort and the Kanin cable car: both good, both eat the picnic.",
+              "Lunch in Bovec: we are carrying food instead. You drive through Bovec to reach Virje, so grab 20 minutes there if the day is running well."
             ]
           },
           {
-            icon: "🌦️", title: "If Vršič is socked in (Plan B)",
+            icon: "\uD83C\uDF26\uFE0F", title: "If Vršič is socked in (Plan B)",
             lines: [
-              "The Krvavec cable car is right by the house; Velika Planina's shepherd huts (near Kamnik) are also close.",
-              "Or a slow Bled day: the flat lakeside loop (~6 km) + the castle."
+              "The Krvavec cable car is right by the house, and Velika Planina shepherd huts near Kamnik are close.",
+              "Or a slow Bled day: the flat lakeside loop, about 6 km, plus the castle."
             ]
           }
         ],
-        book: ["Full tank in Kranjska Gora before the pass", "Grippy shoes — the Soča source path ends on a cable-railed, slippery section", "Card/coins for parking: Velika korita ~€3/hr, Virje ~€4/hr, Soča source (price unconfirmed)", "Swim kit + towel + water shoes only if anyone's actually swimming", "At the summit: clear → Slemenova; fog → the valley plan"]
+        book: ["Buy Sunday food and water in Kranj on SATURDAY before 21:00, every shop in Slovenia is shut Sunday including both Bovec supermarkets", "Full tank in Kranjska Gora before the pass", "Blankets or towels for the picnic, river stones are hard", "Card and coins for parking: Velika korita ~3 euro/hr, Virje 4 to 5 euro", "Warm layer for the summit, roughly 10 degrees colder than the valley", "Carry all rubbish out, Triglav National Park", "Away from Virje by 17:00 to clear the hairpins before dark"]
       },
       d14: {
         accom: {
@@ -1767,11 +1772,11 @@
         { img: "scene-vintgar.jpg", title: "Vintgar Gorge (optional)", desc: "Not in the group plan any more. Solo add-on only — €15pp, timed ticket, book your own at tickets.vintgar.si." }
       ],
       d13: [
-        { img: "scene-jasna.jpg", title: "Vršič Pass", desc: "50 hairpins over the Julian Alps. Full tank first — and the summit car park is barrier-controlled now, 80 spaces." },
-        { img: "triglav.jpg", title: "Slemenova špica — clear days only", desc: "The best short hike off the pass: 3–4 h, ~550 m up. Only if the summit's clear — it replaces Bovec." },
-        { img: "soca-gorge.jpg", title: "Source of the Soča", desc: "Where the river starts, welling out of a cave. 1–1.5 h return from the hut, cable handrail at the end. Fog-proof." },
-        { img: "scene-soca.jpg", title: "Bovec + Virje waterfall", desc: "Lunch in Bovec, then a flat 10-minute walk to Virje's emerald pool. ~€4/hr parking in Plužna." },
-        { img: "scene-velikakorita.jpg", title: "Velika korita", desc: "The Great Soča Gorge on the way back, after the lunchtime rush. Walk the rim from the bridge — swimming optional, water's 10–12°C." }
+        { img: "scene-jasna.jpg", title: "Lake Jasna, and fill the tank", desc: "First stop out of Kranjska Gora at the foot of the pass. Two green lakes, a jetty and the Zlatorog statue. Fuel up here, there is none until Bovec." },
+        { img: "scene-drive.jpg", title: "Over the Vršič Pass", desc: "50 hairpins to 1,611 m, 24 up and 26 down, some cobbled. Summit stop for the view. Roughly 10 degrees colder than the valley, so take a jacket." },
+        { img: "scene-velikakorita.jpg", title: "Velika korita, gorge rim", desc: "The Great Soča Gorge. Walk the rim from the bridge, 30 min. Swimming inside the protected section is forbidden and the water is under 10°C." },
+        { img: "scene-soca.jpg", title: "Long picnic by the river", desc: "The centre of the day, two hours. Brv Brjeka suspension bridge near Čezsoča, or the stone beach at the Lepena confluence by the gorge. Pack a blanket." },
+        { img: "soca-gorge.jpg", title: "Virje waterfall", desc: "Above Bovec at Plužna. Five to ten minutes downhill on gravel to a wide emerald pool fed by a 7°C karst spring. Parking is paid, card or EasyPark." }
       ],
       d14: [
         { img: "scene-stay.jpg", title: "Check out of the house", desc: "Pack up and leave Krvavec by 10:00 — 2 nights done, all nine head south." },
@@ -1792,9 +1797,9 @@
 
     const DAY_SCENE = {
       d11: "scene-trieste.jpg",
-      d12: "scene-predjama.jpg",
-      d13: "scene-bledisland.jpg",
-      d14: "scene-soca.jpg",
+      d12: "scene-bledcastle.jpg",
+      d13: "scene-soca.jpg",
+      d14: "scene-postojna.jpg",
       d15: "scene-ljubljana.jpg"
     };
 
