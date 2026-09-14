@@ -1224,7 +1224,7 @@
               <h4>💶 Cash — about €70pp</h4>
               <p class="pc-why">Several of the good bits are cash-only, and the machines up the mountain aren't.</p>
               <label class="pack-item"><input type="checkbox" data-pack="cash_pletna"><span>Pletna boat ~€20 + island church €12 — <strong>cash only</strong></span></label>
-              <label class="pack-item"><input type="checkbox" data-pack="cash_straza"><span>Straža toboggan €14</span></label>
+              <label class="pack-item"><input type="checkbox" data-pack="cash_straza"><span>Straža toboggan €15 a ride</span></label>
               <label class="pack-item"><input type="checkbox" data-pack="cash_parking"><span>Coins for parking machines — incl. Predjama ~€3/hr</span></label>
             </div>
 
@@ -1436,7 +1436,7 @@
       { id: "d12", iso: "2026-09-12", date: "Sat 12 Sep", city: "Drive up → Bled lake day", stay: "Krvavec house", note: "Straight from Monfalcone to Bled (~1h50) — the house doesn't open till 15:00, so the lake comes first with the bags in the boots. Toboggan, lunch + kremšnita, the island, the castle. Leave Bled ~17:15, big food shop at Mercator Cerklje on the way (shops are shut Sunday), and into the house by ~18:45 in daylight." },
       { id: "d13", iso: "2026-09-13", date: "Sun 13 Sep", city: "Vršič & Soča alpine day", stay: "Krvavec house", note: "The big one, and all nine are still together. Four stops and one long lunch: Lake Jasna, the Vršič summit, the Velika korita gorge rim, then a two hour picnic by the river and Virje waterfall. Hiking and swimming are both out, so this is a scenic drive with a proper sit down in the middle. Food must be bought Saturday, every shop is shut Sunday. ~4h45 of driving; leave 09:00, home ~19:15." },
       { id: "d14", iso: "2026-09-14", date: "Mon 14 Sep", city: "Caves → the split", stay: "Ljubljana (5)", note: "Check out of the Krvavec house (2 nights done) and head south — the 11:00 cave at Postojna is booked, and it's the last thing all nine do together. We split in the cave car park straight afterwards. The 5 went straight on to Ljubljana after the caves — the gorge moved to Tuesday morning.", split: { g1: "Jason X, Sarah, Jason V, Katrina & Steph T take in Predjama from the outside, then on to Ljubljana. Fly out Tue.", g2: "Hao, Heidi, Phi & Steph go straight from the cave to Trieste airport (~1h) for the 16:55." } },
-      { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Bled + Vintgar → fly home", stay: null, logistics: true, group: "g1", note: "Last day for the 5, and the best weather of the trip — 0% rain all day. Bled by 09:00: row around the lake for about an hour (no island), then the Straža toboggan as it opens at 11:00, lunch, and Vintgar Gorge BOOKED for 15:00. The gorge is one-way with a 4.1 km walk back to the shuttle, so you're back at the car ~17:15, then the ~2h20 run to Trieste. FR169 departs 22:15 and lands Stansted 23:25." }
+      { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Bled + Vintgar → fly home", stay: null, logistics: true, group: "g1", note: "Last day for the 5, and the best weather of the trip — 0% rain all day. Park at Straža by ~08:50 and leave the car there all day. Walk ~20 min along the lake to Pletna at Mlino, row for about an hour (no island), walk back for the Straža toboggan as it opens at 11:00, lunch, then drive to Vintgar Gorge, BOOKED for 15:00. The gorge is one-way with a 4.1 km walk back to the shuttle, so you're back at the car ~17:15, then the ~2h20 run to Trieste. FR169 departs 22:15 and lands Stansted 23:25." }
     ];
 
     // The trip forks on Monday: 3 fly home from Trieste that night (Group 2);
@@ -1563,7 +1563,7 @@
           {
             icon: "🛷", title: "Straža summer toboggan",
             lines: [
-              "€14 adult — includes the chairlift up + 3 toboggan rides down the 520 m track.",
+              "€15 adult for one ride (€25 for two, €35 for three), chairlift up included, 520 m track.",
               "Open every day in September, 11:00–18:00. Won't run in rain, high humidity or under 10°C."
             ]
           },
@@ -1729,8 +1729,10 @@
       d15: {
         accom: null,
         drive: [
-          { leg: "Ljubljana → Bled", time: "~50 min", note: "Leave Vila Emona by 08:00 with the bags — you're not coming back. Morning ring-road traffic out of Ljubljana, so don't cut it fine for 09:00 · P03 is €2.50/hr with no time limit, and the boats and the toboggan are both walkable from it", maps: "https://www.google.com/maps/search/?api=1&query=Centralno+parkiri%C5%A1%C4%8De+Bled", mapsLabel: "P03 Centralno parkirišče ↗", backup: "P14/P15 by the school — same €2.50/hr, no limit, ~200 spaces, 12 min walk to the lake", backupMaps: "https://www.google.com/maps/search/?api=1&query=Parkiri%C5%A1%C4%8De+Osnovna+%C5%A1ola+Bled" },
-          { leg: "Bled → Vintgar Gorge (LIP hub)", time: "~10 min", note: "Leave P03 by 14:15 and be at the hub by ~14:35. Hours are 08:00–16:00, so 15:00 is effectively the last slot — no room to be late getting in · the hub is free, shuttle every 7 min to the Visitor Centre, included in the ticket", maps: "https://www.google.com/maps/search/?api=1&query=Centralno+parkiri%C5%A1%C4%8De+Vintgar+LIP", mapsLabel: "Central VINTGAR LIP (P1) ↗", backup: "Don't park in Podhom village, it's signed against it. The hub can be busy mid-afternoon — one more reason to be there by 14:35", backupMaps: "https://www.google.com/maps/search/?api=1&query=Podhom+Bled" },
+          { leg: "Ljubljana → Straža, Bled", time: "~50 min", note: "Leave Vila Emona by 08:00 with the bags — you're not coming back. Morning ring-road traffic out of Ljubljana · park at the Straža car park by the toboggan base station and leave the car there all day. It's for Straža visitors and the fee isn't published, so read the sign when you arrive", maps: "https://www.google.com/maps/search/?api=1&query=Pod+Stra%C5%BEo+3%2C+4260+Bled", mapsLabel: "Straža car park (Pod Stražo 3) ↗", backup: "If it's full or short-stay only: P11 Infrastruktura Bled or P12 Seliše — both €2.50/hr, no time limit", backupMaps: "https://www.google.com/maps/search/?api=1&query=Infrastruktura+Bled+parkiri%C5%A1%C4%8De" },
+          { leg: "Walk: Straža → Pletna boats (Mlino)", time: "~20 min", note: "1.5 km along the lake path to Pension Pletna, Cesta svobode 37. Their opening time isn't published — ring +386 41 393 899 at 08:00 to confirm 09:00" },
+          { leg: "Walk back: Pletna → Straža", time: "~20 min", note: "Back to the base station for the 11:00 toboggan — the car's already there" },
+          { leg: "Straža → Vintgar Gorge (LIP hub)", time: "~10–15 min", note: "Drive off from Straža at 14:15 and be at the hub by ~14:35. Hours are 08:00–16:00, so 15:00 is effectively the last slot — no room to be late getting in · the hub is free, shuttle every 7 min to the Visitor Centre, included in the ticket", maps: "https://www.google.com/maps/search/?api=1&query=Centralno+parkiri%C5%A1%C4%8De+Vintgar+LIP", mapsLabel: "Central VINTGAR LIP (P1) ↗", backup: "Don't park in Podhom village, it's signed against it. The hub can be busy mid-afternoon — one more reason to be there by 14:35", backupMaps: "https://www.google.com/maps/search/?api=1&query=Podhom+Bled" },
           { leg: "Vintgar → Trieste airport", time: "~2h20", note: "Away from the hub by ~17:15 → airport ~19:35, ~2h before the gate shuts at 21:45. If the walk back runs long you're still in by ~20:35 — but the last return shuttle is ~18:00, so keep moving on the return trail", maps: "https://www.google.com/maps/search/?api=1&query=Trieste+Airport+car+rental+return", mapsLabel: "Rental return, Trieste airport ↗", backup: "Fill up before you reach the airport — the nearest pumps to TRS are in Ronchi dei Legionari, not at the terminal", backupMaps: "https://www.google.com/maps/search/?api=1&query=petrol+station+Ronchi+dei+Legionari" },
           { leg: "Return the last hire car", time: "", note: "Full tank — confirm the drop-off is staffed for a 22:15 flight" },
           { leg: "Fly home — FR169", time: "dep 22:15", note: "Trieste 22:15 → London Stansted 23:25 (UK time) · gate closes 21:45 · booking ref is in the Ryanair app" }
@@ -1739,26 +1741,26 @@
           {
             icon: "🗓️", title: "Tuesday, in order",
             lines: [
-              "08:00 out of Vila Emona with the bags · ~08:50 park at P03 in Bled.",
-              "09:00 row around the lake for about an hour, no island · ~10:30 coffee or kremšnita by the water.",
-              "11:00 Straža toboggan as it opens, before the queues · ~12:15 lunch in Bled.",
-              "14:15 leave P03 · ~14:35 Vintgar hub, shuttle to the entrance · 15:00 into the gorge (booked) · ~15:45 Šum waterfall, then walk back 4.1 km · ~17:00 shuttle from the Visitor Centre · ~17:15 away, Trieste ~19:35. Gate closes 21:45."
+              "08:00 out of Vila Emona with the bags · ~08:50 park at Straža (Pod Stražo 3) and leave the car there all day.",
+              "~08:55 walk the lake path to Pletna at Mlino (~20 min) · ~09:15 row for about an hour, no island · ~10:15 walk back (~20 min), with coffee or kremšnita on the way.",
+              "11:00 Straža toboggan as it opens, before the queues — the car's right there · ~12:15 lunch in Bled.",
+              "14:15 drive off from Straža · ~14:35 Vintgar hub, shuttle to the entrance · 15:00 into the gorge (booked) · ~15:45 Šum waterfall, then walk back 4.1 km · ~17:00 shuttle from the Visitor Centre · ~17:15 away, Trieste ~19:35. Gate closes 21:45."
             ]
           },
           {
-            icon: "🚣", title: "Bled: row around the lake (no island)",
+            icon: "🚣", title: "Bled: row from Pletna (no island)", link: "https://www.google.com/maps/search/?api=1&query=Pension+Pletna+Cesta+svobode+37+Bled", linkLabel: "Pletna on the map ↗",
             lines: [
-              "Self-row for about an hour. No island means no pletna, no church ticket and no 99 steps to budget for.",
-              "One 5-seater boat takes all five of you — roughly €17–25 for the hour, depending on the dock.",
-              "Opening times vary by dock: the castle (Grajska) boathouse opens at 10:00, some others from 09:00. If the first one you reach is still shut, walk on, or start at 10:00 — the toboggan at 11:00 still fits.",
-              "Bring some cash in case the dock you pick doesn't take cards."
+              "Pension Pletna boat hire at Mlino, Cesta svobode 37 — about 20 min on foot from the Straža car park along the lake. No island, so no pletna, church ticket or 99 steps to budget for.",
+              "One 5-seater takes all five of you, about €17 for the hour. Their site mentions an additional hour free of charge — worth asking.",
+              "Their opening time isn't published. Ring +386 41 393 899 at 08:00, or email info@pletna.com tonight, to confirm 09:00. If they're not open yet, the castle (Grajska) boathouse definitely opens at 10:00 — the toboggan at 11:00 still fits.",
+              "Bring some cash in case they don't take cards, and set a 55-minute timer — operators here charge a second hour if you go over."
             ]
           },
           {
             icon: "🛷", title: "Straža toboggan — opens 11:00",
             lines: [
               "Open every day from 31 Aug to 4 Oct, 11:00–18:00, so a Tuesday is fine.",
-              "Chairlift up, toboggan down the 520 m track, €14. A few minutes' walk from the lake and P03.",
+              "Chairlift up, toboggan down the 520 m track: €15 for one ride, €25 for two, €35 for three. The Straža car park is right at the base station.",
               "It doesn't run in rain, high humidity or under 10°C. Tuesday is 0% rain and ~18–21°C by late morning, so it should be running. Be there at 11:00, before the queues build."
             ]
           },
@@ -1766,14 +1768,14 @@
             icon: "🌊", title: "Vintgar Gorge — booked, 15:00", link: "https://tickets.vintgar.si", linkLabel: "Your tickets ↗",
             lines: [
               "✅ BOOKED for 15:00. Have the tickets on your phone.",
-              "September hours are 08:00–16:00, so 15:00 is effectively the last slot and there's no slack for being late getting in. Leave P03 by 14:15 and be at the Central VINTGAR LIP hub by ~14:35; the shuttle to the Visitor Centre runs every 7 min and it's in the ticket.",
+              "September hours are 08:00–16:00, so 15:00 is effectively the last slot and there's no slack for being late getting in. Drive off from Straža at 14:15 and be at the Central VINTGAR LIP hub by ~14:35; the shuttle to the Visitor Centre runs every 7 min and it's in the ticket.",
               "The boardwalk is one-way, ~1.6 km / 45 min, ending at the Šum waterfall. There is NO shuttle at that end: you walk back 4.1 km on the King of Triglav Trail, over St Catherine's hill, to the Visitor Centre, and take the shuttle to the car park from there.",
               "The whole loop is 5.7 km — allow about 2 hours (Vintgar's own figure is 2.5–3 h). Still walking after 16:00 is fine: return shuttles run until 2 hours after closing, so ~18:00. Just don't dawdle on the way back.",
               "Emerald water the whole way, and the helmet is included and mandatory."
             ]
           }
         ],
-        book: ["✅ Vintgar booked — 15:00. Tickets on your phone", "Check in for FR169 in the Ryanair app — opens tonight at 22:15. Digital boarding pass only, no printouts", "Out of Vila Emona by 08:00 — bags in the car, you're not coming back", "Card for P03 parking (€2.50/hr) and some cash for the boat hire", "Leave Bled by 14:15 — at the Vintgar hub by ~14:35. No slack on getting in for the 15:00 slot", "Back at the car ~17:15 — it's a 4.1 km walk back to the shuttle · last return shuttle ~18:00 · gate closes 21:45", "Return the last hire car with a full tank; check drop-off hours for a 22:15 flight"]
+        book: ["✅ Vintgar booked — 15:00. Tickets on your phone", "Check in for FR169 in the Ryanair app — opens tonight at 22:15. Digital boarding pass only, no printouts", "Out of Vila Emona by 08:00 — bags in the car, you're not coming back", "Straža car park fee isn't published — check the sign; card and some cash for the boat hire", "Ring Pletna at 08:00 (+386 41 393 899) to confirm the boats are open for 09:00", "Drive off from Straža at 14:15 — at the Vintgar hub by ~14:35. No slack on getting in for the 15:00 slot", "Back at the car ~17:15 — it's a 4.1 km walk back to the shuttle · last return shuttle ~18:00 · gate closes 21:45", "Return the last hire car with a full tank; check drop-off hours for a 22:15 flight"]
       }
     };
     function dayDetail(d) {
@@ -1809,7 +1811,7 @@
       ],
       d12: [
         { img: "scene-drive.jpg", title: "Straight to Bled", desc: "Monfalcone → Bled, ~1h50. The house is locked till 15:00, so the lake comes first — both cars into P03 for the day, bags in the boots." },
-        { img: "scene-straza.jpg", title: "Straža toboggan — first", desc: "Opens 11:00, shuts 18:00 — the one thing today with a cut-off, so do it before the queues. Chairlift up, toboggan down, €14." },
+        { img: "scene-straza.jpg", title: "Straža toboggan — first", desc: "Opens 11:00, shuts 18:00 — the one thing today with a cut-off, so do it before the queues. Chairlift up, toboggan down, €15 a ride." },
         { img: "scene-kremsnita.jpg", title: "Lunch + kremšnita", desc: "Lunch by the water, then the lakeside cream-cake ritual. Touristy, non-negotiable." },
         { img: "scene-bledisland.jpg", title: "Row to Bled Island", desc: "Pletna or self-row to the island church + the 99 steps to the wishing bell. Allow ~1h30 all in." },
         { img: "scene-bledcastle.jpg", title: "Bled Castle", desc: "Walk up from the lake (15–20 min) for the late-afternoon light. Clifftop walls, courtyard and wine cellar, €19pp." },
@@ -1832,9 +1834,9 @@
         { img: "scene-ljubljana.jpg", title: "Then: Ljubljana (the 5)", desc: "Straight on to Ljubljana after the caves — into Vila Emona and an evening in the old town. The gorge moved to Tuesday morning." }
       ],
       d15: [
-        { img: "scene-bledisland.jpg", title: "Row around Lake Bled", desc: "Bled by 09:00 and out on the water for about an hour — just rowing, no island. One 5-seater boat, ~€17–25 for the hour." },
-        { img: "scene-straza.jpg", title: "Straža toboggan — 11:00", desc: "Opens 11:00, every day in September. Chairlift up, toboggan down, €14. Go at opening, before the queues." },
-        { img: "scene-vintgar.jpg", title: "Vintgar Gorge — 15:00, booked", desc: "Leave Bled by 14:15, at the LIP hub by ~14:35, and don't be late in. One-way boardwalk ~45 min, then a 4.1 km walk back to the shuttle — back at the car ~17:15." },
+        { img: "scene-bledisland.jpg", title: "Row from Pletna", desc: "Park at Straža, walk ~20 min along the lake to Pletna at Mlino, and row for about an hour — no island. One 5-seater, ~€17. Ring to confirm they open at 09:00." },
+        { img: "scene-straza.jpg", title: "Straža toboggan — 11:00", desc: "Opens 11:00, every day in September, and the car's parked right there. Chairlift up, toboggan down — €15 for one ride. Go at opening, before the queues." },
+        { img: "scene-vintgar.jpg", title: "Vintgar Gorge — 15:00, booked", desc: "Drive off from Straža at 14:15, at the LIP hub by ~14:35, and don't be late in. One-way boardwalk ~45 min, then a 4.1 km walk back to the shuttle — back at the car ~17:15." },
         { img: "scene-drive.jpg", title: "Fly home — FR169", desc: "Away from Vintgar ~17:15 for Trieste (~2h20), there ~19:35. FR169 departs 22:15 (gate shuts 21:45) and lands London Stansted 23:25." }
       ]
     };
