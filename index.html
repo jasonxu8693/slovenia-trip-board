@@ -1436,7 +1436,7 @@
       { id: "d12", iso: "2026-09-12", date: "Sat 12 Sep", city: "Drive up → Bled lake day", stay: "Krvavec house", note: "Straight from Monfalcone to Bled (~1h50) — the house doesn't open till 15:00, so the lake comes first with the bags in the boots. Toboggan, lunch + kremšnita, the island, the castle. Leave Bled ~17:15, big food shop at Mercator Cerklje on the way (shops are shut Sunday), and into the house by ~18:45 in daylight." },
       { id: "d13", iso: "2026-09-13", date: "Sun 13 Sep", city: "Vršič & Soča alpine day", stay: "Krvavec house", note: "The big one, and all nine are still together. Four stops and one long lunch: Lake Jasna, the Vršič summit, the Velika korita gorge rim, then a two hour picnic by the river and Virje waterfall. Hiking and swimming are both out, so this is a scenic drive with a proper sit down in the middle. Food must be bought Saturday, every shop is shut Sunday. ~4h45 of driving; leave 09:00, home ~19:15." },
       { id: "d14", iso: "2026-09-14", date: "Mon 14 Sep", city: "Caves → the split", stay: "Ljubljana (5)", note: "Check out of the Krvavec house (2 nights done) and head south — the 11:00 cave at Postojna is booked, and it's the last thing all nine do together. We split in the cave car park straight afterwards. The 5 went straight on to Ljubljana after the caves — the gorge moved to Tuesday morning.", split: { g1: "Jason X, Sarah, Jason V, Katrina & Steph T take in Predjama from the outside, then on to Ljubljana. Fly out Tue.", g2: "Hao, Heidi, Phi & Steph go straight from the cave to Trieste airport (~1h) for the 16:55." } },
-      { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Bled + Vintgar → fly home", stay: null, logistics: true, group: "g1", note: "Last day for the 5, and the best weather of the trip — 0% rain all day. Park at Straža by ~08:50 and leave the car there all day. Walk ~20 min along the lake to Pletna at Mlino, row for about an hour (no island), walk back for the Straža toboggan as it opens at 11:00, lunch, then drive to Vintgar Gorge, BOOKED for 15:00. The gorge is one-way with a 4.1 km walk back to the shuttle, so you're back at the car ~17:15, then the ~2h20 run to Trieste. FR169 departs 22:15 and lands Stansted 23:25." }
+      { id: "d15", iso: "2026-09-15", date: "Tue 15 Sep", city: "Bled + Vintgar → fly home", stay: null, logistics: true, group: "g1", note: "Last day for the 5, and the best weather of the trip — 0% rain all day. Park at Straža by ~08:50 and leave the car there all day. Walk ~20 min along the lake to Pletna at Mlino, row for about an hour (no island), walk back for the Straža toboggan as it opens at 11:00, lunch 8 min away on foot, then walk back and drive to Vintgar Gorge, BOOKED for 15:00. The car doesn't move until 14:15. The gorge is one-way with a 4.1 km walk back to the shuttle, so you're back at the car ~17:15, then the ~2h20 run to Trieste. FR169 departs 22:15 and lands Stansted 23:25." }
     ];
 
     // The trip forks on Monday: 3 fly home from Trieste that night (Group 2);
@@ -1732,6 +1732,8 @@
           { leg: "Ljubljana → Straža, Bled", time: "~50 min", note: "Leave Vila Emona by 08:00 with the bags — you're not coming back. Morning ring-road traffic out of Ljubljana · park at the Straža car park by the toboggan base station and leave the car there all day. It's for Straža visitors and the fee isn't published, so read the sign when you arrive", maps: "https://www.google.com/maps/search/?api=1&query=Pod+Stra%C5%BEo+3%2C+4260+Bled", mapsLabel: "Straža car park (Pod Stražo 3) ↗", backup: "If it's full or short-stay only: P11 Infrastruktura Bled or P12 Seliše — both €2.50/hr, no time limit", backupMaps: "https://www.google.com/maps/search/?api=1&query=Infrastruktura+Bled+parkiri%C5%A1%C4%8De" },
           { leg: "Walk: Straža → Pletna boats (Mlino)", time: "~20 min", note: "1.5 km along the lake path to Pension Pletna, Cesta svobode 37. Their opening time isn't published — ring +386 41 393 899 at 08:00 to confirm 09:00" },
           { leg: "Walk back: Pletna → Straža", time: "~20 min", note: "Back to the base station for the 11:00 toboggan — the car's already there" },
+          { leg: "Walk: Straža → lunch", time: "~8 min", note: "660 m to Oštarija Peglez'n (Cesta svobode 19a), or ~9 min to Panorama at Grand Hotel Toplice. Both open at 12:00" },
+          { leg: "Walk back: lunch → Straža", time: "~8 min", note: "Leave lunch by ~13:55 so you're driving off at 14:15" },
           { leg: "Straža → Vintgar Gorge (LIP hub)", time: "~10–15 min", note: "Drive off from Straža at 14:15 and be at the hub by ~14:35. Hours are 08:00–16:00, so 15:00 is effectively the last slot — no room to be late getting in · the hub is free, shuttle every 7 min to the Visitor Centre, included in the ticket", maps: "https://www.google.com/maps/search/?api=1&query=Centralno+parkiri%C5%A1%C4%8De+Vintgar+LIP", mapsLabel: "Central VINTGAR LIP (P1) ↗", backup: "Don't park in Podhom village, it's signed against it. The hub can be busy mid-afternoon — one more reason to be there by 14:35", backupMaps: "https://www.google.com/maps/search/?api=1&query=Podhom+Bled" },
           { leg: "Vintgar → Trieste airport", time: "~2h20", note: "Away from the hub by ~17:15 → airport ~19:35, ~2h before the gate shuts at 21:45. If the walk back runs long you're still in by ~20:35 — but the last return shuttle is ~18:00, so keep moving on the return trail", maps: "https://www.google.com/maps/search/?api=1&query=Trieste+Airport+car+rental+return", mapsLabel: "Rental return, Trieste airport ↗", backup: "Fill up before you reach the airport — the nearest pumps to TRS are in Ronchi dei Legionari, not at the terminal", backupMaps: "https://www.google.com/maps/search/?api=1&query=petrol+station+Ronchi+dei+Legionari" },
           { leg: "Return the last hire car", time: "", note: "Full tank — confirm the drop-off is staffed for a 22:15 flight" },
@@ -1743,7 +1745,7 @@
             lines: [
               "08:00 out of Vila Emona with the bags · ~08:50 park at Straža (Pod Stražo 3) and leave the car there all day.",
               "~08:55 walk the lake path to Pletna at Mlino (~20 min) · ~09:15 row for about an hour, no island · ~10:15 walk back (~20 min), with coffee or kremšnita on the way.",
-              "11:00 Straža toboggan as it opens, before the queues — the car's right there · ~12:15 lunch in Bled.",
+              "11:00 Straža toboggan as it opens, before the queues · ~12:00 walk 8 min to lunch at Oštarija Peglez'n or Panorama (both open 12:00) · ~13:55 walk 8 min back to the car.",
               "14:15 drive off from Straža · ~14:35 Vintgar hub, shuttle to the entrance · 15:00 into the gorge (booked) · ~15:45 Šum waterfall, then walk back 4.1 km · ~17:00 shuttle from the Visitor Centre · ~17:15 away, Trieste ~19:35. Gate closes 21:45."
             ]
           },
@@ -1765,6 +1767,14 @@
             ]
           },
           {
+            icon: "🍽️", title: "Lunch — 8 min on foot from the car", link: "https://www.google.com/maps/search/?api=1&query=O%C5%A1tarija+Peglez'n+Cesta+svobode+19a+Bled", linkLabel: "Oštarija Peglez'n ↗",
+            lines: [
+              "Oštarija Peglez'n, Cesta svobode 19a — a traditional oštarija (tavern), open every day 12:00–22:00. About 660 m / 8 min on foot from the Straža car park. It's popular, so book a table for five.",
+              "Or Panorama at Grand Hotel Toplice, Cesta svobode 12 — lake-view terrace, 12:00–21:00, about 9 min on foot.",
+              "Both open at 12:00, which is about when the toboggan's done. Leave by ~13:55 to walk back to the car and drive off for Vintgar at 14:15."
+            ]
+          },
+          {
             icon: "🌊", title: "Vintgar Gorge — booked, 15:00", link: "https://tickets.vintgar.si", linkLabel: "Your tickets ↗",
             lines: [
               "✅ BOOKED for 15:00. Have the tickets on your phone.",
@@ -1775,7 +1785,7 @@
             ]
           }
         ],
-        book: ["✅ Vintgar booked — 15:00. Tickets on your phone", "Check in for FR169 in the Ryanair app — opens tonight at 22:15. Digital boarding pass only, no printouts", "Out of Vila Emona by 08:00 — bags in the car, you're not coming back", "Straža car park fee isn't published — check the sign; card and some cash for the boat hire", "Ring Pletna at 08:00 (+386 41 393 899) to confirm the boats are open for 09:00", "Drive off from Straža at 14:15 — at the Vintgar hub by ~14:35. No slack on getting in for the 15:00 slot", "Back at the car ~17:15 — it's a 4.1 km walk back to the shuttle · last return shuttle ~18:00 · gate closes 21:45", "Return the last hire car with a full tank; check drop-off hours for a 22:15 flight"]
+        book: ["✅ Vintgar booked — 15:00. Tickets on your phone", "Check in for FR169 in the Ryanair app — opens tonight at 22:15. Digital boarding pass only, no printouts", "Out of Vila Emona by 08:00 — bags in the car, you're not coming back", "Straža car park fee isn't published — check the sign; card and some cash for the boat hire", "Ring Pletna at 08:00 (+386 41 393 899) to confirm the boats are open for 09:00", "Book a table for 5 at 12:00 — Oštarija Peglez'n recommends booking in busy season", "Leave lunch by ~13:55 — 8 min walk back to the car at Straža", "Drive off from Straža at 14:15 — at the Vintgar hub by ~14:35. No slack on getting in for the 15:00 slot", "Back at the car ~17:15 — it's a 4.1 km walk back to the shuttle · last return shuttle ~18:00 · gate closes 21:45", "Return the last hire car with a full tank; check drop-off hours for a 22:15 flight"]
       }
     };
     function dayDetail(d) {
